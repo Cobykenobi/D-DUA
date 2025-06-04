@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* D&D fonts (Google Fonts CDN, вставити <link> в index.html):
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Cinzel+Decorative:wght@700&family=Merriweather&display=swap" rel="stylesheet">
+*/
+
+body {
+  @apply bg-dndbg text-dndgold font-dnd min-h-screen;
+}
