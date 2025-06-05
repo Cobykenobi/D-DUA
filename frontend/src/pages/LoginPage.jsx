@@ -30,20 +30,28 @@ export default function LoginPage() {
     <div className="min-h-screen flex flex-col items-center justify-center">
       <div className="flex flex-row items-center mb-6 mt-12">
         <h1
-          className="font-dnd text-4xl md:text-5xl text-[#2d1506] drop-shadow-[0_3px_6px_rgba(255,255,255,0.8)] animate-pulse text-center"
-          style={{ fontFamily: 'IM Fell English SC, serif', textShadow: '2px 3px 8px #fff, 1px 1px 0 #000, 0 0 4px #000' }}
+          className="text-4xl md:text-5xl drop-shadow-lg animate-pulse text-center"
+          style={{
+            color: '#23160c',
+            fontFamily: 'IM Fell English SC, serif',
+            textShadow: '2px 2px 6px #f9e7b4, 0 2px 16px #f9e7b4'
+          }}
         >
           Ласкаво просимо до D&D
         </h1>
         <span
-          className="font-dnd text-4xl md:text-5xl text-[#2d1506] ml-3 animate-pulse"
-          style={{ fontFamily: 'IM Fell English SC, serif', textShadow: '2px 3px 8px #fff, 1px 1px 0 #000, 0 0 4px #000' }}
+          className="text-4xl md:text-5xl ml-3 animate-pulse"
+          style={{
+            color: '#23160c',
+            fontFamily: 'IM Fell English SC, serif',
+            textShadow: '2px 2px 6px #f9e7b4, 0 2px 16px #f9e7b4'
+          }}
         >
           5051
         </span>
       </div>
       <div className="bg-[#322018]/90 p-8 rounded-2xl shadow-dnd max-w-xs w-full">
-        <h2 className="font-dnd text-3xl text-dndgold text-center mb-4" style={{ fontFamily: 'IM Fell English SC, serif' }}>Вхід</h2>
+        <h2 className="text-3xl text-dndgold text-center mb-4" style={{ fontFamily: 'IM Fell English SC, serif' }}>Вхід</h2>
         <form onSubmit={handleLogin} className="space-y-4">
           <input
             type="text"
@@ -52,6 +60,7 @@ export default function LoginPage() {
             placeholder="Логін"
             value={login}
             onChange={(e) => setLogin(e.target.value)}
+            name="login"
             style={{ fontFamily: 'IM Fell English SC, serif' }}
           />
           <input
@@ -61,12 +70,13 @@ export default function LoginPage() {
             placeholder="Пароль"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            name="password"
             style={{ fontFamily: 'IM Fell English SC, serif' }}
           />
           {error && <div className="text-red-500 text-sm text-center">{error}</div>}
           <button
             type="submit"
-            className="w-full bg-dndred hover:bg-dndgold text-white hover:text-dndred font-dnd rounded-2xl py-2 transition-all"
+            className="w-full bg-dndred hover:bg-dndgold text-white hover:text-dndred rounded-2xl py-2 transition-all"
             style={{ fontFamily: 'IM Fell English SC, serif' }}
           >
             Увійти
