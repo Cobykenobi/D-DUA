@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -117,36 +117,37 @@ export default function CreateCharacterPage() {
     setLoading(false);
   };
 
-  // Генерувати при першому рендері
-  React.useEffect(() => { handleGenerate(); }, []);
+  useEffect(() => { handleGenerate(); }, []);
 
   if (char)
     return (
       <div className="min-h-screen flex flex-col items-center justify-center">
-        <div className="bg-[#322018]/90 p-8 rounded-2xl shadow-dnd max-w-md w-full flex flex-col items-center">
-          <h1 className="text-3xl text-dndgold mb-4">Персонаж створений!</h1>
-          <img src={char.imgUrl} alt="" className="w-32 h-32 mb-2 rounded-full border-2 border-dndgold bg-white" />
-          <div className="text-dndgold text-lg mb-2">{char.name} ({char.race.name}, {char.charClass.name})</div>
-          <div className="text-dndgold text-sm mb-2">{char.race.description} | {char.charClass.description}</div>
-          <div className="text-dndgold text-xs mb-2">
-            <b>Стати:</b>
-            <ul>
-              {Object.entries(char.stats).map(([stat, value]) => (
-                <li key={stat}>{stat}: {value}</li>
-              ))}
-            </ul>
+        <div className="bg-[#322018]/90 p-10 rounded-2xl shadow-dnd max-w-md w-full flex flex-col items-center">
+          <h1 className="text-4xl text-dndgold mb-6 font-dnd">Персонаж створений!</h1>
+          <img src={char.imgUrl} alt="" className="w-32 h-32 mb-4 rounded-full border-2 border-dndgold bg-white" />
+          <div className="text-dndgold text-2xl mb-2 font-dnd">
+            {char.name} <span className="text-lg">({char.race.name}, {char.charClass.name})</span>
           </div>
-          <div className="text-dndgold text-xs mb-2">
-            <b>Інвентар:</b>
-            <ul>
-              {char.inventory.map(item => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+          <div className="text-dndgold text-base mb-4 text-center italic">
+            {char.race.description} <br /> {char.charClass.description}
           </div>
+          <div className="text-dndgold text-lg mb-2 font-semibold">Стати:</div>
+          <ul className="text-dndgold text-base mb-4">
+            {Object.entries(char.stats).map(([stat, value]) => (
+              <li key={stat}>
+                <b>{stat.toUpperCase()}:</b> {value}
+              </li>
+            ))}
+          </ul>
+          <div className="text-dndgold text-lg mb-2 font-semibold">Інвентар:</div>
+          <ul className="text-dndgold text-base mb-6">
+            {char.inventory.map(item => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
           <button
             onClick={() => navigate('/characters')}
-            className="bg-dndgold hover:bg-dndred text-dndred hover:text-white rounded-2xl py-2 px-8 mt-4"
+            className="bg-dndgold hover:bg-dndred text-dndred hover:text-white rounded-2xl py-2 px-8 text-lg font-dnd"
           >
             До списку персонажів
           </button>
@@ -156,26 +157,26 @@ export default function CreateCharacterPage() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
-      <div className="bg-[#322018]/90 p-8 rounded-2xl shadow-dnd max-w-md w-full flex flex-col items-center">
-        <h1 className="text-3xl text-dndgold mb-4">Створити персонажа</h1>
-        <form onSubmit={handleCreate} className="w-full flex flex-col gap-4">
+      <div className="bg-[#322018]/90 p-10 rounded-2xl shadow-dnd max-w-md w-full flex flex-col items-center">
+        <h1 className="text-4xl text-dndgold mb-6 font-dnd">Створити персонажа</h1>
+        <form onSubmit={handleCreate} className="w-full flex flex-col gap-6">
           <input
             type="text"
             required
-            className="rounded-2xl px-3 py-2 bg-[#2c1a12] border border-dndgold text-dndgold"
+            className="rounded-2xl px-4 py-3 bg-[#2c1a12] border border-dndgold text-dndgold text-lg"
             placeholder="Ім'я персонажа"
             value={name}
             onChange={e => setName(e.target.value)}
           />
           <textarea
-            className="rounded-2xl px-3 py-2 bg-[#2c1a12] border border-dndgold text-dndgold"
+            className="rounded-2xl px-4 py-3 bg-[#2c1a12] border border-dndgold text-dndgold text-lg"
             placeholder="Коротка передісторія"
             value={bio}
             onChange={e => setBio(e.target.value)}
             rows={3}
           />
           {generated && (
-            <div className="w-full bg-[#20100a]/80 rounded-xl p-3 text-dndgold text-xs mb-2">
+            <div className="w-full bg-[#20100a]/80 rounded-xl p-4 text-dndgold text-base mb-2">
               <b>Раса:</b> {generated.race.name} <br />
               <i>{generated.race.description}</i>
               <br />
@@ -192,7 +193,7 @@ export default function CreateCharacterPage() {
               <img src={generated.imgUrl} alt="" className="w-20 h-20 inline rounded-full border-2 border-dndgold bg-white mt-2" />
               <button
                 type="button"
-                className="block mt-2 underline text-dndgold hover:text-dndred"
+                className="block mt-3 underline text-dndgold hover:text-dndred text-lg"
                 onClick={handleGenerate}
                 disabled={loading}
               >
@@ -200,11 +201,11 @@ export default function CreateCharacterPage() {
               </button>
             </div>
           )}
-          {error && <div className="text-red-500 text-center">{error}</div>}
+          {error && <div className="text-red-500 text-center text-lg">{error}</div>}
           <button
             disabled={loading}
             type="submit"
-            className="bg-dndgold hover:bg-dndred text-dndred hover:text-white rounded-2xl py-2 px-8"
+            className="bg-dndgold hover:bg-dndred text-dndred hover:text-white rounded-2xl py-3 px-8 text-xl font-dnd"
           >
             {loading ? "Генерація..." : "Створити"}
           </button>
