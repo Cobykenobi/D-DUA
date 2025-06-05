@@ -7,5 +7,6 @@
 */
 
 body {
-  @apply bg-dndbg text-dndgold font-dnd min-h-screen;
+  @apply text-dndgold font-dnd min-h-screen;
+  /* bg-dndbg прибрано, щоб фон-картинка з #root була видима */
 }

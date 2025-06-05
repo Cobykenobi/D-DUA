@@ -27,12 +27,23 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-dndbg">
-      <h1 className="font-dnd text-4xl md:text-5xl text-dndgold mt-12 mb-6 drop-shadow-lg animate-pulse text-center">
-        Ласкаво просимо до D&D 5051
-      </h1>
+    <div className="min-h-screen flex flex-col items-center justify-center">
+      <div className="flex flex-row items-center justify-center mt-12 mb-6">
+        <h1
+          className="font-dnd text-4xl md:text-5xl text-dndgold drop-shadow-lg animate-pulse text-center mr-4"
+          style={{ fontFamily: "'IM Fell English SC', serif", fontSize: '2.7rem' }}
+        >
+          Ласкаво просимо до D&D
+        </h1>
+        <span
+          className="font-dnd text-4xl md:text-5xl text-dndgold drop-shadow-lg animate-pulse text-center"
+          style={{ fontFamily: "'IM Fell English SC', serif", fontSize: '2.7rem' }}
+        >
+          5051
+        </span>
+      </div>
       <div className="bg-[#322018]/90 p-8 rounded-2xl shadow-dnd max-w-xs w-full">
-        <h2 className="font-dnd text-3xl text-dndgold text-center mb-4">Вхід</h2>
+        <h2 className="font-dnd text-3xl text-dndgold text-center mb-4" style={{ fontFamily: "'IM Fell English SC', serif" }}>Вхід</h2>
         <form onSubmit={handleLogin} className="space-y-4">
           <input
             type="text"
@@ -41,6 +52,7 @@ export default function LoginPage() {
             placeholder="Логін"
             value={login}
             onChange={(e) => setLogin(e.target.value)}
+            style={{ fontFamily: "'IM Fell English SC', serif" }}
           />
           <input
             type="password"
@@ -49,17 +61,19 @@ export default function LoginPage() {
             placeholder="Пароль"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            style={{ fontFamily: "'IM Fell English SC', serif" }}
           />
           {error && <div className="text-red-500 text-sm text-center">{error}</div>}
           <button
             type="submit"
             className="w-full bg-dndred hover:bg-dndgold text-white hover:text-dndred font-dnd rounded-2xl py-2 transition-all"
+            style={{ fontFamily: "'IM Fell English SC', serif" }}
           >
             Увійти
           </button>
         </form>
         <div className="mt-4 text-center">
-          <Link to="/register" className="text-dndgold underline">Немає аккаунта?</Link>
+          <Link to="/register" className="text-dndgold underline" style={{ fontFamily: "'IM Fell English SC', serif" }}>Немає аккаунта?</Link>
         </div>
       </div>
     </div>

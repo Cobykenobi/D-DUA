@@ -9,7 +9,7 @@ export default function MainPage() {
   useEffect(() => { restore(); }, [restore]);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-dndbg">
+    <div className="min-h-screen flex flex-col items-center justify-center">
       <div className="bg-[#322018]/90 p-10 rounded-2xl shadow-dnd w-full max-w-xl flex flex-col items-center">
         <h1 className="font-dnd text-4xl text-dndgold mb-2">Ласкаво просимо, {user?.username}!</h1>
         <div className="flex flex-col gap-4 mt-6 w-full items-center">
