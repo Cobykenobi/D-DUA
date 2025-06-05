@@ -26,7 +26,7 @@ function getRandomInventory() {
 const api = axios.create({
   baseURL: "https://d-dua.onrender.com/api",
   headers: {
-    Authorization: `Bearer ${localStorage.getItem('token') || ''}`,
+    Authorization: `Bearer ${localStorage.getItem('dnd_token') || ''}`,
   },
 });
 
