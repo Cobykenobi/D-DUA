@@ -9,6 +9,7 @@ import GameTablePage from './pages/GameTablePage';
 import { useUserStore } from './store/user';
 import UserRoutes from './routes/UserRoutes';
 import AdminRoutes from './routes/AdminRoutes'; // ДОДАЙ ЦЕЙ ІМПОРТ
+import './App.css'; // <-- ВАЖНО! Добавь эту строку для подключения стилей
 
 export default function App() {
   const { user } = useUserStore();
