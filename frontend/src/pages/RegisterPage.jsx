@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 
 export default function RegisterPage() {
-  const [login, setLogin] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
   const [error, setError] = useState('');
@@ -18,9 +18,9 @@ export default function RegisterPage() {
     }
     try {
       const apiUrl = import.meta.env.VITE_API_URL || "";
-      const res = await axios.post(
+      await axios.post(
         `${apiUrl}/api/auth/register`,
-        { login, password }
+        { username, password }
       );
       navigate('/login');
     } catch (err) {
@@ -50,9 +50,9 @@ export default function RegisterPage() {
             required
             className="w-full rounded-2xl px-3 py-2 bg-[#2c1a12] border border-dndgold text-dndgold focus:outline-none"
             placeholder="Логін"
-            value={login}
-            onChange={(e) => setLogin(e.target.value)}
-            name="login"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            name="username"
             style={{ fontFamily: 'IM Fell English SC, serif' }}
           />
           <input
