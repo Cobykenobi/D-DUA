@@ -8,6 +8,7 @@ import ProfilePage from './pages/ProfilePage';
 import GameTablePage from './pages/GameTablePage';
 import { useUserStore } from './store/user';
 import UserRoutes from './routes/UserRoutes';
+import AdminRoutes from './routes/AdminRoutes'; // ДОДАЙ ЦЕЙ ІМПОРТ
 
 export default function App() {
   const { user } = useUserStore();
@@ -20,9 +21,9 @@ export default function App() {
       <Route path="/profile" element={user ? <ProfilePage /> : <Navigate to="/login" />} />
       <Route path="/table" element={user ? <GameTablePage /> : <Navigate to="/login" />} />
       <Route path="/admin" element={user?.role === 'master' || user?.role === 'admin' ? <AdminPage /> : <Navigate to="/" />} />
-      <Route path="*" element={<Navigate to="/" />} />
       <Route path="/admin/*" element={<AdminRoutes />} />
       <Route path="/*" element={<UserRoutes />} />
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   );
 }
