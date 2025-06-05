@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useUserStore } from "../store/user";
 import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
@@ -74,15 +74,20 @@ export default function GameTablePage() {
         <div className="font-dnd text-dndgold">Стiл: {tableId}</div>
       </div>
       <div className="flex flex-1 h-[80vh] bg-[#1b110a]/80 rounded-b-2xl px-6 pb-4">
-        {/* Ліва панель: твій персонаж */}
+        {/* Ліва панель: твій персонаж і монстри */}
         <div className="w-1/6 p-2">
-          <div className="bg-[#25160f]/80 rounded-2xl p-4 mb-4 text-dndgold">
-            <div className="text-lg font-bold mb-2">Твій персонаж</div>
-            <div>Ім'я: <b>{myPlayer?.name || user?.username}</b></div>
-            <div>ID: <b>{myPlayer?.characterId || user?._id}</b></div>
-            <div>Онлайн: {myPlayer?.online ? "Так" : "Ні"}</div>
-            {/* Можна додати фото */}
-          </div>
+          {myPlayer
+            ? <PlayerCard player={myPlayer} />
+            : (
+              <div className="bg-[#25160f]/80 rounded-2xl p-4 mb-4 text-dndgold">
+                <div className="text-lg font-bold mb-2">Твій персонаж</div>
+                <div>Ім'я: <b>{user?.username}</b></div>
+                <div>ID: <b>{user?._id}</b></div>
+                <div>Онлайн: <span className="text-green-400">Так</span></div>
+                <div className="w-16 h-16 rounded-full bg-white my-2 mx-auto"></div>
+              </div>
+            )
+          }
           <MonstersList monsters={monsters} isGM={isGM} tableId={tableId} socket={socket} />
         </div>
         {/* Центр: карта, кубики, ініціатива */}
@@ -123,18 +128,13 @@ export default function GameTablePage() {
           )}
         </div>
         {/* Права панель: чат */}
-       <div className="w-1/6 p-2">
-  {myPlayer
-    ? <PlayerCard player={myPlayer} />
-    : (
-      <div className="bg-[#25160f]/80 rounded-2xl p-4 mb-4 text-dndgold">
-        <div className="text-lg font-bold mb-2">Твій персонаж</div>
-        <div>Ім'я: <b>{user?.username}</b></div>
-        <div>ID: <b>{user?._id}</b></div>
-        <div>Онлайн: <span className="text-green-400">Так</span></div>
-        <div className="w-16 h-16 rounded-full bg-white my-2 mx-auto"></div>
+        <div className="w-1/6 p-2">
+          <ChatComponent tableId={tableId} user={user} messages={messages} socket={socket} />
+        </div>
       </div>
-    )
-  }
-  <MonstersList monsters={monsters} isGM={isGM} tableId={tableId} socket={socket} />
-</div>
+      <div className="p-4 bg-[#322018]/90 text-center font-dnd text-dndgold rounded-b-2xl">
+        © {new Date().getFullYear()} D&D Online Tabletop
+      </div>
+    </div>
+  );
+}
