@@ -1,10 +1,9 @@
-// backend/src/models/User.js
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema({
-  login: { type: String, required: true, unique: true }, // логін (замість username)
+  login: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  // додаткові поля, якщо треба
+  // інші поля за потребою
 }, { timestamps: true });
 
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model("User", UserSchema);
