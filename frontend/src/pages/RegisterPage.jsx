@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import apiUrl from "../api";
 
 export default function RegisterPage() {
   const [login, setLogin] = useState('');
@@ -23,7 +22,7 @@ export default function RegisterPage() {
     }
     try {
       await axios.post(
-        `${apiUrl}/api/auth/register`,
+        "/api/auth/register",
         { login, password }
       );
       navigate("/login");
@@ -53,7 +52,7 @@ export default function RegisterPage() {
           className="w-full rounded-2xl px-3 py-2 mb-2 border border-dndgold bg-transparent text-dndgold"
           placeholder="Пароль"
           value={password}
-          onChange={(e) => setPassword2('')}
+          onChange={(e) => setPassword(e.target.value)}
           name="password"
           style={{ fontFamily: 'IM Fell English SC, serif' }}
         />
