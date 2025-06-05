@@ -3,10 +3,14 @@
 @tailwind utilities;
 
 /* D&D fonts (Google Fonts CDN, вставити <link> в index.html):
-<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Cinzel+Decorative:wght@700&family=Merriweather&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&display=swap" rel="stylesheet">
 */
 
 body {
-  @apply text-dndgold font-dnd min-h-screen;
-  /* bg-dndbg прибрано, щоб фон-картинка з #root була видима */
+  @apply text-dndgold min-h-screen;
+  font-family: 'IM Fell English SC', serif !important;
+}
+
+* {
+  font-family: 'IM Fell English SC', serif !important;
 }
