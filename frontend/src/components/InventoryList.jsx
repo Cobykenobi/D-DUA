@@ -1,10 +1,19 @@
-import React from 'react';
+import React from "react";
 
-export default function InventoryList({ inventory }) {
-  if (!inventory || !inventory.length) return <div className="text-dndgold/60">Порожньо</div>;
+export default function InitiativeList({ initiative }) {
+  if (!initiative || !initiative.length) return null;
   return (
-    <ul className="list-disc pl-6 text-dndgold/90">
-      {inventory.map((item, i) => <li key={i}>{item}</li>)}
-    </ul>
+    <div className="bg-[#20100a]/90 p-2 rounded-2xl mb-4 w-full max-w-xl mx-auto">
+      <div className="text-dndgold font-bold mb-1">Ініціатива:</div>
+      <ol>
+        {initiative
+          .sort((a, b) => b.value - a.value)
+          .map((item, i) => (
+            <li key={i} className="text-dndgold">
+              {item.name} ({item.type}): {item.value}
+            </li>
+        ))}
+      </ol>
+    </div>
   );
 }

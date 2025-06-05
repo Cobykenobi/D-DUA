@@ -27,7 +27,7 @@ export default function GMPanel({ tableId, socket, players }) {
     socket.emit("kick-player", { tableId, userId });
   };
 
-  // Додаємо гравців та монстрів в ініціативу (для прикладу)
+  // Додаємо гравців у ініціативу
   const handleInitiativeInput = () => {
     setInitiativeList(players.map(p => ({ name: p.name, value: Math.ceil(Math.random()*20), type: "player" })));
   };
