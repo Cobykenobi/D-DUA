@@ -10,6 +10,8 @@ import { useUserStore } from './store/user';
 import UserRoutes from './routes/UserRoutes';
 import AdminRoutes from './routes/AdminRoutes'; // ДОДАЙ ЦЕЙ ІМПОРТ
 import './App.css'; // <-- ВАЖНО! Добавь эту строку для подключения стилей
+import CreateCharacterPage from './pages/CreateCharacterPage';
+import CharactersPage from './pages/CharactersPage';
 
 export default function App() {
   const { user } = useUserStore();
@@ -25,6 +27,8 @@ export default function App() {
       <Route path="/admin/*" element={<AdminRoutes />} />
       <Route path="/*" element={<UserRoutes />} />
       <Route path="*" element={<Navigate to="/" />} />
+      <Route path="/create-character" element={<CreateCharacterPage />} />
+      <Route path="/characters" element={<CharactersPage />} />
     </Routes>
   );
 }
