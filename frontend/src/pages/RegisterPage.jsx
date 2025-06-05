@@ -4,8 +4,7 @@ import axios from 'axios';
 import { useUserStore } from '../store/user';
 
 export default function RegisterPage() {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
+  const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const setUser = useUserStore((s) => s.setUser);
@@ -15,7 +14,12 @@ export default function RegisterPage() {
     e.preventDefault();
     setError('');
     try {
-      const res = await axios.post('/api/auth/register', { username, email, password });
+      // !!! ЗАПИТ на правильний бекенд !!!
+      const apiUrl = import.meta.env.VITE_API_URL || "";
+      const res = await axios.post(
+        `${apiUrl}/api/auth/register`,
+        { login, password }
+      );
       setUser(res.data.user, res.data.token);
       navigate('/');
     } catch (err) {
@@ -32,17 +36,9 @@ export default function RegisterPage() {
             type="text"
             required
             className="w-full rounded-2xl px-3 py-2 bg-[#2c1a12] border border-dndgold text-dndgold focus:outline-none"
-            placeholder="Ім'я користувача"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-          <input
-            type="email"
-            required
-            className="w-full rounded-2xl px-3 py-2 bg-[#2c1a12] border border-dndgold text-dndgold focus:outline-none"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Логін"
+            value={login}
+            onChange={(e) => setLogin(e.target.value)}
           />
           <input
             type="password"
@@ -55,7 +51,7 @@ export default function RegisterPage() {
           {error && <div className="text-red-500 text-sm text-center">{error}</div>}
           <button
             type="submit"
-            className="w-full bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl py-2 transition-all"
+            className="w-full bg-dndred hover:bg-dndgold text-white hover:text-dndred font-dnd rounded-2xl py-2 transition-all"
           >
             Зареєструватися
           </button>

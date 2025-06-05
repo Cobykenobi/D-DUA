@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useUserStore } from '../store/user';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState('');
+  const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const setUser = useUserStore((s) => s.setUser);
@@ -14,7 +14,12 @@ export default function LoginPage() {
     e.preventDefault();
     setError('');
     try {
-      const res = await axios.post('/api/auth/login', { email, password });
+      // !!! ЗАПИТ на правильний бекенд !!!
+      const apiUrl = import.meta.env.VITE_API_URL || "";
+      const res = await axios.post(
+        `${apiUrl}/api/auth/login`,
+        { login, password }
+      );
       setUser(res.data.user, res.data.token);
       navigate('/');
     } catch (err) {
@@ -28,12 +33,12 @@ export default function LoginPage() {
         <h1 className="font-dnd text-3xl text-dndgold text-center mb-4">Вхід</h1>
         <form onSubmit={handleLogin} className="space-y-4">
           <input
-            type="email"
+            type="text"
             required
             className="w-full rounded-2xl px-3 py-2 bg-[#2c1a12] border border-dndgold text-dndgold focus:outline-none"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Логін"
+            value={login}
+            onChange={(e) => setLogin(e.target.value)}
           />
           <input
             type="password"
