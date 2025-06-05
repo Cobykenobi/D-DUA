@@ -6,6 +6,7 @@ import GMPanel from "../components/GMPanel";
 import InitiativeList from "../components/InitiativeList";
 import MonstersList from "../components/MonstersList";
 import ChatComponent from "../components/ChatComponent";
+import PlayerCard from "../components/PlayerCard";
 
 // !!! ВАЖЛИВО: якщо бек локально — зміни на своє посилання
 const socket = io("https://d-dua.onrender.com");
@@ -122,13 +123,18 @@ export default function GameTablePage() {
           )}
         </div>
         {/* Права панель: чат */}
-        <div className="w-1/6 p-2">
-          <ChatComponent tableId={tableId} user={user} messages={messages} socket={socket} />
-        </div>
+       <div className="w-1/6 p-2">
+  {myPlayer
+    ? <PlayerCard player={myPlayer} />
+    : (
+      <div className="bg-[#25160f]/80 rounded-2xl p-4 mb-4 text-dndgold">
+        <div className="text-lg font-bold mb-2">Твій персонаж</div>
+        <div>Ім'я: <b>{user?.username}</b></div>
+        <div>ID: <b>{user?._id}</b></div>
+        <div>Онлайн: <span className="text-green-400">Так</span></div>
+        <div className="w-16 h-16 rounded-full bg-white my-2 mx-auto"></div>
       </div>
-      <div className="p-4 bg-[#322018]/90 text-center font-dnd text-dndgold rounded-b-2xl">
-        © {new Date().getFullYear()} D&D Online Tabletop
-      </div>
-    </div>
-  );
-}
+    )
+  }
+  <MonstersList monsters={monsters} isGM={isGM} tableId={tableId} socket={socket} />
+</div>

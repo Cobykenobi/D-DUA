@@ -1,16 +1,22 @@
-import React from 'react';
+import React from "react";
 
-export default function PlayerCard({ player, character, active }) {
+export default function PlayerCard({ player }) {
   return (
-    <div className={`rounded-2xl shadow-dnd bg-[#2c1a12] p-3 mb-2 ${active ? 'border-4 border-dndgold' : 'border border-dndgold/40'}`}>
-      <div className="font-dnd text-dndgold text-lg mb-1">{player?.username}</div>
-      {character && (
-        <>
-          <div className="text-dndgold/80">{character.name}</div>
-          <div className="text-xs text-dndgold/70">{character.race} / {character.profession}</div>
-        </>
-      )}
-      {character?.image && <img src={character.image} alt="avatar" className="w-16 h-16 rounded-xl mt-2 object-cover" />}
+    <div className="bg-[#25160f]/80 rounded-2xl p-4 flex flex-col items-center text-dndgold w-40">
+      <div className="w-16 h-16 rounded-full bg-white mb-2 overflow-hidden flex items-center justify-center">
+        <img
+          src={player.avatar || "/default-avatar.png"}
+          alt="avatar"
+          className="object-cover w-full h-full"
+        />
+      </div>
+      <div className="font-bold">{player.name || player.username}</div>
+      <div className="text-xs mt-1">ID: {player._id || player.id}</div>
+      <div className="text-xs">
+        Онлайн: <span className={player.online ? "text-green-400" : "text-red-400"}>
+          {player.online ? "Так" : "Ні"}
+        </span>
+      </div>
     </div>
   );
 }
