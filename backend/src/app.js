@@ -16,12 +16,12 @@ app.use(cors({ origin: "*", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-// Підключаємо API-роути ДО будь-яких static/catch-all!
+// === ВАЖЛИВО: підключаємо ТІЛЬКИ API-роути ===
 app.use("/api/auth", require("./routes/auth"));
-// Додати інші, якщо треба: app.use("/api/character", require("./routes/character")) і т.д.
+// Додати інші API, якщо треба, ТІЛЬКИ ПЕРЕД static!
 
-// *** ЖОДНИХ express.static та app.get("*") тут НЕ треба! ***
-// Якщо треба віддавати фронт — тільки ПІСЛЯ всіх API!
+// === НЕ ДОДАВАЙ express.static/app.get("*") до наступного фіксу ===
+// Якщо треба — напиши, підкажу порядок для SSR/SPA!
 
 // MongoDB URI
 const MONGO_URI = process.env.MONGO_URI || "твій_рядок_підключення";
