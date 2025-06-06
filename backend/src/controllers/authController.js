@@ -27,6 +27,7 @@ exports.register = async (req, res) => {
 
 exports.login = async (req, res) => {
   try {
+    console.log("LOGIN CALLED", req.body); // Debug log
     const { login, password } = req.body;
     if (!login || !password) {
       return res.status(400).json({ message: "Login and password are required" });
@@ -41,8 +42,9 @@ exports.login = async (req, res) => {
     }
     // Токен (за потреби)
     const token = jwt.sign({ userId: user._id, login: user.login }, JWT_SECRET, { expiresIn: "7d" });
-    res.json({ token, user: { id: user._id, login: user.login } });
+    return res.json({ token, user: { id: user._id, login: user.login } });
   } catch (err) {
-    res.status(500).json({ message: "Login error", error: err.message });
+    console.error("Login error:", err);
+    return res.status(500).json({ message: "Login error", error: err.message });
   }
 };
