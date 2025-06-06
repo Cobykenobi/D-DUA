@@ -10,8 +10,9 @@ app.use(cors({ origin: "*", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-// Роути
+// Підключаємо тільки коректні роути:
 app.use("/api/auth", require("./routes/auth"));
+// Додати інші, якщо треба: app.use("/api/character", require("./routes/character")) і т.д.
 
 // MongoDB URI
 const MONGO_URI = process.env.MONGO_URI || "твій_рядок_підключення";

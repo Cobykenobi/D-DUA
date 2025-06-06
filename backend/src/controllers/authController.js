@@ -2,7 +2,7 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-// Секретний ключ (краще винести в .env)
+// Секретний ключ (винести у .env!)
 const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
 
 exports.register = async (req, res) => {

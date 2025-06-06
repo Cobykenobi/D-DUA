@@ -13,8 +13,9 @@ export default function LoginPage() {
     setError('');
     try {
       const res = await axios.post("/api/auth/login", { login, password });
-      // Можеш зберігати токен, користувача тут
+      // Зберігаємо токен і користувача
       localStorage.setItem("user", JSON.stringify(res.data.user));
+      localStorage.setItem("token", res.data.token); // ДОДАНО збереження токена
       navigate("/");
     } catch (err) {
       setError(err.response?.data?.message || "Помилка входу");
