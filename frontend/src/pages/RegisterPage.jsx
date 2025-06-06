@@ -21,7 +21,8 @@ export default function RegisterPage() {
       return;
     }
     try {
-      await axios.post("/api/auth/register", { login, password });
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, { login, password });
+
       navigate("/login");
     } catch (err) {
       setError(err.response?.data?.message || "Помилка реєстрації");
