@@ -1,3 +1,4 @@
+// app.js (Express backend, для Render/production)
 const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
@@ -18,12 +19,16 @@ app.use(cookieParser());
 
 // === Підключаємо тільки API-роути ===
 app.use("/api/auth", require("./routes/auth"));
-// Додати інші API, якщо треба, тільки ПЕРЕД static!
+// Якщо є інші API, підключай їх так само вище цієї лінії
 
 // --- Debug/catch-all для незнайдених API ---
 app.use((req, res, next) => {
-  console.log('404 API:', req.method, req.originalUrl);
-  res.status(404).json({ message: "API route not found" });
+  if (req.originalUrl.startsWith("/api/")) {
+    console.log('404 API:', req.method, req.originalUrl);
+    res.status(404).json({ message: "API route not found" });
+  } else {
+    next();
+  }
 });
 
 // MongoDB URI
