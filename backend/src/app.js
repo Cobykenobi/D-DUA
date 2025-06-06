@@ -6,7 +6,7 @@ require("dotenv").config();
 
 const app = express();
 
-// Додаємо debug middleware для логування ВСІХ запитів
+// Debug: логування ВСІХ запитів
 app.use((req, res, next) => {
   console.log("REQUEST", req.method, req.originalUrl);
   next();
@@ -16,9 +16,12 @@ app.use(cors({ origin: "*", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-// Підключаємо тільки коректні роути:
+// Підключаємо API-роути ДО будь-яких static/catch-all!
 app.use("/api/auth", require("./routes/auth"));
 // Додати інші, якщо треба: app.use("/api/character", require("./routes/character")) і т.д.
+
+// *** ЖОДНИХ express.static та app.get("*") тут НЕ треба! ***
+// Якщо треба віддавати фронт — тільки ПІСЛЯ всіх API!
 
 // MongoDB URI
 const MONGO_URI = process.env.MONGO_URI || "твій_рядок_підключення";
