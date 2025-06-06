@@ -19,7 +19,7 @@ export default function App() {
   useEffect(() => {
     restore();
   }, []);
-
+console.log("USER IN STORE:", user);
   return (
     <Routes>
       <Route path="/login" element={<LoginPage />} />

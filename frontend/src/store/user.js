@@ -4,6 +4,9 @@ export const useUserStore = create((set) => ({
   user: null,
   token: null,
   setUser: (user, token) => {
+  console.log("setUser called", user, token);
+  set({ user, token });
+  // далі як було
     set({ user, token });
     if (user && token) {
       localStorage.setItem('dnd_user', JSON.stringify(user));
@@ -18,9 +21,10 @@ export const useUserStore = create((set) => ({
     localStorage.removeItem('dnd_user');
     localStorage.removeItem('dnd_token');
   },
-  restore: () => {
-    const user = JSON.parse(localStorage.getItem('dnd_user'));
-    const token = localStorage.getItem('dnd_token');
-    if (user && token) set({ user, token });
-  }
+ restore: () => {
+  const user = JSON.parse(localStorage.getItem('dnd_user'));
+  const token = localStorage.getItem('dnd_token');
+  console.log("restore called", user, token);
+  if (user && token) set({ user, token });
+}
 }));
