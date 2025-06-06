@@ -16,9 +16,9 @@ app.use(cors({ origin: "*", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-// === ВАЖЛИВО: підключаємо ТІЛЬКИ API-роути ===
+// === Підключаємо тільки API-роути ===
 app.use("/api/auth", require("./routes/auth"));
-// Додати інші API, якщо треба, ТІЛЬКИ ПЕРЕД static!
+// Додати інші API, якщо треба, тільки ПЕРЕД static!
 
 // --- Debug/catch-all для незнайдених API ---
 app.use((req, res, next) => {
