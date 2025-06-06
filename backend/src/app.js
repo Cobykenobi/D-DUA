@@ -6,6 +6,12 @@ require("dotenv").config();
 
 const app = express();
 
+// Додаємо debug middleware для логування ВСІХ запитів
+app.use((req, res, next) => {
+  console.log("REQUEST", req.method, req.originalUrl);
+  next();
+});
+
 app.use(cors({ origin: "*", credentials: true }));
 app.use(express.json());
 app.use(cookieParser());
