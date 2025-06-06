@@ -2,7 +2,6 @@ const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-// Секретний ключ (винести у .env!)
 const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
 
 exports.register = async (req, res) => {
@@ -11,7 +10,6 @@ exports.register = async (req, res) => {
     if (!login || !password) {
       return res.status(400).json({ message: "Login and password are required" });
     }
-    // Перевірка на унікальність
     const candidate = await User.findOne({ login });
     if (candidate) {
       return res.status(400).json({ message: "User already exists" });
@@ -40,11 +38,10 @@ exports.login = async (req, res) => {
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid password" });
     }
-    // Токен (за потреби)
     const token = jwt.sign({ userId: user._id, login: user.login }, JWT_SECRET, { expiresIn: "7d" });
-    return res.json({ token, user: { id: user._id, login: user.login } });
+    res.json({ token, user: { id: user._id, login: user.login } });
   } catch (err) {
     console.error("Login error:", err);
-    return res.status(500).json({ message: "Login error", error: err.message });
+    res.status(500).json({ message: "Login error", error: err.message });
   }
 };

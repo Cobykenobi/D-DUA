@@ -20,8 +20,11 @@ app.use(cookieParser());
 app.use("/api/auth", require("./routes/auth"));
 // Додати інші API, якщо треба, ТІЛЬКИ ПЕРЕД static!
 
-// === НЕ ДОДАВАЙ express.static/app.get("*") до наступного фіксу ===
-// Якщо треба — напиши, підкажу порядок для SSR/SPA!
+// --- Debug/catch-all для незнайдених API ---
+app.use((req, res, next) => {
+  console.log('404 API:', req.method, req.originalUrl);
+  res.status(404).json({ message: "API route not found" });
+});
 
 // MongoDB URI
 const MONGO_URI = process.env.MONGO_URI || "твій_рядок_підключення";
