@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
@@ -8,13 +8,17 @@ import ProfilePage from './pages/ProfilePage';
 import GameTablePage from './pages/GameTablePage';
 import { useUserStore } from './store/user';
 import UserRoutes from './routes/UserRoutes';
-import AdminRoutes from './routes/AdminRoutes'; // ДОДАЙ ЦЕЙ ІМПОРТ
-import './App.css'; // <-- ВАЖНО! Добавь эту строку для подключения стилей
+import AdminRoutes from './routes/AdminRoutes';
+import './App.css';
 import CreateCharacterPage from './pages/CreateCharacterPage';
 import CharactersPage from './pages/CharactersPage';
 
 export default function App() {
-  const { user } = useUserStore();
+  const { user, restore } = useUserStore();
+
+  useEffect(() => {
+    restore();
+  }, []);
 
   return (
     <Routes>
