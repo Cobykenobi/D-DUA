@@ -10,7 +10,7 @@ export default function MainPage() {
     <div className="min-h-screen flex flex-col items-center justify-center">
       <div className="bg-[#322018]/90 p-10 rounded-2xl shadow-dnd w-full max-w-xl flex flex-col items-center">
         <h1 className="text-4xl text-dndgold mb-2" style={{ fontFamily: 'IM Fell English SC, serif' }}>
-          Вітаю, {user?.username}!
+         Вітаю, {user?.login}!
         </h1>
         <div className="flex flex-col gap-4 mt-6 w-full items-center">
           <button
