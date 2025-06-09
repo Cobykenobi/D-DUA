@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=IM+Fell+English+SC&family=Cinzel&display=swap');
+
+body {
+  font-family: 'Cinzel', serif;
+  @apply bg-cover bg-center bg-no-repeat min-h-screen text-white;
+  background-image: url('./assets/map-bg.jpg');
+}
+
+.font-dnd {
+  font-family: 'IM Fell English SC', serif;
+}

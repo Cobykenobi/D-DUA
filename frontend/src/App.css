@@ -1,0 +1,7 @@
+body {
+  background-image: url('/nd-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  font-family: 'IM Fell English SC', serif !important;
+}
