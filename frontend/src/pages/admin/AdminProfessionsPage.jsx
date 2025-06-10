@@ -12,7 +12,7 @@ export default function AdminProfessionsPage() {
 
   const fetchProfessions = async () => {
     setLoading(true);
-    const res = await axios.get('/api/professions', { headers: { Authorization: `Bearer ${token}` } });
+    const res = await axios.get('/api/profession', { headers: { Authorization: `Bearer ${token}` } });
     setProfessions(res.data);
     setLoading(false);
   };
@@ -20,12 +20,12 @@ export default function AdminProfessionsPage() {
 
   const addProfession = async (e) => {
     e.preventDefault();
-    await axios.post('/api/professions', { name, description }, { headers: { Authorization: `Bearer ${token}` } });
+    await axios.post('/api/profession', { name, description }, { headers: { Authorization: `Bearer ${token}` } });
     setName(''); setDescription(''); fetchProfessions();
   };
 
   const removeProfession = async (id) => {
-    await axios.delete(`/api/professions/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+    await axios.delete(`/api/profession/${id}`, { headers: { Authorization: `Bearer ${token}` } });
     fetchProfessions();
   };
 

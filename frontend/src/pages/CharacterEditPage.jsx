@@ -13,7 +13,6 @@ export default function CharacterEditPage() {
   useEffect(() => {
 
     api.get(`/api/character/${id}`)
- main
       .then(res => {
         setCharacter(res.data);
         setName(res.data.name || "");
@@ -28,7 +27,6 @@ export default function CharacterEditPage() {
     try {
 
       await api.put(`/api/character/${id}`, { name, description });
- main
       navigate("/characters");
     } catch (err) {
       setError("Не вдалося зберегти зміни");
