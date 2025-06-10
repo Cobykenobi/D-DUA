@@ -8,8 +8,8 @@ import MonstersList from "../components/MonstersList";
 import ChatComponent from "../components/ChatComponent";
 import PlayerCard from "../components/PlayerCard";
 
-// !!! ВАЖЛИВО: якщо бек локально — зміни на своє посилання
-const socket = io("https://d-dua.onrender.com");
+// socket connection URL configurable via env
+const socket = io(import.meta.env.VITE_SOCKET_URL);
 
 export default function GameTablePage() {
   const { user } = useUserStore();
@@ -54,7 +54,7 @@ export default function GameTablePage() {
 
   const isGM = gm && user && gm.toString() === user._id;
 
-  // Відображаємо свого персонажа (user.username + characterName/characterId)
+  // Відображаємо свого персонажа (user.login + characterName/characterId)
   const myPlayer = players.find(p => p.user === user._id || p.user?._id === user._id);
 
   return (
@@ -67,7 +67,7 @@ export default function GameTablePage() {
       fontFamily: "'IM Fell English SC', serif"
     }}>
       <div className="flex justify-between items-center p-4 bg-[#322018]/90 rounded-t-2xl">
-        <div className="font-dnd text-dndgold">{user?.username}</div>
+        <div className="font-dnd text-dndgold">{user?.login}</div>
         <div className="font-dnd text-dndgold text-2xl tracking-widest text-center flex-1">
           D&D Online Tabletop
         </div>
@@ -81,7 +81,7 @@ export default function GameTablePage() {
             : (
               <div className="bg-[#25160f]/80 rounded-2xl p-4 mb-4 text-dndgold">
                 <div className="text-lg font-bold mb-2">Твій персонаж</div>
-                <div>Ім'я: <b>{user?.username}</b></div>
+                <div>Ім'я: <b>{user?.login}</b></div>
                 <div>ID: <b>{user?._id}</b></div>
                 <div>Онлайн: <span className="text-green-400">Так</span></div>
                 <div className="w-16 h-16 rounded-full bg-white my-2 mx-auto"></div>
