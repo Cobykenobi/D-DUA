@@ -13,7 +13,7 @@ export default function AdminMapsPage() {
 
   const fetchMaps = async () => {
     setLoading(true);
-    const res = await axios.get('/api/maps', { headers: { Authorization: `Bearer ${token}` } });
+    const res = await axios.get('/api/map', { headers: { Authorization: `Bearer ${token}` } });
     setMaps(res.data);
     setLoading(false);
   };
@@ -25,14 +25,14 @@ export default function AdminMapsPage() {
     const formData = new FormData();
     formData.append('name', name);
     formData.append('image', file);
-    await axios.post('/api/maps', formData, {
+    await axios.post('/api/map', formData, {
       headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' },
     });
     setName(''); setFile(null); fileInput.current.value = null; fetchMaps();
   };
 
   const removeMap = async (id) => {
-    await axios.delete(`/api/maps/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+    await axios.delete(`/api/map/${id}`, { headers: { Authorization: `Bearer ${token}` } });
     fetchMaps();
   };
 
