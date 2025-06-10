@@ -7,6 +7,7 @@ import InitiativeList from "../components/InitiativeList";
 import MonstersList from "../components/MonstersList";
 import ChatComponent from "../components/ChatComponent";
 import PlayerCard from "../components/PlayerCard";
+import MusicPlayer from "../components/MusicPlayer";
 
 // socket connection URL configurable via env
 const socket = io(import.meta.env.VITE_SOCKET_URL);
@@ -127,9 +128,10 @@ export default function GameTablePage() {
             <GMPanel tableId={tableId} socket={socket} players={players} />
           )}
         </div>
-        {/* Права панель: чат */}
-        <div className="w-1/6 p-2">
+        {/* Права панель: чат та музика */}
+        <div className="w-1/6 p-2 flex flex-col gap-4">
           <ChatComponent tableId={tableId} user={user} messages={messages} socket={socket} />
+          <MusicPlayer isGM={isGM} />
         </div>
       </div>
       <div className="p-4 bg-[#322018]/90 text-center font-dnd text-dndgold rounded-b-2xl">
