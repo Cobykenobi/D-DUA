@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function AdminPage() {
-  const { user, token } = useUserStore();
+  const { user } = useUserStore();
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
 
@@ -16,9 +16,7 @@ export default function AdminPage() {
     const fetchUsers = async () => {
       try {
         const apiUrl = import.meta.env.VITE_API_URL || "";
-        const res = await axios.get(`${apiUrl}/api/admin/users`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axios.get(`${apiUrl}/api/admin/users`);
         setUsers(res.data);
       } catch (e) {}
     };
