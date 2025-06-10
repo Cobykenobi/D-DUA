@@ -6,7 +6,7 @@ export default function CharacterListPage() {
   const [characters, setCharacters] = useState([]);
 
   useEffect(() => {
-    api.get("/characters")
+    api.get("/api/character")
       .then(res => setCharacters(res.data))
       .catch(() => setCharacters([]));
   }, []);

@@ -11,7 +11,7 @@ export default function CharacterEditPage() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    api.get(`/characters/${id}`)
+    api.get(`/api/character/${id}`)
       .then(res => {
         setCharacter(res.data);
         setName(res.data.name || "");
@@ -24,7 +24,7 @@ export default function CharacterEditPage() {
     e.preventDefault();
     setError("");
     try {
-      await api.put(`/characters/${id}`, { name, description });
+      await api.put(`/api/character/${id}`, { name, description });
       navigate("/characters");
     } catch (err) {
       setError("Не вдалося зберегти зміни");
