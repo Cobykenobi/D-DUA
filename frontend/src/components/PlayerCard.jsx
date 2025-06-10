@@ -10,7 +10,7 @@ export default function PlayerCard({ player }) {
           className="object-cover w-full h-full"
         />
       </div>
-      <div className="font-bold">{player.name || player.username}</div>
+      <div className="font-bold">{player.name || player.login}</div>
       <div className="text-xs mt-1">ID: {player._id || player.id}</div>
       <div className="text-xs">
         Онлайн: <span className={player.online ? "text-green-400" : "text-red-400"}>
