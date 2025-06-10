@@ -12,12 +12,18 @@ exports.me = async (req, res) => {
 exports.updateSettings = async (req, res) => {
   try {
     const { musicVolume, brightness } = req.body;
+
+    const update = {};
+    if (musicVolume !== undefined) update['settings.musicVolume'] = musicVolume;
+    if (brightness !== undefined) update['settings.brightness'] = brightness;
+
     const user = await User.findByIdAndUpdate(
       req.user.id,
-      { $set: { 'settings.musicVolume': musicVolume, 'settings.brightness': brightness } },
+      { $set: update },
       { new: true }
     ).select('-password');
-    res.json(user);
+
+    res.json(user.settings);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
