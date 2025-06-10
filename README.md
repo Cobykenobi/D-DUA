@@ -17,6 +17,10 @@ This project combines an Express/MongoDB backend with a React frontend.
    - `OPENAI_API_KEY` – API key for generating images and descriptions
    - `PORT` – optional server port (defaults to `5000`)
 
+   Create a `.env` file inside `frontend` with the following keys:
+   - `VITE_API_URL` – base URL of the backend API (e.g. `http://localhost:5000/api`)
+   - `VITE_SOCKET_URL` – URL of the Socket.io server (e.g. `http://localhost:5000`)
+
 ## Running the app
 
 ### Backend
