@@ -43,7 +43,6 @@ export default function CharacterCreatePage() {
 
 
       const res = await api.post("/api/character", {
- main
         name,
         bio,
         race,
