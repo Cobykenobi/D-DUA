@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
-
-// ... (дані для рандому залишаєш як є)
+import {
+  races,
+  classes,
+  getRandomElement,
+  getRandomStats,
+  getRandomInventory,
+} from "../utils/characterUtils";
 
 export default function CharacterCreatePage() {
-  // ... (твій стейт і функції getRandomElement, getRandomStats, getRandomInventory)
 
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
@@ -20,12 +24,22 @@ export default function CharacterCreatePage() {
     setError("");
 
     try {
-      // Генеруємо характеристики
       const race = getRandomElement(races);
       const charClass = getRandomElement(classes);
-      const stats = getRandomStats();
+      const stats = getRandomStats(charClass);
       const inventory = getRandomInventory();
-      const imgUrl = `https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(name || race+charClass)}`;
+
+      let imgUrl = "";
+      try {
+        const imgRes = await api.post("/ai/avatar", {
+          description: `${race} ${charClass}`,
+        });
+        imgUrl = imgRes.data?.url || "";
+      } catch {
+        imgUrl = `https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(
+          name || race + charClass
+        )}`;
+      }
 
       const res = await api.post("/characters", {
         name,
@@ -44,5 +58,33 @@ export default function CharacterCreatePage() {
     setLoading(false);
   };
 
-  // ... (JSX — як було)
+  return (
+    <div>
+      <h2>Створення персонажа</h2>
+      <form onSubmit={handleCreate}>
+        <input
+          type="text"
+          placeholder="Ім'я"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <textarea
+          placeholder="Біо"
+          value={bio}
+          onChange={(e) => setBio(e.target.value)}
+        />
+        <button type="submit" disabled={loading}>
+          {loading ? "Створення..." : "Створити"}
+        </button>
+      </form>
+      {error && <div style={{ color: "red" }}>{error}</div>}
+      {char && (
+        <div>
+          <h3>Персонаж створений!</h3>
+          {char.img && <img src={char.img} alt={char.name} width="200" />}
+        </div>
+      )}
+    </div>
+  );
 }
