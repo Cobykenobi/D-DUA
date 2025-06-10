@@ -12,7 +12,7 @@ export default function AdminRacesPage() {
 
   const fetchRaces = async () => {
     setLoading(true);
-    const res = await axios.get('/api/races', { headers: { Authorization: `Bearer ${token}` } });
+    const res = await axios.get('/api/race', { headers: { Authorization: `Bearer ${token}` } });
     setRaces(res.data);
     setLoading(false);
   };
@@ -20,12 +20,12 @@ export default function AdminRacesPage() {
 
   const addRace = async (e) => {
     e.preventDefault();
-    await axios.post('/api/races', { name, description }, { headers: { Authorization: `Bearer ${token}` } });
+    await axios.post('/api/race', { name, description }, { headers: { Authorization: `Bearer ${token}` } });
     setName(''); setDescription(''); fetchRaces();
   };
 
   const removeRace = async (id) => {
-    await axios.delete(`/api/races/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+    await axios.delete(`/api/race/${id}`, { headers: { Authorization: `Bearer ${token}` } });
     fetchRaces();
   };
 
