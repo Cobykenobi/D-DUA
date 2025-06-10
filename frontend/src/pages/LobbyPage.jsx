@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
-const socket = io("https://d-dua.onrender.com"); // <-- твій бекенд
+const socket = io(import.meta.env.VITE_SOCKET_URL);
 
 export default function LobbyPage({ tableId, user }) {
   const [players, setPlayers] = useState([]);

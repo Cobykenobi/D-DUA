@@ -1,6 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
+const http = require("http");
+const socket = require("./socket");
 
 const app = express();
 app.use(cors());
@@ -14,7 +16,10 @@ const MONGO_URI = process.env.MONGO_URI;
 mongoose.connect(MONGO_URI)
   .then(() => {
     console.log("MongoDB connected");
-    app.listen(PORT, () => {
+    const server = http.createServer(app);
+    const io = socket.init(server);
+    app.set("io", io);
+    server.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
   })

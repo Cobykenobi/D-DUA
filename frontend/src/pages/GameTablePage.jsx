@@ -8,8 +8,8 @@ import MonstersList from "../components/MonstersList";
 import ChatComponent from "../components/ChatComponent";
 import PlayerCard from "../components/PlayerCard";
 
-// !!! ВАЖЛИВО: якщо бек локально — зміни на своє посилання
-const socket = io("https://d-dua.onrender.com");
+// socket connection URL configurable via env
+const socket = io(import.meta.env.VITE_SOCKET_URL);
 
 export default function GameTablePage() {
   const { user } = useUserStore();
