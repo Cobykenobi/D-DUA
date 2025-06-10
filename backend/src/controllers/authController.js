@@ -7,9 +7,9 @@ const JWT_SECRET = process.env.JWT_SECRET || "supersecretkey";
 // Реєстрація
 exports.register = async (req, res) => {
   try {
-    const { login, password } = req.body;
-    if (!login || !password) {
-      return res.status(400).json({ message: "Login and password are required" });
+    const { login, password, username } = req.body;
+    if (!login || !password || !username) {
+      return res.status(400).json({ message: "Login, password and username are required" });
     }
 
     const candidate = await User.findOne({ login });
@@ -18,10 +18,18 @@ exports.register = async (req, res) => {
     }
 
     const hash = await bcrypt.hash(password, 10);
-    const user = new User({ login, password: hash });
+    const user = new User({ login, password: hash, username });
     await user.save();
 
-    res.status(201).json({ message: "User created" });
+    res.status(201).json({
+      message: "User created",
+      user: {
+        _id: user._id,
+        login: user.login,
+        username: user.username,
+        role: user.role,
+      },
+    });
   } catch (err) {
     res.status(500).json({ message: "Registration error", error: err.message });
   }
@@ -45,13 +53,19 @@ exports.login = async (req, res) => {
       return res.status(400).json({ message: "Invalid password" });
     }
 
-    const token = jwt.sign({ _id: user._id, login: user.login }, JWT_SECRET, { expiresIn: "7d" });
+    const token = jwt.sign(
+      { _id: user._id, login: user.login, username: user.username, role: user.role },
+      JWT_SECRET,
+      { expiresIn: "7d" }
+    );
 
     res.json({
       token,
       user: {
         _id: user._id,
-        login: user.login
+        login: user.login,
+        username: user.username,
+        role: user.role
       }
     });
   } catch (err) {
