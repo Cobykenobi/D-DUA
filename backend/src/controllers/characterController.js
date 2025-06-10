@@ -3,6 +3,23 @@ const Race = require('../models/Race');
 const Profession = require('../models/Profession');
 const Characteristic = require('../models/Characteristic');
 
+const inventoryPool = ['Sword', 'Bow', 'Dagger', 'Staff', 'Shield', 'Potion'];
+const hpRanges = {
+  Warrior: { min: 16, max: 20 },
+  Wizard: { min: 6, max: 10 },
+  Rogue: { min: 10, max: 14 },
+};
+
+const getRandomInventory = () => {
+  const count = Math.floor(Math.random() * 3) + 2; // 2-4 items
+  const items = [];
+  for (let i = 0; i < count; i++) {
+    const name = inventoryPool[Math.floor(Math.random() * inventoryPool.length)];
+    items.push({ item: name, amount: 1 });
+  }
+  return items;
+};
+
 // Отримати всіх персонажів користувача
 exports.getAllByUser = async (req, res) => {
   try {
@@ -32,15 +49,24 @@ exports.create = async (req, res) => {
     const profession = await Profession.aggregate([{ $sample: { size: 1 } }]);
     const characteristics = await Characteristic.find();
 
-    const stats = characteristics.map(char => ({
-      characteristic: char._id,
-      value: Math.floor(Math.random() * 16) + 3 // від 3 до 18
-    }));
+    const profName = profession[0]?.name;
+    const hpChar = characteristics.find(c => c.name.toLowerCase() === 'hp');
+    const hpRange = hpRanges[profName] || { min: 3, max: 18 };
+
+    const stats = characteristics.map(char => {
+      let value = Math.floor(Math.random() * 16) + 3; // 3-18
+      if (hpChar && String(char._id) === String(hpChar._id)) {
+        value = Math.floor(Math.random() * (hpRange.max - hpRange.min + 1)) + hpRange.min;
+      }
+      return { characteristic: char._id, value };
+    });
 
     // Логіка вибору аватара
     const avatar = (image && image.trim())
       ? image
       : defaultAvatars[Math.floor(Math.random() * defaultAvatars.length)];
+
+    const inventory = getRandomInventory();
 
     const newChar = new Character({
       user: req.user.id,
@@ -49,7 +75,8 @@ exports.create = async (req, res) => {
       image: avatar,
       race: race[0]?._id,
       profession: profession[0]?._id,
-      stats
+      stats,
+      inventory
     });
 
     await newChar.save();
