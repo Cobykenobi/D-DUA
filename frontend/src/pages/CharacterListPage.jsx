@@ -8,7 +8,6 @@ export default function CharacterListPage() {
   useEffect(() => {
 
     api.get("/api/character")
- main
       .then(res => setCharacters(res.data))
       .catch(() => setCharacters([]));
   }, []);
