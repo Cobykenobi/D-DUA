@@ -18,7 +18,11 @@ exports.register = async (req, res) => {
     }
 
     const hash = await bcrypt.hash(password, 10);
-    const user = new User({ login, password: hash });
+    const user = new User({
+      login,
+      password: hash,
+      username: login,
+    });
     await user.save();
 
     res.status(201).json({ message: "User created" });
@@ -51,7 +55,9 @@ exports.login = async (req, res) => {
       token,
       user: {
         _id: user._id,
-        login: user.login
+        login: user.login,
+        username: user.username,
+        role: user.role,
       }
     });
   } catch (err) {

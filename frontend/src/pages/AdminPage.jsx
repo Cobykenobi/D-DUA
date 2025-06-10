@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useUserStore } from "../store/user";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../api/axios";
 
 export default function AdminPage() {
   const { user } = useUserStore();
@@ -15,8 +15,7 @@ export default function AdminPage() {
     }
     const fetchUsers = async () => {
       try {
-        const apiUrl = import.meta.env.VITE_API_URL || "";
-        const res = await axios.get(`${apiUrl}/api/admin/users`);
+        const res = await api.get("/admin/users");
         setUsers(res.data);
       } catch (e) {}
     };
