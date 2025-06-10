@@ -17,13 +17,18 @@ exports.create = async (req, res) => {
       session
     });
     await roll.save();
-    // Якщо isPrivate — тільки майстер отримує результат
-    res.json({
+    const result = {
       value: isPrivate ? null : value,
       roller: req.user.id,
       diceType,
       id: roll._id
-    });
+    };
+    const io = req.app.get('io');
+    if (io && session) {
+      io.to(session).emit('dice-roll', result);
+    }
+    // Якщо isPrivate — тільки майстер отримує результат
+    res.json(result);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
