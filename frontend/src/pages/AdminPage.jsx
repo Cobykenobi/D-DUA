@@ -44,12 +44,12 @@ export default function AdminPage() {
             </tr>
           </thead>
           <tbody>
-            {users.map((u) => (
-              <tr key={u._id}>
-                <td>{u.username}</td>
-                <td>{u.role}</td>
-              </tr>
-            ))}
+              {users.map((u) => (
+                <tr key={u._id}>
+                  <td>{u.login}</td>
+                  <td>{u.role}</td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
