@@ -29,6 +29,7 @@ app.use('/api/race', require('./routes/race'));
 app.use('/api/roll', require('./routes/roll'));
 app.use('/api/session', require('./routes/session'));
 app.use('/api/user', require('./routes/user'));
+app.use('/api/ai', require('./routes/ai'));
 
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
