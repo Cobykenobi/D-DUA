@@ -1,4 +1,3 @@
-import React
 import React from 'react';
 import LanguageSwitch from './LanguageSwitch';
 
