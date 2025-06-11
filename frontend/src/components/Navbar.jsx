@@ -1,5 +1,6 @@
 import React
-import LanguageSwitch from './LanguageSwitch'; from "react";
+import React from 'react';
+import LanguageSwitch from './LanguageSwitch';
 
 function Navbar() {
   const navigate = useNavigate();
