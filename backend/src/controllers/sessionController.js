@@ -1,61 +1,18 @@
-const Session = require('../models/Session');
-const User = require('../models/User');
+const SessionLog = require("../models/SessionLog");
 
-exports.getAll = async (req, res) => {
-  try {
-    const query = req.user.role === 'master' ? { master: req.user.id } : { players: req.user.id };
-    const sessions = await Session.find(query).populate('master players activeMap activeMusic');
-    res.json(sessions);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+exports.start = async (req, res) => {
+  const entry = new SessionLog({ message: "Сесія почалась" });
+  await entry.save();
+  res.json({ message: "Session started" });
 };
 
-exports.create = async (req, res) => {
-  try {
-    const { name, playerIds } = req.body;
-    const session = new Session({
-      name,
-      master: req.user.id,
-      players: playerIds
-    });
-    await session.save();
-    res.status(201).json(session);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+exports.end = async (req, res) => {
+  const entry = new SessionLog({ message: "Сесія завершена" });
+  await entry.save();
+  res.json({ message: "Session ended" });
 };
 
-exports.getOne = async (req, res) => {
-  try {
-    const session = await Session.findById(req.params.id).populate('master players activeMap activeMusic');
-    if (!session) return res.status(404).json({ message: 'Not found' });
-    res.json(session);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
-
-exports.update = async (req, res) => {
-  try {
-    const { name, playerIds, activeMap, activeMusic } = req.body;
-    const session = await Session.findByIdAndUpdate(
-      req.params.id,
-      { $set: { name, players: playerIds, activeMap, activeMusic } },
-      { new: true }
-    );
-    if (!session) return res.status(404).json({ message: 'Not found' });
-    res.json(session);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-};
-
-exports.remove = async (req, res) => {
-  try {
-    await Session.findByIdAndDelete(req.params.id);
-    res.json({ message: 'Session deleted' });
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
+exports.log = async (req, res) => {
+  const logs = await SessionLog.find().sort({ createdAt: -1 });
+  res.json(logs.map(log => `${log.message}: ${log.createdAt.toLocaleString()}`));
 };

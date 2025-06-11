@@ -7,6 +7,8 @@ const path = require('path');
 const http = require('http');
 
 const app = express();
+const statsRoutes = require("./routes/stats");
+const settingsRoutes = require("./routes/settings");
 app.use(cors());
 app.use(express.json());
 
