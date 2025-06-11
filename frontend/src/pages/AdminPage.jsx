@@ -80,32 +80,21 @@ export default function AdminPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         <AdminCard title="🎵 Встановити музику" onClick={handleSetMusic} />
         <AdminCard title="🧬 Створити нову расу" onClick={handleCreateRace} />
-        <AdminCard title="🗺 Завантажити мапу" onClick={handleUploadMap} />
-        <AdminCard title="▶️ Почати сесію" onClick={handleStartSession} />
-        <AdminCard title="⏹ Завершити сесію" onClick={handleEndSession} />
-      </div>
-
-      {videoId && (
-        <div className="mb-6">
-          <h2 className="text-xl text-dndgold mb-2">🔊 Музика</h2>
-          <YouTubePlayer videoId={videoId} />
+{races.map(r => (
+              <li key={r._id} className="flex justify-between items-center">
+                {r.name}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
 
-      {races.length > 0 && (
-        <div>
-          <h2 className="text-xl text-dndgold mb-2">🧬 Список рас</h2>
-          <ul className="list-disc pl-6 space-y-2 text-sm text-white/90">
-            {races.map(r => (
-              <li key={r._id} className="flex justify-between items-center">
-                {r.name}
-                <button
-                  className="ml-4 text-red-500 hover:text-red-300 text-xs underline"
-                  onClick={() => handleDeleteRace(r._id)}
-                >
-                  Видалити
-                </button>
-              </li>
+      {log.length > 0 && (
+        <div className="mt-6">
+          <h2 className="text-xl text-dndgold mb-2">📜 Журнал подій</h2>
+          <ul className="list-disc pl-6 text-sm space-y-1">
+            {log.map((entry, i) => (
+              <li key={i}>{entry}</li>
             ))}
           </ul>
         </div>
@@ -115,17 +104,10 @@ export default function AdminPage() {
 }
 
 useEffect(() => {
-    getRaces().then(res => {
+  getRaces().then(res => setRaces(res.data));
   getSessionLog().then(res => setLog(res.data));
-  }, []);
+}, []);
 
-{log.length > 0 && (
-  <div className="mt-6">
-    <h2 className="text-xl text-dndgold mb-2">📜 Журнал подій</h2>
-    <ul className="list-disc pl-6 text-sm space-y-1">
-      {log.map((entry, i) => (
-        <li key={i}>{entry}</li>
-      ))}
-    </ul>
-  </div>
-)}
+export default AdminPage;
+}
+)
