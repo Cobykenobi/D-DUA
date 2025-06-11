@@ -13,6 +13,7 @@ export default function AdminPage() {
   const [races, setRaces] = useState([]);
 
   useEffect(() => {
+    getRaces().then(res => setRaces(res.data));
       const url = res.data?.url || "";
       const id = url.split("v=")[1]?.split("&")[0] || null;
       setVideoId(id);
@@ -114,6 +115,7 @@ export default function AdminPage() {
 }
 
 useEffect(() => {
+    getRaces().then(res => setRaces(res.data));
   getSessionLog().then(res => setLog(res.data));
 }, []);
 
