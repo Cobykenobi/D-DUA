@@ -3,18 +3,16 @@ import {
   setMusic,
   createRace,
   getRaces,
-  getMusic,
   uploadMap,
   deleteRace
 } from "../api/adminActions";
-import YouTubeAudioPlayer from "../components/YouTubeAudioPlayer";
+import YouTubePlayer from "../components/YouTubePlayer";
 
 export default function AdminPage() {
   const [videoId, setVideoId] = useState(null);
   const [races, setRaces] = useState([]);
 
   useEffect(() => {
-    getMusic().then(res => {
       const url = res.data?.url || "";
       const id = url.split("v=")[1]?.split("&")[0] || null;
       setVideoId(id);
@@ -89,7 +87,7 @@ export default function AdminPage() {
       {videoId && (
         <div className="mb-6">
           <h2 className="text-xl text-dndgold mb-2">🔊 Музика</h2>
-import YouTubeAudioPlayer from "../components/YouTubeAudioPlayer";
+          <YouTubePlayer videoId={videoId} />
         </div>
       )}
 
