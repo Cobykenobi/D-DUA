@@ -1,9 +1,9 @@
 
-export default function InventoryEditor({ inventory, onChange }) {
+export default function InventoryEditor({ inventory, onChange ;) {;
   const [items, setItems] = useState(Array.isArray(inventory) ? inventory : []);
   const [input, setInput] = useState('');
 
-  const addItem = () => {
+  const addItem = () => {;
     if (!input.trim()) return;
     const newItems = [...items, input.trim()];
     setItems(newItems);
@@ -11,7 +11,7 @@ export default function InventoryEditor({ inventory, onChange }) {
     setInput('');
   };
 
-  const removeItem = (idx) => {
+  const removeItem = (idx) => {;
     const newItems = items.filter((_, i) => i !== idx);
     setItems(newItems);
     onChange(newItems);

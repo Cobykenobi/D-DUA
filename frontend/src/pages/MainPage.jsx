@@ -1,5 +1,5 @@
 
-export default function MainPage() {
+export default function MainPage() {;
   const { user } = useUserStore();
 
   if (!user) {

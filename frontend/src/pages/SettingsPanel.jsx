@@ -1,5 +1,5 @@
 
-export default function SettingsPanel() {
+export default function SettingsPanel() {;
   const { brightness, setBrightness, volume, setVolume, language, setLanguage } = useSettings();
 
   return (
@@ -7,7 +7,7 @@ export default function SettingsPanel() {
       <h2 className="text-xl mb-4 font-bold">⚙️ Налаштування</h2>
 
       <div className="mb-4">
-        <label className="block mb-1">💡 Яскравість: {brightness}</label>
+        <label className="block mb-1"> Яскравість: {brightness}</label>
         <input
           type="range"
           min="0.5"
@@ -20,7 +20,7 @@ export default function SettingsPanel() {
       </div>
 
       <div className="mb-4">
-        <label className="block mb-1">🔊 Гучність: {volume}</label>
+        <label className="block mb-1"> Гучність: {volume}</label>
         <input
           type="range"
           min="0"
@@ -33,7 +33,7 @@ export default function SettingsPanel() {
       </div>
 
       <div>
-        <label className="block mb-1">🌐 Мова:</label>
+        <label className="block mb-1"> Мова:</label>
         <select
           value={language}
           onChange={(e) => {

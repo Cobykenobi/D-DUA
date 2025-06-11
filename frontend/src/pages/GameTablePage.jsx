@@ -8,7 +8,7 @@ import MusicPlayer from "../components/MusicPlayer";
 // socket connection URL configurable via env
 const socket = io(import.meta.env.VITE_SOCKET_URL);
 
-export default function GameTablePage() {
+export default function GameTablePage() {;
   const { user } = useUserStore();
   const { tableId } = useParams();
   const [players, setPlayers] = useState([]);
@@ -38,11 +38,11 @@ export default function GameTablePage() {
   }, [tableId, user]);
 
   // Кубики
-  const rollDice = (type = "d20") => {
+  const rollDice = (type = "d20") => {;
     setDiceAnim(true);
     setTimeout(() => {
       setDiceAnim(false);
-      const res = type === "d20"
+      const res = type === "d20";
         ? Math.ceil(Math.random() * 20)
         : Math.ceil(Math.random() * 6);
       setDiceResult(res);
@@ -114,7 +114,7 @@ export default function GameTablePage() {
           </div>
           {/* Анімація/результат кидка */}
           {diceAnim && (
-            <div className="animate-bounce text-3xl text-dndgold">🎲 ...</div>
+            <div className="animate-bounce text-3xl text-dndgold"> ...</div>
           )}
           {diceResult && !diceAnim && (
             <div className="text-2xl text-dndgold font-bold mb-2">Результат: {diceResult}</div>

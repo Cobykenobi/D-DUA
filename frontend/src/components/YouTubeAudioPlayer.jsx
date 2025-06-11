@@ -1,13 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 
-const YouTubeAudioPlayer = ({ videoId, volume = 50 }) => {
+const YouTubeAudioPlayer = ({ videoId, volume = 50 }) => {;
   const iframeRef = useRef(null);
 
   useEffect(() => {
     const iframe = iframeRef.current;
     if (!iframe) return;
 
-    const onLoad = () => {
+    const onLoad = () => {;
       // Мутація для приховування відео
       iframe.style.width = '0px';
       iframe.style.height = '0px';

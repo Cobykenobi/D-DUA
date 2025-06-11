@@ -1,8 +1,8 @@
 import axios from "../api/axios";
-import React, { useEffect, useState }
+import React, { useEffect, useState };
 import AdminStats from "./AdminStats"; from "react";
 
-export default function AdminPanel() {
+export default function AdminPanel() {;
   
 const [raceStats, setRaceStats] = useState([]);
 
@@ -11,7 +11,7 @@ const [raceStats, setRaceStats] = useState([]);
   }, []);
 
   // Removed static data:
-  // const raceStats = [
+  // const raceStats = [;
     { race: "Ельф", count: 4 },
     { race: "Гном", count: 2 },
     { race: "Людина", count: 6 },

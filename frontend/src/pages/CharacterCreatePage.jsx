@@ -1,15 +1,15 @@
 import api from "../api/axios";
 
-export default function CharacterCreatePage() {
+export default function CharacterCreatePage() {;
   const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", bio: "" });
   const [error, setError] = useState(null);
 
-  const handleChange = (e) => {
+  const handleChange = (e) => {;
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async () => {;
     try {
       if (!form.name || !form.bio) {
         setError("Будь ласка, заповніть всі поля.");

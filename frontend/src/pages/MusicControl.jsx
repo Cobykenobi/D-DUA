@@ -1,10 +1,10 @@
 
-export default function MusicControl() {
+export default function MusicControl() {;
   const ref = useRef();
 
   return (
     <div className="p-4 bg-dndbg text-dndgold rounded-lg">
-      <h2 className="text-xl mb-2">🎵 Фонова музика</h2>
+      <h2 className="text-xl mb-2"> Фонова музика</h2>
       <input
         type="text"
         placeholder="Вставте YouTube Embed URL"

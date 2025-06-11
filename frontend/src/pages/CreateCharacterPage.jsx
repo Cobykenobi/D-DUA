@@ -1,10 +1,10 @@
 
-const CreateCharacterPage = () => {
+const CreateCharacterPage = () => {;
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {;
     e.preventDefault();
     const newChar = await createCharacter({ name, description });
     if (newChar && newChar._id) {

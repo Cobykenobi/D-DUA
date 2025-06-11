@@ -2,7 +2,7 @@ import CharacterListPage from '../pages/CharacterListPage';
 import CharacterCreatePage from '../pages/CharacterCreatePage';
 import CharacterEditPage from '../pages/CharacterEditPage';
 
-export default function UserRoutes() {
+export default function UserRoutes() {;
   return (
     <Routes>
       <Route path="characters" element={<CharacterListPage />} />

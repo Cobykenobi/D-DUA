@@ -1,7 +1,7 @@
 
 const SettingsContext = createContext();
 
-export function SettingsProvider({ children }) {
+export function SettingsProvider({ children }) {;
   const [brightness, setBrightness] = useState(1);
   const [volume, setVolume] = useState(0.5);
   const [language, setLanguage] = useState("ua");

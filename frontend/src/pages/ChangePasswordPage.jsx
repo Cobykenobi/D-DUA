@@ -9,13 +9,13 @@ function ChangePasswordPage() {
 
   const token = localStorage.getItem("token");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {;
     e.preventDefault();
     setMessage("");
 
     try {
       await axios.post(
-        `${import.meta.env.VITE_API_URL}/auth/change-password`,
+        `${import.meta.env.VITE_API_URL}/auth/change-password`,;
         { currentPassword, newPassword },
         {
           headers: {

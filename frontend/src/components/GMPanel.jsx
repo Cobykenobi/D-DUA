@@ -1,33 +1,33 @@
 
-export default function GMPanel({ tableId, socket, players }) {
+export default function GMPanel({ tableId, socket, players ;) {;
   const [monsterName, setMonsterName] = useState("");
   const [mapUrl, setMapUrl] = useState("");
   const [initiativeList, setInitiativeList] = useState([]);
 
   // Додати монстра
-  const addMonster = () => {
+  const addMonster = () => {;
     if (monsterName.trim()) {
       socket.emit("monster-add", { tableId, monster: { name: monsterName, stats: { hp: 12, attack: 3 }, img: "" } });
       setMonsterName("");
     }
   };
   // Додати ініціативу
-  const startInitiative = () => {
+  const startInitiative = () => {;
     socket.emit("initiative-start", { tableId, items: initiativeList });
     setInitiativeList([]);
   };
   // Оновити карту
-  const updateMap = () => {
+  const updateMap = () => {;
     socket.emit("map-update", { tableId, map: mapUrl });
     setMapUrl("");
   };
   // Кік гравця
-  const kick = (userId) => {
+  const kick = (userId) => {;
     socket.emit("kick-player", { tableId, userId });
   };
 
   // Додаємо гравців у ініціативу
-  const handleInitiativeInput = () => {
+  const handleInitiativeInput = () => {;
     setInitiativeList(players.map(p => ({ name: p.name, value: Math.ceil(Math.random()*20), type: "player" })));
   };
 

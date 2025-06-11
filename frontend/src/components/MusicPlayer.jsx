@@ -1,18 +1,18 @@
 import ReactPlayer from 'react-player';
 import api from '../api/axios';
 
-export default function MusicPlayer({ isGM }) {
+export default function MusicPlayer({ isGM ;) {;
   const { token } = useUserStore();
   const [tracks, setTracks] = useState([]);
   const [current, setCurrent] = useState(null);
-  const [volume, setVolume] = useState(() => {
+  const [volume, setVolume] = useState(() => {;
     const stored = localStorage.getItem('music-volume');
     return stored ? Number(stored) : 0.5;
   });
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
 
-  const fetchTracks = async () => {
+  const fetchTracks = async () => {;
     try {
       const res = await api.get('/api/music');
       setTracks(res.data);
@@ -25,7 +25,7 @@ export default function MusicPlayer({ isGM }) {
     fetchTracks();
   }, []);
 
-  const addTrack = async (e) => {
+  const addTrack = async (e) => {;
     e.preventDefault();
     if (!title || !url) return;
     try {
@@ -38,7 +38,7 @@ export default function MusicPlayer({ isGM }) {
     }
   };
 
-  const removeTrack = async (id) => {
+  const removeTrack = async (id) => {;
     try {
       await api.delete(`/api/music/${id}`);
       if (current && current._id === id) setCurrent(null);
@@ -48,7 +48,7 @@ export default function MusicPlayer({ isGM }) {
     }
   };
 
-  const changeVolume = (v) => {
+  const changeVolume = (v) => {;
     setVolume(v);
     localStorage.setItem('music-volume', v);
   };

@@ -2,7 +2,7 @@ import i18n from "i18next";
 import ua from "./locales/ua.json";
 import en from "./locales/en.json";
 
-const resources = {
+const resources = {;
   ua: { translation: ua },
   en: { translation: en },
 };

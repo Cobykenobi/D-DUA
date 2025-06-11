@@ -2,15 +2,15 @@ import api from "../api/axios";
 
 const diceTypes = ["d20", "d12", "d10", "d8", "d6", "d4"];
 
-export default function DiceRoller({ sessionId, isMaster }) {
+export default function DiceRoller({ sessionId, isMaster ;) {;
   const [rolling, setRolling] = useState(false);
   const [lastRoll, setLastRoll] = useState(null);
   const { token } = useUserStore();
 
-  const rollDice = async (diceType, isPrivate = false) => {
+  const rollDice = async (diceType, isPrivate = false) => {;
     setRolling(true);
     try {
-      const res = await api.post("/rolls", {
+      const res = await api.post("/rolls", {;
         diceType,
         isPrivate,
         session: sessionId,
@@ -34,7 +34,7 @@ export default function DiceRoller({ sessionId, isMaster }) {
             className={`bg-dndred hover:bg-dndgold text-white hover:text-dndred font-dnd rounded-2xl px-3 py-2 transition-all ${rolling ? "opacity-60" : ""}`}
           >
             {dt}
-            {isMaster && <span className="text-xs ml-1">🔒</span>}
+            {isMaster && <span className="text-xs ml-1"></span>}
           </button>
         ))}
       </div>

@@ -1,7 +1,7 @@
-import React
+import React;
 import api from "../api/axios";
 
-export default function CharacterListPage() {
+export default function CharacterListPage() {;
   const [characters, setCharacters] = useState([]);
   const navigate = useNavigate();
 

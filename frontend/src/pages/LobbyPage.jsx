@@ -1,6 +1,6 @@
 const socket = io(import.meta.env.VITE_SOCKET_URL);
 
-export default function LobbyPage({ tableId, user }) {
+export default function LobbyPage({ tableId, user ;) {;
   const [players, setPlayers] = useState([]);
   const [isGM, setIsGM] = useState(false);
   const navigate = useNavigate();

@@ -1,5 +1,5 @@
 
-export default function BrightnessControl({ value, onChange }) {
+export default function BrightnessControl({ value, onChange ;) {;
   return (
     <div className="flex items-center gap-3">
       <span className="text-dndgold/70">Яскравість:</span>

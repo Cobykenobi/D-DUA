@@ -1,5 +1,5 @@
 
-export default function CharacterCard({ character, onEdit, onDelete }) {
+export default function CharacterCard({ character, onEdit, onDelete ;) {;
   return (
     <div style={{ border: "1px solid #ccc", marginBottom: 12, padding: 8 }}>
       <h3>{character.name}</h3>

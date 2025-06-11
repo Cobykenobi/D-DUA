@@ -6,7 +6,7 @@ function Navbar() {
   const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user") || "null");
 
-  const handleLogout = () => {
+  const handleLogout = () => {;
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     navigate("/login");
@@ -18,7 +18,7 @@ function Navbar() {
         D-DUA
       </Link>
       <div className="flex items-center gap-4">
-        {user && <span className="text-sm">👤 {user.login}</span>}
+        {user && <span className="text-sm"> {user.login}</span>}
         {token && (
           <button
             onClick={handleLogout}
