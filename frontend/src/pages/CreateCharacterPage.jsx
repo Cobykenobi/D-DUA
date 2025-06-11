@@ -35,5 +35,3 @@ const CreateCharacterPage = () => {
 };
 
 export default CreateCharacterPage;
-
-}

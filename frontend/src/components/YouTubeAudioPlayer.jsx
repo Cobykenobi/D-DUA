@@ -29,4 +29,3 @@ const YouTubeAudioPlayer = ({ videoId, volume = 50 }) => {
 };
 
 export default YouTubeAudioPlayer;
-}
