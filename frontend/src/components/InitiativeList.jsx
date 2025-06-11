@@ -1,4 +1,3 @@
-import React from "react";
 
 export default function InitiativeList({ initiative }) {
   if (!initiative || !initiative.length) return null;

@@ -1,7 +1,5 @@
 import React
-import PlayerCard from "../components/PlayerCard";, { useEffect, useState } from "react";
 import api from "../api/axios";
-import { useNavigate } from "react-router-dom";
 
 export default function CharacterListPage() {
   const [characters, setCharacters] = useState([]);

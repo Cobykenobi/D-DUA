@@ -1,4 +1,3 @@
-import React from "react";
 
 export default function AlertBox({ message, type = "error" }) {
   const colors = {

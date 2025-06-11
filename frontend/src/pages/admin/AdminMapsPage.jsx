@@ -1,7 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
-import { useUserStore } from '../../store/user';
-import { Link } from 'react-router-dom';
 
 export default function AdminMapsPage() {
   const { token } = useUserStore();

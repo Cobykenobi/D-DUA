@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 
 export default function InventoryEditor({ inventory, onChange }) {
   const [items, setItems] = useState(Array.isArray(inventory) ? inventory : []);

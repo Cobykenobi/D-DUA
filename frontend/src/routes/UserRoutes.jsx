@@ -1,5 +1,3 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
 import CharacterListPage from '../pages/CharacterListPage';
 import CharacterCreatePage from '../pages/CharacterCreatePage';
 import CharacterEditPage from '../pages/CharacterEditPage';

@@ -1,5 +1,3 @@
-import React from "react";
-import { Bar } from "react-chartjs-2";
 
 export default function AdminStats({ data }) {
   const races = data.map(d => d.race);

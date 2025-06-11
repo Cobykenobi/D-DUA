@@ -1,4 +1,3 @@
-import React, { useState, useRef, useEffect } from "react";
 
 export default function ChatComponent({ tableId, user, messages, socket }) {
   const [input, setInput] = useState("");

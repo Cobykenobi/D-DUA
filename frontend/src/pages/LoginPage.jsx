@@ -1,11 +1,5 @@
 
-import React, { useState } from "react";
-import { useToast } from "../context/ToastContext";
-import { useSettings } from "../context/SettingsContext";
-import { useTranslation } from "react-i18next";
 
-import { useNavigate, Link } from "react-router-dom";
-import { useUserStore } from "../store/user";
 import api from "../api/axios";
 
 function LoginPage() {

@@ -1,11 +1,5 @@
-import React, { useState } from "react";
-import { useToast } from "../context/ToastContext";
-import { useTranslation } from "react-i18next";
 
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { useToast } from "../context/ToastContext";
-import { useTranslation } from "react-i18next";
 
 function RegisterPage() {
   const [login, setLogin] = useState("");

@@ -1,7 +1,3 @@
-import React, { useEffect, useState } from "react";
-import { useUserStore } from "../store/user";
-import { useParams } from "react-router-dom";
-import { io } from "socket.io-client";
 import GMPanel from "../components/GMPanel";
 import InitiativeList from "../components/InitiativeList";
 import MonstersList from "../components/MonstersList";

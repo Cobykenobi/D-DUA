@@ -1,6 +1,3 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useUserStore } from '../store/user';
-import { io } from 'socket.io-client';
 
 let socket;
 
