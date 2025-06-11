@@ -70,7 +70,7 @@ export default function AdminPage() {
     await startSession(); alert("Сесія запущена");
   };
 
-  const handleEndSession = () => {
+  const handleEndSession = async () => {
     await endSession(); alert("Сесію завершено");
   };
 
