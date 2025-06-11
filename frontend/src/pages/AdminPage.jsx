@@ -7,7 +7,7 @@ import {
   uploadMap,
   deleteRace
 } from "../api/adminActions";
-import YouTubePlayer from "../components/YouTubePlayer";
+import YouTubeAudioPlayer from "../components/YouTubeAudioPlayer";
 
 export default function AdminPage() {
   const [videoId, setVideoId] = useState(null);
@@ -89,7 +89,7 @@ export default function AdminPage() {
       {videoId && (
         <div className="mb-6">
           <h2 className="text-xl text-dndgold mb-2">🔊 Музика</h2>
-          <YouTubePlayer videoId={videoId} />
+import YouTubeAudioPlayer from "../components/YouTubeAudioPlayer";
         </div>
       )}
 
