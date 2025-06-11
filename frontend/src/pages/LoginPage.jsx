@@ -16,7 +16,6 @@ function LoginPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [error, setError] = useState("");
-  const navigate = useNavigate();
   const setUser = useUserStore((s) => s.setUser);
 
   const handleSubmit = async (e) => {
