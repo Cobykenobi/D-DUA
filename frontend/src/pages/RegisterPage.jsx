@@ -8,7 +8,6 @@ function RegisterPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [error, setError] = useState("");
-  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
