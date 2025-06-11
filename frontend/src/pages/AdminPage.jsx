@@ -1,59 +1,29 @@
-import React, { useEffect, useState } from "react";
-import { useUserStore } from "../store/user";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import React from "react";
+import AdminCard from "../components/AdminCard";
 
 export default function AdminPage() {
-  const { user, token } = useUserStore();
-  const navigate = useNavigate();
-  const [users, setUsers] = useState([]);
+  const handleRaceManage = () => {
+    console.log("Керування расами — ще не реалізовано");
+    // TODO: fetch('/api/race') або navigate('/admin/races')
+  };
 
-  useEffect(() => {
-    if (!user || (user.role !== "admin" && user.role !== "master")) {
-      navigate("/");
-      return;
-    }
-    const fetchUsers = async () => {
-      try {
-        const apiUrl = import.meta.env.VITE_API_URL || "";
-        const res = await axios.get(`${apiUrl}/api/admin/users`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
-        setUsers(res.data);
-      } catch (e) {}
-    };
-    fetchUsers();
-  }, [user, navigate]);
+  const handleMapUpload = () => {
+    console.log("Завантаження карти — ще не реалізовано");
+    // TODO: реалізувати upload input
+  };
 
-  if (!user || (user.role !== "admin" && user.role !== "master")) {
-    return null;
-  }
+  const handleMusicControl = () => {
+    console.log("Керування музикою — ще не реалізовано");
+    // TODO: fetch('/api/music') або navigate('/admin/music')
+  };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
-      <div className="bg-[#322018]/90 p-10 rounded-2xl shadow-dnd w-full max-w-xl flex flex-col items-center">
-        <h1
-          className="text-4xl text-dndgold mb-4"
-          style={{ fontFamily: "IM Fell English SC, serif" }}
-        >
-          Адмін-панель
-        </h1>
-        <table className="w-full text-dndgold mb-4" style={{ fontFamily: "IM Fell English SC, serif" }}>
-          <thead>
-            <tr>
-              <th>Ім'я</th>
-              <th>Роль</th>
-            </tr>
-          </thead>
-          <tbody>
-              {users.map((u) => (
-                <tr key={u._id}>
-                  <td>{u.login}</td>
-                  <td>{u.role}</td>
-                </tr>
-              ))}
-          </tbody>
-        </table>
+    <div className="flex flex-col items-center mt-10 space-y-6">
+      <h1 className="text-3xl font-dnd text-dndgold">Панель Майстра</h1>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-4">
+        <AdminCard title="Керувати расами" onClick={handleRaceManage} />
+        <AdminCard title="Завантажити карту" onClick={handleMapUpload} />
+        <AdminCard title="Фонова музика" onClick={handleMusicControl} />
       </div>
     </div>
   );
