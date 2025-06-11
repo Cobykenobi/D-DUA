@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getRaces, getSessionLog } from "../api/adminActions";
+import { getSessionLog } from "../api/adminActions";
 
 function AdminPage() {
   const [races, setRaces] = useState([]);
