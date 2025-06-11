@@ -1,27 +1,13 @@
 import React from "react";
 
-export default function PlayerCard({ player }) {
+export default function PlayerCard({ character, onSelect }) {
   return (
-    <div className="bg-[#25160f]/80 rounded-2xl p-4 flex flex-col items-center text-dndgold w-48 shadow-lg hover:scale-105 transition-all duration-300">
-      <div className="w-20 h-20 rounded-full bg-white mb-3 overflow-hidden flex items-center justify-center border-2 border-dndgold">
-        <img
-          src={player.avatar || "/default-avatar.png"}
-          alt="avatar"
-          className="object-cover w-full h-full"
-        />
-      </div>
-      <div className="font-bold text-lg">{player.name || player.login}</div>
-      <div className="text-sm mt-1 italic text-gray-300">
-        {player.race?.name || "Раса не вказана"} — {player.profession?.name || "Клас не вказаний"}
-      </div>
-      <div className="text-xs mt-1 text-gray-400">HP: {player.hp || "??"}</div>
-      <div className="text-xs">
-        Онлайн:
-        <span className={player.online ? "text-green-400" : "text-red-400"}>
-          {" "}
-          {player.online ? "Так" : "Ні"}
-        </span>
-      </div>
+    <div className="border rounded-lg shadow-lg p-4 bg-gradient-to-br from-gray-800 to-black text-white font-dnd">
+      <img src={character.image || "/default-avatar.png"} alt="character" className="rounded mb-2 h-32 w-full object-cover" />
+      <h3 className="text-xl text-dndgold">{character.name}</h3>
+      <p className="text-sm">Раса: {character.race}</p>
+      <p className="text-sm">Клас: {character.class}</p>
+      <button onClick={() => onSelect(character)} className="mt-2 bg-red-800 px-3 py-1 text-sm rounded text-white hover:bg-red-700">Грати</button>
     </div>
   );
 }

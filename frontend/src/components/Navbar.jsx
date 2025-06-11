@@ -1,4 +1,5 @@
-import React from "react";
+import React
+import LanguageSwitch from './LanguageSwitch'; from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
@@ -28,7 +29,8 @@ function Navbar() {
           </button>
         )}
       </div>
-    </nav>
+    <div className='ml-auto'><LanguageSwitch /></div>
+</nav>
   );
 }
 

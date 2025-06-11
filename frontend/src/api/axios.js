@@ -1,16 +1,27 @@
-
 import axios from "axios";
+import { toast } from "react-toastify";
 
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+const instance = axios.create({
+  baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000",
+  withCredentials: true,
 });
 
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem("token"); // простіше, ніж через Zustand в runtime
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
+// Optional interceptor to use with ToastContext (for custom integration)
+instance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response) {
+      const status = error.response.status;
+      if (status === 401) {
+        toast.error("Авторизація потрібна");
+      } else if (status >= 500) {
+        toast.error("Серверна помилка");
+      }
+    } else {
+      toast.error("Мережева помилка");
+    }
+    return Promise.reject(error);
   }
-  return config;
-});
+);
 
-export default api;
+export default instance;

@@ -1,91 +1,57 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import api from "../api/axios";
-import {
-  races,
-  classes,
-  getRandomElement,
-  getRandomStats,
-  getRandomInventory,
-} from "../utils/characterUtils";
+import { useNavigate } from "react-router-dom";
 
 export default function CharacterCreatePage() {
-
-  const [name, setName] = useState("");
-  const [bio, setBio] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [char, setChar] = useState(null);
-  const [error, setError] = useState("");
   const navigate = useNavigate();
+  const [form, setForm] = useState({ name: "", bio: "" });
+  const [error, setError] = useState(null);
 
-  const handleCreate = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError("");
+  const handleChange = (e) => {
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
+  const handleSubmit = async () => {
     try {
-      const race = getRandomElement(races);
-      const charClass = getRandomElement(classes);
-      const stats = getRandomStats(charClass);
-      const inventory = getRandomInventory();
-
-      let imgUrl = "";
-      try {
-        const imgRes = await api.post("/ai/avatar", {
-          description: `${race} ${charClass}`,
-        });
-        imgUrl = imgRes.data?.url || "";
-      } catch {
-        imgUrl = `https://api.dicebear.com/7.x/adventurer/svg?seed=${encodeURIComponent(
-          name || race + charClass
-        )}`;
+      if (!form.name || !form.bio) {
+        setError("Будь ласка, заповніть всі поля.");
+        return;
       }
 
-
-      const res = await api.post("/api/character", {
-        name,
-        bio,
-        race,
-        class: charClass,
-        stats,
-        inventory,
-        img: imgUrl,
-      });
-
-      setChar(res.data);
+      await api.post("/api/character", form);
+      navigate("/profile");
     } catch (err) {
+      console.error(err);
       setError("Помилка створення персонажа");
     }
-    setLoading(false);
   };
 
   return (
-    <div>
-      <h2>Створення персонажа</h2>
-      <form onSubmit={handleCreate}>
+    <div className="flex justify-center items-center min-h-screen font-dnd text-white bg-cover bg-center" style={{ backgroundImage: "url('/map-bg-CbQYZMul.jpg')" }}>
+      <div className="bg-[#1c120a]/80 p-8 rounded-xl w-full max-w-md shadow-2xl">
+        <h2 className="text-2xl text-dndgold mb-6 text-center">Створення персонажа</h2>
+        <label className="block text-sm mb-1">Ім’я</label>
         <input
-          type="text"
-          placeholder="Ім'я"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          className="w-full mb-4 px-3 py-2 rounded bg-[#2d1a10] border border-dndgold text-white"
         />
+        <label className="block text-sm mb-1">Біо</label>
         <textarea
-          placeholder="Біо"
-          value={bio}
-          onChange={(e) => setBio(e.target.value)}
+          name="bio"
+          value={form.bio}
+          onChange={handleChange}
+          className="w-full mb-4 px-3 py-2 rounded bg-[#2d1a10] border border-dndgold text-white"
         />
-        <button type="submit" disabled={loading}>
-          {loading ? "Створення..." : "Створити"}
+        {error && <p className="text-red-500 mb-4">{error}</p>}
+        <button
+          onClick={handleSubmit}
+          className="w-full bg-red-800 hover:bg-red-700 text-white py-2 rounded font-semibold transition"
+        >
+          Створити
         </button>
-      </form>
-      {error && <div style={{ color: "red" }}>{error}</div>}
-      {char && (
-        <div>
-          <h3>Персонаж створений!</h3>
-          {char.img && <img src={char.img} alt={char.name} width="200" />}
-        </div>
-      )}
+      </div>
     </div>
   );
 }

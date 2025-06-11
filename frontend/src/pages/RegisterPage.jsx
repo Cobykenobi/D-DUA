@@ -1,10 +1,18 @@
 import React, { useState } from "react";
+import { useToast } from "../context/ToastContext";
+import { useTranslation } from "react-i18next";
+
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "../context/ToastContext";
+import { useTranslation } from "react-i18next";
 
 function RegisterPage() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const { showToast } = useToast();
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -33,7 +41,7 @@ function RegisterPage() {
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <form
+            <form
         onSubmit={handleRegister}
         className="bg-white shadow-md p-8 rounded w-full max-w-sm"
       >

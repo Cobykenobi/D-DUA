@@ -5,3 +5,9 @@ body {
   background-attachment: fixed;
   font-family: 'IM Fell English SC', serif !important;
 }
+
+
+/* Dynamic brightness via settings context */
+body[data-brightness] {
+  filter: brightness(var(--brightness));
+}
