@@ -15,7 +15,7 @@ export default function MusicPlayer({ isGM }) {
 
   const fetchTracks = async () => {
     try {
-      const res = await api.get('/api/music');
+      const res = await api.get('/music');
       setTracks(res.data);
     } catch (e) {
       console.error(e);
@@ -30,7 +30,7 @@ export default function MusicPlayer({ isGM }) {
     e.preventDefault();
     if (!title || !url) return;
     try {
-      await api.post('/api/music', { title, url });
+      await api.post('/music', { title, url });
       setTitle('');
       setUrl('');
       fetchTracks();
@@ -41,7 +41,7 @@ export default function MusicPlayer({ isGM }) {
 
   const removeTrack = async (id) => {
     try {
-      await api.delete(`/api/music/${id}`);
+      await api.delete(`/music/${id}`);
       if (current && current._id === id) setCurrent(null);
       fetchTracks();
     } catch (e) {

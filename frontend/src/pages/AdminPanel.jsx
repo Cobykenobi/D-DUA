@@ -7,7 +7,7 @@ export default function AdminPanel() {
 
   useEffect(() => {
     axios
-      .get("/api/stats/races")
+      .get("/stats/races")
       .then((res) => setRaceStats(res.data))
       .catch(() => setRaceStats([]));
   }, []);

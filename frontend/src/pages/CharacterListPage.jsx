@@ -7,7 +7,7 @@ export default function CharacterListPage() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    api.get("/api/character").then(res => setCharacters(res.data));
+    api.get("/character").then(res => setCharacters(res.data));
   }, []);
 
   return (

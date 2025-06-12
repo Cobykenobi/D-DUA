@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../../api/axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { useUserStore } from '../../store/user'
@@ -12,7 +12,7 @@ export default function AdminRacesPage() {
 
   const fetchRaces = async () => {
     setLoading(true);
-    const res = await axios.get('/api/race', { headers: { Authorization: `Bearer ${token}` } });
+    const res = await api.get('/race', { headers: { Authorization: `Bearer ${token}` } });
     setRaces(res.data);
     setLoading(false);
   };
@@ -20,12 +20,12 @@ export default function AdminRacesPage() {
 
   const addRace = async (e) => {
     e.preventDefault();
-    await axios.post('/api/race', { name, description }, { headers: { Authorization: `Bearer ${token}` } });
+    await api.post('/race', { name, description }, { headers: { Authorization: `Bearer ${token}` } });
     setName(''); setDescription(''); fetchRaces();
   };
 
   const removeRace = async (id) => {
-    await axios.delete(`/api/race/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+    await api.delete(`/race/${id}`, { headers: { Authorization: `Bearer ${token}` } });
     fetchRaces();
   };
 

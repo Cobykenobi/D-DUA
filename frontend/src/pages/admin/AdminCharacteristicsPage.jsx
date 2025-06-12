@@ -1,4 +1,4 @@
-import axios from 'axios';
+import api from '../../api/axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
 import { useUserStore } from '../../store/user'
@@ -12,7 +12,7 @@ export default function AdminCharacteristicsPage() {
 
   const fetchCharacteristics = async () => {
     setLoading(true);
-    const res = await axios.get('/api/characteristic', { headers: { Authorization: `Bearer ${token}` } });
+    const res = await api.get('/characteristic', { headers: { Authorization: `Bearer ${token}` } });
     setCharacteristics(res.data);
     setLoading(false);
   };
@@ -20,12 +20,12 @@ export default function AdminCharacteristicsPage() {
 
   const addCharacteristic = async (e) => {
     e.preventDefault();
-    await axios.post('/api/characteristic', { name, description }, { headers: { Authorization: `Bearer ${token}` } });
+    await api.post('/characteristic', { name, description }, { headers: { Authorization: `Bearer ${token}` } });
     setName(''); setDescription(''); fetchCharacteristics();
   };
 
   const removeCharacteristic = async (id) => {
-    await axios.delete(`/api/characteristic/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+    await api.delete(`/characteristic/${id}`, { headers: { Authorization: `Bearer ${token}` } });
     fetchCharacteristics();
   };
 

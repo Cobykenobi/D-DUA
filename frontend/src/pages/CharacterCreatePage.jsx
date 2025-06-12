@@ -18,7 +18,7 @@ export default function CharacterCreatePage() {
         return;
       }
 
-      await api.post("/api/character", form);
+      await api.post("/character", form);
       navigate("/profile");
     } catch (err) {
       console.error(err);
