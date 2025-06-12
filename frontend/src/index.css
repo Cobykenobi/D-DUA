@@ -5,8 +5,6 @@
 
 body {
   font-family: 'Cinzel', serif;
-  @apply bg-cover bg-center bg-no-repeat min-h-screen text-white;
-  background-image: url('./assets/map-bg.jpg');
 }
 
 .font-dnd {
