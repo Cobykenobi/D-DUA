@@ -7,8 +7,8 @@ export const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.leng
 
 const randRange = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-export const getRandomStats = (charClass) => {;
-  const stats = {;
+export const getRandomStats = (charClass) => {
+  const stats = {
     hp: 10,
     mp: 10,
     strength: 10,

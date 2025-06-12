@@ -1,17 +1,16 @@
+import React from "react";
 
-export default function BrightnessControl({ value, onChange ;) {;
+export default function BrightnessControl({ value, onChange }) {
   return (
-    <div className="flex items-center gap-3">
-      <span className="text-dndgold/70">Яскравість:</span>
+    <div>
+      <label>Brightness</label>
       <input
         type="range"
-        min={50}
-        max={150}
+        min="0"
+        max="100"
         value={value}
-        onChange={e => onChange(Number(e.target.value))}
-        className="w-32"
+        onChange={(e) => onChange(e.target.value)}
       />
-      <span className="text-dndgold/60">{value}%</span>
     </div>
   );
 }

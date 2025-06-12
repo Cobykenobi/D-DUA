@@ -1,5 +1,5 @@
 
-export default function SettingsPanel() {;
+export default function SettingsPanel() {
   const { brightness, setBrightness, volume, setVolume, language, setLanguage } = useSettings();
 
   return (

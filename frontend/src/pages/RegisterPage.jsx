@@ -9,17 +9,17 @@ function RegisterPage() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
 
-  const handleRegister = async (e) => {;
+  const handleRegister = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, {;
+      await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, {
         login,
         password,
       });
 
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, {;
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, {
         login,
         password,
       });
