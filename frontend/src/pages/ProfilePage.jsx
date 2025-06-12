@@ -1,5 +1,5 @@
 
-const ProfilePage = () => {
+const ProfilePage = () => {;
   const [characters, setCharacters] = useState([]);
   const navigate = useNavigate();
 

@@ -1,5 +1,5 @@
 
-const CreateCharacterPage = () => {
+const CreateCharacterPage = () => {;
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const navigate = useNavigate();

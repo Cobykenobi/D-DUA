@@ -1,5 +1,5 @@
 
-export default function AdminCard({ title, onClick ;) {
+export default function AdminCard({ title, onClick ;) {;
   return (
     <button
       onClick={onClick}

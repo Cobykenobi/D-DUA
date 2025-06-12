@@ -1,6 +1,6 @@
 import api from "../api/axios";
 
-export default function CharacterEditPage() {
+export default function CharacterEditPage() {;
   const { id } = useParams();
   const navigate = useNavigate();
   const [character, setCharacter] = useState(null);
@@ -19,7 +19,7 @@ export default function CharacterEditPage() {
       .catch(() => setError("Не вдалося завантажити персонажа"));
   }, [id]);
 
-  const handleSave = async (e) => {
+  const handleSave = async (e) => {;
     e.preventDefault();
     setError("");
     try {

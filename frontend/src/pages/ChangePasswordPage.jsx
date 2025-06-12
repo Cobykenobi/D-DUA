@@ -9,7 +9,7 @@ function ChangePasswordPage() {
 
   const token = localStorage.getItem("token");
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {;
     e.preventDefault();
     setMessage("");
 

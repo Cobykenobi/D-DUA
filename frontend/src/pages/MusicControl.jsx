@@ -1,5 +1,5 @@
 
-export default function MusicControl() {
+export default function MusicControl() {;
   const ref = useRef();
 
   return (

@@ -1,4 +1,4 @@
-import {
+import {;
   AdminRacesPage,
   AdminProfessionsPage,
   AdminCharacteristicsPage,
@@ -6,7 +6,7 @@ import {
   AdminMusicPage,
 } from '../pages/admin';
 
-export default function AdminRoutes() {
+export default function AdminRoutes() {;
   return (
     <Routes>
       <Route path="races" element={<AdminRacesPage />} />
