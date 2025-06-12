@@ -24,8 +24,8 @@ This project combines an Express/MongoDB backend with a React frontend.
 
 3. **Seed starter data** (optional)
 
-   Populate the database with some basic races, professions and
-   characteristics:
+   Populate the database with approximately ten races and ten professions
+   along with five core characteristics:
 
    ```bash
    cd backend
