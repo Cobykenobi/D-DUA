@@ -20,7 +20,7 @@ function LoginPage() {
 
   const handleSubmit = async (e) => {
     setError(null);
-    if (!email || !password) {
+    if (!login || !password) {
       showToast(t('fields_required'), "error");
       return;
     }
