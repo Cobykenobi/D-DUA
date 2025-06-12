@@ -42,17 +42,23 @@ exports.create = async (req, res) => {
     ];
 
     // Обрати рандомно расу, професію і базові стати з колекції
-    let race = await Race.aggregate([{ $sample: { size: 1 } }]);
-    if (!race.length) {
-      const fallback = await Race.find().limit(1);
-      race = fallback;
-    }
+  let race = await Race.aggregate([{ $sample: { size: 1 } }]);
+  if (!race.length) {
+    const fallback = await Race.find().limit(1);
+    race = fallback;
+  }
 
-    let profession = await Profession.aggregate([{ $sample: { size: 1 } }]);
-    if (!profession.length) {
-      const fallback = await Profession.find().limit(1);
-      profession = fallback;
-    }
+  let profession = await Profession.aggregate([{ $sample: { size: 1 } }]);
+  if (!profession.length) {
+    const fallback = await Profession.find().limit(1);
+    profession = fallback;
+  }
+
+  if (!race.length || !profession.length) {
+    return res.status(500).json({
+      message: 'Missing races or professions to create character'
+    });
+  }
 
     let characteristics = await Characteristic.find();
     if (!characteristics.length) {
