@@ -3,6 +3,8 @@ import { initReactI18next } from 'react-i18next';
 import en from './locales/en.json';
 import ua from './locales/ua.json';
 
+const storedLang = localStorage.getItem('lang') || 'ua';
+
 i18n
   .use(initReactI18next)
   .init({
@@ -10,8 +12,8 @@ i18n
       en: { translation: en },
       ua: { translation: ua },
     },
-    lng: 'ua',
-    fallbackLng: 'ua',
+    lng: storedLang,
+    fallbackLng: storedLang,
     interpolation: {
       escapeValue: false,
     },

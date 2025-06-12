@@ -1,8 +1,10 @@
 
+import i18n from '../i18n';
+
 export default function LanguageSwitch() {
   const changeLanguage = (lang) => {
-    localStorage.setItem("lang", lang);
-    window.location.reload();
+    localStorage.setItem('lang', lang);
+    i18n.changeLanguage(lang);
   };
 
   return (
