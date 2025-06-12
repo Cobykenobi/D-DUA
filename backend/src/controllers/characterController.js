@@ -1,7 +1,6 @@
 const Character = require('../models/Character');
 const Race = require('../models/Race');
 const Profession = require('../models/Profession');
-const Characteristic = require('../models/Characteristic');
 
 const inventoryPool = [
   'Sword',
@@ -20,11 +19,6 @@ const inventoryPool = [
   'Lockpick',
   'Food Rations'
 ];
-const hpRanges = {
-  Warrior: { min: 16, max: 20 },
-  Wizard: { min: 6, max: 10 },
-  Rogue: { min: 10, max: 14 },
-};
 
 const getRandomInventory = () => {
   const count = Math.floor(Math.random() * 3) + 2; // 2-4 items
@@ -40,7 +34,7 @@ const getRandomInventory = () => {
 exports.getAllByUser = async (req, res) => {
   try {
     const characters = await Character.find({ user: req.user.id })
-      .populate('race profession stats.characteristic');
+      .populate('race profession');
     res.json(characters);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -76,23 +70,13 @@ exports.create = async (req, res) => {
     });
   }
 
-    let characteristics = await Characteristic.find();
-    if (!characteristics.length) {
-      const fallback = await Characteristic.find().limit(1);
-      characteristics = fallback;
-    }
-
-    const profName = profession[0]?.name;
-    const hpChar = characteristics.find(c => c.name.toLowerCase() === 'hp');
-    const hpRange = hpRanges[profName] || { min: 3, max: 18 };
-
-    const stats = characteristics.map(char => {
-      let value = Math.floor(Math.random() * 16) + 3; // 3-18
-      if (hpChar && String(char._id) === String(hpChar._id)) {
-        value = Math.floor(Math.random() * (hpRange.max - hpRange.min + 1)) + hpRange.min;
-      }
-      return { characteristic: char._id, value };
-    });
+  const stats = {
+    STR: Math.floor(Math.random() * 16) + 3,
+    DEX: Math.floor(Math.random() * 16) + 3,
+    INT: Math.floor(Math.random() * 16) + 3,
+    CON: Math.floor(Math.random() * 16) + 3,
+    CHA: Math.floor(Math.random() * 16) + 3
+  };
 
     // Логіка вибору аватара
     const avatar = (image && image.trim())
@@ -123,7 +107,7 @@ exports.create = async (req, res) => {
 exports.getOne = async (req, res) => {
   try {
     const char = await Character.findOne({ _id: req.params.id, user: req.user.id })
-      .populate('race profession stats.characteristic');
+      .populate('race profession');
     if (!char) return res.status(404).json({ message: 'Not found' });
     res.json(char);
   } catch (err) {
