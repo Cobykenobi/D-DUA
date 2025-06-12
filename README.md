@@ -22,6 +22,16 @@ This project combines an Express/MongoDB backend with a React frontend.
    - `VITE_API_URL` – base URL of the backend API (e.g. `http://localhost:5000/api`)
    - `VITE_SOCKET_URL` – URL of the Socket.io server (e.g. `http://localhost:5000`)
 
+3. **Seed starter data** (optional)
+
+   Populate the database with some basic races, professions and
+   characteristics:
+
+   ```bash
+   cd backend
+   node scripts/seed.js
+   ```
+
 ## Running the app
 
 ### Backend
