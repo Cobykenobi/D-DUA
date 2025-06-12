@@ -1,58 +1,69 @@
-import api from "../api/axios";
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import api from '../utils/api';
+
+const races = ['Людина', 'Ельф', 'Гном', 'Орк', 'Драконіт'];
+const professions = ['Воїн', 'Маг', 'Крадій', 'Священик', 'Бард'];
+const inventoryItems = ['Меч', 'Плащ', 'Зілля', 'Книга', 'Ключ'];
+
+function getRandomFromArray(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function getRandomStats() {
+  return {
+    strength: Math.floor(Math.random() * 20) + 1,
+    agility: Math.floor(Math.random() * 20) + 1,
+    intelligence: Math.floor(Math.random() * 20) + 1,
+    charisma: Math.floor(Math.random() * 20) + 1,
+    luck: Math.floor(Math.random() * 20) + 1,
+  };
+}
 
 export default function CharacterCreatePage() {
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
   const navigate = useNavigate();
-  const [form, setForm] = useState({ name: "", description: "" });
-  const [error, setError] = useState(null);
 
-  const handleChange = (e) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  const handleCreate = async () => {
+    const newCharacter = {
+      name,
+      description,
+      race: getRandomFromArray(races),
+      profession: getRandomFromArray(professions),
+      inventory: [getRandomFromArray(inventoryItems)],
+      characteristics: getRandomStats(),
+    };
 
-  const handleSubmit = async () => {
     try {
-      if (!form.name || !form.description) {
-        setError("Будь ласка, заповніть всі поля.");
-        return;
-      }
-
-      const payload = { name: form.name, description: form.description };
-      await api.post("/character", payload);
-      navigate("/profile");
-    } catch (err) {
-      console.error(err);
-      setError("Помилка створення персонажа");
+      await api.post('/characters', newCharacter);
+      navigate('/profile');
+    } catch (error) {
+      console.error('Помилка при створенні персонажа:', error);
     }
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen font-dnd text-white bg-cover bg-center" style={{ backgroundImage: "url('/map-bg.jpg')" }}>
-      <div className="bg-[#1c120a]/80 p-8 rounded-xl w-full max-w-md shadow-2xl">
-        <h2 className="text-2xl text-dndgold mb-6 text-center">Створення персонажа</h2>
-        <label className="block text-sm mb-1">Ім’я</label>
-        <input
-          name="name"
-          value={form.name}
-          onChange={handleChange}
-          className="w-full mb-4 px-3 py-2 rounded bg-[#2d1a10] border border-dndgold text-white"
-        />
-        <label className="block text-sm mb-1">Опис</label>
-        <textarea
-          name="description"
-          value={form.description}
-          onChange={handleChange}
-          className="w-full mb-4 px-3 py-2 rounded bg-[#2d1a10] border border-dndgold text-white"
-        />
-        {error && <p className="text-red-500 mb-4">{error}</p>}
-        <button
-          onClick={handleSubmit}
-          className="w-full bg-red-800 hover:bg-red-700 text-white py-2 rounded font-semibold transition"
-        >
-          Створити
-        </button>
-      </div>
+    <div className="p-4 text-white">
+      <h1 className="text-xl font-bold mb-4">Створення персонажа</h1>
+      <input
+        className="w-full p-2 mb-2 text-black"
+        placeholder="Ім’я персонажа"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+      <textarea
+        className="w-full p-2 mb-2 text-black"
+        placeholder="Опис персонажа"
+        value={description}
+        onChange={(e) => setDescription(e.target.value)}
+      />
+      <button
+        onClick={handleCreate}
+        className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded"
+      >
+        Створити
+      </button>
     </div>
   );
 }
