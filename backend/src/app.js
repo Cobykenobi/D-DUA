@@ -9,7 +9,11 @@ const http = require('http');
 const app = express();
 const statsRoutes = require("./routes/stats");
 const settingsRoutes = require("./routes/settings");
-app.use(cors());
+const corsOptions = {
+  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  credentials: true,
+};
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Ensure uploads directories exist

@@ -1,5 +1,10 @@
 const { Server } = require('socket.io');
 
+const corsOptions = {
+  origin: process.env.CLIENT_URL || 'http://localhost:5173',
+  credentials: true,
+};
+
 let io;
 const sessions = {};
 
@@ -19,9 +24,7 @@ function getSession(id) {
 }
 
 function init(httpServer) {
-  io = new Server(httpServer, {
-    cors: { origin: '*' }
-  });
+  io = new Server(httpServer, { cors: corsOptions });
 
   io.on('connection', (socket) => {
     socket.on('join-lobby', ({ tableId, user }) => {
