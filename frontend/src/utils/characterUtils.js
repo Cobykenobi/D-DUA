@@ -43,7 +43,7 @@ export const getRandomStats = (charClass) => {
   return stats;
 };
 
-export const getRandomInventory = () => {;
+export const getRandomInventory = () => {
   const count = randRange(2, 4);
   const items = [];
   for (let i = 0; i < count; i++) {

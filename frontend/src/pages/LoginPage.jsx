@@ -12,7 +12,7 @@ function LoginPage() {
   const [error, setError] = useState("");
   const setUser = useUserStore((s) => s.setUser);
 
-  const handleSubmit = async (e) => {;
+  const handleSubmit = async (e) => {
     setError(null);
     if (!email || !password) {
       showToast(t('fields_required'), "error");

@@ -1,5 +1,5 @@
 
-export default function ChatComponent({ tableId, user, messages, socket ;) {;
+export default function ChatComponent({ tableId, user, messages, socket ;) {
   const [input, setInput] = useState("");
   const chatEnd = useRef(null);
 
@@ -7,7 +7,7 @@ export default function ChatComponent({ tableId, user, messages, socket ;) {;
     chatEnd.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const send = (e) => {;
+  const send = (e) => {
     e.preventDefault();
     if (input.trim() && tableId && user && user.login) {
       socket.emit("chat-message", { tableId, user, text: input });

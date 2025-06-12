@@ -1,5 +1,5 @@
 
-export default function PlayerCard({ character, onSelect ;) {;
+export default function PlayerCard({ character, onSelect ;) {
   return (
     <div className="border rounded-lg shadow-lg p-4 bg-gradient-to-br from-gray-800 to-black text-white font-dnd">
       <img src={character.image || "/default-avatar.png"} alt="character" className="rounded mb-2 h-32 w-full object-cover" />

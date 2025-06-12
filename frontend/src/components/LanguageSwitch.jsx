@@ -1,6 +1,6 @@
 
-export default function LanguageSwitch() {;
-  const changeLanguage = (lang) => {;
+export default function LanguageSwitch() {
+  const changeLanguage = (lang) => {
     localStorage.setItem("lang", lang);
     window.location.reload();
   };

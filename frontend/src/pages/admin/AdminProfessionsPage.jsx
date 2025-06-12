@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-export default function AdminProfessionsPage() {;
+export default function AdminProfessionsPage() {
   const { token } = useUserStore();
   const [professions, setProfessions] = useState([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const fetchProfessions = async () => {;
+  const fetchProfessions = async () => {
     setLoading(true);
     const res = await axios.get('/api/profession', { headers: { Authorization: `Bearer ${token}` } });
     setProfessions(res.data);
@@ -15,13 +15,13 @@ export default function AdminProfessionsPage() {;
   };
   useEffect(() => { fetchProfessions(); }, []);
 
-  const addProfession = async (e) => {;
+  const addProfession = async (e) => {
     e.preventDefault();
     await axios.post('/api/profession', { name, description }, { headers: { Authorization: `Bearer ${token}` } });
     setName(''); setDescription(''); fetchProfessions();
   };
 
-  const removeProfession = async (id) => {;
+  const removeProfession = async (id) => {
     await axios.delete(`/api/profession/${id}`, { headers: { Authorization: `Bearer ${token}` } });
     fetchProfessions();
   };

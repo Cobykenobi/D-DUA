@@ -1,13 +1,13 @@
 import axios from 'axios';
 
-export default function AdminRacesPage() {;
+export default function AdminRacesPage() {
   const { token } = useUserStore();
   const [races, setRaces] = useState([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const fetchRaces = async () => {;
+  const fetchRaces = async () => {
     setLoading(true);
     const res = await axios.get('/api/race', { headers: { Authorization: `Bearer ${token}` } });
     setRaces(res.data);
@@ -15,13 +15,13 @@ export default function AdminRacesPage() {;
   };
   useEffect(() => { fetchRaces(); }, []);
 
-  const addRace = async (e) => {;
+  const addRace = async (e) => {
     e.preventDefault();
     await axios.post('/api/race', { name, description }, { headers: { Authorization: `Bearer ${token}` } });
     setName(''); setDescription(''); fetchRaces();
   };
 
-  const removeRace = async (id) => {;
+  const removeRace = async (id) => {
     await axios.delete(`/api/race/${id}`, { headers: { Authorization: `Bearer ${token}` } });
     fetchRaces();
   };

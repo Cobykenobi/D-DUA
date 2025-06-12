@@ -1,10 +1,10 @@
 
 const diceTypes = ["d4", "d6", "d8", "d10", "d12", "d20"];
 
-export default function DiceTable({ isMaster ;) {;
+export default function DiceTable({ isMaster ;) {
   const [lastRoll, setLastRoll] = useState(null);
 
-  const roll = (type) => {;
+  const roll = (type) => {
     const max = parseInt(type.substring(1));
     const result = Math.floor(Math.random() * max) + 1;
     setLastRoll(result);
