@@ -1,6 +1,5 @@
 
 import React, { createContext, useState, useContext } from 'react';
- main
 
 const ToastContext = createContext();
 
