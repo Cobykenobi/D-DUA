@@ -19,17 +19,43 @@ const ProfilePage = () => {
   };
 
   return (
-    <div>
-      <h2>Твої персонажі</h2>
-      <button onClick={handleCreate}>Створити нового</button>
-      <ul>
-        {characters.map((char) => (
-          <li key={char._id}>
-            <strong>{char.name}</strong> ({char.race?.name} / {char.profession?.name})
-            <button onClick={() => handleSelect(char._id)}>Увійти</button>
-            <button onClick={() => handleDelete(char._id)}>Видалити</button>
-          </li>
-        ))}
+    <div className="min-h-screen bg-dndbg flex flex-col items-center p-6 font-dnd text-dndgold">
+      <h2 className="text-2xl mb-4">Твої персонажі</h2>
+      <button
+        onClick={handleCreate}
+        className="bg-dndgold text-dndred rounded-2xl px-4 py-2 font-semibold mb-6"
+      >
+        Створити нового
+      </button>
+      <ul className="w-full max-w-xl space-y-3">
+        {characters.length === 0 ? (
+          <li className="text-center text-dndgold/80">Тут поки пусто. Створи першого героя!</li>
+        ) : (
+          characters.map((char) => (
+            <li
+              key={char._id}
+              className="bg-[#2d1a10]/80 p-4 rounded-xl flex justify-between items-center"
+            >
+              <span>
+                <strong>{char.name}</strong> ({char.race?.name} / {char.profession?.name})
+              </span>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => handleSelect(char._id)}
+                  className="bg-dndgold text-dndred rounded px-3 py-1"
+                >
+                  Увійти
+                </button>
+                <button
+                  onClick={() => handleDelete(char._id)}
+                  className="bg-dndred text-white rounded px-3 py-1"
+                >
+                  Видалити
+                </button>
+              </div>
+            </li>
+          ))
+        )}
       </ul>
     </div>
   );
