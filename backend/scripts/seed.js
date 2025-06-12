@@ -15,9 +15,33 @@ if (!MONGO_URI) {
 async function seed() {
   await mongoose.connect(MONGO_URI);
 
-  const races = ['Human', 'Elf', 'Dwarf'];
-  const professions = ['Warrior', 'Wizard', 'Rogue'];
-  const characteristics = ['Strength', 'Agility', 'Intelligence'];
+
+  const races = [
+    'Human',
+    'Elf',
+    'Dwarf',
+    'Orc',
+    'Halfling',
+    'Gnome',
+    'Tiefling',
+    'Dragonborn',
+    'Half-Elf',
+    'Half-Orc'
+  ];
+  const professions = [
+    'Warrior',
+    'Wizard',
+    'Rogue',
+    'Cleric',
+    'Ranger',
+    'Paladin',
+    'Bard',
+    'Druid',
+    'Monk',
+    'Barbarian'
+  ];
+  const characteristics = ['HP', 'MP', 'Strength', 'Agility', 'Intellect'];
+ main
 
   if (await Race.countDocuments() === 0) {
     await Race.insertMany(races.map(name => ({ name })));

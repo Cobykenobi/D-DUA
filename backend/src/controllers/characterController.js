@@ -3,7 +3,23 @@ const Race = require('../models/Race');
 const Profession = require('../models/Profession');
 const Characteristic = require('../models/Characteristic');
 
-const inventoryPool = ['Sword', 'Bow', 'Dagger', 'Staff', 'Shield', 'Potion'];
+const inventoryPool = [
+  'Sword',
+  'Bow',
+  'Dagger',
+  'Staff',
+  'Shield',
+  'Potion',
+  'Axe',
+  'Spear',
+  'Mace',
+  'Helmet',
+  'Armor',
+  'Lantern',
+  'Rope',
+  'Lockpick',
+  'Food Rations'
+];
 const hpRanges = {
   Warrior: { min: 16, max: 20 },
   Wizard: { min: 6, max: 10 },
