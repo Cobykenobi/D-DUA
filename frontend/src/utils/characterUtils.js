@@ -1,5 +1,27 @@
-export const races = ['Human', 'Elf', 'Dwarf', 'Orc'];
-export const classes = ['Warrior', 'Wizard', 'Rogue'];
+export const races = [
+  'Human',
+  'Elf',
+  'Dwarf',
+  'Orc',
+  'Halfling',
+  'Gnome',
+  'Tiefling',
+  'Dragonborn',
+  'Half-Elf',
+  'Half-Orc'
+];
+export const classes = [
+  'Warrior',
+  'Wizard',
+  'Rogue',
+  'Cleric',
+  'Ranger',
+  'Paladin',
+  'Bard',
+  'Druid',
+  'Monk',
+  'Barbarian'
+];
 
 const inventoryPool = [
   'Sword',
