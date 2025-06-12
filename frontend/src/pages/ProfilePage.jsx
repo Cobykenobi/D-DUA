@@ -19,7 +19,10 @@ const ProfilePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-dndbg flex flex-col items-center p-6 font-dnd text-dndgold">
+    <div
+      className="min-h-screen bg-dndbg bg-cover bg-center flex flex-col items-center p-6 font-dnd text-dndgold"
+      style={{ backgroundImage: "url('/map-bg.jpg')" }}
+    >
       <h2 className="text-2xl mb-4">Твої персонажі</h2>
       <button
         onClick={handleCreate}
