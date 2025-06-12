@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom'
+import { useUserStore } from '../../store/user'
 
 export default function AdminCharacteristicsPage() {
   const { token } = useUserStore();
