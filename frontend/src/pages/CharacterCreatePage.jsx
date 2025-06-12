@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function CharacterCreatePage() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ name: "", bio: "" });
+  const [form, setForm] = useState({ name: "", description: "" });
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
@@ -13,12 +13,13 @@ export default function CharacterCreatePage() {
 
   const handleSubmit = async () => {
     try {
-      if (!form.name || !form.bio) {
+      if (!form.name || !form.description) {
         setError("Будь ласка, заповніть всі поля.");
         return;
       }
 
-      await api.post("/character", form);
+      const payload = { name: form.name, description: form.description };
+      await api.post("/character", payload);
       navigate("/profile");
     } catch (err) {
       console.error(err);
@@ -37,10 +38,10 @@ export default function CharacterCreatePage() {
           onChange={handleChange}
           className="w-full mb-4 px-3 py-2 rounded bg-[#2d1a10] border border-dndgold text-white"
         />
-        <label className="block text-sm mb-1">Біо</label>
+        <label className="block text-sm mb-1">Опис</label>
         <textarea
-          name="bio"
-          value={form.bio}
+          name="description"
+          value={form.description}
           onChange={handleChange}
           className="w-full mb-4 px-3 py-2 rounded bg-[#2d1a10] border border-dndgold text-white"
         />
