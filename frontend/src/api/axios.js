@@ -1,23 +1,34 @@
 import axios from "axios";
 
+// Holds ToastContext's showToast function. Call setAxiosToast(showToast) from a
+// React component to enable toast notifications for API errors.
+let showToast;
+
+export function setAxiosToast(fn) {
+  showToast = fn;
+}
+
 const instance = axios.create({
   baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000",
   withCredentials: true,
 });
 
-// Optional interceptor to use with ToastContext (for custom integration)
+// Response interceptor uses ToastContext. Call setAxiosToast from a component
+// with the showToast function to display API errors globally.
 instance.interceptors.response.use(
   (response) => response,
   (error) => {
-    if (error.response) {
-      const status = error.response.status;
-      if (status === 401) {
-        toast.error("Авторизація потрібна");
-      } else if (status >= 500) {
-        toast.error("Серверна помилка");
+    if (showToast) {
+      if (error.response) {
+        const status = error.response.status;
+        if (status === 401) {
+          showToast("Авторизація потрібна", "error");
+        } else if (status >= 500) {
+          showToast("Серверна помилка", "error");
+        }
+      } else {
+        showToast("Мережева помилка", "error");
       }
-    } else {
-      toast.error("Мережева помилка");
     }
     return Promise.reject(error);
   }

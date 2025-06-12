@@ -6,12 +6,14 @@ import './index.css';
 import { BrowserRouter } from 'react-router-dom';
 import { SettingsProvider } from './context/SettingsContext';
 import { ToastProvider } from './context/ToastContext';
+import AxiosToastProvider from './components/AxiosToastProvider';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
       <SettingsProvider>
         <ToastProvider>
+          <AxiosToastProvider />
           <App />
         </ToastProvider>
       </SettingsProvider>
