@@ -35,4 +35,22 @@ describe('Character Controller - create', () => {
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalled();
   });
+
+  it('returns 500 if races or professions are missing', async () => {
+    Race.aggregate.mockResolvedValue([]);
+    Race.find.mockReturnValue({ limit: jest.fn().mockResolvedValue([]) });
+    Profession.aggregate.mockResolvedValue([]);
+    Profession.find.mockReturnValue({ limit: jest.fn().mockResolvedValue([]) });
+    Characteristic.find.mockResolvedValue([{ _id: 'c1', name: 'hp' }]);
+
+    const req = { user: { id: 'u1' }, body: { name: 'Hero', description: '', image: '' } };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+    await characterController.create(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.json).toHaveBeenCalledWith({
+      message: 'Missing races or professions to create character'
+    });
+  });
 });
