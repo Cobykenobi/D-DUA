@@ -27,7 +27,7 @@ export default function CharacterCreatePage() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen font-dnd text-white bg-cover bg-center" style={{ backgroundImage: "url('/map-bg-CbQYZMul.jpg')" }}>
+    <div className="flex justify-center items-center min-h-screen font-dnd text-white bg-cover bg-center" style={{ backgroundImage: "url('/map-bg.jpg')" }}>
       <div className="bg-[#1c120a]/80 p-8 rounded-xl w-full max-w-md shadow-2xl">
         <h2 className="text-2xl text-dndgold mb-6 text-center">Створення персонажа</h2>
         <label className="block text-sm mb-1">Ім’я</label>

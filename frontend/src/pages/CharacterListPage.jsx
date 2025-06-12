@@ -11,7 +11,7 @@ export default function CharacterListPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-cover bg-center p-8 font-dnd text-white" style={{ backgroundImage: "url('/map-bg-CbQYZMul.jpg')" }}>
+    <div className="min-h-screen bg-cover bg-center p-8 font-dnd text-white" style={{ backgroundImage: "url('/map-bg.jpg')" }}>
       <h1 className="text-3xl text-dndgold mb-6">Твої персонажі</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {characters.map(c => (
