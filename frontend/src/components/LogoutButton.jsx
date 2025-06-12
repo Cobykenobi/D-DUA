@@ -1,16 +1,19 @@
 import { useNavigate } from 'react-router-dom';
+import { useUserStore } from '../store/user';
+
 function LogoutButton() {
   const navigate = useNavigate();
+  const logout = useUserStore((s) => s.logout);
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
+    logout();
+    navigate('/login');
   };
 
   return (
     <button
       onClick={handleLogout}
-      className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+      className="bg-dndred hover:bg-dndgold text-white hover:text-dndred font-dnd rounded-2xl px-4 py-2 transition"
     >
       Вийти
     </button>
