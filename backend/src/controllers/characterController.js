@@ -42,9 +42,23 @@ exports.create = async (req, res) => {
     ];
 
     // Обрати рандомно расу, професію і базові стати з колекції
-    const race = await Race.aggregate([{ $sample: { size: 1 } }]);
-    const profession = await Profession.aggregate([{ $sample: { size: 1 } }]);
-    const characteristics = await Characteristic.find();
+    let race = await Race.aggregate([{ $sample: { size: 1 } }]);
+    if (!race.length) {
+      const fallback = await Race.find().limit(1);
+      race = fallback;
+    }
+
+    let profession = await Profession.aggregate([{ $sample: { size: 1 } }]);
+    if (!profession.length) {
+      const fallback = await Profession.find().limit(1);
+      profession = fallback;
+    }
+
+    let characteristics = await Characteristic.find();
+    if (!characteristics.length) {
+      const fallback = await Characteristic.find().limit(1);
+      characteristics = fallback;
+    }
 
     const profName = profession[0]?.name;
     const hpChar = characteristics.find(c => c.name.toLowerCase() === 'hp');
