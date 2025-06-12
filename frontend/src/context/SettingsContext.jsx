@@ -1,7 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
-
 const SettingsContext = createContext();
 
 export function SettingsProvider({ children }) {
