@@ -1,6 +1,7 @@
 import api from "../api/axios";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
+import LogoutButton from "../components/LogoutButton";
 
 export default function CharacterCreatePage() {
   const navigate = useNavigate();
@@ -28,7 +29,16 @@ export default function CharacterCreatePage() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen font-dnd text-white bg-cover bg-center" style={{ backgroundImage: "url('/map-bg.jpg')" }}>
+    <div className="relative flex justify-center items-center min-h-screen font-dnd text-white bg-cover bg-center" style={{ backgroundImage: "url('/map-bg.jpg')" }}>
+      <div className="absolute top-4 right-4 flex gap-2">
+        <button
+          onClick={() => navigate('/profile')}
+          className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-4 py-2 transition"
+        >
+          Назад
+        </button>
+        <LogoutButton />
+      </div>
       <div className="bg-[#1c120a]/80 p-8 rounded-xl w-full max-w-md shadow-2xl">
         <h2 className="text-2xl text-dndgold mb-6 text-center">Створення персонажа</h2>
         <label className="block text-sm mb-1">Ім’я</label>
