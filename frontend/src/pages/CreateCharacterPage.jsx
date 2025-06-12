@@ -1,5 +1,7 @@
 
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'
+import { createCharacter } from '../utils/api'
 
 const CreateCharacterPage = () => {
   const [name, setName] = useState('');

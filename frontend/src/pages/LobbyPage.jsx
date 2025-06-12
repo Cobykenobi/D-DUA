@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
+import { useNavigate } from 'react-router-dom'
 
 const socket = io(import.meta.env.VITE_SOCKET_URL);
 

@@ -6,6 +6,8 @@ import PlayerCard from "../components/PlayerCard";
 import MusicPlayer from "../components/MusicPlayer";
 import { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
+import { useParams } from 'react-router-dom'
+import { useUserStore } from '../store/user'
 
 // socket connection URL configurable via env
 const socket = io(import.meta.env.VITE_SOCKET_URL);
