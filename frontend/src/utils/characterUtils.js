@@ -1,7 +1,23 @@
 export const races = ['Human', 'Elf', 'Dwarf', 'Orc'];
 export const classes = ['Warrior', 'Wizard', 'Rogue'];
 
-const inventoryPool = ['Sword', 'Bow', 'Dagger', 'Staff', 'Shield', 'Potion'];
+const inventoryPool = [
+  'Sword',
+  'Bow',
+  'Dagger',
+  'Staff',
+  'Shield',
+  'Potion',
+  'Axe',
+  'Spear',
+  'Mace',
+  'Helmet',
+  'Armor',
+  'Lantern',
+  'Rope',
+  'Lockpick',
+  'Food Rations'
+];
 
 export const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
