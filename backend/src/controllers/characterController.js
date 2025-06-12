@@ -71,7 +71,7 @@ exports.create = async (req, res) => {
   }
 
   if (!race.length || !profession.length) {
-    return res.status(500).json({
+    return res.status(400).json({
       message: 'Missing races or professions to create character'
     });
   }

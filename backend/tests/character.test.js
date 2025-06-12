@@ -48,7 +48,7 @@ describe('Character Controller - create', () => {
 
     await characterController.create(req, res);
 
-    expect(res.status).toHaveBeenCalledWith(500);
+    expect(res.status).toHaveBeenCalledWith(400);
     expect(res.json).toHaveBeenCalledWith({
       message: 'Missing races or professions to create character'
     });
