@@ -41,7 +41,6 @@ async function seed() {
     'Barbarian'
   ];
   const characteristics = ['HP', 'MP', 'Strength', 'Agility', 'Intellect'];
- main
 
   if (await Race.countDocuments() === 0) {
     await Race.insertMany(races.map(name => ({ name })));
