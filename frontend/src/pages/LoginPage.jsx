@@ -3,6 +3,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from "../api/axios";
+import { useToast } from '../context/ToastContext';
+import { useSettings } from '../context/SettingsContext';
+import { useUserStore } from '../store/user';
+import { useTranslation } from 'react-i18next';
 
 function LoginPage() {
   const [login, setLogin] = useState("");
@@ -16,7 +20,7 @@ function LoginPage() {
 
   const handleSubmit = async (e) => {
     setError(null);
-    if (!email || !password) {
+    if (!login || !password) {
       showToast(t('fields_required'), "error");
       return;
     }
