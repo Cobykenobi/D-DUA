@@ -10,7 +10,7 @@ jest.mock('../src/models/Characteristic');
 jest.mock('../src/models/Character');
 
 describe('Character Controller - create', () => {
-  it('populates inventory and validates wizard hp range', async () => {
+  it('populates inventory and generates stats', async () => {
     Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Elf' }]);
     Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Wizard' }]);
     Characteristic.find.mockResolvedValue([
@@ -29,9 +29,10 @@ describe('Character Controller - create', () => {
     await characterController.create(req, res);
 
     expect(savedData.inventory.length).toBeGreaterThanOrEqual(2);
-    const hp = savedData.stats.find(s => s.characteristic === 'c1').value;
-    expect(hp).toBeGreaterThanOrEqual(6);
-    expect(hp).toBeLessThanOrEqual(10);
+    savedData.stats.forEach(s => {
+      expect(s.value).toBeGreaterThanOrEqual(8);
+      expect(s.value).toBeLessThanOrEqual(15);
+    });
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalled();
   });

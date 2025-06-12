@@ -2,6 +2,7 @@ const Character = require('../models/Character');
 const Race = require('../models/Race');
 const Profession = require('../models/Profession');
 const Characteristic = require('../models/Characteristic');
+const generateStats = require('../utils/generateStats');
 
 const inventoryPool = [
   'Sword',
@@ -20,11 +21,6 @@ const inventoryPool = [
   'Lockpick',
   'Food Rations'
 ];
-const hpRanges = {
-  Warrior: { min: 16, max: 20 },
-  Wizard: { min: 6, max: 10 },
-  Rogue: { min: 10, max: 14 },
-};
 
 const getRandomInventory = () => {
   const count = Math.floor(Math.random() * 3) + 2; // 2-4 items
@@ -83,16 +79,9 @@ exports.create = async (req, res) => {
     }
 
     const profName = profession[0]?.name;
-    const hpChar = characteristics.find(c => c.name.toLowerCase() === 'hp');
-    const hpRange = hpRanges[profName] || { min: 3, max: 18 };
+    const raceName = race[0]?.name;
 
-    const stats = characteristics.map(char => {
-      let value = Math.floor(Math.random() * 16) + 3; // 3-18
-      if (hpChar && String(char._id) === String(hpChar._id)) {
-        value = Math.floor(Math.random() * (hpRange.max - hpRange.min + 1)) + hpRange.min;
-      }
-      return { characteristic: char._id, value };
-    });
+    const stats = generateStats(characteristics, raceName, profName);
 
     // Логіка вибору аватара
     const avatar = (image && image.trim())
