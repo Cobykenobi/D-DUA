@@ -44,35 +44,32 @@ async function seed() {
   // const characteristics = ['HP', 'MP', 'Strength', 'Agility', 'Intellect'];
 
   const races = [
-    'Людина',
-    'Ельф',
-    'Дварф',
-    'Орк',
-    'Напіврослик',
-    'Гном',
-    'Тіфлінг',
-    'Драконолюд',
-    'Напівельф',
-    'Напіворк'
+    'Human',
+    'Elf',
+    'Dwarf',
+    'Orc',
+    'Halfling',
+    'Gnome',
+    'Tiefling',
+    'Dragonborn',
+    'Half-Elf',
+    'Half-Orc'
   ];
   const professions = [
-    'Воїн',
-    'Чарівник',
-    'Плут',
-    'Клірик',
-    'Рейнджер',
-    'Паладин',
-    'Бард',
-    'Друїд',
-    'Монах',
-    'Варвар'
+    'Warrior',
+    'Wizard',
+    'Rogue',
+    'Cleric',
+    'Ranger',
+    'Paladin',
+    'Bard'
   ];
   const characteristics = [
-    'HP',
-    'MP',
-    'Сила',
-    'Спритність',
-    'Інтелект'
+    'STR',
+    'DEX',
+    'INT',
+    'CON',
+    'CHA'
   ];
 
   if (await Race.countDocuments() === 0) {
