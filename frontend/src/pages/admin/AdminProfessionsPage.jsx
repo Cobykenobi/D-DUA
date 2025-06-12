@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { useUserStore } from '../../store/user';
 
 export default function AdminProfessionsPage() {
   const { token } = useUserStore();

@@ -1,4 +1,6 @@
 
+import { useUserStore } from '../store/user';
+
 export default function CharactersPage() {
   const { user } = useUserStore();
 
