@@ -11,12 +11,12 @@ This project combines an Express/MongoDB backend with a React frontend.
    ```
 
 2. **Environment variables**
-   Create a `.env` file inside `backend` with the following keys:
+   Copy `backend/.env.example` to `backend/.env` and adjust the values:
    - `MONGO_URI` – MongoDB connection string
    - `JWT_SECRET` – secret used for signing tokens
    - `OPENAI_API_KEY` – API key for generating images and descriptions
    - `PORT` – optional server port (defaults to `5000`)
-   - `CLIENT_URL` – allowed origin for CORS (defaults to `http://localhost:5173`)
+   - `CLIENT_URL` – allowed origin(s) for CORS. Set this to the URL of your frontend (comma separated to allow multiple, e.g. `http://localhost:5173,https://example.com`).
 
    Create a `.env` file inside `frontend` with the following keys:
    - `VITE_API_URL` – base URL of the backend API (e.g. `http://localhost:5000/api`)
