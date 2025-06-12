@@ -41,3 +41,13 @@ npm run dev
 ```
 
 Vite prints the local URL once the frontend server starts.
+
+## Running tests
+
+The backend uses **Jest** for its test suite. After installing dependencies you
+can run the tests with:
+
+```bash
+cd backend
+npm test
+```
