@@ -6,10 +6,13 @@ const characterSchema = new mongoose.Schema({
   name: { type: String, required: true },
   race: { type: mongoose.Schema.Types.ObjectId, ref: 'Race' },
   profession: { type: mongoose.Schema.Types.ObjectId, ref: 'Profession' },
-  stats: [{
-    characteristic: { type: mongoose.Schema.Types.ObjectId, ref: 'Characteristic' },
-    value: { type: Number, default: 0 },
-  }],
+  stats: {
+    STR: { type: Number, default: 10 },
+    DEX: { type: Number, default: 10 },
+    INT: { type: Number, default: 10 },
+    CON: { type: Number, default: 10 },
+    CHA: { type: Number, default: 10 }
+  },
   inventory: [{
     item: { type: String },
     amount: { type: Number, default: 1 }
