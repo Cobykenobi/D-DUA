@@ -3,6 +3,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import api from "../api/axios";
+import { useToast } from '../context/ToastContext';
+import { useSettings } from '../context/SettingsContext';
+import { useUserStore } from '../store/user';
+import { useTranslation } from 'react-i18next';
 
 function LoginPage() {
   const [login, setLogin] = useState("");
