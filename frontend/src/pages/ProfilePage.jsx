@@ -1,5 +1,5 @@
 
-const ProfilePage = () => {;
+const ProfilePage = () => {
   const [characters, setCharacters] = useState([]);
   const navigate = useNavigate();
 
@@ -9,7 +9,7 @@ const ProfilePage = () => {;
 
   const handleCreate = () => navigate('/create-character');
   const handleSelect = (charId) => navigate(`/lobby?char=${charId}`);
-  const handleDelete = async (id) => {;
+  const handleDelete = async (id) => {
     await deleteCharacter(id);
     setCharacters((prev) => prev.filter((c) => c._id !== id));
   };

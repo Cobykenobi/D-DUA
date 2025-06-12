@@ -1,10 +1,10 @@
 
 const ToastContext = createContext();
 
-export function ToastProvider({ children }) {;
+export function ToastProvider({ children }) {
   const [toast, setToast] = useState(null);
 
-  const showToast = (message, type = "info", duration = 3000) => {;
+  const showToast = (message, type = "info", duration = 3000) => {
     setToast({ message, type });
     setTimeout(() => setToast(null), duration);
   };

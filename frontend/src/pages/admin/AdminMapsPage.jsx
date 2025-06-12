@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default function AdminMapsPage() {;
+export default function AdminMapsPage() {
   const { token } = useUserStore();
   const [maps, setMaps] = useState([]);
   const [name, setName] = useState('');
@@ -8,7 +8,7 @@ export default function AdminMapsPage() {;
   const [loading, setLoading] = useState(false);
   const fileInput = useRef();
 
-  const fetchMaps = async () => {;
+  const fetchMaps = async () => {
     setLoading(true);
     const res = await axios.get('/api/map', { headers: { Authorization: `Bearer ${token}` } });
     setMaps(res.data);
@@ -16,7 +16,7 @@ export default function AdminMapsPage() {;
   };
   useEffect(() => { fetchMaps(); }, []);
 
-  const addMap = async (e) => {;
+  const addMap = async (e) => {
     e.preventDefault();
     if (!file) return;
     const formData = new FormData();
@@ -28,7 +28,7 @@ export default function AdminMapsPage() {;
     setName(''); setFile(null); fileInput.current.value = null; fetchMaps();
   };
 
-  const removeMap = async (id) => {;
+  const removeMap = async (id) => {
     await axios.delete(`/api/map/${id}`, { headers: { Authorization: `Bearer ${token}` } });
     fetchMaps();
   };

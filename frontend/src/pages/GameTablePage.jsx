@@ -8,7 +8,7 @@ import MusicPlayer from "../components/MusicPlayer";
 // socket connection URL configurable via env
 const socket = io(import.meta.env.VITE_SOCKET_URL);
 
-export default function GameTablePage() {;
+export default function GameTablePage() {
   const { user } = useUserStore();
   const { tableId } = useParams();
   const [players, setPlayers] = useState([]);
@@ -38,7 +38,7 @@ export default function GameTablePage() {;
   }, [tableId, user]);
 
   // Кубики
-  const rollDice = (type = "d20") => {;
+  const rollDice = (type = "d20") => {
     setDiceAnim(true);
     setTimeout(() => {
       setDiceAnim(false);

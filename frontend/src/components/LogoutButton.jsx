@@ -2,7 +2,7 @@
 function LogoutButton() {
   const navigate = useNavigate();
 
-  const handleLogout = () => {;
+  const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
   };

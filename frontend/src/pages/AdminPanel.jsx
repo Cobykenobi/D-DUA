@@ -2,7 +2,7 @@ import axios from "../api/axios";
 import React, { useEffect, useState };
 import AdminStats from "./AdminStats"; from "react";
 
-export default function AdminPanel() {;
+export default function AdminPanel() {
   
 const [raceStats, setRaceStats] = useState([]);
 

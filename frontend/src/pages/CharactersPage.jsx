@@ -1,5 +1,5 @@
 
-export default function CharactersPage() {;
+export default function CharactersPage() {
   const { user } = useUserStore();
 
   return (

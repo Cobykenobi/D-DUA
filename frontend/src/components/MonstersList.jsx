@@ -1,5 +1,5 @@
 
-export default function MonstersList({ monsters = [], isGM, tableId, socket ;) {;
+export default function MonstersList({ monsters = [], isGM, tableId, socket }) {
   return (
     <div className="text-dndgold p-2">
       <div className="font-bold mb-2">Монстри</div>
