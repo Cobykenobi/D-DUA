@@ -38,10 +38,7 @@ exports.create = async (req, res) => {
 
     // Дефолтні аватари
     const defaultAvatars = [
-      "/avatars/1.png",
-      "/avatars/2.png",
-      "/avatars/3.png",
-      "/avatars/4.png"
+      "/avatars/1.png"
     ];
 
     // Обрати рандомно расу, професію і базові стати з колекції
