@@ -1,4 +1,6 @@
 
+import { useState } from 'react';
+
 export default function GMPanel({ tableId, socket, players }) {
   const [monsterName, setMonsterName] = useState("");
   const [mapUrl, setMapUrl] = useState("");

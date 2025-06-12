@@ -1,4 +1,6 @@
 
+import { useRef } from 'react';
+
 export default function MusicControl() {
   const ref = useRef();
 

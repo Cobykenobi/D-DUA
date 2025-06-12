@@ -1,4 +1,6 @@
 
+import { useState, useEffect } from 'react';
+
 const ProfilePage = () => {
   const [characters, setCharacters] = useState([]);
   const navigate = useNavigate();
