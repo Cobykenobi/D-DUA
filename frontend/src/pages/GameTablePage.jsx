@@ -4,6 +4,7 @@ import MonstersList from "../components/MonstersList";
 import ChatComponent from "../components/ChatComponent";
 import PlayerCard from "../components/PlayerCard";
 import MusicPlayer from "../components/MusicPlayer";
+import { io } from "socket.io-client";
 
 // socket connection URL configurable via env
 const socket = io(import.meta.env.VITE_SOCKET_URL);

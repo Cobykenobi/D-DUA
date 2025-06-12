@@ -1,4 +1,6 @@
 
+import { io } from "socket.io-client";
+
 let socket;
 
 export default function ChatBox({ sessionId }) {
