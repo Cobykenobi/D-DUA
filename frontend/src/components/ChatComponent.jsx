@@ -1,4 +1,6 @@
 
+import { useState, useEffect, useRef } from 'react';
+
 export default function ChatComponent({ tableId, user, messages, socket }) {
   const [input, setInput] = useState("");
   const chatEnd = useRef(null);

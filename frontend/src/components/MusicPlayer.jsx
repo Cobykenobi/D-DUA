@@ -1,4 +1,5 @@
 import ReactPlayer from 'react-player';
+import { useState, useEffect } from 'react';
 import api from '../api/axios';
 
 export default function MusicPlayer({ isGM }) {

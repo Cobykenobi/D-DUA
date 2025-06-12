@@ -1,4 +1,5 @@
 import api from "../api/axios";
+import { useState } from 'react';
 
 export default function CharacterCreatePage() {
   const navigate = useNavigate();

@@ -1,4 +1,6 @@
 
+import { useState } from 'react';
+
 const CreateCharacterPage = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');

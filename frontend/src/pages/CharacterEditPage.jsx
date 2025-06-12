@@ -1,4 +1,5 @@
 import api from "../api/axios";
+import { useState, useEffect } from 'react';
 
 export default function CharacterEditPage() {
   const { id } = useParams();
