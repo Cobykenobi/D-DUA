@@ -20,7 +20,10 @@ export default function LobbyPage({ tableId, user }) {
   const startGame = () => socket.emit("start-game", { tableId });
 
   return (
-    <div className="flex flex-col items-center min-h-screen bg-dndbg">
+    <div
+      className="flex flex-col items-center min-h-screen bg-dndbg bg-cover bg-center"
+      style={{ backgroundImage: "url('/nd-bg.png')" }}
+    >
       <div className="bg-[#322018]/90 p-6 rounded-2xl mt-10 w-full max-w-lg">
         <h1 className="text-3xl font-dnd text-dndgold text-center mb-2">Лобі столу</h1>
         <div className="text-dndgold mb-2">Код для підключення: <b>{tableId}</b></div>
