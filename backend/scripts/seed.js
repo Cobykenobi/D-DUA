@@ -16,31 +16,64 @@ async function seed() {
   await mongoose.connect(MONGO_URI);
 
 
+  // English versions kept for reference:
+  // const races = [
+  //   'Human',
+  //   'Elf',
+  //   'Dwarf',
+  //   'Orc',
+  //   'Halfling',
+  //   'Gnome',
+  //   'Tiefling',
+  //   'Dragonborn',
+  //   'Half-Elf',
+  //   'Half-Orc'
+  // ];
+  // const professions = [
+  //   'Warrior',
+  //   'Wizard',
+  //   'Rogue',
+  //   'Cleric',
+  //   'Ranger',
+  //   'Paladin',
+  //   'Bard',
+  //   'Druid',
+  //   'Monk',
+  //   'Barbarian'
+  // ];
+  // const characteristics = ['HP', 'MP', 'Strength', 'Agility', 'Intellect'];
+
   const races = [
-    'Human',
-    'Elf',
-    'Dwarf',
-    'Orc',
-    'Halfling',
-    'Gnome',
-    'Tiefling',
-    'Dragonborn',
-    'Half-Elf',
-    'Half-Orc'
+    'Людина',
+    'Ельф',
+    'Дварф',
+    'Орк',
+    'Напіврослик',
+    'Гном',
+    'Тіфлінг',
+    'Драконолюд',
+    'Напівельф',
+    'Напіворк'
   ];
   const professions = [
-    'Warrior',
-    'Wizard',
-    'Rogue',
-    'Cleric',
-    'Ranger',
-    'Paladin',
-    'Bard',
-    'Druid',
-    'Monk',
-    'Barbarian'
+    'Воїн',
+    'Чарівник',
+    'Плут',
+    'Клірик',
+    'Рейнджер',
+    'Паладин',
+    'Бард',
+    'Друїд',
+    'Монах',
+    'Варвар'
   ];
-  const characteristics = ['HP', 'MP', 'Strength', 'Agility', 'Intellect'];
+  const characteristics = [
+    'HP',
+    'MP',
+    'Сила',
+    'Спритність',
+    'Інтелект'
+  ];
 
   if (await Race.countDocuments() === 0) {
     await Race.insertMany(races.map(name => ({ name })));
