@@ -1,5 +1,3 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
 import api from "../api/axios";
 
 export default function CharacterEditPage() {

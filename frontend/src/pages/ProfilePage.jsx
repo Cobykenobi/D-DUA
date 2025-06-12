@@ -1,8 +1,4 @@
 
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getCharacters, deleteCharacter } from '../utils/api';
-
 const ProfilePage = () => {
   const [characters, setCharacters] = useState([]);
   const navigate = useNavigate();

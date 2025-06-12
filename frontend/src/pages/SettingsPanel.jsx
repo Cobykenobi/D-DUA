@@ -1,6 +1,4 @@
 
-import { useSettings } from '../context/SettingsContext';
-
 export default function SettingsPanel() {
   const { brightness, setBrightness, volume, setVolume, language, setLanguage } = useSettings();
 

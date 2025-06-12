@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
 import api from "../api/axios";
-import { useUserStore } from '../store/user';
 
 const diceTypes = ["d20", "d12", "d10", "d8", "d6", "d4"];
 
-export default function DiceRoller({ sessionId, isMaster }) {
+export default function DiceRoller({ sessionId, isMaster ) {
   const [rolling, setRolling] = useState(false);
   const [lastRoll, setLastRoll] = useState(null);
   const { token } = useUserStore();

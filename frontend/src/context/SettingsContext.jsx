@@ -1,6 +1,4 @@
 
-import React, { createContext, useState, useEffect, useContext } from 'react';
-
 const SettingsContext = createContext();
 
 export function SettingsProvider({ children }) {

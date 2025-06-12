@@ -1,13 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import GMPanel from "../components/GMPanel";
 import InitiativeList from "../components/InitiativeList";
 import MonstersList from "../components/MonstersList";
 import ChatComponent from "../components/ChatComponent";
 import PlayerCard from "../components/PlayerCard";
 import MusicPlayer from "../components/MusicPlayer";
-import { io } from "socket.io-client";
-import { useUserStore } from '../store/user';
 
 // socket connection URL configurable via env
 const socket = io(import.meta.env.VITE_SOCKET_URL);
