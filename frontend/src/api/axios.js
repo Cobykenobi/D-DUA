@@ -13,6 +13,16 @@ const instance = axios.create({
   withCredentials: true,
 });
 
+// Automatically attach JWT from localStorage if present
+instance.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers = config.headers || {};
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
 // Response interceptor uses ToastContext. Call setAxiosToast from a component
 // with the showToast function to display API errors globally.
 instance.interceptors.response.use(
