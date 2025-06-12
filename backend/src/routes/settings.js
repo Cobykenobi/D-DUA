@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { saveSettings } = require("../controllers/settingsController");
-const authMiddleware = require("../middlewares/authMiddleware");
+const authMiddleware = require("../middleware/authMiddleware");
 
 router.post("/", authMiddleware, saveSettings);
 

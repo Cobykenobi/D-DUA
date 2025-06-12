@@ -12,6 +12,7 @@ const settingsRoutes = require("./routes/settings");
 const allowedOrigins = process.env.CLIENT_URL
   ? process.env.CLIENT_URL.split(',').map(o => o.trim())
   : ['http://localhost:5173'];
+
 const corsOptions = {
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
@@ -22,7 +23,9 @@ const corsOptions = {
   },
   credentials: true,
 };
+
 app.use(cors(corsOptions));
+
 app.use(express.json());
 
 // Ensure uploads directories exist

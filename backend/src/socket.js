@@ -1,19 +1,5 @@
 const { Server } = require('socket.io');
 
-const allowedOrigins = process.env.CLIENT_URL
-  ? process.env.CLIENT_URL.split(',').map(o => o.trim())
-  : ['http://localhost:5173'];
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-};
-
 let io;
 const sessions = {};
 
@@ -33,7 +19,9 @@ function getSession(id) {
 }
 
 function init(httpServer) {
-  io = new Server(httpServer, { cors: corsOptions });
+  io = new Server(httpServer, {
+    cors: { origin: '*' }
+  });
 
   io.on('connection', (socket) => {
     socket.on('join-lobby', ({ tableId, user }) => {
