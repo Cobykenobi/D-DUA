@@ -16,7 +16,7 @@ async function seed() {
   await mongoose.connect(MONGO_URI);
 
   const races = ['Human', 'Elf', 'Dwarf'];
-  const professions = ['Warrior', 'Mage', 'Rogue'];
+  const professions = ['Warrior', 'Wizard', 'Rogue'];
   const characteristics = ['Strength', 'Agility', 'Intelligence'];
 
   if (await Race.countDocuments() === 0) {
