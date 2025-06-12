@@ -8,7 +8,7 @@ import ChangePasswordPage from './pages/ChangePasswordPage';
 
 const isAuthenticated = () => !!localStorage.getItem('token');
 
-const App = () => (;
+const App = () => (
   <Routes>
     <Route path="/" element={<Navigate to={isAuthenticated() ? "/profile" : "/login"} />} />
     <Route path="/login" element={<LoginPage />} />

@@ -1,14 +1,14 @@
 
 let socket;
 
-export default function ChatBox({ sessionId ;) {;
+export default function ChatBox({ sessionId }) {
   const { user, token } = useUserStore();
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const chatEnd = useRef();
 
   useEffect(() => {
-    socket = io(import.meta.env.VITE_SOCKET_URL || '/', {;
+    socket = io(import.meta.env.VITE_SOCKET_URL || '/', {
       auth: { token },
       query: { sessionId },
     });
@@ -18,7 +18,7 @@ export default function ChatBox({ sessionId ;) {;
 
   useEffect(() => { chatEnd.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages]);
 
-  const send = e => {;
+  const send = e => {
     e.preventDefault();
     if (input.trim()) {
       socket.emit('chat', { text: input });

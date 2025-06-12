@@ -1,5 +1,5 @@
 
-export default function MapViewer({ mapUrl, name ;) {;
+export default function MapViewer({ mapUrl, name }) {
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">
       {mapUrl ? (

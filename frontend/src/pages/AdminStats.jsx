@@ -1,5 +1,5 @@
 
-export default function AdminStats({ data ;) {;
+export default function AdminStats({ data }) {
   const races = data.map(d => d.race);
   const counts = data.map(d => d.count);
   return (

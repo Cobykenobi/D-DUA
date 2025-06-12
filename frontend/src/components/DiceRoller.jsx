@@ -2,15 +2,15 @@ import api from "../api/axios";
 
 const diceTypes = ["d20", "d12", "d10", "d8", "d6", "d4"];
 
-export default function DiceRoller({ sessionId, isMaster ;) {;
+export default function DiceRoller({ sessionId, isMaster ) {
   const [rolling, setRolling] = useState(false);
   const [lastRoll, setLastRoll] = useState(null);
   const { token } = useUserStore();
 
-  const rollDice = async (diceType, isPrivate = false) => {;
+  const rollDice = async (diceType, isPrivate = false) => {
     setRolling(true);
     try {
-      const res = await api.post("/rolls", {;
+      const res = await api.post("/rolls", {
         diceType,
         isPrivate,
         session: sessionId,

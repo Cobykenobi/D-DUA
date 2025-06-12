@@ -1,6 +1,6 @@
 
 
-export const useUserStore = create(;
+export const useUserStore = create(
   persist(
     (set) => ({
       user: null,
