@@ -46,7 +46,7 @@ export default function GameTablePage() {
     setDiceAnim(true);
     setTimeout(() => {
       setDiceAnim(false);
-      const res = type === "d20";
+      const res = type === "d20"
         ? Math.ceil(Math.random() * 20)
         : Math.ceil(Math.random() * 6);
       setDiceResult(res);
