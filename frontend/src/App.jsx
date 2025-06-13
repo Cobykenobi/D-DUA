@@ -6,6 +6,7 @@ import ProfilePage from './pages/ProfilePage';
 import CharacterCreatePage from './pages/CharacterCreatePage';
 import LobbyPage from './pages/LobbyPage';
 import AdminPage from './pages/AdminPage';
+import AdminInventoryPage from './pages/admin/AdminInventoryPage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
 
 const isAuthenticated = () => !!localStorage.getItem('token');
@@ -19,6 +20,7 @@ const App = () => (
     <Route path="/create-character" element={isAuthenticated() ? <CharacterCreatePage /> : <Navigate to="/login" />} />
     <Route path="/lobby" element={isAuthenticated() ? <LobbyPage /> : <Navigate to="/login" />} />
     <Route path="/admin" element={isAuthenticated() ? <AdminPage /> : <Navigate to="/login" />} />
+    <Route path="/admin/inventory/:characterId" element={isAuthenticated() ? <AdminInventoryPage /> : <Navigate to="/login" />} />
     <Route path="/change-password" element={isAuthenticated() ? <ChangePasswordPage /> : <Navigate to="/login" />} />
     <Route path="*" element={<Navigate to="/" />} />
   </Routes>
