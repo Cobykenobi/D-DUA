@@ -27,7 +27,7 @@ export default function CharacterListPage() {
               Клас: {t('classes.' + (c.profession?.name || '')) || c.profession?.name || '—'}
             </p>
             <button
-              onClick={() => navigate(`/lobby/${c._id}`)}
+              onClick={() => navigate(`/lobby?char=${c._id}`)}
               className="mt-2 bg-red-800 hover:bg-red-700 text-white py-1 px-4 rounded transition"
             >
               Обрати
