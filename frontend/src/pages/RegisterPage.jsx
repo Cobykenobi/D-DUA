@@ -38,47 +38,46 @@ function RegisterPage() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-            <form
-        onSubmit={handleRegister}
-        className="bg-white shadow-md p-8 rounded w-full max-w-sm"
-      >
-        <h2 className="text-2xl font-bold mb-4">Реєстрація</h2>
-
-        {error && <p className="text-red-500 mb-3">{error}</p>}
-
-        <input
-          type="text"
-          placeholder="Логін"
-          value={login}
-          onChange={(e) => setLogin(e.target.value)}
-          className="w-full border rounded px-3 py-2 mb-3"
-          required
-        />
-        <input
-          type="text"
-          placeholder="Ім'я користувача"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="w-full border rounded px-3 py-2 mb-3"
-          required
-        />
-        <input
-          type="password"
-          placeholder="Пароль"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full border rounded px-3 py-2 mb-4"
-          required
-        />
-
-        <button
-          type="submit"
-          className="w-full bg-green-600 hover:bg-green-700 text-white py-2 rounded"
-        >
-          Зареєструватися
-        </button>
-      </form>
+    <div
+      className="min-h-screen bg-cover bg-center flex items-center justify-center"
+      style={{ backgroundImage: `url('/map-bg.jpg')` }}
+    >
+      <div className="bg-[#2d1d14]/90 p-8 rounded-lg shadow-lg w-full max-w-md text-center text-white">
+        <h2 className="text-3xl font-dnd mb-4">Реєстрація</h2>
+        <form onSubmit={handleRegister} className="flex flex-col gap-4">
+          {error && <p className="text-red-400">{error}</p>}
+          <input
+            type="text"
+            placeholder="Логін"
+            value={login}
+            onChange={(e) => setLogin(e.target.value)}
+            className="p-2 rounded bg-[#3c2a20] text-white placeholder:text-gray-300"
+            required
+          />
+          <input
+            type="text"
+            placeholder="Ім'я користувача"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            className="p-2 rounded bg-[#3c2a20] text-white placeholder:text-gray-300"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Пароль"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="p-2 rounded bg-[#3c2a20] text-white placeholder:text-gray-300"
+            required
+          />
+          <button
+            type="submit"
+            className="bg-red-700 hover:bg-red-800 rounded py-2 text-white font-bold"
+          >
+            Зареєструватися
+          </button>
+        </form>
+      </div>
     </div>
   );
 }
