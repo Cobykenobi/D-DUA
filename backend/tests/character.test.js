@@ -8,7 +8,9 @@ jest.mock('../src/models/Profession');
 jest.mock('../src/models/Character');
 
 describe('Character Controller - create', () => {
+
   it('populates inventory and creates stats object', async () => {
+ main
     Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Elf' }]);
     Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Wizard' }]);
     let savedData;
@@ -23,8 +25,10 @@ describe('Character Controller - create', () => {
     await characterController.create(req, res);
 
     expect(savedData.inventory.length).toBeGreaterThanOrEqual(2);
+
     expect(savedData.stats).toHaveProperty('STR');
     expect(typeof savedData.stats.STR).toBe('number');
+ main
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalled();
   });

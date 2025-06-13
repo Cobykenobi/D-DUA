@@ -2,6 +2,9 @@ const Character = require('../models/Character');
 const Race = require('../models/Race');
 const Profession = require('../models/Profession');
 
+const generateStats = require('../utils/generateStats');
+ main
+
 const inventoryPool = [
   'Sword',
   'Bow',
@@ -70,6 +73,8 @@ exports.create = async (req, res) => {
     });
   }
 
+
+
   const stats = {
     STR: Math.floor(Math.random() * 16) + 3,
     DEX: Math.floor(Math.random() * 16) + 3,
@@ -77,6 +82,7 @@ exports.create = async (req, res) => {
     CON: Math.floor(Math.random() * 16) + 3,
     CHA: Math.floor(Math.random() * 16) + 3
   };
+ main
 
     // Логіка вибору аватара
     const avatar = (image && image.trim())
