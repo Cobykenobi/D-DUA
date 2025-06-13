@@ -65,9 +65,18 @@ export default function CharacterCard({
       <div className="mt-2">
         <div className="text-dndgold font-semibold mb-1">Інвентар:</div>
         <ul className="list-none pl-0 text-base space-y-0.5">
-          {character.inventory && character.inventory.map((it, idx) => (
-            <li key={idx}>{it.item} {it.amount > 1 ? `x${it.amount}` : ''}</li>
-          ))}
+          {character.inventory && character.inventory.map((it, idx) => {
+            const bonus = it.bonus && Object.keys(it.bonus).length
+              ? ' (' + Object.entries(it.bonus)
+                  .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${k}`)
+                  .join(', ') + ')'
+              : '';
+            return (
+              <li key={idx}>
+                {it.item} {it.amount > 1 ? `x${it.amount}` : ''}{bonus}
+              </li>
+            );
+          })}
         </ul>
       </div>
       <div className="mt-3 flex gap-2 justify-center">
