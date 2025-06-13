@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../api/axios";
 import { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom'
@@ -18,13 +18,13 @@ function RegisterPage() {
     setError("");
 
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, {
+      await api.post("/auth/register", {
         login,
         password,
         username,
       });
 
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, {
+      const response = await api.post("/auth/login", {
         login,
         password,
       });
