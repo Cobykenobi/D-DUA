@@ -11,10 +11,10 @@ exports.me = async (req, res) => {
 
 exports.updateSettings = async (req, res) => {
   try {
-    const { musicVolume, brightness } = req.body;
+    const { volume, brightness } = req.body;
     const user = await User.findByIdAndUpdate(
       req.user.id,
-      { $set: { 'settings.musicVolume': musicVolume, 'settings.brightness': brightness } },
+      { $set: { 'settings.volume': volume, 'settings.brightness': brightness } },
       { new: true }
     ).select('-password');
     res.json(user);

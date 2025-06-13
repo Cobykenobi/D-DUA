@@ -7,7 +7,7 @@ const UserSchema = new mongoose.Schema(
     username: { type: String, required: true },
     role: { type: String, default: "player" },
     settings: {
-      musicVolume: { type: Number, default: 50 },
+      volume: { type: Number, default: 50 },
       brightness: { type: Number, default: 50 },
     },
     // інші поля за потребою
