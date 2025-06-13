@@ -7,8 +7,6 @@ const path = require('path');
 const http = require('http');
 
 const app = express();
-const statsRoutes = require("./routes/stats");
-const settingsRoutes = require("./routes/settings");
 const allowedOrigins = process.env.CLIENT_URL
   ? process.env.CLIENT_URL.split(',').map(o => o.trim())
   : ['http://localhost:5173'];
