@@ -2,6 +2,7 @@ const Character = require('../models/Character');
 const Race = require('../models/Race');
 const Profession = require('../models/Profession');
 
+
 const generateStats = require('../utils/generateStats');
  main
 
@@ -32,6 +33,7 @@ const getRandomInventory = () => {
   }
   return items;
 };
+ main
 
 // Отримати всіх персонажів користувача
 exports.getAllByUser = async (req, res) => {
@@ -50,6 +52,7 @@ exports.create = async (req, res) => {
     const { name, description, image } = req.body;
 
     // Дефолтні аватари
+
     const defaultAvatars = [
       "/avatars/1.png"
     ];
@@ -83,6 +86,7 @@ exports.create = async (req, res) => {
     CHA: Math.floor(Math.random() * 16) + 3
   };
  main
+ 
 
     // Логіка вибору аватара
     const avatar = (image && image.trim())
