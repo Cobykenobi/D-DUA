@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
+import api from '../api/axios';
 
 const SettingsContext = createContext();
 
@@ -19,6 +20,17 @@ export function SettingsProvider({ children }) {
   useEffect(() => {
     localStorage.setItem("settings", JSON.stringify({ brightness, volume, language }));
   }, [brightness, volume, language]);
+
+  useEffect(() => {
+    const save = async () => {
+      try {
+        await api.put('/user/settings', { volume, brightness });
+      } catch (e) {
+        console.error(e);
+      }
+    };
+    save();
+  }, [volume, brightness]);
 
   return (
     <SettingsContext.Provider value={{ brightness, setBrightness, volume, setVolume, language, setLanguage }}>
