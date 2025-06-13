@@ -78,7 +78,7 @@ export default function GameTablePage() {
         {/* Ліва панель: твій персонаж і монстри */}
         <div className="w-1/6 p-2">
           {myPlayer
-            ? <PlayerCard player={myPlayer} />
+            ? <PlayerCard character={myPlayer} />
             : (
               <div className="bg-[#25160f]/80 rounded-2xl p-4 mb-4 text-dndgold">
                 <div className="text-lg font-bold mb-2">Твій персонаж</div>
