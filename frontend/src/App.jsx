@@ -9,19 +9,29 @@ import AdminPage from './pages/AdminPage';
 import AdminInventoryPage from './pages/admin/AdminInventoryPage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
 import GameTablePage from './pages/GameTablePage';
+import AdminLoginPage from './pages/AdminLoginPage';
 
 const isAuthenticated = () => !!localStorage.getItem('token');
+const isAdmin = () => {
+  try {
+    const data = JSON.parse(localStorage.getItem('user-storage') || '{}');
+    return data.state?.user?.role === 'admin';
+  } catch {
+    return false;
+  }
+};
 
 const App = () => (
   <Routes>
     <Route path="/" element={<Navigate to={isAuthenticated() ? "/profile" : "/login"} />} />
     <Route path="/login" element={<LoginPage />} />
+    <Route path="/admin/login" element={<AdminLoginPage />} />
     <Route path="/register" element={<RegisterPage />} />
     <Route path="/profile" element={isAuthenticated() ? <ProfilePage /> : <Navigate to="/login" />} />
     <Route path="/create-character" element={isAuthenticated() ? <CharacterCreatePage /> : <Navigate to="/login" />} />
     <Route path="/lobby" element={isAuthenticated() ? <LobbyPage /> : <Navigate to="/login" />} />
-    <Route path="/admin" element={isAuthenticated() ? <AdminPage /> : <Navigate to="/login" />} />
-    <Route path="/admin/inventory/:characterId" element={isAuthenticated() ? <AdminInventoryPage /> : <Navigate to="/login" />} />
+    <Route path="/admin" element={isAdmin() ? <AdminPage /> : <Navigate to="/admin/login" />} />
+    <Route path="/admin/inventory/:characterId" element={isAdmin() ? <AdminInventoryPage /> : <Navigate to="/admin/login" />} />
     <Route path="/change-password" element={isAuthenticated() ? <ChangePasswordPage /> : <Navigate to="/login" />} />
     <Route path="/table/:tableId" element={<GameTablePage />} />
     <Route path="*" element={<Navigate to="/" />} />
