@@ -1,4 +1,6 @@
 
+import { withApiHost } from '../utils/imageUtils';
+
 export default function CharacterCard({
   character,
   onEdit,
@@ -9,7 +11,11 @@ export default function CharacterCard({
   return (
     <div className="bg-[#1c120a]/80 text-white border border-dndgold rounded-xl shadow-lg p-4 space-y-2">
       <img
+<<<<<<< codex/create-helper-for-avatar-urls
+        src={withApiHost(character.image) || "/default-avatar.png"}
+=======
         src={character.image || '/default-avatar.png'}
+>>>>>>> main
         alt={character.name}
         className="w-20 h-20 object-cover rounded mx-auto mb-2"
       />
