@@ -21,6 +21,7 @@ exports.getAllByUser = async (req, res) => {
 exports.create = async (req, res) => {
   try {
     const { name, description, image } = req.body;
+    const uploaded = req.file ? `/uploads/avatars/${req.file.filename}` : null;
 
     // Дефолтні аватари
 
@@ -53,9 +54,10 @@ exports.create = async (req, res) => {
  
 
     // Логіка вибору аватара
-    const avatar = (image && image.trim())
-      ? image
-      : defaultAvatars[Math.floor(Math.random() * defaultAvatars.length)];
+    const avatar = uploaded ||
+      ((image && image.trim())
+        ? image
+        : defaultAvatars[Math.floor(Math.random() * defaultAvatars.length)]);
 
     const inventory = generateInventory(race[0].name, profession[0].name);
 
@@ -93,9 +95,15 @@ exports.getOne = async (req, res) => {
 exports.update = async (req, res) => {
   try {
     const { name, description, image } = req.body;
+    const updateData = { name, description };
+    if (req.file) {
+      updateData.image = `/uploads/avatars/${req.file.filename}`;
+    } else if (image) {
+      updateData.image = image;
+    }
     const char = await Character.findOneAndUpdate(
       { _id: req.params.id, user: req.user.id },
-      { $set: { name, description, image } },
+      { $set: updateData },
       { new: true }
     );
     if (!char) return res.status(404).json({ message: 'Not found' });
