@@ -1,13 +1,39 @@
 const generateInventory = require('../src/utils/generateInventory');
 
 describe('generateInventory', () => {
-  it('combines items from class and race', () => {
+  it('selects random items for each category', () => {
+    jest
+      .spyOn(Math, 'random')
+      .mockReturnValueOnce(0)
+      .mockReturnValueOnce(0.9)
+      .mockReturnValueOnce(0);
+
     const items = generateInventory('Orc', 'Warrior');
+    Math.random.mockRestore();
+
     const names = items.map(i => i.item);
     expect(names).toEqual([
       'Меч',
-      'Щит',
       'Шкіряна броня',
+      'Зілля здоров’я',
+      'Кістяний талісман'
+    ]);
+  });
+
+  it('mixes items across sets', () => {
+    jest
+      .spyOn(Math, 'random')
+      .mockReturnValueOnce(0.9)
+      .mockReturnValueOnce(0)
+      .mockReturnValueOnce(0);
+
+    const items = generateInventory('Orc', 'Warrior');
+    Math.random.mockRestore();
+
+    const names = items.map(i => i.item);
+    expect(names).toEqual([
+      'Сокира',
+      'Щит',
       'Зілля здоров’я',
       'Кістяний талісман'
     ]);

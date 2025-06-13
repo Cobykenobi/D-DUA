@@ -12,11 +12,11 @@ beforeEach(() => {
 describe('Inventory Controller - update', () => {
   it('allows owner to update inventory', async () => {
     Character.findOne.mockResolvedValue({ _id: 'c1', user: 'u1' });
-    Inventory.findOneAndUpdate.mockResolvedValue({ items: [{ name: 'Sword' }] });
+    Inventory.findOneAndUpdate.mockResolvedValue({ items: [{ item: 'Sword' }] });
 
     const req = {
       params: { characterId: 'c1' },
-      body: { items: [{ name: 'Sword' }] },
+      body: { items: [{ item: 'Sword' }] },
       user: { id: 'u1', role: 'player' }
     };
     const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
@@ -24,7 +24,7 @@ describe('Inventory Controller - update', () => {
     await inventoryController.update(req, res);
 
     expect(Inventory.findOneAndUpdate).toHaveBeenCalled();
-    expect(res.json).toHaveBeenCalledWith({ items: [{ name: 'Sword' }] });
+    expect(res.json).toHaveBeenCalledWith({ items: [{ item: 'Sword' }] });
   });
 
   it('allows admin to update inventory without ownership', async () => {

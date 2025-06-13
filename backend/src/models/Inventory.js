@@ -4,9 +4,10 @@ const mongoose = require('mongoose');
 const inventorySchema = new mongoose.Schema({
   character: { type: mongoose.Schema.Types.ObjectId, ref: 'Character', required: true },
   items: [{
-    name: { type: String, required: true },
+    item: { type: String, required: true },
     amount: { type: Number, default: 1 },
-    description: { type: String, default: '' }
+    description: { type: String, default: '' },
+    bonus: { type: Map, of: Number, default: {} }
   }]
 }, { timestamps: true });
 
