@@ -107,3 +107,12 @@ When creating a character, the race bonuses are applied first. Any class minimum
 const stats = generateStats('Elf', 'Mage');
 // => { STR: 10, DEX: 12, INT: 13, CON: 10, CHA: 11 }
 ```
+
+### Starter Inventory
+
+Each class begins with a predefined set of equipment which can be supplemented by race-specific items. The `generateInventory` utility merges these sets when a character is created.
+
+```js
+const inventory = generateInventory('Orc', 'Warrior');
+// => ['Меч', 'Щит', 'Шкіряна броня', 'Зілля здоров’я', 'Кістяний талісман']
+```

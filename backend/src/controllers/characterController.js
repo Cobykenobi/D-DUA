@@ -4,34 +4,7 @@ const Profession = require('../models/Profession');
 
 
 const generateStats = require('../utils/generateStats');
-
-const inventoryPool = [
-  'Sword',
-  'Bow',
-  'Dagger',
-  'Staff',
-  'Shield',
-  'Potion',
-  'Axe',
-  'Spear',
-  'Mace',
-  'Helmet',
-  'Armor',
-  'Lantern',
-  'Rope',
-  'Lockpick',
-  'Food Rations'
-];
-
-const getRandomInventory = () => {
-  const count = Math.floor(Math.random() * 3) + 2; // 2-4 items
-  const items = [];
-  for (let i = 0; i < count; i++) {
-    const name = inventoryPool[Math.floor(Math.random() * inventoryPool.length)];
-    items.push({ item: name, amount: 1 });
-  }
-  return items;
-};
+const generateInventory = require('../utils/generateInventory');
 
 // Отримати всіх персонажів користувача
 exports.getAllByUser = async (req, res) => {
@@ -84,7 +57,7 @@ exports.create = async (req, res) => {
       ? image
       : defaultAvatars[Math.floor(Math.random() * defaultAvatars.length)];
 
-    const inventory = getRandomInventory();
+    const inventory = generateInventory(race[0].name, profession[0].name);
 
     const newChar = new Character({
       user: req.user.id,
