@@ -33,7 +33,7 @@ const ProfilePage = () => {
 
   return (
     <div
-      className="relative min-h-screen bg-dndbg bg-cover bg-center flex flex-col items-center p-6 font-dnd text-dndgold"
+      className="relative min-h-screen bg-dndbg bg-cover bg-center flex flex-col items-center p-6 font-dnd text-dndgold text-shadow"
       style={{ backgroundImage: "url('/map-bg.jpg')" }}
     >
       <div className="absolute top-4 right-4 flex gap-2">
@@ -45,7 +45,7 @@ const ProfilePage = () => {
         </button>
         <LogoutButton />
       </div>
-      <h2 className="text-2xl mb-4">Твої персонажі</h2>
+      <h2 className="text-2xl mb-4 text-shadow">Твої персонажі</h2>
       <button
         onClick={handleCreate}
         className="bg-dndgold text-dndred rounded-2xl px-4 py-2 font-semibold mb-6"
