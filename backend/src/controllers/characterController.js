@@ -20,11 +20,6 @@ const inventoryPool = [
   'Lockpick',
   'Food Rations'
 ];
-const hpRanges = {
-  Warrior: { min: 16, max: 20 },
-  Wizard: { min: 6, max: 10 },
-  Rogue: { min: 10, max: 14 },
-};
 
 const getRandomInventory = () => {
   const count = Math.floor(Math.random() * 3) + 2; // 2-4 items
@@ -82,14 +77,18 @@ exports.create = async (req, res) => {
       characteristics = fallback;
     }
 
-    const profName = profession[0]?.name;
-    const hpChar = characteristics.find(c => c.name.toLowerCase() === 'hp');
-    const hpRange = hpRanges[profName] || { min: 3, max: 18 };
+    const raceBonuses = race[0]?.bonuses || {};
+    const classMinimums = profession[0]?.minStats || {};
 
     const stats = characteristics.map(char => {
+      const key = String(char.name).toUpperCase();
       let value = Math.floor(Math.random() * 16) + 3; // 3-18
-      if (hpChar && String(char._id) === String(hpChar._id)) {
-        value = Math.floor(Math.random() * (hpRange.max - hpRange.min + 1)) + hpRange.min;
+      if (raceBonuses[key]) {
+        value += raceBonuses[key];
+      }
+      const min = classMinimums[key];
+      if (min && value < min) {
+        value = min;
       }
       return { characteristic: char._id, value };
     });
