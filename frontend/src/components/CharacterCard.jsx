@@ -16,19 +16,19 @@ export default function CharacterCard({
         className="w-20 h-20 object-cover rounded mx-auto mb-2"
       />
       <h3 className="text-xl text-dndgold text-center font-dnd mb-2">{character.name}</h3>
-      <div className="text-sm">
+      <div className="text-base">
         <strong className="text-dndgold">Раса:</strong> {character.race?.name || '—'}
       </div>
-      <div className="text-sm">
+      <div className="text-base">
         <strong className="text-dndgold">Клас:</strong> {character.profession?.name || '—'}
       </div>
-      <div className="text-sm">
+      <div className="text-base">
         <strong className="text-dndgold">Опис:</strong> {character.description || '—'}
       </div>
       <div className="mt-2">
         <div className="text-dndgold font-semibold mb-1">Стати:</div>
         {character.stats && (
-          <ul className="list-none pl-0 text-sm space-y-0.5">
+          <ul className="list-none pl-0 text-base space-y-0.5">
             {Object.entries(character.stats).map(([key, val]) => (
               <li key={key}>{key}: {val}</li>
             ))}
@@ -37,7 +37,7 @@ export default function CharacterCard({
       </div>
       <div className="mt-2">
         <div className="text-dndgold font-semibold mb-1">Інвентар:</div>
-        <ul className="list-none pl-0 text-sm space-y-0.5">
+        <ul className="list-none pl-0 text-base space-y-0.5">
           {character.inventory && character.inventory.map((it, idx) => (
             <li key={idx}>{it.item} {it.amount > 1 ? `x${it.amount}` : ''}</li>
           ))}

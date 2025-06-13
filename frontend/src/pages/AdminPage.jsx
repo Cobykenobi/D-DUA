@@ -96,7 +96,7 @@ export default function AdminPage() {
 
       <div className="mb-6">
         <h2 className="text-xl text-dndgold mb-2">Список рас</h2>
-        <ul className="list-disc pl-6 text-sm space-y-1">
+        <ul className="list-disc pl-6 text-base space-y-1">
           {races.map((r) => (
             <li key={r._id} className="flex justify-between items-center">
               {r.name}
@@ -111,7 +111,7 @@ export default function AdminPage() {
       {log.length > 0 && (
         <div className="mt-6">
           <h2 className="text-xl text-dndgold mb-2">Журнал подій</h2>
-          <ul className="list-disc pl-6 text-sm space-y-1">
+          <ul className="list-disc pl-6 text-base space-y-1">
             {log.map((entry, i) => (
               <li key={i}>{entry}</li>
             ))}
