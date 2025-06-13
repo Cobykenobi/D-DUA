@@ -69,6 +69,12 @@ function LoginPage() {
           </button>
         </form>
         <Link
+          to="/admin/login"
+          className="mt-4 inline-block bg-red-700 hover:bg-red-800 rounded py-2 text-white font-bold"
+        >
+          Адмінка
+        </Link>
+        <Link
           to="/register"
           className="mt-4 inline-block text-dndgold underline text-sm"
         >
