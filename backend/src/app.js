@@ -38,6 +38,7 @@ app.use('/uploads', express.static(uploadDir));
 
 // API routes
 app.use('/api/auth', require('./routes/auth'));
+app.use('/api/admin/auth', require('./routes/adminAuth'));
 app.use('/api/character', require('./routes/character'));
 app.use('/api/characteristic', require('./routes/characteristic'));
 app.use('/api/inventory', require('./routes/inventory'));

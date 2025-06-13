@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const Race = require('../src/models/Race');
 const Profession = require('../src/models/Profession');
 const Characteristic = require('../src/models/Characteristic');
+const User = require('../src/models/User');
+const bcrypt = require('bcrypt');
 
 const MONGO_URI = process.env.MONGO_URI;
 
@@ -85,6 +87,18 @@ async function seed() {
   if (await Characteristic.countDocuments() === 0) {
     await Characteristic.insertMany(characteristics.map(name => ({ name })));
     console.log('Characteristics seeded');
+  }
+
+  const adminLogin = 'root';
+  if (await User.countDocuments({ login: adminLogin }) === 0) {
+    const hash = await bcrypt.hash('kolokol911', 10);
+    await User.create({
+      login: adminLogin,
+      username: 'Admin',
+      password: hash,
+      role: 'admin'
+    });
+    console.log('Admin user created');
   }
 
   await mongoose.disconnect();
