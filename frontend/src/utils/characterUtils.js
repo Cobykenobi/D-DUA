@@ -1,26 +1,23 @@
 export const races = [
   'Human',
   'Elf',
-  'Dwarf',
   'Orc',
-  'Halfling',
   'Gnome',
-  'Tiefling',
-  'Dragonborn',
-  'Half-Elf',
-  'Half-Orc'
+  'Dwarf',
+  'Halfling',
+  'Demon',
+  'Beastkin',
+  'Angel',
+  'Lizardman'
 ];
 export const classes = [
   'Warrior',
-  'Wizard',
+  'Mage',
   'Rogue',
-  'Cleric',
+  'Healer',
   'Ranger',
-  'Paladin',
   'Bard',
-  'Druid',
-  'Monk',
-  'Barbarian'
+  'Paladin'
 ];
 
 const inventoryPool = [

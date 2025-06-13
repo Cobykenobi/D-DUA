@@ -4,7 +4,6 @@ const Profession = require('../models/Profession');
 
 
 const generateStats = require('../utils/generateStats');
- main
 
 const inventoryPool = [
   'Sword',
@@ -33,7 +32,6 @@ const getRandomInventory = () => {
   }
   return items;
 };
- main
 
 // Отримати всіх персонажів користувача
 exports.getAllByUser = async (req, res) => {
@@ -78,14 +76,7 @@ exports.create = async (req, res) => {
 
 
 
-  const stats = {
-    STR: Math.floor(Math.random() * 16) + 3,
-    DEX: Math.floor(Math.random() * 16) + 3,
-    INT: Math.floor(Math.random() * 16) + 3,
-    CON: Math.floor(Math.random() * 16) + 3,
-    CHA: Math.floor(Math.random() * 16) + 3
-  };
- main
+  const stats = generateStats(race[0].name, profession[0].name);
  
 
     // Логіка вибору аватара

@@ -46,23 +46,23 @@ async function seed() {
   const races = [
     'Human',
     'Elf',
-    'Dwarf',
     'Orc',
-    'Halfling',
     'Gnome',
-    'Tiefling',
-    'Dragonborn',
-    'Half-Elf',
-    'Half-Orc'
+    'Dwarf',
+    'Halfling',
+    'Demon',
+    'Beastkin',
+    'Angel',
+    'Lizardman'
   ];
   const professions = [
     'Warrior',
-    'Wizard',
+    'Mage',
     'Rogue',
-    'Cleric',
+    'Healer',
     'Ranger',
-    'Paladin',
-    'Bard'
+    'Bard',
+    'Paladin'
   ];
   const characteristics = [
     'STR',

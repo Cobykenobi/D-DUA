@@ -64,54 +64,46 @@ npm test
 
 ## Character Basics
 
-The seed script inserts five core statistics and example races/classes for
-testing.
+Characters use five core statistics which start at **10** each:
 
-### Core statistics
+- **STR** – Strength
+- **DEX** – Dexterity
+- **INT** – Intelligence
+- **CON** – Constitution
+- **CHA** – Charisma
 
-- **HP** – hit points
-- **MP** – magic points
-- **Strength**
-- **Agility**
-- **Intellect**
+### Races and Bonuses
 
-### Races
+Ten playable races provide bonuses to these stats:
 
-The following races are included:
+- Human – +1 to all stats
+- Elf – +2 DEX, +1 INT
+- Orc – +2 STR, +1 CON
+- Gnome – +2 CON, +1 INT
+- Dwarf – +2 STR, +1 CHA
+- Halfling – +2 DEX, +1 CHA
+- Demon – +2 INT, +1 CHA
+- Beastkin – +2 DEX, +1 CON
+- Angel – +2 CHA, +1 INT
+- Lizardman – +2 STR, +1 CON
 
-- Human
-- Elf
-- Dwarf
-- Orc
-- Halfling
-- Gnome
-- Tiefling
-- Dragonborn
-- Half-Elf
-- Half-Orc
+### Classes and Minimums
 
-These races are provided without additional bonuses.
+Seven classes require minimum statistics:
 
-### Classes
+- Warrior – STR 13, CON 12
+- Mage – INT 13, CHA 11
+- Rogue – DEX 13, INT 11
+- Healer – CHA 13, CON 11
+- Ranger – DEX 12, STR 12
+- Bard – CHA 13, DEX 12
+- Paladin – STR 13, CHA 13
 
-Three example classes come with basic HP ranges used when generating stats:
+### Stat Generation
 
-- **Warrior** – 16‑20 HP minimum
-- **Wizard** – 6‑10 HP minimum
-- **Rogue** – 10‑14 HP minimum
-
-Other attributes are rolled between 3 and 18.
-
-### Example stat generation
+When creating a character, the race bonuses are applied first. Any class minimums are enforced next. All remaining stats are randomised between **8** and **15** but never lowered below their current values.
 
 ```js
-const roll = () => Math.floor(Math.random() * 16) + 3; // 3‑18
-
-const stats = {
-  hp: roll(),
-  mp: roll(),
-  strength: roll(),
-  agility: roll(),
-  intellect: roll()
-};
+const stats = generateStats('Elf', 'Mage');
+// => { STR: 10, DEX: 12, INT: 13, CON: 10, CHA: 11 }
 ```
