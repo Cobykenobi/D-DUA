@@ -19,5 +19,14 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addUtilities }) {
+      const newUtilities = {
+        '.text-shadow': {
+          textShadow: '2px 2px 4px rgba(0, 0, 0, 0.8)',
+        },
+      };
+      addUtilities(newUtilities);
+    },
+  ],
 }
