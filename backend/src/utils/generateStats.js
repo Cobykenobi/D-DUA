@@ -1,58 +1,58 @@
+const baseStats = {
+  STR: 10,
+  DEX: 10,
+  INT: 10,
+  CON: 10,
+  CHA: 10,
+};
+
 const raceBonuses = {
-  Elf: { agility: 2, intellect: 1 },
-  Dwarf: { strength: 2 },
-  Human: { strength: 1, agility: 1, intellect: 1 }
+  Human:     { STR: 1, DEX: 1, INT: 1, CON: 1, CHA: 1 },
+  Elf:       { DEX: 2, INT: 1 },
+  Orc:       { STR: 2, CON: 1 },
+  Gnome:     { CON: 2, INT: 1 },
+  Dwarf:     { STR: 2, CHA: 1 },
+  Halfling:  { DEX: 2, CHA: 1 },
+  Demon:     { INT: 2, CHA: 1 },
+  Beastkin:  { DEX: 2, CON: 1 },
+  Angel:     { CHA: 2, INT: 1 },
+  Lizardman: { STR: 2, CON: 1 },
 };
 
 const classMinimums = {
-  Warrior: { strength: 13, hp: 15 },
-  Wizard: { intellect: 12 },
-  Rogue: { agility: 12 }
+  Warrior: { STR: 13, CON: 12 },
+  Mage: { INT: 13, CHA: 11 },
+  Rogue: { DEX: 13, INT: 11 },
+  Healer: { CHA: 13, CON: 11 },
+  Ranger: { DEX: 12, STR: 12 },
+  Bard: { CHA: 13, DEX: 12 },
+  Paladin: { STR: 13, CHA: 13 },
 };
 
-/**
- * Generate stats array based on available characteristics, race and class.
- * @param {Array} characteristics - list of characteristic docs with _id and name
- * @param {string} raceName - name of the race
- * @param {string} className - name of the profession/class
- * @returns {Array<{characteristic: string, value: number}>}
- */
-function generateStats(characteristics, raceName, className) {
-  const stats = {};
-  // 1. start all at 10
-  characteristics.forEach(c => {
-    stats[c._id] = 10;
-  });
+function generateStats(race, charClass) {
+  const stats = { ...baseStats };
 
-  // 2. apply race bonuses
-  const raceMods = raceBonuses[raceName] || {};
-  Object.entries(raceMods).forEach(([name, bonus]) => {
-    const char = characteristics.find(c => c.name.toLowerCase() === name.toLowerCase());
-    if (char) {
-      stats[char._id] += bonus;
+  const bonuses = raceBonuses[race] || {};
+  for (const key in bonuses) {
+    stats[key] += bonuses[key];
+  }
+
+  const mins = classMinimums[charClass] || {};
+  for (const key in mins) {
+    if (stats[key] < mins[key]) {
+      stats[key] = mins[key];
     }
-  });
+  }
 
-  // 3. enforce class minimums
-  const classMins = classMinimums[className] || {};
-  Object.entries(classMins).forEach(([name, min]) => {
-    const char = characteristics.find(c => c.name.toLowerCase() === name.toLowerCase());
-    if (char) {
-      if (stats[char._id] < min) stats[char._id] = min;
-    }
-  });
-
-  // 4. randomize remaining values to 8-15
-  characteristics.forEach(c => {
-    const name = c.name.toLowerCase();
-    const hasBonus = raceMods[name] !== undefined;
-    const hasMin = classMins[name] !== undefined;
+  for (const key of Object.keys(stats)) {
+    const hasBonus = bonuses[key] !== undefined;
+    const hasMin = mins[key] !== undefined;
     if (!hasBonus && !hasMin) {
-      stats[c._id] = Math.floor(Math.random() * (15 - 8 + 1)) + 8;
+      stats[key] = Math.max(stats[key], Math.floor(Math.random() * 8) + 8);
     }
-  });
+  }
 
-  return Object.entries(stats).map(([id, value]) => ({ characteristic: id, value }));
+  return stats;
 }
 
 module.exports = generateStats;
