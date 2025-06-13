@@ -23,6 +23,8 @@ export function SettingsProvider({ children }) {
 
   useEffect(() => {
     const save = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) return;
       try {
         await api.put('/user/settings', { volume, brightness });
       } catch (e) {
