@@ -15,7 +15,8 @@ const characterSchema = new mongoose.Schema({
   },
   inventory: [{
     item: { type: String },
-    amount: { type: Number, default: 1 }
+    amount: { type: Number, default: 1 },
+    bonus: { type: Map, of: Number, default: {} }
   }],
   description: { type: String, default: '' },
   image: { type: String, default: '' }, // посилання на файл/URL

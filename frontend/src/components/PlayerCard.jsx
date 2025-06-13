@@ -9,10 +9,10 @@ export default function PlayerCard({ character, onSelect }) {
       <img src={withApiHost(character.image) || "/default-avatar.png"} alt="character" className="rounded mb-2 h-32 w-full object-cover" />
       <h3 className="text-xl text-dndgold">{character.name}</h3>
       <p className="text-sm">
-        Раса: {t('races.' + (character.race || '')) || character.race}
+        Раса: {t('races.' + (character.race?.name || '')) || character.race?.name}
       </p>
       <p className="text-sm">
-        Клас: {t('classes.' + (character.class || '')) || character.class}
+        Клас: {t('classes.' + (character.profession?.name || '')) || character.profession?.name}
       </p>
       <button onClick={() => onSelect(character)} className="mt-2 bg-red-800 px-3 py-1 text-sm rounded text-white hover:bg-red-700">Грати</button>
     </div>

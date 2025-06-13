@@ -39,7 +39,7 @@ export default function LobbyPage() {
       return;
     }
     setError('');
-    socket.emit('join-lobby', { tableId, user, char });
+    socket.emit('join-lobby', { tableId, user, characterId: char });
     socket.on('lobby-players', data => setPlayers(data.players));
     socket.on('gm-assigned', () => setIsGM(true));
     socket.on('game-started', () => navigate(`/table/${tableId}`));
@@ -87,6 +87,7 @@ export default function LobbyPage() {
         <div className="text-dndgold mb-4">Гравці:</div>
         <ul>
           {players.map(pl => (
+
             <li key={pl._id} className="text-dndgold">
               {pl.name}
               {pl.race && (
@@ -96,6 +97,7 @@ export default function LobbyPage() {
                 <> / {t('classes.' + pl.class) || pl.class}</>
               )}
               {pl.role === 'gm' ? ' (GM)' : ''}
+ main
             </li>
           ))}
         </ul>

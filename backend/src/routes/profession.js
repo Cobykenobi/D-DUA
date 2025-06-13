@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const professionController = require('../controllers/professionController');
-const auth = require('../middlewares/authMiddleware');
+const auth = require('../middleware/authMiddleware');
 
 const onlyMaster = (req, res, next) => {
   if (req.user && (req.user.role === 'master' || req.user.role === 'admin')) return next();

@@ -1,4 +1,5 @@
 const { Server } = require('socket.io');
+const Character = require('./models/Character');
 
 let io;
 const sessions = {};
@@ -24,7 +25,7 @@ function init(httpServer) {
   });
 
   io.on('connection', (socket) => {
-    socket.on('join-lobby', ({ tableId, user }) => {
+    socket.on('join-lobby', async ({ tableId, user, characterId }) => {
       if (!tableId || !user) return;
       const sess = getSession(tableId);
       socket.join(tableId);
@@ -32,10 +33,23 @@ function init(httpServer) {
       socket.data.userId = user._id;
       let player = sess.players.find(p => p.user === user._id);
       if (!player) {
-        player = { user: user._id, name: user.username || user.login, online: true };
+        let character = null;
+        if (characterId) {
+          character = await Character.findById(characterId)
+            .populate('race profession')
+            .select('name image race profession')
+            .lean();
+        }
+        player = { user: user._id, character, online: true };
         sess.players.push(player);
       } else {
         player.online = true;
+        if (characterId && !player.character) {
+          player.character = await Character.findById(characterId)
+            .populate('race profession')
+            .select('name image race profession')
+            .lean();
+        }
       }
       if (!sess.gm) {
         sess.gm = user._id;
@@ -50,7 +64,7 @@ function init(httpServer) {
       io.to(tableId).emit('game-started');
     });
 
-    socket.on('join-table', ({ tableId, user }) => {
+    socket.on('join-table', async ({ tableId, user, characterId }) => {
       if (!tableId || !user) return;
       const sess = getSession(tableId);
       socket.join(tableId);
@@ -58,10 +72,23 @@ function init(httpServer) {
       socket.data.userId = user._id;
       let player = sess.players.find(p => p.user === user._id);
       if (!player) {
-        player = { user: user._id, name: user.username || user.login, online: true };
+        let character = null;
+        if (characterId) {
+          character = await Character.findById(characterId)
+            .populate('race profession')
+            .select('name image race profession')
+            .lean();
+        }
+        player = { user: user._id, character, online: true };
         sess.players.push(player);
       } else {
         player.online = true;
+        if (characterId && !player.character) {
+          player.character = await Character.findById(characterId)
+            .populate('race profession')
+            .select('name image race profession')
+            .lean();
+        }
       }
       socket.emit('chat-history', sess.chat);
       io.to(tableId).emit('table-players', {
