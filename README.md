@@ -33,6 +33,9 @@ This project combines an Express/MongoDB backend with a React frontend.
    node scripts/seed.js
    ```
 
+   This script also creates an admin account with login **root** and password
+   **kolokol911**. You must sign in with this account to access `/admin`.
+
 ## Running the app
 
 ### Backend
@@ -117,3 +120,7 @@ Each class begins with a predefined set of equipment which can be supplemented b
 const inventory = generateInventory('Orc', 'Warrior');
 // => ['Меч', 'Щит', 'Шкіряна броня', 'Зілля здоров’я', 'Кістяний талісман']
 ```
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).

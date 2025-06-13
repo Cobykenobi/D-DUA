@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../api/axios";
 import { useState } from 'react';
 
 import { useNavigate } from 'react-router-dom'
@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next'
 function RegisterPage() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const [username, setUsername] = useState("");
   const { showToast } = useToast();
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -18,13 +17,13 @@ function RegisterPage() {
     setError("");
 
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, {
+      await api.post("/auth/register", {
         login,
         password,
-        username,
+        username: login,
       });
 
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, {
+      const response = await api.post("/auth/login", {
         login,
         password,
       });
@@ -38,6 +37,7 @@ function RegisterPage() {
   };
 
   return (
+
     <div
       className="min-h-screen bg-cover bg-center flex items-center justify-center"
       style={{ backgroundImage: `url('/map-bg.jpg')` }}
@@ -78,6 +78,7 @@ function RegisterPage() {
           </button>
         </form>
       </div>
+ main
     </div>
   );
 }

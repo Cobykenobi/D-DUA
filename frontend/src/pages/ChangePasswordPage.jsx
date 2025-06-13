@@ -1,4 +1,4 @@
-import axios from "axios";
+import api from "../api/axios";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import Navbar from "../components/Navbar";
@@ -9,21 +9,14 @@ function ChangePasswordPage() {
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
-  const token = localStorage.getItem("token");
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
 
     try {
-      await axios.post(
-        `${import.meta.env.VITE_API_URL}/auth/change-password`,
-        { currentPassword, newPassword },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+      await api.post(
+        "/auth/change-password",
+        { currentPassword, newPassword }
       );
       setMessage("Пароль успішно змінено.");
       setCurrentPassword("");
