@@ -8,6 +8,7 @@ import LobbyPage from './pages/LobbyPage';
 import AdminPage from './pages/AdminPage';
 import AdminInventoryPage from './pages/admin/AdminInventoryPage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
+import GameTablePage from '../pages/GameTablePage';
 
 const isAuthenticated = () => !!localStorage.getItem('token');
 
@@ -22,6 +23,7 @@ const App = () => (
     <Route path="/admin" element={isAuthenticated() ? <AdminPage /> : <Navigate to="/login" />} />
     <Route path="/admin/inventory/:characterId" element={isAuthenticated() ? <AdminInventoryPage /> : <Navigate to="/login" />} />
     <Route path="/change-password" element={isAuthenticated() ? <ChangePasswordPage /> : <Navigate to="/login" />} />
+    <Route path="/table/:tableId" element={<GameTablePage />} />
     <Route path="*" element={<Navigate to="/" />} />
   </Routes>
 );
