@@ -1,1 +1,28 @@
+# Dependencies
 node_modules/
+
+# Environment files
+*.env
+*.env.*
+!*.env.example
+backend/.env
+backend/.env.*
+!backend/.env.example
+frontend/.env
+frontend/.env.*
+!frontend/.env.example
+
+# Uploaded files
+backend/uploads/
+uploads/
+
+# Build outputs
+dist/
+build/
+frontend/dist/
+frontend/build/
+backend/dist/
+backend/build/
+
+# Log files
+*.log
