@@ -53,7 +53,7 @@ export default function CharacterCard({
       <div className="mt-2">
         <div className="text-dndgold font-semibold mb-1">Стати:</div>
         {character.stats && (
-          <ul className="list-none pl-0 text-base space-y-0.5">
+          <ul className="list-none pl-0 text-lg font-bold space-y-0.5">
             {Object.entries(character.stats).map(([key, val]) => (
               <li key={key}>
                 {t('stats.' + key) || key}: {val}
