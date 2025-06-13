@@ -1,6 +1,7 @@
 
 import { withApiHost } from '../utils/imageUtils';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function CharacterCard({
   character,
@@ -10,6 +11,7 @@ export default function CharacterCard({
   editLabel = 'Редагувати',
   deleteLabel = 'Видалити',
 }) {
+  const { t } = useTranslation();
   const [desc, setDesc] = useState(character.description || '');
   return (
     <div className="bg-[#1c120a]/80 text-white border border-dndgold rounded-xl shadow-lg p-4 space-y-2">
@@ -20,10 +22,12 @@ export default function CharacterCard({
       />
       <h3 className="text-xl text-dndgold text-center font-dnd mb-2">{character.name}</h3>
       <div className="text-base">
-        <strong className="text-dndgold">Раса:</strong> {character.race?.name || '—'}
+        <strong className="text-dndgold">Раса:</strong>{' '}
+        {t('races.' + (character.race?.name || '')) || character.race?.name || '—'}
       </div>
       <div className="text-base">
-        <strong className="text-dndgold">Клас:</strong> {character.profession?.name || '—'}
+        <strong className="text-dndgold">Клас:</strong>{' '}
+        {t('classes.' + (character.profession?.name || '')) || character.profession?.name || '—'}
       </div>
 
       <div className="text-sm">
@@ -37,7 +41,6 @@ export default function CharacterCard({
             onChange={e => setDesc(e.target.value)}
           />
         )}
- main
       </div>
       {!character.description && (
         <button
@@ -52,7 +55,9 @@ export default function CharacterCard({
         {character.stats && (
           <ul className="list-none pl-0 text-base space-y-0.5">
             {Object.entries(character.stats).map(([key, val]) => (
-              <li key={key}>{key}: {val}</li>
+              <li key={key}>
+                {t('stats.' + key) || key}: {val}
+              </li>
             ))}
           </ul>
         )}
