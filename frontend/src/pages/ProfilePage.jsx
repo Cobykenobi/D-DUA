@@ -52,11 +52,11 @@ const ProfilePage = () => {
       >
         Створити нового
       </button>
-      <ul className="w-full max-w-xl space-y-3">
+      <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl">
         {characters.length === 0 ? (
-          <li className="text-center text-dndgold/80">
+          <div className="col-span-full text-center text-dndgold/80">
             Тут поки пусто. Створи першого героя!
-          </li>
+          </div>
         ) : (
           characters.map((char) => (
             <CharacterCard
@@ -68,7 +68,7 @@ const ProfilePage = () => {
             />
           ))
         )}
-      </ul>
+      </div>
     </div>
   );
 };
