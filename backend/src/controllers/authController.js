@@ -8,9 +8,12 @@ const JWT_SECRET = process.env.JWT_SECRET;
 exports.register = async (req, res) => {
   try {
     const { login, password, username } = req.body;
-    if (!login || !password || !username) {
-      return res.status(400).json({ message: "Login, password and username are required" });
+    if (!login || !password) {
+      return res.status(400).json({ message: "Login and password are required" });
     }
+
+    // Default username to login if not provided
+    const finalUsername = username || login;
 
     const candidate = await User.findOne({ login });
     if (candidate) {
@@ -18,7 +21,7 @@ exports.register = async (req, res) => {
     }
 
     const hash = await bcrypt.hash(password, 10);
-    const user = new User({ login, password: hash, username });
+    const user = new User({ login, password: hash, username: finalUsername });
     await user.save();
 
     res.status(201).json({
