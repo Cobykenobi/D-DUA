@@ -16,6 +16,16 @@ export const getCharacters = async () => {
   return res.json();
 };
 
+export const getCharacter = async (id) => {
+  const res = await fetch(`${API_URL}/character/${id}`, {
+    headers: getAuthHeaders(),
+  });
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+  return res.json();
+};
+
 export const createCharacter = async (data) => {
   const headers = getAuthHeaders();
   let body;

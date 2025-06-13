@@ -3,6 +3,9 @@ import { io } from 'socket.io-client';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useUserStore } from '../store/user';
 import LogoutButton from '../components/LogoutButton';
+import { getCharacter } from '../utils/api';
+import { withApiHost } from '../utils/imageUtils';
+import { useTranslation } from 'react-i18next';
 
 const socket = io(import.meta.env.VITE_SOCKET_URL);
 
@@ -11,11 +14,18 @@ export default function LobbyPage() {
   const { user } = useUserStore();
   const [tableId, setTableId] = useState(null);
   const [players, setPlayers] = useState([]);
+  const [character, setCharacter] = useState(null);
   const [isGM, setIsGM] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const char = searchParams.get('char');
+
+  useEffect(() => {
+    if (!char) return;
+    getCharacter(char).then(setCharacter).catch(() => {});
+  }, [char]);
 
   // generate tableId on mount
   useEffect(() => {
@@ -58,12 +68,36 @@ export default function LobbyPage() {
         <h1 className="text-3xl font-dnd text-dndgold text-center mb-2">Лобі столу</h1>
         {error && <div className="text-red-500 mb-2">{error}</div>}
         <div className="text-dndgold mb-2">Код для підключення: <b>{tableId}</b></div>
+        {character && (
+          <div className="flex items-center gap-3 mb-4 text-dndgold">
+            <img
+              src={withApiHost(character.image) || '/default-avatar.png'}
+              alt={character.name}
+              className="w-12 h-12 object-cover rounded-full"
+            />
+            <div>
+              <div className="font-bold">{character.name}</div>
+              <div className="text-sm">
+                {t('races.' + (character.race?.name || '')) || character.race?.name} &middot;{' '}
+                {t('classes.' + (character.profession?.name || '')) || character.profession?.name}
+              </div>
+            </div>
+          </div>
+        )}
         <div className="text-dndgold mb-4">Гравці:</div>
         <ul>
           {players.map(pl => (
-            <li key={pl.user} className="text-dndgold">
-              {pl.character?.name || pl.user}
-              {pl.role === "gm" ? "(GM)" : ""}
+
+            <li key={pl._id} className="text-dndgold">
+              {pl.name}
+              {pl.race && (
+                <> – {t('races.' + pl.race) || pl.race}</>
+              )}
+              {pl.class && (
+                <> / {t('classes.' + pl.class) || pl.class}</>
+              )}
+              {pl.role === 'gm' ? ' (GM)' : ''}
+ main
             </li>
           ))}
         </ul>
