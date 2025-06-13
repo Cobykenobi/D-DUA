@@ -1,4 +1,5 @@
 const Inventory = require('../models/Inventory');
+const Character = require('../models/Character');
 
 exports.getByCharacter = async (req, res) => {
   try {
@@ -12,8 +13,17 @@ exports.getByCharacter = async (req, res) => {
 exports.update = async (req, res) => {
   try {
     const { items } = req.body;
+    const characterId = req.params.characterId;
+
+    if (req.user.role !== 'admin' && req.user.role !== 'master') {
+      const char = await Character.findOne({ _id: characterId, user: req.user.id });
+      if (!char) {
+        return res.status(403).json({ message: 'Forbidden' });
+      }
+    }
+
     const inventory = await Inventory.findOneAndUpdate(
-      { character: req.params.characterId },
+      { character: characterId },
       { $set: { items } },
       { new: true, upsert: true }
     );
