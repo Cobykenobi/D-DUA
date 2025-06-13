@@ -9,7 +9,18 @@ const ProfilePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    getCharacters().then(setCharacters);
+    const fetchChars = async () => {
+      try {
+        const data = await getCharacters();
+        setCharacters(data);
+      } catch (err) {
+        setCharacters([]);
+        if (err.message === 'Unauthorized') {
+          navigate('/login');
+        }
+      }
+    };
+    fetchChars();
   }, []);
 
   const handleCreate = () => navigate('/create-character');

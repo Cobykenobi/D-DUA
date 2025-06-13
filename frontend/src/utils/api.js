@@ -10,6 +10,9 @@ export const getCharacters = async () => {
   const res = await fetch(`${API_URL}/character`, {
     headers: getAuthHeaders(),
   });
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
   return res.json();
 };
 
