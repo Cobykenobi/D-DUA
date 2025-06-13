@@ -1,8 +1,9 @@
 const Character = require('../models/Character');
 const Race = require('../models/Race');
 const Profession = require('../models/Profession');
-const Characteristic = require('../models/Characteristic');
+
 const generateStats = require('../utils/generateStats');
+ main
 
 const inventoryPool = [
   'Sword',
@@ -36,7 +37,7 @@ const getRandomInventory = () => {
 exports.getAllByUser = async (req, res) => {
   try {
     const characters = await Character.find({ user: req.user.id })
-      .populate('race profession stats.characteristic');
+      .populate('race profession');
     res.json(characters);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -72,16 +73,16 @@ exports.create = async (req, res) => {
     });
   }
 
-    let characteristics = await Characteristic.find();
-    if (!characteristics.length) {
-      const fallback = await Characteristic.find().limit(1);
-      characteristics = fallback;
-    }
 
-    const profName = profession[0]?.name;
-    const raceName = race[0]?.name;
 
-    const stats = generateStats(characteristics, raceName, profName);
+  const stats = {
+    STR: Math.floor(Math.random() * 16) + 3,
+    DEX: Math.floor(Math.random() * 16) + 3,
+    INT: Math.floor(Math.random() * 16) + 3,
+    CON: Math.floor(Math.random() * 16) + 3,
+    CHA: Math.floor(Math.random() * 16) + 3
+  };
+ main
 
     // Логіка вибору аватара
     const avatar = (image && image.trim())
@@ -112,7 +113,7 @@ exports.create = async (req, res) => {
 exports.getOne = async (req, res) => {
   try {
     const char = await Character.findOne({ _id: req.params.id, user: req.user.id })
-      .populate('race profession stats.characteristic');
+      .populate('race profession');
     if (!char) return res.status(404).json({ message: 'Not found' });
     res.json(char);
   } catch (err) {
