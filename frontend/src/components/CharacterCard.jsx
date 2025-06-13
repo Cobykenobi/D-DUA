@@ -1,5 +1,11 @@
 
-export default function CharacterCard({ character, onEdit, onDelete }) {
+export default function CharacterCard({
+  character,
+  onEdit,
+  onDelete,
+  editLabel = 'Редагувати',
+  deleteLabel = 'Видалити',
+}) {
   return (
     <div style={{ border: "1px solid #ccc", marginBottom: 12, padding: 8 }}>
       <img
@@ -37,11 +43,14 @@ export default function CharacterCard({ character, onEdit, onDelete }) {
       </div>
       <div style={{ marginTop: 8 }}>
         {onEdit && (
-          <button onClick={() => onEdit(character)}>Редагувати</button>
+          <button onClick={() => onEdit(character)}>{editLabel}</button>
         )}
         {onDelete && (
-          <button style={{ marginLeft: 8 }} onClick={() => onDelete(character._id || character.id)}>
-            Видалити
+          <button
+            style={{ marginLeft: 8 }}
+            onClick={() => onDelete(character._id || character.id)}
+          >
+            {deleteLabel}
           </button>
         )}
       </div>
