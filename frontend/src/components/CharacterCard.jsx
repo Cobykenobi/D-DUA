@@ -1,4 +1,6 @@
 
+import { withApiHost } from '../utils/imageUtils';
+
 export default function CharacterCard({
   character,
   onEdit,
@@ -9,7 +11,7 @@ export default function CharacterCard({
   return (
     <div style={{ border: "1px solid #ccc", marginBottom: 12, padding: 8 }}>
       <img
-        src={character.image || "/default-avatar.png"}
+        src={withApiHost(character.image) || "/default-avatar.png"}
         alt={character.name}
         style={{ width: 80, height: 80, objectFit: "cover", borderRadius: 4 }}
       />
