@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import api from "../api/axios";
 import { useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next';
 
 export default function CharacterListPage() {
   const [characters, setCharacters] = useState([]);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     api.get("/character").then(res => setCharacters(res.data));
@@ -18,8 +20,12 @@ export default function CharacterListPage() {
           <div key={c._id} className="bg-[#1c120a]/80 p-4 rounded-xl shadow-lg border border-dndgold">
             <h2 className="text-xl text-dndgold">{c.name}</h2>
             <p className="text-base italic mb-2">{c.description}</p>
-            <p className="text-xs">Раса: {c.race?.name || "—"}</p>
-            <p className="text-xs">Клас: {c.profession?.name || "—"}</p>
+            <p className="text-xs">
+              Раса: {t('races.' + (c.race?.name || '')) || c.race?.name || '—'}
+            </p>
+            <p className="text-xs">
+              Клас: {t('classes.' + (c.profession?.name || '')) || c.profession?.name || '—'}
+            </p>
             <button
               onClick={() => navigate(`/lobby/${c._id}`)}
               className="mt-2 bg-red-800 hover:bg-red-700 text-white py-1 px-4 rounded transition"
