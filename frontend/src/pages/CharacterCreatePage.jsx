@@ -5,7 +5,7 @@ import LogoutButton from "../components/LogoutButton";
 
 export default function CharacterCreatePage() {
   const navigate = useNavigate();
-  const [form, setForm] = useState({ name: "", description: "" });
+  const [form, setForm] = useState({ name: "" });
   const [image, setImage] = useState(null);
   const [error, setError] = useState(null);
 
@@ -15,8 +15,8 @@ export default function CharacterCreatePage() {
 
   const handleSubmit = async () => {
     try {
-      if (!form.name || !form.description) {
-        setError("Будь ласка, заповніть всі поля.");
+      if (!form.name) {
+        setError("Будь ласка, заповніть ім'я персонажа.");
         return;
       }
 
@@ -25,11 +25,10 @@ export default function CharacterCreatePage() {
       if (image) {
         payload = new FormData();
         payload.append('name', form.name);
-        payload.append('description', form.description);
         payload.append('image', image);
         headers = { 'Content-Type': 'multipart/form-data' };
       } else {
-        payload = { name: form.name, description: form.description };
+        payload = { name: form.name };
         headers = { 'Content-Type': 'application/json' };
       }
       await api.post("/character", payload, { headers });
@@ -57,13 +56,6 @@ export default function CharacterCreatePage() {
         <input
           name="name"
           value={form.name}
-          onChange={handleChange}
-          className="w-full mb-4 px-3 py-2 rounded bg-[#2d1a10] border border-dndgold text-white"
-        />
-        <label className="block text-sm mb-1">Опис</label>
-        <textarea
-          name="description"
-          value={form.description}
           onChange={handleChange}
           className="w-full mb-4 px-3 py-2 rounded bg-[#2d1a10] border border-dndgold text-white"
         />

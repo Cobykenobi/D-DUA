@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LogoutButton from '../components/LogoutButton';
 import CharacterCard from '../components/CharacterCard';
-import { getCharacters, deleteCharacter } from '../utils/api';
+import { getCharacters, deleteCharacter, updateCharacter } from '../utils/api';
 
 const ProfilePage = () => {
   const [characters, setCharacters] = useState([]);
@@ -29,6 +29,11 @@ const ProfilePage = () => {
   const handleDelete = async (id) => {
     await deleteCharacter(id);
     setCharacters((prev) => prev.filter((c) => c._id !== id));
+  };
+
+  const handleSaveDescription = async (id, desc) => {
+    const updated = await updateCharacter(id, { description: desc });
+    setCharacters(prev => prev.map(c => c._id === id ? updated : c));
   };
 
   return (
@@ -65,6 +70,7 @@ const ProfilePage = () => {
               editLabel="Увійти"
               onEdit={() => handleSelect(char._id)}
               onDelete={() => handleDelete(char._id)}
+              onSaveDescription={handleSaveDescription}
             />
           ))
         )}

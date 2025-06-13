@@ -43,3 +43,23 @@ export const deleteCharacter = async (id) => {
   });
   return res.json();
 };
+
+export const updateCharacter = async (id, data) => {
+  const headers = getAuthHeaders();
+  let body;
+  if (data.image instanceof File) {
+    body = new FormData();
+    Object.keys(data).forEach(key => {
+      if (data[key] !== undefined) body.append(key, data[key]);
+    });
+  } else {
+    headers['Content-Type'] = 'application/json';
+    body = JSON.stringify(data);
+  }
+  const res = await fetch(`${API_URL}/character/${id}`, {
+    method: 'PUT',
+    headers,
+    body,
+  });
+  return res.json();
+};
