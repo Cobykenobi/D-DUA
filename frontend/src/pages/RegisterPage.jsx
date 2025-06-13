@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 function RegisterPage() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [username, setUsername] = useState("");
   const { showToast } = useToast();
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ function RegisterPage() {
       await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, {
         login,
         password,
+        username,
       });
 
       const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, {
@@ -50,6 +52,14 @@ function RegisterPage() {
           placeholder="Логін"
           value={login}
           onChange={(e) => setLogin(e.target.value)}
+          className="w-full border rounded px-3 py-2 mb-3"
+          required
+        />
+        <input
+          type="text"
+          placeholder="Ім'я користувача"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
           className="w-full border rounded px-3 py-2 mb-3"
           required
         />
