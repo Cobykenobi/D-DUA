@@ -117,3 +117,7 @@ Each class begins with a predefined set of equipment which can be supplemented b
 const inventory = generateInventory('Orc', 'Warrior');
 // => ['Меч', 'Щит', 'Шкіряна броня', 'Зілля здоров’я', 'Кістяний талісман']
 ```
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
