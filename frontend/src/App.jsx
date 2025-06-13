@@ -8,7 +8,7 @@ import LobbyPage from './pages/LobbyPage';
 import AdminPage from './pages/AdminPage';
 import AdminInventoryPage from './pages/admin/AdminInventoryPage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
-import GameTablePage from '../pages/GameTablePage';
+import GameTablePage from './pages/GameTablePage';
 
 const isAuthenticated = () => !!localStorage.getItem('token');
 
