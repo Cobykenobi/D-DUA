@@ -2,10 +2,8 @@ const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 const getAuthHeaders = () => {
   const token = localStorage.getItem('token');
-  return {
-    'Content-Type': 'application/json',
-    Authorization: `Bearer ${token}`,
-  };
+  const headers = { Authorization: `Bearer ${token}` };
+  return headers;
 };
 
 export const getCharacters = async () => {
@@ -16,10 +14,21 @@ export const getCharacters = async () => {
 };
 
 export const createCharacter = async (data) => {
+  const headers = getAuthHeaders();
+  let body;
+  if (data.image instanceof File) {
+    body = new FormData();
+    Object.keys(data).forEach(key => {
+      if (data[key] !== undefined) body.append(key, data[key]);
+    });
+  } else {
+    headers['Content-Type'] = 'application/json';
+    body = JSON.stringify(data);
+  }
   const res = await fetch(`${API_URL}/character`, {
     method: 'POST',
-    headers: getAuthHeaders(),
-    body: JSON.stringify(data),
+    headers,
+    body,
   });
   return res.json();
 };

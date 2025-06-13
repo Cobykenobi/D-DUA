@@ -8,6 +8,7 @@ export default function CharacterEditPage() {
   const [character, setCharacter] = useState(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [image, setImage] = useState(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -26,7 +27,19 @@ export default function CharacterEditPage() {
     setError("");
     try {
 
-      await api.put(`/character/${id}`, { name, description });
+      let payload;
+      let headers;
+      if (image) {
+        payload = new FormData();
+        payload.append('name', name);
+        payload.append('description', description);
+        payload.append('image', image);
+        headers = { 'Content-Type': 'multipart/form-data' };
+      } else {
+        payload = { name, description };
+        headers = { 'Content-Type': 'application/json' };
+      }
+      await api.put(`/character/${id}`, payload, { headers });
       navigate("/characters");
     } catch (err) {
       setError("Не вдалося зберегти зміни");
@@ -49,6 +62,11 @@ export default function CharacterEditPage() {
         value={description}
         onChange={e => setDescription(e.target.value)}
         placeholder="Опис"
+      />
+      <input
+        type="file"
+        accept="image/*"
+        onChange={e => setImage(e.target.files[0])}
       />
       <button type="submit">Зберегти</button>
     </form>

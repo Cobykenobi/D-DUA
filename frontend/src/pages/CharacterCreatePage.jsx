@@ -6,6 +6,7 @@ import LogoutButton from "../components/LogoutButton";
 export default function CharacterCreatePage() {
   const navigate = useNavigate();
   const [form, setForm] = useState({ name: "", description: "" });
+  const [image, setImage] = useState(null);
   const [error, setError] = useState(null);
 
   const handleChange = (e) => {
@@ -19,8 +20,19 @@ export default function CharacterCreatePage() {
         return;
       }
 
-      const payload = { name: form.name, description: form.description };
-      await api.post("/character", payload);
+      let payload;
+      let headers;
+      if (image) {
+        payload = new FormData();
+        payload.append('name', form.name);
+        payload.append('description', form.description);
+        payload.append('image', image);
+        headers = { 'Content-Type': 'multipart/form-data' };
+      } else {
+        payload = { name: form.name, description: form.description };
+        headers = { 'Content-Type': 'application/json' };
+      }
+      await api.post("/character", payload, { headers });
       navigate("/profile");
     } catch (err) {
       console.error(err);
@@ -54,6 +66,12 @@ export default function CharacterCreatePage() {
           value={form.description}
           onChange={handleChange}
           className="w-full mb-4 px-3 py-2 rounded bg-[#2d1a10] border border-dndgold text-white"
+        />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={e => setImage(e.target.files[0])}
+          className="mb-4"
         />
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <button

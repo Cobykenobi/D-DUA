@@ -49,4 +49,27 @@ describe('Character Controller - create', () => {
       message: 'Missing races or professions to create character'
     });
   });
+
+  it('uses uploaded avatar when file provided', async () => {
+    Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Elf' }]);
+    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Mage' }]);
+
+    let saved;
+    Character.mockImplementation(data => {
+      saved = data;
+      return { save: jest.fn().mockResolvedValue(data) };
+    });
+
+    const req = {
+      user: { id: 'u1' },
+      body: { name: 'Hero', description: '' },
+      file: { filename: 'avatar.png' }
+    };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+    await characterController.create(req, res);
+
+    expect(saved.image).toBe('/uploads/avatars/avatar.png');
+    expect(res.status).toHaveBeenCalledWith(201);
+  });
 });
