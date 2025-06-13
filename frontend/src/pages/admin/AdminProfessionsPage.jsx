@@ -29,6 +29,15 @@ export default function AdminProfessionsPage() {
     fetchProfessions();
   };
 
+  const saveProfession = async (id, data) => {
+    await api.put(`/profession/${id}`, data, { headers: { Authorization: `Bearer ${token}` } });
+    fetchProfessions();
+  };
+
+  const handleProfessionChange = (id, field, value) => {
+    setProfessions(profs => profs.map(p => p._id === id ? { ...p, [field]: value } : p));
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-dndbg p-4">
       <div className="bg-[#322018]/90 p-8 rounded-2xl shadow-dnd w-full max-w-xl">
@@ -49,18 +58,54 @@ export default function AdminProfessionsPage() {
           />
           <button type="submit" className="bg-dndgold text-dndred font-dnd rounded-2xl px-4 py-2">Додати</button>
         </form>
-        {loading ? <div className="text-center text-dndgold">Завантаження...</div> : (
-          <ul className="divide-y divide-dndgold/20">
-            {professions.map(p => (
-              <li key={p._id} className="flex justify-between items-center py-2">
-                <div>
-                  <div className="font-dnd text-dndgold">{p.name}</div>
-                  {p.description && <div className="text-xs text-dndgold/80">{p.description}</div>}
-                </div>
-                <button onClick={() => removeProfession(p._id)} className="text-dndred hover:underline ml-2">Видалити</button>
-              </li>
-            ))}
-          </ul>
+        {loading ? (
+          <div className="text-center text-dndgold">Завантаження...</div>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="min-w-full text-dndgold divide-y divide-dndgold/20">
+              <thead>
+                <tr className="text-left">
+                  <th className="py-2">Назва</th>
+                  <th className="py-2">Опис</th>
+                  <th className="py-2 w-24">Дії</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-dndgold/20">
+                {professions.map(p => (
+                  <tr key={p._id} className="align-top">
+                    <td className="py-1 pr-2">
+                      <input
+                        className="w-full rounded-lg px-2 py-1 bg-[#2c1a12] border border-dndgold text-dndgold"
+                        value={p.name}
+                        onChange={e => handleProfessionChange(p._id, 'name', e.target.value)}
+                      />
+                    </td>
+                    <td className="py-1 pr-2">
+                      <input
+                        className="w-full rounded-lg px-2 py-1 bg-[#2c1a12] border border-dndgold text-dndgold"
+                        value={p.description || ''}
+                        onChange={e => handleProfessionChange(p._id, 'description', e.target.value)}
+                      />
+                    </td>
+                    <td className="py-1 flex gap-2">
+                      <button
+                        onClick={() => saveProfession(p._id, { name: p.name, description: p.description })}
+                        className="bg-dndgold text-dndred font-dnd rounded-2xl px-2 py-1"
+                      >
+                        Зберегти
+                      </button>
+                      <button
+                        onClick={() => removeProfession(p._id)}
+                        className="text-dndred hover:underline"
+                      >
+                        Видалити
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
         <Link to="/admin" className="block text-dndgold underline mt-6 text-center">← Назад</Link>
       </div>

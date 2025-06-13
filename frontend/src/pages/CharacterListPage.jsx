@@ -17,7 +17,7 @@ export default function CharacterListPage() {
         {characters.map(c => (
           <div key={c._id} className="bg-[#1c120a]/80 p-4 rounded-xl shadow-lg border border-dndgold">
             <h2 className="text-xl text-dndgold">{c.name}</h2>
-            <p className="text-sm italic mb-2">{c.description}</p>
+            <p className="text-base italic mb-2">{c.description}</p>
             <p className="text-xs">Раса: {c.race?.name || "—"}</p>
             <p className="text-xs">Клас: {c.profession?.name || "—"}</p>
             <button

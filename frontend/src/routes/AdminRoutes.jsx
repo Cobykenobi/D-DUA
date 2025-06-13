@@ -4,6 +4,7 @@ import {
   AdminCharacteristicsPage,
   AdminMapsPage,
   AdminMusicPage,
+  AdminInventoryPage,
 } from '../pages/admin';
 
 export default function AdminRoutes() {
@@ -14,6 +15,7 @@ export default function AdminRoutes() {
       <Route path="characteristics" element={<AdminCharacteristicsPage />} />
       <Route path="maps" element={<AdminMapsPage />} />
       <Route path="music" element={<AdminMusicPage />} />
+      <Route path="inventory/:characterId" element={<AdminInventoryPage />} />
     </Routes>
   );
 }
