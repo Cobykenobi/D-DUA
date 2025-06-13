@@ -6,7 +6,7 @@ import PlayerCard from "../components/PlayerCard";
 import MusicPlayer from "../components/MusicPlayer";
 import { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { useUserStore } from '../store/user'
 
 // socket connection URL configurable via env
@@ -15,6 +15,8 @@ const socket = io(import.meta.env.VITE_SOCKET_URL);
 export default function GameTablePage() {
   const { user } = useUserStore();
   const { tableId } = useParams();
+  const [searchParams] = useSearchParams();
+  const characterId = searchParams.get('char');
   const [players, setPlayers] = useState([]);
   const [gm, setGm] = useState(null);
   const [monsters, setMonsters] = useState([]);
@@ -26,7 +28,7 @@ export default function GameTablePage() {
 
   // SOCKET.IO підключення
   useEffect(() => {
-    socket.emit("join-table", { tableId, user });
+    socket.emit("join-table", { tableId, user, characterId });
     socket.on("table-players", data => {
       setPlayers(data.players || []);
       setGm(data.gm || null);
@@ -39,7 +41,7 @@ export default function GameTablePage() {
     socket.on("chat-history", setMessages);
     socket.on("chat-message", msg => setMessages(m => [...m, msg]));
     return () => socket.disconnect();
-  }, [tableId, user]);
+  }, [tableId, user, characterId]);
 
   // Кубики
   const rollDice = (type = "d20") => {
@@ -78,7 +80,7 @@ export default function GameTablePage() {
         {/* Ліва панель: твій персонаж і монстри */}
         <div className="w-1/6 p-2">
           {myPlayer
-            ? <PlayerCard character={myPlayer} />
+            ? <PlayerCard character={myPlayer.character} />
             : (
               <div className="bg-[#25160f]/80 rounded-2xl p-4 mb-4 text-dndgold">
                 <div className="text-lg font-bold mb-2">Твій персонаж</div>
