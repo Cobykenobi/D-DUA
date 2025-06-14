@@ -20,8 +20,19 @@ function LoginPage() {
   const setUser = useUserStore((s) => s.setUser);
 
   useEffect(() => {
-    // Wake the backend in case it was idle
-    api.get("/ping").catch(() => {});
+    // Wake the backend in case it was idle. Retry a few times before giving up.
+    let attempts = 0;
+    const ping = () => {
+      api.get("/ping").catch(() => {
+        if (attempts < 2) {
+          attempts++;
+          setTimeout(ping, 1000);
+        } else {
+          showToast("Failed to connect to server", "error");
+        }
+      });
+    };
+    ping();
   }, []);
 
   const handleSubmit = async (e) => {
