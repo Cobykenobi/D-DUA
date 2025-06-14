@@ -107,14 +107,14 @@ export default function GameTablePage() {
               <ChatComponent tableId={tableId} user={user} messages={messages} socket={socket} />
               <MusicPlayer isGM={isGM} />
               <GMPanel tableId={tableId} socket={socket} players={players} />
-              <DiceBox />
+              <DiceBox className="self-end" />
             </>
           ) : (
             <>
               <div className="md:w-72 w-full">
                 <ChatComponent tableId={tableId} user={user} messages={messages} socket={socket} />
               </div>
-              <DiceBox />
+              <DiceBox className="self-end" />
             </>
           )}
         </div>
