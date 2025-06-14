@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const raceController = require('../controllers/raceController');
-const auth = require('../middleware/authMiddleware');
+const auth = require('../middlewares/authMiddleware');
 
 // Тільки для майстра або адміна
 const onlyMaster = (req, res, next) => {
