@@ -1,13 +1,21 @@
 import api from "../api/axios";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom'
 import LogoutButton from "../components/LogoutButton";
+import { getRaces, getProfessions } from '../utils/api';
 
 export default function CharacterCreatePage() {
   const navigate = useNavigate();
   const [form, setForm] = useState({ name: "" });
   const [image, setImage] = useState(null);
   const [error, setError] = useState(null);
+  const [races, setRaces] = useState([]);
+  const [professions, setProfessions] = useState([]);
+
+  useEffect(() => {
+    getRaces().then(setRaces).catch(() => {});
+    getProfessions().then(setProfessions).catch(() => {});
+  }, []);
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -65,6 +73,16 @@ export default function CharacterCreatePage() {
           onChange={e => setImage(e.target.files[0])}
           className="mb-4"
         />
+        {races.length > 0 && (
+          <div className="mb-2 text-sm text-dndgold">
+            Доступні раси: {races.map(r => r.name).join(', ')}
+          </div>
+        )}
+        {professions.length > 0 && (
+          <div className="mb-4 text-sm text-dndgold">
+            Доступні класи: {professions.map(p => p.name).join(', ')}
+          </div>
+        )}
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <button
           onClick={handleSubmit}
