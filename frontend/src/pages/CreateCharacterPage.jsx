@@ -1,12 +1,14 @@
-
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createCharacter } from '../utils/api';
+
 import { useToast } from '../context/ToastContext';
+ main
 
 const CreateCharacterPage = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
   const { showToast } = useToast();
 
@@ -18,7 +20,9 @@ const CreateCharacterPage = () => {
         navigate('/lobby?char=' + newChar._id);
       }
     } catch (err) {
-      showToast(err.message || 'Помилка створення персонажа', 'error');
+
+      setError(err.message || 'Помилка створення персонажа');
+ main
     }
   };
 
@@ -38,6 +42,7 @@ const CreateCharacterPage = () => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
+        {error && <p style={{ color: 'red' }}>{error}</p>}
         <button type="submit">Створити</button>
       </form>
     </div>

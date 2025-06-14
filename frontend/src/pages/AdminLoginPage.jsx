@@ -13,12 +13,13 @@ function AdminLoginPage() {
   const navigate = useNavigate();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [serverReady, setServerReady] = useState(false);
   const setUser = useUserStore((s) => s.setUser);
 
   useEffect(() => {
     let attempts = 0;
     const ping = () => {
-      api.get('/ping').catch(() => {
+      api.get('/ping').then(() => setServerReady(true)).catch(() => {
         if (attempts < 2) {
           attempts++;
           setTimeout(ping, 1000);
@@ -31,12 +32,12 @@ function AdminLoginPage() {
   }, []);
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     setError(null);
     if (!login || !password) {
       showToast(t('fields_required'), 'error');
       return;
     }
-    e.preventDefault();
     setError('');
     setLoading(true);
     try {
@@ -59,6 +60,11 @@ function AdminLoginPage() {
         <h1 className="text-3xl font-dnd mb-4">Admin Login</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           {error && <div className="text-red-400">{error}</div>}
+
+          {!serverReady && (
+            <div className="text-yellow-300">Connecting to server...</div>
+          )}
+ main
           <input
             className="p-2 rounded bg-[#3c2a20] text-white placeholder:text-gray-300"
             placeholder="Login"
@@ -76,7 +82,7 @@ function AdminLoginPage() {
           />
           <button
             type="submit"
-            disabled={loading}
+            disabled={!serverReady || loading}
             className="bg-red-700 hover:bg-red-800 rounded py-2 text-white font-bold transition active:scale-95 disabled:opacity-50"
           >
             {loading ? 'Вхід...' : t('login')}
