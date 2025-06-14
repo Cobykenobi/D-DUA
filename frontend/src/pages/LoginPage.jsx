@@ -68,18 +68,20 @@ function LoginPage() {
             Увійти
           </button>
         </form>
-        <Link
-          to="/admin/login"
-          className="mt-4 inline-block bg-red-700 hover:bg-red-800 rounded py-2 text-white font-bold"
-        >
-          Адмінка
-        </Link>
-        <Link
-          to="/register"
-          className="mt-4 inline-block text-dndgold underline text-sm"
-        >
-          Нова легенда?
-        </Link>
+        <div className="mt-4 flex justify-center gap-4">
+          <Link
+            to="/admin/login"
+            className="bg-red-700 hover:bg-red-800 rounded py-2 px-4 text-white font-bold"
+          >
+            Адмінка
+          </Link>
+          <Link
+            to="/register"
+            className="bg-red-700 hover:bg-red-800 rounded py-2 px-4 text-white font-bold"
+          >
+            Реєстрація
+          </Link>
+        </div>
       </div>
     </div>
   );
