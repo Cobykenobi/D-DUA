@@ -23,11 +23,6 @@ exports.create = async (req, res) => {
     const { name, description, image } = req.body;
     const uploaded = req.file ? `/uploads/avatars/${req.file.filename}` : null;
 
-    // Дефолтні аватари
-
-    const defaultAvatars = [
-      "/avatars/1.png"
-    ];
 
     // Обрати рандомно расу, професію і базові стати з колекції
   let race = await Race.aggregate([{ $sample: { size: 1 } }]);
@@ -54,10 +49,7 @@ exports.create = async (req, res) => {
  
 
     // Логіка вибору аватара
-    const avatar = uploaded ||
-      ((image && image.trim())
-        ? image
-        : defaultAvatars[Math.floor(Math.random() * defaultAvatars.length)]);
+    const avatar = uploaded || (image && image.trim() ? image : '');
 
     const inventory = generateInventory(race[0].name, profession[0].name);
 
