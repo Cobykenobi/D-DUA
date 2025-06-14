@@ -4,7 +4,6 @@ import api from '../api/axios';
 import { useUserStore } from '../store/user';
 
 export default function MusicPlayer({ isGM }) {
-  const { token } = useUserStore();
   const [tracks, setTracks] = useState([]);
   const [current, setCurrent] = useState(null);
   const [volume, setVolume] = useState(() => {

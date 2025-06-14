@@ -1,10 +1,7 @@
 import api from '../../api/axios';
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'
-import { useUserStore } from '../../store/user'
-
 export default function AdminMapsPage() {
-  const { token } = useUserStore();
   const [maps, setMaps] = useState([]);
   const [name, setName] = useState('');
   const [file, setFile] = useState(null);
@@ -13,7 +10,7 @@ export default function AdminMapsPage() {
 
   const fetchMaps = async () => {
     setLoading(true);
-    const res = await api.get('/map', { headers: { Authorization: `Bearer ${token}` } });
+    const res = await api.get('/map');
     setMaps(res.data);
     setLoading(false);
   };
@@ -26,13 +23,13 @@ export default function AdminMapsPage() {
     formData.append('name', name);
     formData.append('image', file);
     await api.post('/map', formData, {
-      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data' },
+      headers: { 'Content-Type': 'multipart/form-data' },
     });
     setName(''); setFile(null); fileInput.current.value = null; fetchMaps();
   };
 
   const removeMap = async (id) => {
-    await api.delete(`/map/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+    await api.delete(`/map/${id}`);
     fetchMaps();
   };
 

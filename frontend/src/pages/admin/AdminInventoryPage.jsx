@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import api from '../../api/axios';
-import { useUserStore } from '../../store/user';
 import InventoryEditor from '../../components/InventoryEditor';
 
 export default function AdminInventoryPage() {
   const { characterId } = useParams();
-  const { token } = useUserStore();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -14,9 +12,7 @@ export default function AdminInventoryPage() {
     const fetchInventory = async () => {
       setLoading(true);
       try {
-        const res = await api.get(`/inventory/${characterId}`, {
-          headers: { Authorization: `Bearer ${token}` }
-        });
+        const res = await api.get(`/inventory/${characterId}`);
         const data = res.data?.items || [];
         setItems(data.map(it => it.name || it.item || it));
       } catch (err) {
@@ -25,13 +21,12 @@ export default function AdminInventoryPage() {
       setLoading(false);
     };
     fetchInventory();
-  }, [characterId, token]);
+  }, [characterId]);
 
   const handleSave = async () => {
     await api.put(
       `/inventory/${characterId}`,
-      { items: items.map(name => ({ name })) },
-      { headers: { Authorization: `Bearer ${token}` } }
+      { items: items.map(name => ({ name })) }
     );
     alert('Збережено');
   };
