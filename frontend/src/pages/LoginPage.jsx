@@ -63,7 +63,7 @@ function LoginPage() {
           />
           <button
             type="submit"
-            className="bg-red-700 hover:bg-red-800 rounded py-2 text-white font-bold"
+            className="bg-red-700 hover:bg-red-800 rounded py-2 text-white font-bold transition active:scale-95"
           >
             Увійти
           </button>
@@ -71,13 +71,13 @@ function LoginPage() {
         <div className="mt-4 flex justify-center gap-4">
           <Link
             to="/admin/login"
-            className="bg-red-700 hover:bg-red-800 rounded py-2 px-4 text-white font-bold"
+            className="bg-red-700 hover:bg-red-800 rounded py-2 px-4 text-white font-bold transition active:scale-95"
           >
             Адмінка
           </Link>
           <Link
             to="/register"
-            className="bg-red-700 hover:bg-red-800 rounded py-2 px-4 text-white font-bold"
+            className="bg-red-700 hover:bg-red-800 rounded py-2 px-4 text-white font-bold transition active:scale-95"
           >
             Реєстрація
           </Link>

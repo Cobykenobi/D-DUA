@@ -44,7 +44,7 @@ export default function CharacterCreatePage() {
       <div className="absolute top-4 right-4 flex gap-2">
         <button
           onClick={() => navigate('/profile')}
-          className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-4 py-2 transition"
+          className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-4 py-2 transition active:scale-95"
         >
           Назад
         </button>
@@ -68,7 +68,7 @@ export default function CharacterCreatePage() {
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <button
           onClick={handleSubmit}
-          className="w-full bg-red-800 hover:bg-red-700 text-white py-2 rounded font-semibold transition"
+          className="w-full bg-red-800 hover:bg-red-700 text-white py-2 rounded font-semibold transition active:scale-95"
         >
           Створити
         </button>

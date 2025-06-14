@@ -73,7 +73,7 @@ export default function LobbyPage() {
       <div className="absolute top-4 right-4 flex gap-2">
         <button
           onClick={() => navigate('/profile')}
-          className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-4 py-2 transition"
+          className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-4 py-2 transition active:scale-95"
         >
           Назад
         </button>
@@ -126,8 +126,8 @@ export default function LobbyPage() {
         </ul>
         {isGM && (
           <button
-            className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-6 py-2 mt-6 transition"
-            onClick={startGame}
+          className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-6 py-2 mt-6 transition active:scale-95"
+          onClick={startGame}
           >
             Розпочати гру!
           </button>

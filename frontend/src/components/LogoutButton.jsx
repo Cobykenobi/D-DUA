@@ -13,7 +13,7 @@ function LogoutButton() {
   return (
     <button
       onClick={handleLogout}
-      className="bg-dndred hover:bg-dndgold text-white hover:text-dndred font-dnd rounded-2xl px-4 py-2 transition"
+      className="bg-dndred hover:bg-dndgold text-white hover:text-dndred font-dnd rounded-2xl px-4 py-2 transition active:scale-95"
     >
       Вийти
     </button>

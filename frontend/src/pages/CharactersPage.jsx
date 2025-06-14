@@ -10,7 +10,7 @@ export default function CharactersPage() {
       <div className="border border-dndgold p-4 rounded">
         {/* Тут буде список персонажів */}
         <p>Список персонажів поки порожній.</p>
-        <button className="mt-4 px-4 py-2 bg-dndred text-white rounded hover:bg-dndgold hover:text-dndred transition">
+        <button className="mt-4 px-4 py-2 bg-dndred text-white rounded hover:bg-dndgold hover:text-dndred transition active:scale-95">
           Створити нового
         </button>
       </div>

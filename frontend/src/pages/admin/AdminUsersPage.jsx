@@ -53,7 +53,7 @@ export default function AdminUsersPage() {
                     <td className="py-1">
                       <button
                         onClick={() => toggleRole(user._id, user.role)}
-                        className="bg-dndgold text-dndred font-dnd rounded-2xl px-2 py-1"
+                        className="bg-dndgold text-dndred font-dnd rounded-2xl px-2 py-1 transition active:scale-95"
                       >
                         Змінити
                       </button>
