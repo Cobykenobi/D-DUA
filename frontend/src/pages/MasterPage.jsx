@@ -11,7 +11,7 @@ import {
   getSessionLog,
 } from "../api/adminActions";
 
-export default function AdminPage() {
+export default function MasterPage() {
   const [videoId, setVideoId] = useState(null);
   const [races, setRaces] = useState([]);
   const [log, setLog] = useState([]);
