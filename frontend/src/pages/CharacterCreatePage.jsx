@@ -1,8 +1,7 @@
-import api from "../api/axios";
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import LogoutButton from "../components/LogoutButton";
-import { getRaces, getProfessions } from '../utils/api';
+import { createCharacter, getRaces, getProfessions } from '../utils/api';
 
 export default function CharacterCreatePage() {
   const navigate = useNavigate();
@@ -28,22 +27,14 @@ export default function CharacterCreatePage() {
         return;
       }
 
-      let payload;
-      let headers;
-      if (image) {
-        payload = new FormData();
-        payload.append('name', form.name);
-        payload.append('image', image);
-        headers = { 'Content-Type': 'multipart/form-data' };
-      } else {
-        payload = { name: form.name };
-        headers = { 'Content-Type': 'application/json' };
-      }
-      await api.post("/character", payload, { headers });
+      const payload = { name: form.name };
+      if (image) payload.image = image;
+
+      await createCharacter(payload);
       navigate("/profile");
     } catch (err) {
       console.error(err);
-      setError("Помилка створення персонажа");
+      setError(err.message || "Помилка створення персонажа");
     }
   };
 
