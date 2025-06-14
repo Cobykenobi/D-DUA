@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AdminCard from "../components/AdminCard";
+import { useNavigate } from "react-router-dom";
 import {
   setMusic,
   createRace,
@@ -15,6 +16,7 @@ export default function MasterPage() {
   const [videoId, setVideoId] = useState(null);
   const [races, setRaces] = useState([]);
   const [log, setLog] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getRaces().then((res) => {
@@ -90,6 +92,7 @@ export default function MasterPage() {
         <AdminCard title="Встановити музику" onClick={handleSetMusic} />
         <AdminCard title="Створити нову расу" onClick={handleCreateRace} />
         <AdminCard title="Завантажити карту" onClick={handleUploadMap} />
+        <AdminCard title="Користувачі" onClick={() => navigate('/master/users')} />
         <AdminCard title="Запустити сесію" onClick={handleStartSession} />
         <AdminCard title="Завершити сесію" onClick={handleEndSession} />
       </div>
