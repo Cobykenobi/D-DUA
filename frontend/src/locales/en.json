@@ -4,25 +4,25 @@
   "register": "Register",
   "fields_required": "Please fill in all fields",
   "races": {
-    "Human": "Human",
-    "Elf": "Elf",
-    "Orc": "Orc",
-    "Gnome": "Gnome",
-    "Dwarf": "Dwarf",
-    "Halfling": "Halfling",
-    "Demon": "Demon",
-    "Beastkin": "Beastkin",
-    "Angel": "Angel",
-    "Lizardman": "Lizardman"
+    "human": "Human",
+    "elf": "Elf",
+    "orc": "Orc",
+    "gnome": "Gnome",
+    "dwarf": "Dwarf",
+    "halfling": "Halfling",
+    "demon": "Demon",
+    "beastkin": "Beastkin",
+    "angel": "Angel",
+    "lizardman": "Lizardman"
   },
   "classes": {
-    "Warrior": "Warrior",
-    "Mage": "Mage",
-    "Rogue": "Rogue",
-    "Healer": "Healer",
-    "Ranger": "Ranger",
-    "Bard": "Bard",
-    "Paladin": "Paladin"
+    "warrior": "Warrior",
+    "mage": "Mage",
+    "rogue": "Rogue",
+    "healer": "Healer",
+    "ranger": "Ranger",
+    "bard": "Bard",
+    "paladin": "Paladin"
   },
   "stats": {
     "STR": "Strength",

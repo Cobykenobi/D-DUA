@@ -10,7 +10,8 @@ const generateInventory = require('../utils/generateInventory');
 exports.getAllByUser = async (req, res) => {
   try {
     const characters = await Character.find({ user: req.user.id })
-      .populate('race profession');
+      .populate('race', 'name code')
+      .populate('profession', 'name code');
     res.json(characters);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -103,7 +104,8 @@ exports.create = async (req, res) => {
 exports.getOne = async (req, res) => {
   try {
     const char = await Character.findOne({ _id: req.params.id, user: req.user.id })
-      .populate('race profession');
+      .populate('race', 'name code')
+      .populate('profession', 'name code');
     if (!char) return res.status(404).json({ message: 'Not found' });
     res.json(char);
   } catch (err) {
