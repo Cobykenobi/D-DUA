@@ -87,17 +87,20 @@ export default function LobbyPage() {
         <div className="text-dndgold mb-4">Гравці:</div>
         <ul>
           {players.map(pl => (
-
-            <li key={pl._id} className="text-dndgold">
-              {pl.name}
-              {pl.race && (
-                <> – {t('races.' + pl.race) || pl.race}</>
+            <li key={pl.user} className="text-dndgold">
+              {pl.character ? (
+                <>
+                  {pl.character.name}
+                  {pl.character.race && (
+                    <> – {t('races.' + (pl.character.race?.name || '')) || pl.character.race?.name}</>
+                  )}
+                  {pl.character.profession && (
+                    <> / {t('classes.' + (pl.character.profession?.name || '')) || pl.character.profession?.name}</>
+                  )}
+                </>
+              ) : (
+                <>{t('Без персонажа')}</>
               )}
-              {pl.class && (
-                <> / {t('classes.' + pl.class) || pl.class}</>
-              )}
-              {pl.role === 'gm' ? ' (GM)' : ''}
- main
             </li>
           ))}
         </ul>
