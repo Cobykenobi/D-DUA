@@ -73,3 +73,48 @@ export const updateCharacter = async (id, data) => {
   });
   return res.json();
 };
+
+export const getRaces = async () => {
+  const res = await fetch(`${API_URL}/race`, {
+    headers: getAuthHeaders(),
+  });
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+  return res.json();
+};
+
+export const getProfessions = async () => {
+  const res = await fetch(`${API_URL}/profession`, {
+    headers: getAuthHeaders(),
+  });
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+  return res.json();
+};
+
+export const getInventory = async (characterId) => {
+  const res = await fetch(`${API_URL}/inventory/${characterId}`, {
+    headers: getAuthHeaders(),
+  });
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+  return res.json();
+};
+
+export const updateInventory = async (characterId, items) => {
+  const res = await fetch(`${API_URL}/inventory/${characterId}`, {
+    method: 'PUT',
+    headers: {
+      ...getAuthHeaders(),
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ items }),
+  });
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+  return res.json();
+};
