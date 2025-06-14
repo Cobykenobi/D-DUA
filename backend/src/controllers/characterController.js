@@ -58,7 +58,9 @@ exports.create = async (req, res) => {
     const inventory = await generateInventory(race[0].code, profession[0].code);
 
 
-    const newChar = new Character({
+
+  const newChar = new Character({
+ main
       user: req.user.id,
       name,
       description,
