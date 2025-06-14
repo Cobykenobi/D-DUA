@@ -43,6 +43,10 @@ export const createCharacter = async (data) => {
     headers,
     body,
   });
+  if (!res.ok) {
+    const msg = await res.text();
+    throw new Error(msg || res.statusText);
+  }
   return res.json();
 };
 

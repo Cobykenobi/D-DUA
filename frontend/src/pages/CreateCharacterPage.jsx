@@ -1,18 +1,24 @@
 
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
-import { createCharacter } from '../utils/api'
+import { useNavigate } from 'react-router-dom';
+import { createCharacter } from '../utils/api';
+import { useToast } from '../context/ToastContext';
 
 const CreateCharacterPage = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newChar = await createCharacter({ name, description });
-    if (newChar && newChar._id) {
-      navigate('/lobby?char=' + newChar._id);
+    try {
+      const newChar = await createCharacter({ name, description });
+      if (newChar && newChar._id) {
+        navigate('/lobby?char=' + newChar._id);
+      }
+    } catch (err) {
+      showToast(err.message || 'Помилка створення персонажа', 'error');
     }
   };
 
