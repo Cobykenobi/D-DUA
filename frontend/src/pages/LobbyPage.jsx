@@ -14,6 +14,7 @@ export default function LobbyPage() {
   const { user } = useUserStore();
   const [tableId, setTableId] = useState(null);
   const [players, setPlayers] = useState([]);
+  const [gm, setGm] = useState(null);
   const [character, setCharacter] = useState(null);
   const [isGM, setIsGM] = useState(user?.role === 'master');
   const [error, setError] = useState('');
@@ -40,15 +41,25 @@ export default function LobbyPage() {
     }
     setError('');
     socket.emit('join-lobby', { tableId, user, characterId: char });
-    socket.on('lobby-players', data => setPlayers(data.players));
-    socket.on('gm-assigned', () => setIsGM(true));
+    socket.on('lobby-players', data => {
+      setPlayers(data.players);
+      setGm(data.gm || null);
+      if (user) {
+        setIsGM(user.role === 'master' || (data.gm && data.gm.toString() === user._id));
+      }
+    });
+    socket.on('gm-assigned', () => {
+      setIsGM(true);
+      setGm(user?._id);
+    });
     socket.on('game-started', () => navigate(`/table/${tableId}`));
     return () => socket.disconnect();
   }, [tableId, user, char, navigate]);
 
   useEffect(() => {
-    if (user?.role === 'master') setIsGM(true);
-  }, [user]);
+    if (!user) return;
+    setIsGM(user.role === 'master' || (gm && gm.toString() === user._id));
+  }, [user, gm]);
 
   const startGame = () => {
     if (tableId) socket.emit('start-game', { tableId });
@@ -91,20 +102,25 @@ export default function LobbyPage() {
         <div className="text-dndgold mb-4">Гравці:</div>
         <ul>
           {players.map(pl => (
-            <li key={pl.user} className="text-dndgold">
-              {pl.character ? (
-                <>
-                  {pl.character.name}
-                  {pl.character.race && (
-                    <> – {t('races.' + (pl.character.race?.name || '')) || pl.character.race?.name}</>
-                  )}
-                  {pl.character.profession && (
-                    <> / {t('classes.' + (pl.character.profession?.name || '')) || pl.character.profession?.name}</>
-                  )}
-                </>
-              ) : (
-                <>{t('Без персонажа')}</>
-              )}
+            <li key={pl.user} className="text-dndgold mb-2">
+              <div className="font-bold">
+                {pl.name} {pl.user === gm && ' (Мастер)'}
+              </div>
+              <div className="ml-2">
+                {pl.character ? (
+                  <>
+                    {pl.character.name}
+                    {pl.character.race && (
+                      <> – {t('races.' + (pl.character.race?.name || '')) || pl.character.race?.name}</>
+                    )}
+                    {pl.character.profession && (
+                      <> / {t('classes.' + (pl.character.profession?.name || '')) || pl.character.profession?.name}</>
+                    )}
+                  </>
+                ) : (
+                  <>{t('Без персонажа')}</>
+                )}
+              </div>
             </li>
           ))}
         </ul>
