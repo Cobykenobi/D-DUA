@@ -1,23 +1,3 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
-
-const getAuthHeaders = () => {
-  const token = localStorage.getItem('token');
-  const headers = { Authorization: `Bearer ${token}` };
-  return headers;
-};
-
-export const getCharacters = async () => {
-  const res = await fetch(`${API_URL}/character`, {
-    headers: getAuthHeaders(),
-  });
-  if (!res.ok) {
-    throw new Error(res.statusText);
-  }
-  return res.json();
-};
-
-export const getCharacter = async (id) => {
-  const res = await fetch(`${API_URL}/character/${id}`, {
     headers: getAuthHeaders(),
   });
   if (!res.ok) {
@@ -43,7 +23,11 @@ export const createCharacter = async (data) => {
     headers,
     body,
   });
-  return res.json();
+  const result = await res.json();
+  if (!res.ok) {
+    throw new Error(result?.message || res.statusText);
+  }
+  return result;
 };
 
 export const deleteCharacter = async (id) => {
@@ -69,52 +53,3 @@ export const updateCharacter = async (id, data) => {
   const res = await fetch(`${API_URL}/character/${id}`, {
     method: 'PUT',
     headers,
-    body,
-  });
-  return res.json();
-};
-
-export const getRaces = async () => {
-  const res = await fetch(`${API_URL}/race`, {
-    headers: getAuthHeaders(),
-  });
-  if (!res.ok) {
-    throw new Error(res.statusText);
-  }
-  return res.json();
-};
-
-export const getProfessions = async () => {
-  const res = await fetch(`${API_URL}/profession`, {
-    headers: getAuthHeaders(),
-  });
-  if (!res.ok) {
-    throw new Error(res.statusText);
-  }
-  return res.json();
-};
-
-export const getInventory = async (characterId) => {
-  const res = await fetch(`${API_URL}/inventory/${characterId}`, {
-    headers: getAuthHeaders(),
-  });
-  if (!res.ok) {
-    throw new Error(res.statusText);
-  }
-  return res.json();
-};
-
-export const updateInventory = async (characterId, items) => {
-  const res = await fetch(`${API_URL}/inventory/${characterId}`, {
-    method: 'PUT',
-    headers: {
-      ...getAuthHeaders(),
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ items }),
-  });
-  if (!res.ok) {
-    throw new Error(res.statusText);
-  }
-  return res.json();
-};
