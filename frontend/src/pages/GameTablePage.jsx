@@ -38,7 +38,7 @@ export default function GameTablePage() {
     return () => socket.disconnect();
   }, [tableId, user, characterId]);
 
-  const isGM = gm && user && gm.toString() === user._id;
+  const isGM = (user?.role === 'master') || (gm && user && gm.toString() === user._id);
 
 
   return (

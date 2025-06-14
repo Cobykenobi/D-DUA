@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 function RegisterPage() {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState('player');
   const { showToast } = useToast();
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ function RegisterPage() {
         login,
         password,
         username: login,
+        role,
       });
 
       const response = await api.post("/auth/login", {
@@ -62,6 +64,14 @@ function RegisterPage() {
             className="p-2 rounded bg-[#3c2a20] text-white placeholder:text-gray-300"
             required
           />
+          <select
+            value={role}
+            onChange={(e) => setRole(e.target.value)}
+            className="p-2 rounded bg-[#3c2a20] text-white"
+          >
+            <option value="player">Гравець</option>
+            <option value="master">Майстер</option>
+          </select>
           <button
             type="submit"
             className="bg-red-700 hover:bg-red-800 rounded py-2 text-white font-bold"
