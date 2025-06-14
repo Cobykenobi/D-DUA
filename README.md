@@ -5,9 +5,10 @@ This project combines an Express/MongoDB backend with a React frontend.
 ## Setup
 
 1. **Install dependencies**
+   Run the helper script to install packages in both subprojects:
+
    ```bash
-   cd backend && npm install
-   cd ../frontend && npm install
+   ./setup.sh
    ```
 
 2. **Environment variables**
@@ -85,12 +86,12 @@ npm start
 
 ## Running tests
 
-The backend uses **Jest** for its test suite. After installing dependencies you
-can run the tests with:
+Both the backend and frontend use **Jest**. Ensure dependencies are installed in
+each directory (run `./setup.sh` if you haven't already) and then execute:
 
 ```bash
-cd backend
-npm test
+cd backend && npm test
+cd ../frontend && npm test
 ```
 
 ## Linting and formatting
