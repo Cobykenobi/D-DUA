@@ -1,6 +1,7 @@
 import ReactPlayer from 'react-player';
 import { useState, useEffect } from 'react';
 import api from '../api/axios';
+import { useUserStore } from '../store/user';
 
 export default function MusicPlayer({ isGM }) {
   const { token } = useUserStore();
