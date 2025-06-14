@@ -5,7 +5,7 @@ import { useUserStore } from '../store/user';
 import { useState } from 'react';
 import api from "../api/axios";
 
-function MasterLoginPage() {
+function AdminLoginPage() {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const { showToast } = useToast();
@@ -25,7 +25,7 @@ function MasterLoginPage() {
     try {
       const res = await api.post('/admin/auth', { login, password });
       setUser(res.data.user, res.data.token);
-      navigate('/master');
+      navigate('/admin');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
     }
@@ -37,7 +37,7 @@ function MasterLoginPage() {
       style={{ backgroundImage: `url('/map-bg.jpg')` }}
     >
       <div className="bg-[#2d1d14]/90 p-8 rounded-lg shadow-lg w-full max-w-md text-center text-white">
-        <h1 className="text-3xl font-dnd mb-4">Master Login</h1>
+        <h1 className="text-3xl font-dnd mb-4">Admin Login</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           {error && <div className="text-red-400">{error}</div>}
           <input
@@ -67,4 +67,4 @@ function MasterLoginPage() {
   );
 }
 
-export default MasterLoginPage;
+export default AdminLoginPage;
