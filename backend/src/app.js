@@ -53,6 +53,8 @@ app.use('/api/session', require('./routes/session'));
 app.use('/api/user', require('./routes/user'));
 
 app.use('/api/ai', require('./routes/ai'));
+// Simple ping route used to wake the server
+app.use('/api/ping', require('./routes/ping'));
 
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
