@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useToast } from '../context/ToastContext';
 import { useTranslation } from 'react-i18next';
 import { useUserStore } from '../store/user';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import api from "../api/axios";
 
 function AdminLoginPage() {
@@ -12,7 +12,12 @@ function AdminLoginPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const setUser = useUserStore((s) => s.setUser);
+
+  useEffect(() => {
+    api.get('/ping').catch(() => {});
+  }, []);
 
   const handleSubmit = async (e) => {
     setError(null);
@@ -22,12 +27,15 @@ function AdminLoginPage() {
     }
     e.preventDefault();
     setError('');
+    setLoading(true);
     try {
       const res = await api.post('/admin/auth', { login, password });
       setUser(res.data.user, res.data.token);
       navigate('/admin');
     } catch (err) {
       setError(err.response?.data?.message || 'Login failed');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -57,9 +65,10 @@ function AdminLoginPage() {
           />
           <button
             type="submit"
-            className="bg-red-700 hover:bg-red-800 rounded py-2 text-white font-bold transition active:scale-95"
+            disabled={loading}
+            className="bg-red-700 hover:bg-red-800 rounded py-2 text-white font-bold transition active:scale-95 disabled:opacity-50"
           >
-            {t('login')}
+            {loading ? 'Вхід...' : t('login')}
           </button>
         </form>
       </div>
