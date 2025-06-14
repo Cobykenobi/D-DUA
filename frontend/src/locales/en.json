@@ -3,6 +3,7 @@
   "login": "Login",
   "register": "Register",
   "fields_required": "Please fill in all fields",
+  "connecting": "Connecting...",
   "races": {
     "human": "Human",
     "elf": "Elf",

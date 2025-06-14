@@ -67,9 +67,11 @@ function LoginPage() {
         <h1 className="text-3xl font-dnd mb-4">Ласкаво просимо до D&D 5051</h1>
               <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           {error && <div className="text-red-400">{error}</div>}
+
           {!serverReady && (
             <div className="text-yellow-300">Connecting to server...</div>
           )}
+ main
           <input
             className="p-2 rounded bg-[#3c2a20] text-white placeholder:text-gray-300"
             placeholder="Кодове ім’я"
