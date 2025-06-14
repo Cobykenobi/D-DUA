@@ -18,21 +18,23 @@ export default function ChatComponent({ tableId, user, messages, socket }) {
   };
 
   return (
-    <div className="flex flex-col h-full">
-      <div className="flex-1 overflow-y-auto bg-[#20100a]/70 p-2 rounded-xl mb-2" style={{ maxHeight: 350 }}>
-        {messages.map((m, i) => (
-          <div key={i}><b>{m.user}:</b> {m.text}</div>
-        ))}
-        <div ref={chatEnd} />
+    <div className="border border-dndgold rounded-2xl p-2 bg-[#25160f]/80">
+      <div className="flex flex-col h-full">
+        <div className="flex-1 max-h-60 overflow-y-auto bg-[#20100a]/70 p-2 rounded-xl mb-2">
+          {messages.map((m, i) => (
+            <div key={i}><b>{m.user}:</b> {m.text}</div>
+          ))}
+          <div ref={chatEnd} />
+        </div>
+        <form onSubmit={send}>
+          <input
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            className="rounded-xl w-full px-2 py-1"
+            placeholder="Ваше повідомлення..."
+          />
+        </form>
       </div>
-      <form onSubmit={send}>
-        <input
-          value={input}
-          onChange={e => setInput(e.target.value)}
-          className="rounded-xl w-full px-2 py-1"
-          placeholder="Ваше повідомлення..."
-        />
-      </form>
     </div>
   );
 }
