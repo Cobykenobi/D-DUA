@@ -2,15 +2,18 @@ const characterController = require('../src/controllers/characterController');
 const Race = require('../src/models/Race');
 const Profession = require('../src/models/Profession');
 const Character = require('../src/models/Character');
+const StartingSet = require('../src/models/StartingSet');
 
 jest.mock('../src/models/Race');
 jest.mock('../src/models/Profession');
 jest.mock('../src/models/Character');
+jest.mock('../src/models/StartingSet');
 
 describe('Character Controller - create', () => {
   it('applies race bonuses and class minimums', async () => {
     Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Elf' }]);
     Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Mage' }]);
+    StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
 
     let saved;
     Character.mockImplementation(data => {
@@ -38,6 +41,7 @@ describe('Character Controller - create', () => {
     Race.find.mockReturnValue({ limit: jest.fn().mockResolvedValue([]) });
     Profession.aggregate.mockResolvedValue([]);
     Profession.find.mockReturnValue({ limit: jest.fn().mockResolvedValue([]) });
+    StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([]) });
 
     const req = { user: { id: 'u1' }, body: { name: 'Hero', description: '', image: '' } };
     const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
@@ -53,6 +57,7 @@ describe('Character Controller - create', () => {
   it('uses uploaded avatar when file provided', async () => {
     Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Elf' }]);
     Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Mage' }]);
+    StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
 
     let saved;
     Character.mockImplementation(data => {
