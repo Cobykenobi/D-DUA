@@ -9,6 +9,8 @@ const Item = require('../src/models/Item');
 const StartingSet = require('../src/models/StartingSet');
 const bcrypt = require('bcrypt');
 
+const slug = str => str.toLowerCase().replace(/\s+/g, '_');
+
 const MONGO_URI = process.env.MONGO_URI;
 
 if (!MONGO_URI) {
@@ -77,7 +79,7 @@ async function seed() {
   ];
 
   const classInventory = {
-    Warrior: {
+    warrior: {
       weapon: [
         { item: 'Меч', bonus: { STR: 2 } },
         { item: 'Сокира', bonus: { STR: 2 } }
@@ -90,7 +92,7 @@ async function seed() {
         { item: 'Зілля здоров’я' }
       ]
     },
-    Mage: {
+    mage: {
       weapon: [
         { item: 'Магічний посох', bonus: { INT: 2 } },
         { item: 'Чарівна паличка', bonus: { INT: 1 } }
@@ -104,7 +106,7 @@ async function seed() {
         { item: 'Книга заклять' }
       ]
     },
-    Rogue: {
+    rogue: {
       weapon: [
         { item: 'Кинджал', bonus: { DEX: 1 } },
         { item: 'Короткий меч', bonus: { DEX: 1 } }
@@ -117,7 +119,7 @@ async function seed() {
         { item: 'Відмички' }
       ]
     },
-    Healer: {
+    healer: {
       weapon: [
         { item: 'Жезл лікування', bonus: { CHA: 1 } },
         { item: 'Священний посох', bonus: { CHA: 1 } }
@@ -130,7 +132,7 @@ async function seed() {
         { item: 'Зілля лікування' }
       ]
     },
-    Ranger: {
+    ranger: {
       weapon: [
         { item: 'Лук', bonus: { DEX: 1 } },
         { item: 'Арбалет', bonus: { DEX: 1 } }
@@ -143,7 +145,7 @@ async function seed() {
         { item: 'Колчан стріл' }
       ]
     },
-    Bard: {
+    bard: {
       weapon: [
         { item: 'Лютня', bonus: { CHA: 1 } },
         { item: 'Легкий меч', bonus: { DEX: 1 } }
@@ -154,7 +156,7 @@ async function seed() {
       ],
       misc: []
     },
-    Paladin: {
+    paladin: {
       weapon: [
         { item: 'Молот', bonus: { STR: 1 } },
         { item: 'Святий меч', bonus: { STR: 2 } }
@@ -183,12 +185,16 @@ async function seed() {
   };
 
   if (await Race.countDocuments() === 0) {
-    await Race.insertMany(races);
+
+    await Race.insertMany(races.map(name => ({ name, code: slug(name) })));
+ main
     console.log('Races seeded');
   }
 
   if (await Profession.countDocuments() === 0) {
-    await Profession.insertMany(professions);
+
+    await Profession.insertMany(professions.map(name => ({ name, code: slug(name) })));
+ main
     console.log('Professions seeded');
   }
 

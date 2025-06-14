@@ -45,7 +45,7 @@ describe('generateInventory', () => {
 
   it('returns empty array for unknown inputs', async () => {
     StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([]) });
-    const items = await generateInventory('Unknown', 'Unknown');
+    const items = await generateInventory('unknown', 'unknown');
     expect(items).toEqual([]);
   });
 });
