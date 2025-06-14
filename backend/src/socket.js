@@ -37,7 +37,7 @@ function init(httpServer) {
         if (characterId) {
           character = await Character.findById(characterId)
             .populate('race profession')
-            .select('name image race profession')
+            .select('name image race profession stats inventory description')
             .lean();
         }
         player = { user: user._id, character, online: true };
@@ -47,7 +47,7 @@ function init(httpServer) {
         if (characterId && !player.character) {
           player.character = await Character.findById(characterId)
             .populate('race profession')
-            .select('name image race profession')
+            .select('name image race profession stats inventory description')
             .lean();
         }
       }
@@ -76,7 +76,7 @@ function init(httpServer) {
         if (characterId) {
           character = await Character.findById(characterId)
             .populate('race profession')
-            .select('name image race profession')
+            .select('name image race profession stats inventory description')
             .lean();
         }
         player = { user: user._id, character, online: true };
@@ -86,7 +86,7 @@ function init(httpServer) {
         if (characterId && !player.character) {
           player.character = await Character.findById(characterId)
             .populate('race profession')
-            .select('name image race profession')
+            .select('name image race profession stats inventory description')
             .lean();
         }
       }
