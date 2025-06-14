@@ -1,5 +1,6 @@
 // backend/models/StartingSet.js
 const mongoose = require('mongoose');
+require('./Item');
 
 const startingSetSchema = new mongoose.Schema({
   classCode: { type: String, required: true },
