@@ -44,7 +44,7 @@ const ProfilePage = () => {
       <div className="absolute top-4 right-4 flex gap-2">
         <button
           onClick={() => navigate('/login')}
-          className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-4 py-2 transition"
+          className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-4 py-2 transition active:scale-95"
         >
           Назад
         </button>
@@ -53,7 +53,7 @@ const ProfilePage = () => {
       <h2 className="text-2xl mb-4 text-shadow">Твої персонажі</h2>
       <button
         onClick={handleCreate}
-        className="bg-dndgold text-dndred rounded-2xl px-4 py-2 font-semibold mb-6"
+        className="bg-dndgold text-dndred rounded-2xl px-4 py-2 font-semibold mb-6 transition active:scale-95"
       >
         Створити нового
       </button>

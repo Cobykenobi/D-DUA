@@ -53,7 +53,7 @@ export default function AdminProfessionsPage() {
             value={description}
             onChange={e => setDescription(e.target.value)}
           />
-          <button type="submit" className="bg-dndgold text-dndred font-dnd rounded-2xl px-4 py-2">Додати</button>
+          <button type="submit" className="bg-dndgold text-dndred font-dnd rounded-2xl px-4 py-2 transition active:scale-95">Додати</button>
         </form>
         {loading ? (
           <div className="text-center text-dndgold">Завантаження...</div>
@@ -87,7 +87,7 @@ export default function AdminProfessionsPage() {
                     <td className="py-1 flex gap-2">
                       <button
                         onClick={() => saveProfession(p._id, { name: p.name, description: p.description })}
-                        className="bg-dndgold text-dndred font-dnd rounded-2xl px-2 py-1"
+                        className="bg-dndgold text-dndred font-dnd rounded-2xl px-2 py-1 transition active:scale-95"
                       >
                         Зберегти
                       </button>

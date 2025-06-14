@@ -57,7 +57,7 @@ function AdminLoginPage() {
           />
           <button
             type="submit"
-            className="bg-red-700 hover:bg-red-800 rounded py-2 text-white font-bold"
+            className="bg-red-700 hover:bg-red-800 rounded py-2 text-white font-bold transition active:scale-95"
           >
             {t('login')}
           </button>

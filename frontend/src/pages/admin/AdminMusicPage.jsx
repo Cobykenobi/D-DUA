@@ -46,7 +46,7 @@ export default function AdminMusicPage() {
             onChange={e => setUrl(e.target.value)}
             required
           />
-          <button type="submit" className="bg-dndgold text-dndred font-dnd rounded-2xl px-4 py-2">Додати</button>
+          <button type="submit" className="bg-dndgold text-dndred font-dnd rounded-2xl px-4 py-2 transition active:scale-95">Додати</button>
         </form>
         {loading ? <div className="text-center text-dndgold">Завантаження...</div> : (
           <ul className="divide-y divide-dndgold/20 max-h-64 overflow-y-auto">
