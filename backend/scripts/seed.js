@@ -187,14 +187,12 @@ async function seed() {
   if (await Race.countDocuments() === 0) {
 
     await Race.insertMany(races.map(name => ({ name, code: slug(name) })));
- main
     console.log('Races seeded');
   }
 
   if (await Profession.countDocuments() === 0) {
 
     await Profession.insertMany(professions.map(name => ({ name, code: slug(name) })));
- main
     console.log('Professions seeded');
   }
 
