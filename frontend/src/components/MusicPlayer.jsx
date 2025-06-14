@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import api from '../api/axios';
 import { useUserStore } from '../store/user';
 
-export default function MusicPlayer({ isGM }) {
+export default function MusicPlayer({ isGM, className = '' }) {
   const [tracks, setTracks] = useState([]);
   const [current, setCurrent] = useState(null);
   const [volume, setVolume] = useState(() => {
@@ -55,7 +55,7 @@ export default function MusicPlayer({ isGM }) {
   };
 
   return (
-    <div className="bg-[#25160f]/80 rounded-2xl p-4 mb-4 text-dndgold">
+    <div className={`bg-[#25160f]/80 rounded-2xl p-4 mb-4 text-dndgold ${className}`}>
       <div className="font-dnd text-xl mb-2">Музика</div>
       {current && (
         <ReactPlayer url={current.url} playing controls={true} volume={volume} width="100%" height="50px" />

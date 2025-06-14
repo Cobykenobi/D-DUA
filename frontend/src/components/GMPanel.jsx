@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 
-export default function GMPanel({ tableId, socket, players }) {
+export default function GMPanel({ tableId, socket, players, className = '' }) {
   const [monsterName, setMonsterName] = useState("");
   const [mapUrl, setMapUrl] = useState("");
   const [initiativeList, setInitiativeList] = useState([]);
@@ -34,7 +34,7 @@ export default function GMPanel({ tableId, socket, players }) {
   };
 
   return (
-    <div className="bg-[#25160f]/80 rounded-2xl p-4 mb-2 mt-4 text-center">
+    <div className={`bg-[#25160f]/80 rounded-2xl p-4 mb-2 mt-4 text-center ${className}`}>
       <div className="text-dndgold text-xl font-bold mb-2">GM-панель</div>
       {/* Додавання монстра */}
       <div className="mb-2">
