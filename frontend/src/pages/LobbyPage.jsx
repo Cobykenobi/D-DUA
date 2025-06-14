@@ -125,7 +125,10 @@ export default function LobbyPage() {
           ))}
         </ul>
         {isGM && (
-          <button className="bg-dndgold mt-6 rounded-2xl px-6 py-2 font-dnd" onClick={startGame}>
+          <button
+            className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-6 py-2 mt-6 transition"
+            onClick={startGame}
+          >
             Розпочати гру!
           </button>
         )}
