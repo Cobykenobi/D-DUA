@@ -7,7 +7,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 // Реєстрація
 exports.register = async (req, res) => {
   try {
-    const { login, password, username } = req.body;
+    const { login, password, username, role } = req.body;
     if (!login || !password) {
       return res.status(400).json({ message: "Login and password are required" });
     }
@@ -21,7 +21,12 @@ exports.register = async (req, res) => {
     }
 
     const hash = await bcrypt.hash(password, 10);
-    const user = new User({ login, password: hash, username: finalUsername });
+    const user = new User({
+      login,
+      password: hash,
+      username: finalUsername,
+      role: role === 'master' ? 'master' : 'player',
+    });
     await user.save();
 
     res.status(201).json({

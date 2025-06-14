@@ -15,7 +15,7 @@ export default function LobbyPage() {
   const [tableId, setTableId] = useState(null);
   const [players, setPlayers] = useState([]);
   const [character, setCharacter] = useState(null);
-  const [isGM, setIsGM] = useState(false);
+  const [isGM, setIsGM] = useState(user?.role === 'master');
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -45,6 +45,10 @@ export default function LobbyPage() {
     socket.on('game-started', () => navigate(`/table/${tableId}`));
     return () => socket.disconnect();
   }, [tableId, user, char, navigate]);
+
+  useEffect(() => {
+    if (user?.role === 'master') setIsGM(true);
+  }, [user]);
 
   const startGame = () => {
     if (tableId) socket.emit('start-game', { tableId });

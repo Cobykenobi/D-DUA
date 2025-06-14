@@ -51,7 +51,7 @@ function init(httpServer) {
             .lean();
         }
       }
-      if (!sess.gm) {
+      if (user.role === 'master' || !sess.gm) {
         sess.gm = user._id;
         socket.emit('gm-assigned');
       }
