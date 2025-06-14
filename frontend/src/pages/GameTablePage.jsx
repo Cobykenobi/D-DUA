@@ -10,7 +10,8 @@ import { useParams, useSearchParams } from 'react-router-dom'
 import { useUserStore } from '../store/user'
 
 // socket connection URL configurable via env
-const socket = io(import.meta.env.VITE_SOCKET_URL);
+// Fallback to localhost if env variable is missing
+const socket = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000');
 
 export default function GameTablePage() {
   const { user } = useUserStore();
