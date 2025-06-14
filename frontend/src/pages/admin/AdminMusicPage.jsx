@@ -1,10 +1,7 @@
 import api from '../../api/axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
-import { useUserStore } from '../../store/user'
-
 export default function AdminMusicPage() {
-  const { token } = useUserStore();
   const [tracks, setTracks] = useState([]);
   const [title, setTitle] = useState('');
   const [url, setUrl] = useState('');
@@ -12,7 +9,7 @@ export default function AdminMusicPage() {
 
   const fetchTracks = async () => {
     setLoading(true);
-    const res = await api.get('/music', { headers: { Authorization: `Bearer ${token}` } });
+    const res = await api.get('/music');
     setTracks(res.data);
     setLoading(false);
   };
@@ -21,12 +18,12 @@ export default function AdminMusicPage() {
   const addTrack = async (e) => {
     e.preventDefault();
     if (!title || !url) return;
-    await api.post('/music', { title, url }, { headers: { Authorization: `Bearer ${token}` } });
+    await api.post('/music', { title, url });
     setTitle(''); setUrl(''); fetchTracks();
   };
 
   const removeTrack = async (id) => {
-    await api.delete(`/music/${id}`, { headers: { Authorization: `Bearer ${token}` } });
+    await api.delete(`/music/${id}`);
     fetchTracks();
   };
 

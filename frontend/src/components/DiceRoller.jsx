@@ -6,7 +6,6 @@ const diceTypes = ["d20", "d12", "d10", "d8", "d6", "d4"];
 export default function DiceRoller({ sessionId, isMaster }) {
   const [rolling, setRolling] = useState(false);
   const [lastRoll, setLastRoll] = useState(null);
-  const { token } = useUserStore();
 
   const rollDice = async (diceType, isPrivate = false) => {
     setRolling(true);
