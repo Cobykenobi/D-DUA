@@ -97,20 +97,26 @@ export default function GameTablePage() {
             )}
           </div>
           <InitiativeList initiative={initiative} />
-          {isGM && (
-            <GMPanel tableId={tableId} socket={socket} players={players} />
-          )}
         </div>
-        {/* Чат та музика */}
+        {/* Нижня панель */}
         <div
-          className={`md:absolute md:bottom-4 ${isGM ? 'md:left-1/2 md:-translate-x-1/2' : 'md:left-4'} md:w-72 w-full flex flex-col gap-4 z-20 mt-4 md:mt-0`}
+          className={`md:absolute md:bottom-4 md:left-1/2 md:-translate-x-1/2 z-20 mt-4 md:mt-0 flex gap-4 ${isGM ? 'flex-col items-center md:w-72 w-full' : 'flex-row justify-center w-full'}`}
         >
-          {isGM && <MusicPlayer isGM={isGM} />}
-          <ChatComponent tableId={tableId} user={user} messages={messages} socket={socket} />
-        </div>
-        {/* Кубики */}
-        <div className="md:absolute md:bottom-4 md:right-4 z-10 mt-4 md:mt-0">
-          <DiceBox />
+          {isGM ? (
+            <>
+              <ChatComponent tableId={tableId} user={user} messages={messages} socket={socket} />
+              <MusicPlayer isGM={isGM} />
+              <GMPanel tableId={tableId} socket={socket} players={players} />
+              <DiceBox />
+            </>
+          ) : (
+            <>
+              <div className="md:w-72 w-full">
+                <ChatComponent tableId={tableId} user={user} messages={messages} socket={socket} />
+              </div>
+              <DiceBox />
+            </>
+          )}
         </div>
       </div>
       <div className="p-4 bg-[#322018]/90 text-center font-dnd text-dndgold rounded-b-2xl">
