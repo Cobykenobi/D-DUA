@@ -9,6 +9,8 @@ const Item = require('../src/models/Item');
 const StartingSet = require('../src/models/StartingSet');
 const bcrypt = require('bcrypt');
 
+const slug = str => str.toLowerCase().replace(/\s+/g, '_');
+
 const MONGO_URI = process.env.MONGO_URI;
 
 if (!MONGO_URI) {
@@ -77,7 +79,7 @@ async function seed() {
   ];
 
   const classInventory = {
-    Warrior: {
+    warrior: {
       weapon: [
         { item: 'Меч', bonus: { STR: 2 } },
         { item: 'Сокира', bonus: { STR: 2 } }
@@ -90,7 +92,7 @@ async function seed() {
         { item: 'Зілля здоров’я' }
       ]
     },
-    Mage: {
+    mage: {
       weapon: [
         { item: 'Магічний посох', bonus: { INT: 2 } },
         { item: 'Чарівна паличка', bonus: { INT: 1 } }
@@ -104,7 +106,7 @@ async function seed() {
         { item: 'Книга заклять' }
       ]
     },
-    Rogue: {
+    rogue: {
       weapon: [
         { item: 'Кинджал', bonus: { DEX: 1 } },
         { item: 'Короткий меч', bonus: { DEX: 1 } }
@@ -117,7 +119,7 @@ async function seed() {
         { item: 'Відмички' }
       ]
     },
-    Healer: {
+    healer: {
       weapon: [
         { item: 'Жезл лікування', bonus: { CHA: 1 } },
         { item: 'Священний посох', bonus: { CHA: 1 } }
@@ -130,7 +132,7 @@ async function seed() {
         { item: 'Зілля лікування' }
       ]
     },
-    Ranger: {
+    ranger: {
       weapon: [
         { item: 'Лук', bonus: { DEX: 1 } },
         { item: 'Арбалет', bonus: { DEX: 1 } }
@@ -143,7 +145,7 @@ async function seed() {
         { item: 'Колчан стріл' }
       ]
     },
-    Bard: {
+    bard: {
       weapon: [
         { item: 'Лютня', bonus: { CHA: 1 } },
         { item: 'Легкий меч', bonus: { DEX: 1 } }
@@ -154,7 +156,7 @@ async function seed() {
       ],
       misc: []
     },
-    Paladin: {
+    paladin: {
       weapon: [
         { item: 'Молот', bonus: { STR: 1 } },
         { item: 'Святий меч', bonus: { STR: 2 } }
@@ -170,25 +172,25 @@ async function seed() {
   };
 
   const raceInventory = {
-    Elf: [{ item: 'Ельфійські стріли', bonus: { DEX: 1 } }],
-    Orc: [{ item: 'Кістяний талісман', bonus: { STR: 1 } }],
-    Human: [{ item: 'Монета удачі', bonus: { CHA: 1 } }],
-    Gnome: [{ item: 'Гвинтовий ключ' }],
-    Dwarf: [{ item: 'Похідна кружка', bonus: { CON: 1 } }],
-    Halfling: [{ item: 'Трубка та тютюн', bonus: { CHA: 1 } }],
-    Demon: [{ item: 'Темний камінь', bonus: { INT: 1 } }],
-    Beastkin: [{ item: 'Кігтістий амулет', bonus: { DEX: 1 } }],
-    Angel: [{ item: 'Пір’я з крила', bonus: { CHA: 1 } }],
-    Lizardman: [{ item: 'Луска пращура', bonus: { CON: 1 } }]
+    elf: [{ item: 'Ельфійські стріли', bonus: { DEX: 1 } }],
+    orc: [{ item: 'Кістяний талісман', bonus: { STR: 1 } }],
+    human: [{ item: 'Монета удачі', bonus: { CHA: 1 } }],
+    gnome: [{ item: 'Гвинтовий ключ' }],
+    dwarf: [{ item: 'Похідна кружка', bonus: { CON: 1 } }],
+    halfling: [{ item: 'Трубка та тютюн', bonus: { CHA: 1 } }],
+    demon: [{ item: 'Темний камінь', bonus: { INT: 1 } }],
+    beastkin: [{ item: 'Кігтістий амулет', bonus: { DEX: 1 } }],
+    angel: [{ item: 'Пір’я з крила', bonus: { CHA: 1 } }],
+    lizardman: [{ item: 'Луска пращура', bonus: { CON: 1 } }]
   };
 
   if (await Race.countDocuments() === 0) {
-    await Race.insertMany(races.map(name => ({ name })));
+    await Race.insertMany(races.map(name => ({ name, code: slug(name) })));
     console.log('Races seeded');
   }
 
   if (await Profession.countDocuments() === 0) {
-    await Profession.insertMany(professions.map(name => ({ name })));
+    await Profession.insertMany(professions.map(name => ({ name, code: slug(name) })));
     console.log('Professions seeded');
   }
 

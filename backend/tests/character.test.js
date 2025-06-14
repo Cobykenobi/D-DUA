@@ -11,8 +11,8 @@ jest.mock('../src/models/StartingSet');
 
 describe('Character Controller - create', () => {
   it('applies race bonuses and class minimums', async () => {
-    Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Elf' }]);
-    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Mage' }]);
+    Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Elf', code: 'elf' }]);
+    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Mage', code: 'mage' }]);
     StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
 
     let saved;
@@ -55,8 +55,8 @@ describe('Character Controller - create', () => {
   });
 
   it('uses uploaded avatar when file provided', async () => {
-    Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Elf' }]);
-    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Mage' }]);
+    Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Elf', code: 'elf' }]);
+    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Mage', code: 'mage' }]);
     StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
 
     let saved;
