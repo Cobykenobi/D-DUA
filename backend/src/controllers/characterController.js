@@ -94,7 +94,11 @@ exports.create = async (req, res) => {
     });
 
     await newChar.save();
-    res.status(201).json(newChar);
+
+    const populated = await Character.findById(newChar._id)
+      .populate('race', 'name code')
+      .populate('profession', 'name code');
+    res.status(201).json(populated);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -129,7 +133,11 @@ exports.update = async (req, res) => {
       { new: true }
     );
     if (!char) return res.status(404).json({ message: 'Not found' });
-    res.json(char);
+
+    const populated = await Character.findById(char._id)
+      .populate('race', 'name code')
+      .populate('profession', 'name code');
+    res.json(populated);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

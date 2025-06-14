@@ -15,6 +15,9 @@ beforeEach(() => {
   jest.clearAllMocks();
   generateInventory.mockResolvedValue([]);
   jest.spyOn(console, 'warn').mockImplementation(() => {});
+  const q = Promise.resolve({ _id: 'c1', race: { name: 'Elf', code: 'elf' }, profession: { name: 'Mage', code: 'mage' } });
+  q.populate = jest.fn().mockReturnValue(q);
+  Character.findById = jest.fn(() => q);
 });
 
 afterEach(() => {
