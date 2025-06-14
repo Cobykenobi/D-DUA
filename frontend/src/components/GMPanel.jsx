@@ -44,7 +44,7 @@ export default function GMPanel({ tableId, socket, players }) {
           onChange={e => setMonsterName(e.target.value)}
           placeholder="Ім'я монстра"
         />
-        <button className="bg-dndgold px-4 py-2 rounded-xl" onClick={addMonster}>Додати монстра</button>
+        <button className="bg-dndgold text-dndred font-dnd px-4 py-2 rounded-xl" onClick={addMonster}>Додати монстра</button>
       </div>
       {/* Кік гравців */}
       <div className="mb-2">
@@ -54,13 +54,13 @@ export default function GMPanel({ tableId, socket, players }) {
       </div>
       {/* Ініціатива */}
       <div className="mb-2">
-        <button className="bg-dndgold px-4 py-2 rounded-xl" onClick={handleInitiativeInput}>Згенерувати ініціативу</button>
-        <button className="bg-dndgold px-4 py-2 rounded-xl ml-2" onClick={startInitiative}>Почати ініціативу</button>
+        <button className="bg-dndgold text-dndred font-dnd px-4 py-2 rounded-xl" onClick={handleInitiativeInput}>Згенерувати ініціативу</button>
+        <button className="bg-dndgold text-dndred font-dnd px-4 py-2 rounded-xl ml-2" onClick={startInitiative}>Почати ініціативу</button>
       </div>
       {/* Оновити карту */}
       <div>
         <input className="rounded px-2 py-1 mr-2" value={mapUrl} onChange={e => setMapUrl(e.target.value)} placeholder="Посилання на карту" />
-        <button className="bg-dndgold px-4 py-2 rounded-xl" onClick={updateMap}>Оновити карту</button>
+        <button className="bg-dndgold text-dndred font-dnd px-4 py-2 rounded-xl" onClick={updateMap}>Оновити карту</button>
       </div>
     </div>
   );
