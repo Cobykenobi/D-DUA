@@ -4,10 +4,7 @@ const raceController = require('../controllers/raceController');
 const auth = require('../middleware/authMiddleware');
 
 // Тільки для майстра або адміна
-const onlyMaster = (req, res, next) => {
-  if (req.user && (req.user.role === 'master' || req.user.role === 'admin')) return next();
-  return res.status(403).json({ message: 'Forbidden' });
-};
+const onlyMaster = require('../middleware/onlyMaster');
 
 router.get('/', auth, raceController.getAll);
 router.post('/', auth, onlyMaster, raceController.create);
