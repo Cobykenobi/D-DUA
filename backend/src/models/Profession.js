@@ -5,7 +5,6 @@ const professionSchema = new mongoose.Schema({
 
   name: { type: String, required: true },
   code: { type: String, required: true, unique: true },
- main
   description: { type: String, default: '' },
 }, { timestamps: true });
 

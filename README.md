@@ -68,6 +68,17 @@ cd backend
 npm test
 ```
 
+## Linting and formatting
+
+ESLint and Prettier configuration live in the `backend` folder. You can lint and
+format the backend code with:
+
+```bash
+cd backend
+npm run lint
+npm run format
+```
+
 ## Character Basics
 
 Characters use five core statistics which start at **10** each:
