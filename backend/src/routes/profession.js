@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const professionController = require('../controllers/professionController');
-const auth = require('../middleware/authMiddleware');
+const auth = require('../middlewares/authMiddleware');
 
-const onlyMaster = require('../middleware/onlyMaster');
+const onlyMaster = require('../middlewares/onlyMaster');
 
 router.get('/', auth, professionController.getAll);
 router.post('/', auth, onlyMaster, professionController.create);
