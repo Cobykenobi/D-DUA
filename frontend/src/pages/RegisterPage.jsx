@@ -11,6 +11,7 @@ function RegisterPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [username, setUsername] = useState("");
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -20,7 +21,7 @@ function RegisterPage() {
       await api.post("/auth/register", {
         login,
         password,
-        username: login,
+        username,
       });
 
       const response = await api.post("/auth/login", {
@@ -78,7 +79,6 @@ function RegisterPage() {
           </button>
         </form>
       </div>
- main
     </div>
   );
 }
