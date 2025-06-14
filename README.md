@@ -15,7 +15,6 @@ This project combines an Express/MongoDB backend with a React frontend.
    Copy `backend/.env.example` to `backend/.env` and adjust the values:
    - `MONGO_URI` – MongoDB connection string
    - `JWT_SECRET` – secret used for signing tokens
-   - `OPENAI_API_KEY` – API key for generating images and descriptions
    - `PORT` – optional server port (defaults to `5000`)
    - `CLIENT_URL` – allowed origin(s) for CORS. Set this to the URL of your frontend (comma separated to allow multiple, e.g. `http://localhost:5173,https://example.com`).
 
@@ -47,7 +46,7 @@ cd backend
 npm run dev
 ```
 
-The backend automatically creates `uploads/` and `uploads/maps/` directories for uploaded files and exposes them from the `/uploads` path.
+The backend automatically creates `uploads/` and `uploads/maps/` directories for uploaded files and exposes them from the `/uploads` path. Preset avatars are served from `/avatars`.
 
 ### Frontend
 
