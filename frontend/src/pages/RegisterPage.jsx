@@ -11,7 +11,6 @@ function RegisterPage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [error, setError] = useState("");
-  const [username, setUsername] = useState("");
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -21,7 +20,7 @@ function RegisterPage() {
       await api.post("/auth/register", {
         login,
         password,
-        username,
+        username: login,
       });
 
       const response = await api.post("/auth/login", {
@@ -52,14 +51,6 @@ function RegisterPage() {
             placeholder="Логін"
             value={login}
             onChange={(e) => setLogin(e.target.value)}
-            className="p-2 rounded bg-[#3c2a20] text-white placeholder:text-gray-300"
-            required
-          />
-          <input
-            type="text"
-            placeholder="Ім'я користувача"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
             className="p-2 rounded bg-[#3c2a20] text-white placeholder:text-gray-300"
             required
           />
