@@ -51,7 +51,7 @@ exports.create = async (req, res) => {
     // Логіка вибору аватара
     const avatar = uploaded || (image && image.trim() ? image : '');
 
-    const inventory = generateInventory(race[0].name, profession[0].name);
+    const inventory = await generateInventory(race[0].name, profession[0].name);
 
     const newChar = new Character({
       user: req.user.id,

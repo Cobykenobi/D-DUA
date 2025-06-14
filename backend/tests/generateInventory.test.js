@@ -1,14 +1,21 @@
+const StartingSet = require('../src/models/StartingSet');
+jest.mock('../src/models/StartingSet');
+
 const generateInventory = require('../src/utils/generateInventory');
 
 describe('generateInventory', () => {
-  it('selects random items for each category', () => {
-    jest
-      .spyOn(Math, 'random')
-      .mockReturnValueOnce(0)
-      .mockReturnValueOnce(0.9)
-      .mockReturnValueOnce(0);
+  const sets = [
+    { items: [ { name: 'Меч' }, { name: 'Щит' }, { name: 'Зілля здоров’я' } ] },
+    { items: [ { name: 'Меч' }, { name: 'Шкіряна броня' }, { name: 'Зілля здоров’я' } ] },
+    { items: [ { name: 'Сокира' }, { name: 'Щит' }, { name: 'Зілля здоров’я' } ] },
+    { items: [ { name: 'Сокира' }, { name: 'Шкіряна броня' }, { name: 'Зілля здоров’я' } ] },
+  ];
 
-    const items = generateInventory('Orc', 'Warrior');
+  it('selects random items for each category', async () => {
+    StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue(sets) });
+    jest.spyOn(Math, 'random').mockReturnValueOnce(0.3);
+
+    const items = await generateInventory('Orc', 'Warrior');
     Math.random.mockRestore();
 
     const names = items.map(i => i.item);
@@ -20,14 +27,11 @@ describe('generateInventory', () => {
     ]);
   });
 
-  it('mixes items across sets', () => {
-    jest
-      .spyOn(Math, 'random')
-      .mockReturnValueOnce(0.9)
-      .mockReturnValueOnce(0)
-      .mockReturnValueOnce(0);
+  it('mixes items across sets', async () => {
+    StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue(sets) });
+    jest.spyOn(Math, 'random').mockReturnValueOnce(0.6);
 
-    const items = generateInventory('Orc', 'Warrior');
+    const items = await generateInventory('Orc', 'Warrior');
     Math.random.mockRestore();
 
     const names = items.map(i => i.item);
@@ -39,8 +43,9 @@ describe('generateInventory', () => {
     ]);
   });
 
-  it('returns empty array for unknown inputs', () => {
-    const items = generateInventory('Unknown', 'Unknown');
+  it('returns empty array for unknown inputs', async () => {
+    StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([]) });
+    const items = await generateInventory('Unknown', 'Unknown');
     expect(items).toEqual([]);
   });
 });
