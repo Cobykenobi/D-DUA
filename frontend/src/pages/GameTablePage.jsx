@@ -4,12 +4,11 @@ import ChatComponent from "../components/ChatComponent";
 import PlayerCard from "../components/PlayerCard";
 import MusicPlayer from "../components/MusicPlayer";
 import DiceBox from "../components/DiceBox";
-import BrightnessControl from "../components/BrightnessControl";
-import { useSettings } from "../context/SettingsContext";
+import LogoutButton from "../components/LogoutButton";
 import { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
-import { useParams, useSearchParams } from 'react-router-dom'
-import { useUserStore } from '../store/user'
+import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
+import { useUserStore } from '../store/user';
 
 // socket connection URL configurable via env
 // Fallback to localhost if env variable is missing
@@ -17,7 +16,7 @@ const socket = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000');
 
 export default function GameTablePage() {
   const { user } = useUserStore();
-  const { brightness, setBrightness, volume, setVolume } = useSettings();
+  const navigate = useNavigate();
   const { tableId } = useParams();
   const [searchParams] = useSearchParams();
   const characterId = searchParams.get('char');
@@ -48,32 +47,32 @@ export default function GameTablePage() {
 
 
   return (
-    <div style={{
-      minHeight: "100vh",
-      backgroundImage: `url('/nd-bg.png')`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      backgroundAttachment: "fixed",
-      fontFamily: "'IM Fell English SC', serif"
-    }}>
+    <div
+      style={{
+        minHeight: "100vh",
+        backgroundImage: `url('/nd-bg.png')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundAttachment: "fixed",
+        fontFamily: "'IM Fell English SC', serif"
+      }}
+      className="relative"
+    >
+      <div className="absolute top-4 right-4 flex gap-2 z-20">
+        <button
+          onClick={() => navigate(`/lobby?tableId=${tableId}${characterId ? `&char=${characterId}` : ''}`)}
+          className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-4 py-2 transition active:scale-95"
+        >
+          Назад
+        </button>
+        <LogoutButton />
+      </div>
       <div className="relative flex justify-between items-center p-4 bg-[#322018]/90 rounded-t-2xl">
         <div className="font-dnd text-dndgold">{user?.login}</div>
         <div className="font-dnd text-dndgold text-2xl tracking-widest text-center flex-1">
           D&D Online Tabletop
         </div>
         <div className="font-dnd text-dndgold">Стiл: {tableId}</div>
-        <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-4 bg-[#25160f]/80 p-2 rounded-lg">
-          <input
-            type="range"
-            min={0}
-            max={1}
-            step={0.1}
-            value={volume}
-            onChange={e => setVolume(parseFloat(e.target.value))}
-            className="w-24"
-          />
-          <BrightnessControl value={brightness * 100} onChange={v => setBrightness(v / 100)} />
-        </div>
       </div>
       <div className="relative flex-1 h-[80vh] bg-[#1b110a]/80 rounded-b-2xl px-6 pb-4 overflow-hidden">
         {/* Ліві слоти гравців */}
@@ -89,7 +88,7 @@ export default function GameTablePage() {
           ))}
         </div>
         {/* Центральна зона столу */}
-        <div className="flex flex-col items-center justify-center h-full z-0">
+        <div className="flex flex-col items-center justify-center h-full z-0 md:mx-60">
           <div className="w-full h-[40vh] flex items-center justify-center rounded-2xl shadow-dnd bg-[#160b06]/90 mb-4 border-2 border-dndgold">
             {map ? (
               <img src={map} alt="Map" className="max-h-full max-w-full rounded-xl" />
@@ -103,9 +102,11 @@ export default function GameTablePage() {
           )}
         </div>
         {/* Чат та музика */}
-        <div className="md:absolute md:bottom-4 md:left-4 md:w-72 w-full flex flex-col gap-4 z-20 mt-4 md:mt-0">
+        <div
+          className={`md:absolute md:bottom-4 ${isGM ? 'md:left-1/2 md:-translate-x-1/2' : 'md:left-4'} md:w-72 w-full flex flex-col gap-4 z-20 mt-4 md:mt-0`}
+        >
+          {isGM && <MusicPlayer isGM={isGM} />}
           <ChatComponent tableId={tableId} user={user} messages={messages} socket={socket} />
-          <MusicPlayer isGM={isGM} />
         </div>
         {/* Кубики */}
         <div className="md:absolute md:bottom-4 md:right-4 z-10 mt-4 md:mt-0">
