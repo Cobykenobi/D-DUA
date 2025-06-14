@@ -7,6 +7,7 @@ import CharacterCreatePage from './pages/CharacterCreatePage';
 import LobbyPage from './pages/LobbyPage';
 import MasterPage from './pages/MasterPage';
 import AdminInventoryPage from './pages/admin/AdminInventoryPage';
+import AdminUsersPage from './pages/admin/AdminUsersPage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
 import GameTablePage from './pages/GameTablePage';
 import MasterLoginPage from './pages/MasterLoginPage';
@@ -32,6 +33,7 @@ const App = () => (
     <Route path="/lobby" element={isAuthenticated() ? <LobbyPage /> : <Navigate to="/login" />} />
     <Route path="/master" element={isAdmin() ? <MasterPage /> : <Navigate to="/master/login" />} />
     <Route path="/master/inventory/:characterId" element={isAdmin() ? <AdminInventoryPage /> : <Navigate to="/master/login" />} />
+    <Route path="/master/users" element={isAdmin() ? <AdminUsersPage /> : <Navigate to="/master/login" />} />
     <Route path="/change-password" element={isAuthenticated() ? <ChangePasswordPage /> : <Navigate to="/login" />} />
     <Route path="/table/:tableId" element={<GameTablePage />} />
     <Route path="*" element={<Navigate to="/" />} />

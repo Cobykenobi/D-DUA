@@ -15,3 +15,8 @@ export const deleteRace = (id) => api.delete(`/race/${id}`);
 
 // Карти
 export const uploadMap = (data) => api.post("/map", data);
+
+// Користувачі
+export const getUsers = () => api.get('/admin/users');
+export const updateUserRole = (id, role) =>
+  api.put(`/admin/users/${id}/role`, { role });
