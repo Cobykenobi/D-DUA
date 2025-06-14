@@ -23,11 +23,13 @@ export const createCharacter = async (data) => {
     headers,
     body,
   });
-  const result = await res.json();
+
   if (!res.ok) {
-    throw new Error(result?.message || res.statusText);
+    const msg = await res.text();
+    throw new Error(msg || res.statusText);
   }
-  return result;
+  return res.json();
+ main
 };
 
 export const deleteCharacter = async (id) => {

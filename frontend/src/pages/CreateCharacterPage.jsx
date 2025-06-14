@@ -2,11 +2,15 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createCharacter } from '../utils/api';
 
+import { useToast } from '../context/ToastContext';
+ main
+
 const CreateCharacterPage = () => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { showToast } = useToast();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,7 +20,9 @@ const CreateCharacterPage = () => {
         navigate('/lobby?char=' + newChar._id);
       }
     } catch (err) {
+
       setError(err.message || 'Помилка створення персонажа');
+ main
     }
   };
 
