@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const raceController = require('../controllers/raceController');
-const auth = require('../middlewares/authMiddleware');
+const auth = require('../middleware/authMiddleware');
 
 // Тільки для майстра або адміна
-const onlyMaster = require('../middlewares/onlyMaster');
+const onlyMaster = require('../middleware/onlyMaster');
 
 router.get('/', auth, raceController.getAll);
 router.post('/', auth, onlyMaster, raceController.create);

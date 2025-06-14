@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const characteristicController = require('../controllers/characteristicController');
-const auth = require('../middlewares/authMiddleware');
+const auth = require('../middleware/authMiddleware');
 
-const onlyMaster = require('../middlewares/onlyMaster');
+const onlyMaster = require('../middleware/onlyMaster');
 
 router.get('/', auth, characteristicController.getAll);
 router.post('/', auth, onlyMaster, characteristicController.create);
