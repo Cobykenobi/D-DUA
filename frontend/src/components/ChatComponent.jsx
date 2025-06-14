@@ -18,9 +18,9 @@ export default function ChatComponent({ tableId, user, messages, socket }) {
   };
 
   return (
-    <div className="border border-dndgold rounded-2xl p-2 bg-[#25160f]/80">
+    <div className="border border-dndgold rounded-2xl p-2 bg-[#25160f]/80 w-60">
       <div className="flex flex-col h-full">
-        <div className="flex-1 max-h-60 overflow-y-auto bg-[#20100a]/70 p-2 rounded-xl mb-2">
+        <div className="flex-1 max-h-32 overflow-y-auto bg-[#20100a]/70 p-2 rounded-xl mb-2">
           {messages.map((m, i) => (
             <div key={i}><b>{m.user}:</b> {m.text}</div>
           ))}
