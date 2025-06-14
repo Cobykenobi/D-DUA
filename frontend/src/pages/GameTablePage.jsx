@@ -60,19 +60,19 @@ export default function GameTablePage() {
       </div>
       <div className="relative flex-1 h-[80vh] bg-[#1b110a]/80 rounded-b-2xl px-6 pb-4 overflow-hidden">
         {/* Ліві слоти гравців */}
-        <div className="absolute left-2 top-1/2 -translate-y-1/2 flex flex-col gap-2">
+        <div className="md:absolute md:left-2 md:top-1/2 md:-translate-y-1/2 flex flex-col gap-2">
           {players.slice(0,3).map((p,i) => (
             <PlayerCard key={i} character={p.character} />
           ))}
         </div>
         {/* Праві слоти гравців */}
-        <div className="absolute right-2 top-1/2 -translate-y-1/2 flex flex-col gap-2 items-end">
+        <div className="md:absolute md:right-2 md:top-1/2 md:-translate-y-1/2 flex flex-col gap-2 items-end mt-4 md:mt-0">
           {players.slice(3,6).map((p,i) => (
             <PlayerCard key={i} character={p.character} />
           ))}
         </div>
         {/* Центральна зона столу */}
-        <div className="flex flex-col items-center justify-center h-full">
+        <div className="flex flex-col items-center justify-center h-full z-0">
           <div className="w-full h-[40vh] flex items-center justify-center rounded-2xl shadow-dnd bg-[#160b06]/90 mb-4 border-2 border-dndgold">
             {map ? (
               <img src={map} alt="Map" className="max-h-full max-w-full rounded-xl" />
@@ -85,13 +85,13 @@ export default function GameTablePage() {
             <GMPanel tableId={tableId} socket={socket} players={players} />
           )}
         </div>
-        {/* Чат у нижньому лівому куті */}
-        <div className="absolute bottom-4 left-4 w-72 flex flex-col gap-4">
+        {/* Чат та музика */}
+        <div className="md:absolute md:bottom-4 md:left-4 md:w-72 w-full flex flex-col gap-4 z-20 mt-4 md:mt-0">
           <ChatComponent tableId={tableId} user={user} messages={messages} socket={socket} />
           <MusicPlayer isGM={isGM} />
         </div>
-        {/* Кубики у нижньому правому куті */}
-        <div className="absolute bottom-4 right-4">
+        {/* Кубики */}
+        <div className="md:absolute md:bottom-4 md:right-4 z-10 mt-4 md:mt-0">
           <DiceBox />
         </div>
       </div>
