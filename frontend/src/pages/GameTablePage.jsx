@@ -58,21 +58,21 @@ export default function GameTablePage() {
       }}
       className="relative"
     >
-      <div className="absolute top-4 right-4 flex gap-2 z-20">
-        <button
-          onClick={() => navigate(`/lobby?tableId=${tableId}${characterId ? `&char=${characterId}` : ''}`)}
-          className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-4 py-2 transition active:scale-95"
-        >
-          Назад
-        </button>
-        <LogoutButton />
-      </div>
       <div className="relative flex justify-between items-center p-4 bg-[#322018]/90 rounded-t-2xl">
         <div className="font-dnd text-dndgold">{user?.login}</div>
         <div className="font-dnd text-dndgold text-2xl tracking-widest text-center flex-1">
           D&D Online Tabletop
         </div>
-        <div className="font-dnd text-dndgold">Стiл: {tableId}</div>
+        <div className="flex items-center gap-2">
+          <span className="font-dnd text-dndgold whitespace-nowrap">Стiл: {tableId}</span>
+          <button
+            onClick={() => navigate(`/lobby?tableId=${tableId}${characterId ? `&char=${characterId}` : ''}`)}
+            className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-4 py-2 transition active:scale-95"
+          >
+            Назад
+          </button>
+          <LogoutButton />
+        </div>
       </div>
       <div className="relative flex-1 h-[80vh] bg-[#1b110a]/80 rounded-b-2xl px-6 pb-4 overflow-hidden">
         {/* Ліві слоти гравців */}
@@ -100,7 +100,7 @@ export default function GameTablePage() {
         </div>
         {/* Нижня панель */}
         <div
-          className={`md:absolute md:bottom-4 md:left-1/2 md:-translate-x-1/2 z-20 mt-4 md:mt-0 flex gap-4 ${isGM ? 'flex-col items-center md:w-72 w-full' : 'flex-row justify-center w-full'}`}
+          className={`md:absolute md:bottom-4 md:left-1/2 md:-translate-x-1/2 z-20 mt-4 md:mt-0 flex gap-4 ${isGM ? 'flex-row flex-wrap justify-center items-end md:w-auto w-full' : 'flex-row justify-center w-full'}`}
         >
           {isGM ? (
             <>
