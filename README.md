@@ -36,7 +36,6 @@ This project combines an Express/MongoDB backend with a React frontend.
    This script also creates an admin account with login **root** and password
 
    **kolokol911**. You must sign in with this account to access `/admin`.
- main
 
 ## Running the app
 
@@ -58,6 +57,32 @@ npm run dev
 
 Vite prints the local URL once the frontend server starts.
 
+### Building the frontend
+
+Create a production build of the React app:
+
+```bash
+cd frontend
+npm run build
+```
+
+The resulting files are written to `frontend/dist`. Serve this directory with
+any static web server, for example:
+
+```bash
+npx serve -s dist
+```
+
+### Backend production
+
+After configuring your environment variables, start the backend in production
+mode with:
+
+```bash
+cd backend
+npm start
+```
+
 ## Running tests
 
 The backend uses **Jest** for its test suite. After installing dependencies you
@@ -66,6 +91,17 @@ can run the tests with:
 ```bash
 cd backend
 npm test
+```
+
+## Linting and formatting
+
+ESLint and Prettier configuration live in the `backend` folder. You can lint and
+format the backend code with:
+
+```bash
+cd backend
+npm run lint
+npm run format
 ```
 
 ## Character Basics
