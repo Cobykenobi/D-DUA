@@ -36,12 +36,12 @@ function LoginPage() {
   }, []);
 
   const handleSubmit = async (e) => {
+    e.preventDefault();
     setError(null);
     if (!login || !password) {
       showToast(t('fields_required'), "error");
       return;
     }
-    e.preventDefault();
     setError("");
     setLoading(true);
     try {
