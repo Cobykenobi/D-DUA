@@ -1,3 +1,23 @@
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
+const getAuthHeaders = () => {
+  const token = localStorage.getItem('token');
+  const headers = { Authorization: `Bearer ${token}` };
+  return headers;
+};
+
+export const getCharacters = async () => {
+  const res = await fetch(`${API_URL}/character`, {
+    headers: getAuthHeaders(),
+  });
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+  return res.json();
+};
+
+export const getCharacter = async (id) => {
+  const res = await fetch(`${API_URL}/character/${id}`, {
     headers: getAuthHeaders(),
   });
   if (!res.ok) {
@@ -23,13 +43,11 @@ export const createCharacter = async (data) => {
     headers,
     body,
   });
-
   if (!res.ok) {
     const msg = await res.text();
     throw new Error(msg || res.statusText);
   }
   return res.json();
- main
 };
 
 export const deleteCharacter = async (id) => {
@@ -55,3 +73,27 @@ export const updateCharacter = async (id, data) => {
   const res = await fetch(`${API_URL}/character/${id}`, {
     method: 'PUT',
     headers,
+    body,
+  });
+  return res.json();
+};
+
+export const getRaces = async () => {
+  const res = await fetch(`${API_URL}/race`, {
+    headers: getAuthHeaders(),
+  });
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+  return res.json();
+};
+
+export const getProfessions = async () => {
+  const res = await fetch(`${API_URL}/profession`, {
+    headers: getAuthHeaders(),
+  });
+  if (!res.ok) {
+    throw new Error(res.statusText);
+  }
+  return res.json();
+};
