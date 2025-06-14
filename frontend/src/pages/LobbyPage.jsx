@@ -122,8 +122,8 @@ export default function LobbyPage() {
             <div>
               <div className="font-bold">{character.name}</div>
               <div className="text-sm">
-                {t('races.' + (character.race?.name || '')) || character.race?.name} &middot;{' '}
-                {t('classes.' + (character.profession?.name || '')) || character.profession?.name}
+                {t('races.' + (character.race?.code || '')) || character.race?.name} &middot;{' '}
+                {t('classes.' + (character.profession?.code || '')) || character.profession?.name}
               </div>
             </div>
           </div>
@@ -140,10 +140,10 @@ export default function LobbyPage() {
                   <>
                     {pl.character.name}
                     {pl.character.race && (
-                      <> – {t('races.' + (pl.character.race?.name || '')) || pl.character.race?.name}</>
+                      <> – {t('races.' + (pl.character.race?.code || '')) || pl.character.race?.name}</>
                     )}
                     {pl.character.profession && (
-                      <> / {t('classes.' + (pl.character.profession?.name || '')) || pl.character.profession?.name}</>
+                      <> / {t('classes.' + (pl.character.profession?.code || '')) || pl.character.profession?.name}</>
                     )}
                   </>
                 ) : (

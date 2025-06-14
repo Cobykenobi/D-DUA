@@ -36,7 +36,8 @@ function init(httpServer) {
         let character = null;
         if (characterId) {
           character = await Character.findById(characterId)
-            .populate('race profession')
+            .populate('race', 'name code')
+            .populate('profession', 'name code')
             .select('name image race profession stats inventory description')
             .lean();
         }
@@ -46,7 +47,8 @@ function init(httpServer) {
         player.online = true;
         if (characterId && !player.character) {
           player.character = await Character.findById(characterId)
-            .populate('race profession')
+            .populate('race', 'name code')
+            .populate('profession', 'name code')
             .select('name image race profession stats inventory description')
             .lean();
         }
@@ -75,7 +77,8 @@ function init(httpServer) {
         let character = null;
         if (characterId) {
           character = await Character.findById(characterId)
-            .populate('race profession')
+            .populate('race', 'name code')
+            .populate('profession', 'name code')
             .select('name image race profession stats inventory description')
             .lean();
         }
@@ -85,7 +88,8 @@ function init(httpServer) {
         player.online = true;
         if (characterId && !player.character) {
           player.character = await Character.findById(characterId)
-            .populate('race profession')
+            .populate('race', 'name code')
+            .populate('profession', 'name code')
             .select('name image race profession stats inventory description')
             .lean();
         }

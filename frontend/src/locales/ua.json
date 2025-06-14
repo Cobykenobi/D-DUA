@@ -4,25 +4,25 @@
   "register": "Реєстрація",
   "fields_required": "Заповніть усі поля",
   "races": {
-    "Human": "Людина",
-    "Elf": "Ельф",
-    "Orc": "Орк",
-    "Gnome": "Гном",
-    "Dwarf": "Дварф",
-    "Halfling": "Хафлінг",
-    "Demon": "Демон",
-    "Beastkin": "Звіролюдина",
-    "Angel": "Ангел",
-    "Lizardman": "Ящіролюд"
+    "human": "Людина",
+    "elf": "Ельф",
+    "orc": "Орк",
+    "gnome": "Гном",
+    "dwarf": "Дварф",
+    "halfling": "Хафлінг",
+    "demon": "Демон",
+    "beastkin": "Звіролюдина",
+    "angel": "Ангел",
+    "lizardman": "Ящіролюд"
   },
   "classes": {
-    "Warrior": "Воїн",
-    "Mage": "Маг",
-    "Rogue": "Розбійник",
-    "Healer": "Лікар",
-    "Ranger": "Рейнджер",
-    "Bard": "Бард",
-    "Paladin": "Паладин"
+    "warrior": "Воїн",
+    "mage": "Маг",
+    "rogue": "Розбійник",
+    "healer": "Лікар",
+    "ranger": "Рейнджер",
+    "bard": "Бард",
+    "paladin": "Паладин"
   },
   "stats": {
     "STR": "Сила",
