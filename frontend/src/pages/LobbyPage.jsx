@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 const socket = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000');
 
 export default function LobbyPage() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { user } = useUserStore();
   const tableParam = searchParams.get('tableId');
   const [tableId, setTableId] = useState(tableParam || null);
@@ -31,7 +31,9 @@ export default function LobbyPage() {
     getCharacter(char).then(setCharacter).catch(() => {});
   }, [char]);
 
+
   // tableId is taken from URL if provided
+ main
 
   useEffect(() => {
     if (!tableId || !user) {
