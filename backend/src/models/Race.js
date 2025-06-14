@@ -8,8 +8,6 @@ const raceSchema = new mongoose.Schema({
 
   code: { type: String, required: true, unique: true },
   description: { type: String, default: '' },
- main
 }, { timestamps: true });
- main
 
 module.exports = mongoose.model('Race', raceSchema);

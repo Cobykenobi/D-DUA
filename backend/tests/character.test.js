@@ -20,7 +20,6 @@ describe('Character Controller - create', () => {
     Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Mage', code: 'mage' }]);
 
     StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
- main
 
     let saved;
     Character.mockImplementation(data => {
@@ -67,7 +66,6 @@ describe('Character Controller - create', () => {
     Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Mage', code: 'mage' }]);
 
     StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
- main
 
     let saved;
     Character.mockImplementation(data => {
