@@ -40,7 +40,7 @@ function init(httpServer) {
             .select('name image race profession stats inventory description')
             .lean();
         }
-        player = { user: user._id, character, online: true };
+        player = { user: user._id, name: user.username, role: user.role, character, online: true };
         sess.players.push(player);
       } else {
         player.online = true;
@@ -55,7 +55,7 @@ function init(httpServer) {
         sess.gm = user._id;
         socket.emit('gm-assigned');
       }
-      io.to(tableId).emit('lobby-players', { players: sess.players });
+      io.to(tableId).emit('lobby-players', { players: sess.players, gm: sess.gm });
     });
 
     socket.on('start-game', ({ tableId }) => {
@@ -151,7 +151,7 @@ function init(httpServer) {
         player.online = false;
         const event = sess.state === 'lobby' ? 'lobby-players' : 'table-players';
         const payload = event === 'lobby-players'
-          ? { players: sess.players }
+          ? { players: sess.players, gm: sess.gm }
           : { players: sess.players, gm: sess.gm, monsters: sess.monsters, initiative: sess.initiative };
         io.to(tableId).emit(event, payload);
       }
