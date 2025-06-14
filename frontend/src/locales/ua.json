@@ -3,6 +3,7 @@
   "login": "Увійти",
   "register": "Реєстрація",
   "fields_required": "Заповніть усі поля",
+  "connecting": "Підключення...",
   "races": {
     "human": "Людина",
     "elf": "Ельф",
