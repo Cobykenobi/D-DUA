@@ -7,26 +7,26 @@ const baseStats = {
 };
 
 const raceBonuses = {
-  Human:     { STR: 1, DEX: 1, INT: 1, CON: 1, CHA: 1 },
-  Elf:       { DEX: 2, INT: 1 },
-  Orc:       { STR: 2, CON: 1 },
-  Gnome:     { CON: 2, INT: 1 },
-  Dwarf:     { STR: 2, CHA: 1 },
-  Halfling:  { DEX: 2, CHA: 1 },
-  Demon:     { INT: 2, CHA: 1 },
-  Beastkin:  { DEX: 2, CON: 1 },
-  Angel:     { CHA: 2, INT: 1 },
-  Lizardman: { STR: 2, CON: 1 },
+  human:     { STR: 1, DEX: 1, INT: 1, CON: 1, CHA: 1 },
+  elf:       { DEX: 2, INT: 1 },
+  orc:       { STR: 2, CON: 1 },
+  gnome:     { CON: 2, INT: 1 },
+  dwarf:     { STR: 2, CHA: 1 },
+  halfling:  { DEX: 2, CHA: 1 },
+  demon:     { INT: 2, CHA: 1 },
+  beastkin:  { DEX: 2, CON: 1 },
+  angel:     { CHA: 2, INT: 1 },
+  lizardman: { STR: 2, CON: 1 },
 };
 
 const classMinimums = {
-  Warrior: { STR: 13, CON: 12 },
-  Mage: { INT: 13, CHA: 11 },
-  Rogue: { DEX: 13, INT: 11 },
-  Healer: { CHA: 13, CON: 11 },
-  Ranger: { DEX: 12, STR: 12 },
-  Bard: { CHA: 13, DEX: 12 },
-  Paladin: { STR: 13, CHA: 13 },
+  warrior: { STR: 13, CON: 12 },
+  mage: { INT: 13, CHA: 11 },
+  rogue: { DEX: 13, INT: 11 },
+  healer: { CHA: 13, CON: 11 },
+  ranger: { DEX: 12, STR: 12 },
+  bard: { CHA: 13, DEX: 12 },
+  paladin: { STR: 13, CHA: 13 },
 };
 
 function generateStats(race, charClass) {

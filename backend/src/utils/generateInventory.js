@@ -2,26 +2,26 @@
 const StartingSet = require('../models/StartingSet');
 
 const raceInventory = {
-  Elf: [{ item: 'Ельфійські стріли', amount: 1, bonus: { DEX: 1 } }],
-  Orc: [{ item: 'Кістяний талісман', amount: 1, bonus: { STR: 1 } }],
-  Human: [{ item: 'Монета удачі', amount: 1, bonus: { CHA: 1 } }],
-  Gnome: [{ item: 'Гвинтовий ключ', amount: 1 }],
-  Dwarf: [{ item: 'Похідна кружка', amount: 1, bonus: { CON: 1 } }],
-  Halfling: [{ item: 'Трубка та тютюн', amount: 1, bonus: { CHA: 1 } }],
-  Demon: [{ item: 'Темний камінь', amount: 1, bonus: { INT: 1 } }],
-  Beastkin: [{ item: 'Кігтістий амулет', amount: 1, bonus: { DEX: 1 } }],
-  Angel: [{ item: 'Пір’я з крила', amount: 1, bonus: { CHA: 1 } }],
-  Lizardman: [{ item: 'Луска пращура', amount: 1, bonus: { CON: 1 } }]
+  elf: [{ item: 'Ельфійські стріли', amount: 1, bonus: { DEX: 1 } }],
+  orc: [{ item: 'Кістяний талісман', amount: 1, bonus: { STR: 1 } }],
+  human: [{ item: 'Монета удачі', amount: 1, bonus: { CHA: 1 } }],
+  gnome: [{ item: 'Гвинтовий ключ', amount: 1 }],
+  dwarf: [{ item: 'Похідна кружка', amount: 1, bonus: { CON: 1 } }],
+  halfling: [{ item: 'Трубка та тютюн', amount: 1, bonus: { CHA: 1 } }],
+  demon: [{ item: 'Темний камінь', amount: 1, bonus: { INT: 1 } }],
+  beastkin: [{ item: 'Кігтістий амулет', amount: 1, bonus: { DEX: 1 } }],
+  angel: [{ item: 'Пір’я з крила', amount: 1, bonus: { CHA: 1 } }],
+  lizardman: [{ item: 'Луска пращура', amount: 1, bonus: { CON: 1 } }]
 };
 
 function randomItem(list) {
   return list[Math.floor(Math.random() * list.length)];
 }
 
-async function generateInventory(race, charClass) {
+async function generateInventory(raceCode, classCode) {
   const result = [];
 
-  const sets = await StartingSet.find({ className: charClass }).populate('items');
+  const sets = await StartingSet.find({ classCode }).populate('items');
   if (sets.length) {
     const selected = randomItem(sets);
     for (const item of selected.items) {
@@ -30,7 +30,7 @@ async function generateInventory(race, charClass) {
     }
   }
 
-  const raceItems = raceInventory[race] || [];
+  const raceItems = raceInventory[raceCode] || [];
   for (const r of raceItems) {
     result.push({ item: r.item, amount: r.amount ?? 1, bonus: r.bonus || {} });
   }
