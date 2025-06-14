@@ -185,14 +185,12 @@ async function seed() {
   };
 
   if (await Race.countDocuments() === 0) {
-
-    await Race.insertMany(races.map(name => ({ name, code: slug(name) })));
+    await Race.insertMany(races);
     console.log('Races seeded');
   }
 
   if (await Profession.countDocuments() === 0) {
-
-    await Profession.insertMany(professions.map(name => ({ name, code: slug(name) })));
+    await Profession.insertMany(professions);
     console.log('Professions seeded');
   }
 
@@ -272,7 +270,11 @@ async function seed() {
   await mongoose.disconnect();
 }
 
-seed().catch(err => {
-  console.error(err);
-  mongoose.disconnect();
-});
+module.exports = seed;
+
+if (require.main === module) {
+  seed().catch(err => {
+    console.error(err);
+    mongoose.disconnect();
+  });
+}

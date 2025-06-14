@@ -73,7 +73,12 @@ exports.create = async (req, res) => {
 
 
 
-    const inventory = await generateInventory(race[0].code, profession[0].code);
+    const raceCode = (race[0].code || race[0].name).toLowerCase();
+    const classCode = (profession[0].code || profession[0].name).toLowerCase();
+    const inventory = await generateInventory(raceCode, classCode);
+    if (!inventory.length) {
+      console.warn(`Empty inventory for race ${raceCode} class ${classCode}`);
+    }
 
 
   const newChar = new Character({
