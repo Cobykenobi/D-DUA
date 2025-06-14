@@ -6,6 +6,9 @@ export default function AdminRacesPage() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(false);
+  const [editingId, setEditingId] = useState(null);
+  const [editName, setEditName] = useState('');
+  const [editDescription, setEditDescription] = useState('');
 
   const fetchRaces = async () => {
     setLoading(true);
@@ -31,9 +34,23 @@ export default function AdminRacesPage() {
     fetchRaces();
   };
 
-  const handleRaceChange = (id, field, value) => {
-    setRaces(races => races.map(r => r._id === id ? { ...r, [field]: value } : r));
+  const startEdit = (race) => {
+    setEditingId(race._id);
+    setEditName(race.name);
+    setEditDescription(race.description || '');
   };
+
+  const cancelEdit = () => {
+    setEditingId(null);
+    setEditName('');
+    setEditDescription('');
+  };
+
+  const saveEdit = async (id) => {
+    await saveRace(id, { name: editName, description: editDescription });
+    cancelEdit();
+  };
+
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-dndbg p-4">
@@ -71,32 +88,59 @@ export default function AdminRacesPage() {
                 {races.map(race => (
                   <tr key={race._id} className="align-top">
                     <td className="py-1 pr-2">
-                      <input
-                        className="w-full rounded-lg px-2 py-1 bg-[#2c1a12] border border-dndgold text-dndgold"
-                        value={race.name}
-                        onChange={e => handleRaceChange(race._id, 'name', e.target.value)}
-                      />
+                      {editingId === race._id ? (
+                        <input
+                          className="w-full rounded-lg px-2 py-1 bg-[#2c1a12] border border-dndgold text-dndgold"
+                          value={editName}
+                          onChange={e => setEditName(e.target.value)}
+                        />
+                      ) : (
+                        <span>{race.name}</span>
+                      )}
                     </td>
                     <td className="py-1 pr-2">
-                      <input
-                        className="w-full rounded-lg px-2 py-1 bg-[#2c1a12] border border-dndgold text-dndgold"
-                        value={race.description || ''}
-                        onChange={e => handleRaceChange(race._id, 'description', e.target.value)}
-                      />
+                      {editingId === race._id ? (
+                        <input
+                          className="w-full rounded-lg px-2 py-1 bg-[#2c1a12] border border-dndgold text-dndgold"
+                          value={editDescription}
+                          onChange={e => setEditDescription(e.target.value)}
+                        />
+                      ) : (
+                        <span>{race.description}</span>
+                      )}
                     </td>
                     <td className="py-1 flex gap-2">
-                      <button
-                        onClick={() => saveRace(race._id, { name: race.name, description: race.description })}
-                        className="bg-dndgold text-dndred font-dnd rounded-2xl px-2 py-1 transition active:scale-95"
-                      >
-                        Зберегти
-                      </button>
-                      <button
-                        onClick={() => removeRace(race._id)}
-                        className="text-dndred hover:underline"
-                      >
-                        Видалити
-                      </button>
+                      {editingId === race._id ? (
+                        <>
+                          <button
+                            onClick={() => saveEdit(race._id)}
+                            className="bg-dndgold text-dndred font-dnd rounded-2xl px-2 py-1 transition active:scale-95"
+                          >
+                            Зберегти
+                          </button>
+                          <button
+                            onClick={cancelEdit}
+                            className="text-dndred hover:underline"
+                          >
+                            Скасувати
+                          </button>
+                        </>
+                      ) : (
+                        <>
+                          <button
+                            onClick={() => startEdit(race)}
+                            className="bg-dndgold text-dndred font-dnd rounded-2xl px-2 py-1 transition active:scale-95"
+                          >
+                            Редагувати
+                          </button>
+                          <button
+                            onClick={() => removeRace(race._id)}
+                            className="text-dndred hover:underline"
+                          >
+                            Видалити
+                          </button>
+                        </>
+                      )}
                     </td>
                   </tr>
                 ))}
