@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 const socket = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000');
 
 export default function LobbyPage() {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const { user } = useUserStore();
   const [tableId, setTableId] = useState(null);
   const [players, setPlayers] = useState([]);
@@ -29,10 +29,18 @@ export default function LobbyPage() {
     getCharacter(char).then(setCharacter).catch(() => {});
   }, [char]);
 
-  // generate tableId on mount
+  // get or generate tableId on mount
   useEffect(() => {
-    const id = Math.random().toString(36).substring(2, 8);
-    setTableId(id);
+    const existing = searchParams.get('table');
+    if (existing) {
+      setTableId(existing);
+    } else {
+      const id = Math.random().toString(36).substring(2, 8);
+      setTableId(id);
+      const sp = new URLSearchParams(searchParams);
+      sp.set('table', id);
+      setSearchParams(sp, { replace: true });
+    }
   }, []);
 
   useEffect(() => {
