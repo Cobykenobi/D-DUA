@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage });
 
-const onlyMaster = require('../middleware/onlyMaster');
+const onlyMaster = require('../middlewares/onlyMaster');
 
 router.get('/', auth, mapController.getAll);
 router.post('/', auth, onlyMaster, upload.single('image'), mapController.create);
