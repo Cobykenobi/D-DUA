@@ -48,25 +48,25 @@ async function seed() {
   // const characteristics = ['HP', 'MP', 'Strength', 'Agility', 'Intellect'];
 
   const races = [
-    'Human',
-    'Elf',
-    'Orc',
-    'Gnome',
-    'Dwarf',
-    'Halfling',
-    'Demon',
-    'Beastkin',
-    'Angel',
-    'Lizardman'
+    { code: 'human', name: 'Людина' },
+    { code: 'elf', name: 'Ельф' },
+    { code: 'orc', name: 'Орк' },
+    { code: 'gnome', name: 'Гном' },
+    { code: 'dwarf', name: 'Дварф' },
+    { code: 'halfling', name: 'Напіврослик' },
+    { code: 'demon', name: 'Демон' },
+    { code: 'beastkin', name: 'Звіролюд' },
+    { code: 'angel', name: 'Ангел' },
+    { code: 'lizardman', name: 'Ящіролюд' }
   ];
   const professions = [
-    'Warrior',
-    'Mage',
-    'Rogue',
-    'Healer',
-    'Ranger',
-    'Bard',
-    'Paladin'
+    { code: 'warrior', name: 'Воїн' },
+    { code: 'mage', name: 'Маг' },
+    { code: 'rogue', name: 'Шахрай' },
+    { code: 'healer', name: 'Цілитель' },
+    { code: 'ranger', name: 'Рейнджер' },
+    { code: 'bard', name: 'Бард' },
+    { code: 'paladin', name: 'Паладин' }
   ];
   const characteristics = [
     'STR',
@@ -170,25 +170,25 @@ async function seed() {
   };
 
   const raceInventory = {
-    Elf: [{ item: 'Ельфійські стріли', bonus: { DEX: 1 } }],
-    Orc: [{ item: 'Кістяний талісман', bonus: { STR: 1 } }],
-    Human: [{ item: 'Монета удачі', bonus: { CHA: 1 } }],
-    Gnome: [{ item: 'Гвинтовий ключ' }],
-    Dwarf: [{ item: 'Похідна кружка', bonus: { CON: 1 } }],
-    Halfling: [{ item: 'Трубка та тютюн', bonus: { CHA: 1 } }],
-    Demon: [{ item: 'Темний камінь', bonus: { INT: 1 } }],
-    Beastkin: [{ item: 'Кігтістий амулет', bonus: { DEX: 1 } }],
-    Angel: [{ item: 'Пір’я з крила', bonus: { CHA: 1 } }],
-    Lizardman: [{ item: 'Луска пращура', bonus: { CON: 1 } }]
+    elf: [{ item: 'Ельфійські стріли', bonus: { DEX: 1 } }],
+    orc: [{ item: 'Кістяний талісман', bonus: { STR: 1 } }],
+    human: [{ item: 'Монета удачі', bonus: { CHA: 1 } }],
+    gnome: [{ item: 'Гвинтовий ключ' }],
+    dwarf: [{ item: 'Похідна кружка', bonus: { CON: 1 } }],
+    halfling: [{ item: 'Трубка та тютюн', bonus: { CHA: 1 } }],
+    demon: [{ item: 'Темний камінь', bonus: { INT: 1 } }],
+    beastkin: [{ item: 'Кігтістий амулет', bonus: { DEX: 1 } }],
+    angel: [{ item: 'Пір’я з крила', bonus: { CHA: 1 } }],
+    lizardman: [{ item: 'Луска пращура', bonus: { CON: 1 } }]
   };
 
   if (await Race.countDocuments() === 0) {
-    await Race.insertMany(races.map(name => ({ name })));
+    await Race.insertMany(races);
     console.log('Races seeded');
   }
 
   if (await Profession.countDocuments() === 0) {
-    await Profession.insertMany(professions.map(name => ({ name })));
+    await Profession.insertMany(professions);
     console.log('Professions seeded');
   }
 
@@ -244,7 +244,7 @@ async function seed() {
         .map(a => a.map(d => d.item));
       const combos = combine(arrays);
       for (const combo of combos) {
-        sets.push({ className: cls, items: combo.map(name => itemsByName[name]) });
+        sets.push({ classCode: cls.toLowerCase(), items: combo.map(name => itemsByName[name]) });
       }
     }
     if (sets.length) {
