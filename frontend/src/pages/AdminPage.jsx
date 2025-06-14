@@ -12,7 +12,7 @@ import {
   getSessionLog,
 } from "../api/adminActions";
 
-export default function MasterPage() {
+export default function AdminPage() {
   const [videoId, setVideoId] = useState(null);
   const [races, setRaces] = useState([]);
   const [log, setLog] = useState([]);
@@ -86,13 +86,13 @@ export default function MasterPage() {
       className="min-h-screen bg-cover bg-center p-8 font-dnd text-white"
       style={{ backgroundImage: "url('/map-bg.jpg')" }}
     >
-      <h1 className="text-3xl text-dndgold mb-6">Панель Майстра</h1>
+      <h1 className="text-3xl text-dndgold mb-6">Панель Адміністратора</h1>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         <AdminCard title="Встановити музику" onClick={handleSetMusic} />
         <AdminCard title="Створити нову расу" onClick={handleCreateRace} />
         <AdminCard title="Завантажити карту" onClick={handleUploadMap} />
-        <AdminCard title="Користувачі" onClick={() => navigate('/master/users')} />
+        <AdminCard title="Користувачі" onClick={() => navigate('/admin/users')} />
         <AdminCard title="Запустити сесію" onClick={handleStartSession} />
         <AdminCard title="Завершити сесію" onClick={handleEndSession} />
       </div>

@@ -64,7 +64,7 @@ export default function AdminUsersPage() {
             </table>
           </div>
         )}
-        <Link to="/master" className="block text-dndgold underline mt-6 text-center">← Назад</Link>
+        <Link to="/admin" className="block text-dndgold underline mt-6 text-center">← Назад</Link>
       </div>
     </div>
   );

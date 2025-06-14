@@ -46,7 +46,7 @@ export default function AdminInventoryPage() {
         >
           Зберегти
         </button>
-        <Link to="/master" className="block text-dndgold underline mt-6 text-center">
+        <Link to="/admin" className="block text-dndgold underline mt-6 text-center">
           ← Назад
         </Link>
       </div>
