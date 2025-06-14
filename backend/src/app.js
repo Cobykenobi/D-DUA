@@ -30,9 +30,7 @@ app.use(express.json());
 // Ensure uploads directories exist
 const uploadDir = path.join(__dirname, '..', 'uploads');
 const mapsDir = path.join(uploadDir, 'maps');
-const avatarsDir = path.join(uploadDir, 'avatars');
 fs.mkdirSync(mapsDir, { recursive: true });
-fs.mkdirSync(avatarsDir, { recursive: true });
 
 // Serve uploaded files
 app.use('/uploads', express.static(uploadDir));
