@@ -35,6 +35,10 @@ async function generateInventory(raceCode, classCode) {
     result.push({ item: r.item, amount: r.amount ?? 1, bonus: r.bonus || {} });
   }
 
+  if (!result.length) {
+    console.warn(`No inventory generated for race ${raceCode} and class ${classCode}`);
+  }
+
   return result;
 }
 

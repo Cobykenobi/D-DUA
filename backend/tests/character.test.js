@@ -3,14 +3,22 @@ const Race = require('../src/models/Race');
 const Profession = require('../src/models/Profession');
 const Character = require('../src/models/Character');
 const StartingSet = require('../src/models/StartingSet');
+const generateInventory = require('../src/utils/generateInventory');
 
 jest.mock('../src/models/Race');
 jest.mock('../src/models/Profession');
 jest.mock('../src/models/Character');
 jest.mock('../src/models/StartingSet');
+jest.mock('../src/utils/generateInventory');
 
 beforeEach(() => {
   jest.clearAllMocks();
+  generateInventory.mockResolvedValue([]);
+  jest.spyOn(console, 'warn').mockImplementation(() => {});
+});
+
+afterEach(() => {
+  console.warn.mockRestore();
 });
 
 describe('Character Controller - create', () => {
@@ -40,6 +48,22 @@ describe('Character Controller - create', () => {
     expect(saved.stats.DEX).toBe(12); // Elf bonus applied
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalled();
+  });
+
+  it('passes codes to generateInventory', async () => {
+    Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Elf', code: 'elf' }]);
+    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Mage', code: 'mage' }]);
+
+    generateInventory.mockResolvedValue([]);
+
+    Character.mockImplementation(data => ({ save: jest.fn().mockResolvedValue(data) }));
+
+    const req = { user: { id: 'u1' }, body: { name: 'Hero' } };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+    await characterController.create(req, res);
+
+    expect(generateInventory).toHaveBeenCalledWith('elf', 'mage');
   });
 
   it('returns 400 if races or professions are missing', async () => {

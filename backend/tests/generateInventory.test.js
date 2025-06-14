@@ -43,9 +43,12 @@ describe('generateInventory', () => {
     ]);
   });
 
-  it('returns empty array for unknown inputs', async () => {
+  it('returns empty array for unknown inputs and logs warning', async () => {
     StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([]) });
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const items = await generateInventory('unknown', 'unknown');
+    expect(warn).toHaveBeenCalled();
+    warn.mockRestore();
     expect(items).toEqual([]);
   });
 });
