@@ -4,6 +4,8 @@ import ChatComponent from "../components/ChatComponent";
 import PlayerCard from "../components/PlayerCard";
 import MusicPlayer from "../components/MusicPlayer";
 import DiceBox from "../components/DiceBox";
+import BrightnessControl from "../components/BrightnessControl";
+import { useSettings } from "../context/SettingsContext";
 import { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 import { useParams, useSearchParams } from 'react-router-dom'
@@ -15,11 +17,13 @@ const socket = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000');
 
 export default function GameTablePage() {
   const { user } = useUserStore();
+  const { brightness, setBrightness, volume, setVolume } = useSettings();
   const { tableId } = useParams();
   const [searchParams] = useSearchParams();
   const characterId = searchParams.get('char');
   const [players, setPlayers] = useState([]);
   const [gm, setGm] = useState(null);
+  const [visiblePlayers, setVisiblePlayers] = useState([]);
   const [initiative, setInitiative] = useState([]);
   const [map, setMap] = useState("");
   const [messages, setMessages] = useState([]);
@@ -31,6 +35,7 @@ export default function GameTablePage() {
       setPlayers(data.players || []);
       setGm(data.gm || null);
       setInitiative(data.initiative || []);
+      setVisiblePlayers((data.players || []).filter(p => p.user !== data.gm));
     });
     socket.on("initiative-update", setInitiative);
     socket.on("map-update", setMap);
@@ -51,23 +56,35 @@ export default function GameTablePage() {
       backgroundAttachment: "fixed",
       fontFamily: "'IM Fell English SC', serif"
     }}>
-      <div className="flex justify-between items-center p-4 bg-[#322018]/90 rounded-t-2xl">
+      <div className="relative flex justify-between items-center p-4 bg-[#322018]/90 rounded-t-2xl">
         <div className="font-dnd text-dndgold">{user?.login}</div>
         <div className="font-dnd text-dndgold text-2xl tracking-widest text-center flex-1">
           D&D Online Tabletop
         </div>
         <div className="font-dnd text-dndgold">Стiл: {tableId}</div>
+        <div className="absolute right-4 top-1/2 -translate-y-1/2 flex items-center gap-4 bg-[#25160f]/80 p-2 rounded-lg">
+          <input
+            type="range"
+            min={0}
+            max={1}
+            step={0.1}
+            value={volume}
+            onChange={e => setVolume(parseFloat(e.target.value))}
+            className="w-24"
+          />
+          <BrightnessControl value={brightness * 100} onChange={v => setBrightness(v / 100)} />
+        </div>
       </div>
       <div className="relative flex-1 h-[80vh] bg-[#1b110a]/80 rounded-b-2xl px-6 pb-4 overflow-hidden">
         {/* Ліві слоти гравців */}
         <div className="md:absolute md:left-2 md:top-1/2 md:-translate-y-1/2 flex flex-col gap-2">
-          {players.slice(0,3).map((p,i) => (
+          {visiblePlayers.slice(0,3).map((p,i) => (
             <PlayerCard key={i} character={p.character} />
           ))}
         </div>
         {/* Праві слоти гравців */}
         <div className="md:absolute md:right-2 md:top-1/2 md:-translate-y-1/2 flex flex-col gap-2 items-end mt-4 md:mt-0">
-          {players.slice(3,6).map((p,i) => (
+          {visiblePlayers.slice(3,6).map((p,i) => (
             <PlayerCard key={i} character={p.character} />
           ))}
         </div>
