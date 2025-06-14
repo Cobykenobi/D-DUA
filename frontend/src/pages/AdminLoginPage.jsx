@@ -16,7 +16,18 @@ function AdminLoginPage() {
   const setUser = useUserStore((s) => s.setUser);
 
   useEffect(() => {
-    api.get('/ping').catch(() => {});
+    let attempts = 0;
+    const ping = () => {
+      api.get('/ping').catch(() => {
+        if (attempts < 2) {
+          attempts++;
+          setTimeout(ping, 1000);
+        } else {
+          showToast('Failed to connect to server', 'error');
+        }
+      });
+    };
+    ping();
   }, []);
 
   const handleSubmit = async (e) => {
