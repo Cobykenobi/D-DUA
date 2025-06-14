@@ -159,6 +159,10 @@ const inventory = generateInventory('Orc', 'Warrior');
 // => ['Меч', 'Щит', 'Шкіряна броня', 'Зілля здоров’я', 'Кістяний талісман']
 ```
 
+## Contributing
+
+Please read [CONTRIBUTING.md](CONTRIBUTING.md) for development and binary asset guidelines.
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
