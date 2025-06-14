@@ -7,7 +7,8 @@ import { getCharacter } from '../utils/api';
 import { withApiHost } from '../utils/imageUtils';
 import { useTranslation } from 'react-i18next';
 
-const socket = io(import.meta.env.VITE_SOCKET_URL);
+// Fallback to localhost if env variable is missing
+const socket = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000');
 
 export default function LobbyPage() {
   const [searchParams] = useSearchParams();
