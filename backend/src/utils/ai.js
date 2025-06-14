@@ -3,6 +3,8 @@
 // Потрібно додати API-ключ у .env
 
 const fetch = require('node-fetch');
+const fs = require('fs');
+const path = require('path');
 
 exports.generateCharacterImage = async (description) => {
   // Приклад з DALL-E або Stable Diffusion (через proxy)
@@ -16,7 +18,18 @@ exports.generateCharacterImage = async (description) => {
     body: JSON.stringify({ prompt: description, n: 1, size: '512x512' }),
   });
   const data = await res.json();
-  return data.data?.[0]?.url || '';
+  const url = data.data?.[0]?.url;
+  if (!url) return '';
+
+  // Download and persist the generated image
+  const imgRes = await fetch(url);
+  if (!imgRes.ok) return '';
+  const buffer = await imgRes.buffer();
+  const dir = path.join(__dirname, '..', '..', 'uploads', 'avatars');
+  fs.mkdirSync(dir, { recursive: true });
+  const filename = Date.now() + '.png';
+  fs.writeFileSync(path.join(dir, filename), buffer);
+  return `/uploads/avatars/${filename}`;
 };
 
 exports.generateCharacterDescription = async (params) => {
