@@ -50,25 +50,25 @@ async function seed() {
   // const characteristics = ['HP', 'MP', 'Strength', 'Agility', 'Intellect'];
 
   const races = [
-    'Human',
-    'Elf',
-    'Orc',
-    'Gnome',
-    'Dwarf',
-    'Halfling',
-    'Demon',
-    'Beastkin',
-    'Angel',
-    'Lizardman'
+    { code: 'human', name: 'Людина' },
+    { code: 'elf', name: 'Ельф' },
+    { code: 'orc', name: 'Орк' },
+    { code: 'gnome', name: 'Гном' },
+    { code: 'dwarf', name: 'Дварф' },
+    { code: 'halfling', name: 'Напіврослик' },
+    { code: 'demon', name: 'Демон' },
+    { code: 'beastkin', name: 'Звіролюд' },
+    { code: 'angel', name: 'Ангел' },
+    { code: 'lizardman', name: 'Ящіролюд' }
   ];
   const professions = [
-    'Warrior',
-    'Mage',
-    'Rogue',
-    'Healer',
-    'Ranger',
-    'Bard',
-    'Paladin'
+    { code: 'warrior', name: 'Воїн' },
+    { code: 'mage', name: 'Маг' },
+    { code: 'rogue', name: 'Шахрай' },
+    { code: 'healer', name: 'Цілитель' },
+    { code: 'ranger', name: 'Рейнджер' },
+    { code: 'bard', name: 'Бард' },
+    { code: 'paladin', name: 'Паладин' }
   ];
   const characteristics = [
     'STR',
@@ -185,12 +185,16 @@ async function seed() {
   };
 
   if (await Race.countDocuments() === 0) {
+
     await Race.insertMany(races.map(name => ({ name, code: slug(name) })));
+ main
     console.log('Races seeded');
   }
 
   if (await Profession.countDocuments() === 0) {
+
     await Profession.insertMany(professions.map(name => ({ name, code: slug(name) })));
+ main
     console.log('Professions seeded');
   }
 
@@ -246,7 +250,7 @@ async function seed() {
         .map(a => a.map(d => d.item));
       const combos = combine(arrays);
       for (const combo of combos) {
-        sets.push({ className: cls, items: combo.map(name => itemsByName[name]) });
+        sets.push({ classCode: cls.toLowerCase(), items: combo.map(name => itemsByName[name]) });
       }
     }
     if (sets.length) {

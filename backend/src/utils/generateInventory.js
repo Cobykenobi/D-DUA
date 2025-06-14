@@ -18,10 +18,10 @@ function randomItem(list) {
   return list[Math.floor(Math.random() * list.length)];
 }
 
-async function generateInventory(race, charClass) {
+async function generateInventory(raceCode, classCode) {
   const result = [];
 
-  const sets = await StartingSet.find({ className: charClass }).populate('items');
+  const sets = await StartingSet.find({ classCode }).populate('items');
   if (sets.length) {
     const selected = randomItem(sets);
     for (const item of selected.items) {
@@ -30,7 +30,7 @@ async function generateInventory(race, charClass) {
     }
   }
 
-  const raceItems = raceInventory[race] || [];
+  const raceItems = raceInventory[raceCode] || [];
   for (const r of raceItems) {
     result.push({ item: r.item, amount: r.amount ?? 1, bonus: r.bonus || {} });
   }

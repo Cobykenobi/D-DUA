@@ -45,13 +45,19 @@ exports.create = async (req, res) => {
 
 
 
-  const stats = generateStats(race[0].name, profession[0].name);
+  const stats = generateStats(
+    (race[0].code || race[0].name)?.toLowerCase(),
+    (profession[0].code || profession[0].name)?.toLowerCase()
+  );
  
 
     // Логіка вибору аватара
     const avatar = uploaded || (image && image.trim() ? image : '');
 
+
     const inventory = await generateInventory(race[0].code, profession[0].code);
+
+ main
 
     const newChar = new Character({
       user: req.user.id,
