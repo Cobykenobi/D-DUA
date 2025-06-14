@@ -9,12 +9,15 @@ jest.mock('../src/models/Profession');
 jest.mock('../src/models/Character');
 jest.mock('../src/models/StartingSet');
 
+beforeEach(() => {
+  jest.clearAllMocks();
+});
+
 describe('Character Controller - create', () => {
   it('applies race bonuses and class minimums', async () => {
 
     Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Elf', code: 'elf' }]);
     Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Mage', code: 'mage' }]);
- main
     StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
 
     let saved;
@@ -60,7 +63,6 @@ describe('Character Controller - create', () => {
 
     Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Elf', code: 'elf' }]);
     Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Mage', code: 'mage' }]);
- main
     StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
 
     let saved;
@@ -80,5 +82,37 @@ describe('Character Controller - create', () => {
 
     expect(saved.image).toBe('/uploads/avatars/avatar.png');
     expect(res.status).toHaveBeenCalledWith(201);
+  });
+
+  it('returns 400 when name is invalid', async () => {
+    const req = { user: { id: 'u1' }, body: { description: '' } };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+    await characterController.create(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({ message: 'Invalid name' });
+    expect(Race.aggregate).not.toHaveBeenCalled();
+  });
+
+  it('returns 400 when description is too long', async () => {
+    const desc = 'a'.repeat(501);
+    const req = { user: { id: 'u1' }, body: { name: 'Hero', description: desc } };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+    await characterController.create(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({ message: 'Invalid description' });
+  });
+
+  it('returns 400 when image is invalid', async () => {
+    const req = { user: { id: 'u1' }, body: { name: 'Hero', image: {} } };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+    await characterController.create(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({ message: 'Invalid image' });
   });
 });

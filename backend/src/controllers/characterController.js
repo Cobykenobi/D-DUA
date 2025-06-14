@@ -20,7 +20,24 @@ exports.getAllByUser = async (req, res) => {
 // Створити персонажа
 exports.create = async (req, res) => {
   try {
-    const { name, description, image } = req.body;
+    let { name, description, image } = req.body;
+
+    if (!name || typeof name !== 'string' || !name.trim() || name.trim().length > 50) {
+      return res.status(400).json({ message: 'Invalid name' });
+    }
+
+    if (description && (typeof description !== 'string' || description.length > 500)) {
+      return res.status(400).json({ message: 'Invalid description' });
+    }
+
+    if (image && (typeof image !== 'string' || image.length > 500)) {
+      return res.status(400).json({ message: 'Invalid image' });
+    }
+
+    name = name.trim();
+    description = description ? description.trim() : '';
+    image = image ? image.trim() : '';
+
     const uploaded = req.file ? `/uploads/avatars/${req.file.filename}` : null;
 
 
@@ -52,12 +69,10 @@ exports.create = async (req, res) => {
  
 
     // Логіка вибору аватара
-    const avatar = uploaded || (image && image.trim() ? image : '');
+    const avatar = uploaded || (image ? image : '');
 
 
     const inventory = await generateInventory(race[0].code, profession[0].code);
-
- main
 
     const newChar = new Character({
       user: req.user.id,
