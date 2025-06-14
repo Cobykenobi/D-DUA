@@ -13,7 +13,9 @@ const socket = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000');
 export default function LobbyPage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const { user } = useUserStore();
-  const [tableId, setTableId] = useState(null);
+  const tableParam = searchParams.get('tableId');
+  const [tableId, setTableId] = useState(tableParam || null);
+  const [inputId, setInputId] = useState(tableParam || '');
   const [players, setPlayers] = useState([]);
   const [gm, setGm] = useState(null);
   const [character, setCharacter] = useState(null);
@@ -29,23 +31,12 @@ export default function LobbyPage() {
     getCharacter(char).then(setCharacter).catch(() => {});
   }, [char]);
 
-  // get or generate tableId on mount
-  useEffect(() => {
-    const existing = searchParams.get('table');
-    if (existing) {
-      setTableId(existing);
-    } else {
-      const id = Math.random().toString(36).substring(2, 8);
-      setTableId(id);
-      const sp = new URLSearchParams(searchParams);
-      sp.set('table', id);
-      setSearchParams(sp, { replace: true });
-    }
-  }, []);
+
+  // tableId is taken from URL if provided
+ main
 
   useEffect(() => {
     if (!tableId || !user) {
-      if (!tableId) setError('Не вдалося отримати код столу');
       return;
     }
     setError('');
@@ -74,6 +65,15 @@ export default function LobbyPage() {
     if (tableId) socket.emit('start-game', { tableId });
   };
 
+  const handleJoin = () => {
+    let id = inputId.trim();
+    if (!id) {
+      id = Math.random().toString(36).substring(2, 8);
+    }
+    setTableId(id);
+    navigate(`/lobby?tableId=${id}${char ? `&char=${char}` : ''}`);
+  };
+
   return (
     <div
       className="relative flex flex-col items-center min-h-screen bg-dndbg bg-cover bg-center"
@@ -88,10 +88,31 @@ export default function LobbyPage() {
         </button>
         <LogoutButton />
       </div>
+      {!tableId ? (
+        <div className="bg-[#322018]/90 p-6 rounded-2xl mt-10 w-full max-w-lg text-center">
+          <h1 className="text-3xl font-dnd text-dndgold mb-4">Вхід до лобі</h1>
+          <input
+            value={inputId}
+            onChange={(e) => setInputId(e.target.value)}
+            placeholder="Код столу"
+            className="w-full p-2 rounded bg-[#3c2a20] text-dndgold mb-4"
+          />
+          <button
+            onClick={handleJoin}
+            className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-6 py-2 transition active:scale-95"
+          >
+            Приєднатися / Створити
+          </button>
+          <div className="text-dndgold text-sm mt-2">Залиште поле порожнім, щоб створити нове лобі</div>
+        </div>
+      ) : (
       <div className="bg-[#322018]/90 p-6 rounded-2xl mt-10 w-full max-w-lg">
         <h1 className="text-3xl font-dnd text-dndgold text-center mb-2">Лобі столу</h1>
         {error && <div className="text-red-500 mb-2">{error}</div>}
-        <div className="text-dndgold mb-2">Код для підключення: <b>{tableId}</b></div>
+        <div className="text-dndgold mb-2">
+          Код для підключення: <b>{tableId}</b>
+          <div className="text-sm">Поділися цим кодом або посиланням /lobby?tableId={tableId}</div>
+        </div>
         {character && (
           <div className="flex items-center gap-3 mb-4 text-dndgold">
             <img
@@ -142,6 +163,7 @@ export default function LobbyPage() {
           </button>
         )}
       </div>
+      )}
     </div>
   );
 }
