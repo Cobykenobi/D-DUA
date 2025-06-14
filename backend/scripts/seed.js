@@ -9,8 +9,6 @@ const Item = require('../src/models/Item');
 const StartingSet = require('../src/models/StartingSet');
 const bcrypt = require('bcrypt');
 
-const slug = str => str.toLowerCase().replace(/\s+/g, '_');
-
 const MONGO_URI = process.env.MONGO_URI;
 
 if (!MONGO_URI) {

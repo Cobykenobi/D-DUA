@@ -32,7 +32,7 @@ exports.generateCharacterImage = async (description) => {
   return `/uploads/avatars/${filename}`;
 };
 
-exports.generateCharacterDescription = async (params) => {
+exports.generateCharacterDescription = async () => {
   // Можна підключити ChatGPT або інший сервіс
   // ...
   return 'Короткий опис персонажа з AI';
