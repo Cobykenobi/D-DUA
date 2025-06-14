@@ -34,7 +34,7 @@ This project combines an Express/MongoDB backend with a React frontend.
    ```
 
    This script also creates an admin account with login **root** and password
-   **kolokol911**. You must sign in with this account to access `/master`.
+   **kolokol911**. Logging in with these credentials grants admin access to `/admin`.
 
 ## Running the app
 
