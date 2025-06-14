@@ -64,7 +64,6 @@ function AdminLoginPage() {
           {!serverReady && (
             <div className="text-yellow-300">Connecting to server...</div>
           )}
- main
           <input
             className="p-2 rounded bg-[#3c2a20] text-white placeholder:text-gray-300"
             placeholder="Login"

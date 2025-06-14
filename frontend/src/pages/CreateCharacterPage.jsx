@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { createCharacter } from '../utils/api';
 
 import { useToast } from '../context/ToastContext';
- main
 
 const CreateCharacterPage = () => {
   const [name, setName] = useState('');
@@ -22,7 +21,6 @@ const CreateCharacterPage = () => {
     } catch (err) {
 
       setError(err.message || 'Помилка створення персонажа');
- main
     }
   };
 
