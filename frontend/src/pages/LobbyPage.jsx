@@ -33,7 +33,6 @@ export default function LobbyPage() {
 
 
   // tableId is taken from URL if provided
- main
 
   useEffect(() => {
     if (!tableId || !user) {
