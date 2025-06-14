@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
 const http = require('http');
+const adminRouter = require('./routes/admin');
 
 const app = express();
 const allowedOrigins = process.env.CLIENT_URL
@@ -39,6 +40,7 @@ app.use('/uploads', express.static(uploadDir));
 // API routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/admin/auth', require('./routes/adminAuth'));
+app.use('/api/admin', require('./routes/admin'));
 app.use('/api/character', require('./routes/character'));
 app.use('/api/characteristic', require('./routes/characteristic'));
 app.use('/api/inventory', require('./routes/inventory'));
