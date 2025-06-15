@@ -23,11 +23,11 @@ export default function CharacterCard({
       <h3 className="text-xl text-dndgold text-center font-dnd mb-2">{character.name}</h3>
       <div className="text-base">
         <strong className="text-dndgold">Раса:</strong>{' '}
-        {t('races.' + (character.race?.code || '')) || character.race?.name || '—'}
+        {character.race?.code ? t(`races.${character.race.code}`) : (character.race?.name || '—')}
       </div>
       <div className="text-base">
         <strong className="text-dndgold">Клас:</strong>{' '}
-        {t('classes.' + (character.profession?.code || '')) || character.profession?.name || '—'}
+        {character.profession?.code ? t(`classes.${character.profession.code}`) : (character.profession?.name || '—')}
       </div>
 
       <div className="text-sm">

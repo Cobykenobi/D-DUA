@@ -13,8 +13,8 @@ export default function PlayerCard({ character, onSelect }) {
       />
       <h3 className="text-lg text-dndgold text-center mb-1">{character.name}</h3>
       <p className="text-xs text-center">
-        {t('races.' + (character.race?.code || '')) || character.race?.name} /{' '}
-        {t('classes.' + (character.profession?.code || '')) || character.profession?.name}
+        {character.race?.code ? t(`races.${character.race.code}`) : (character.race?.name || '')} /{' '}
+        {character.profession?.code ? t(`classes.${character.profession.code}`) : (character.profession?.name || '')}
       </p>
       {character.stats && (
         <ul className="text-xs grid grid-cols-2 gap-x-2 mt-2">
