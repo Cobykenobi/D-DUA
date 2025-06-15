@@ -30,7 +30,8 @@ async function generateInventory(raceCode, classCode) {
     }
   }
 
-  const raceItems = raceInventory[raceCode] || [];
+  const baseCode = raceCode.split('_')[0];
+  const raceItems = raceInventory[baseCode] || [];
   for (const r of raceItems) {
     result.push({ item: r.item, amount: r.amount ?? 1, bonus: r.bonus || {} });
   }

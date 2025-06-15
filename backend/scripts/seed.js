@@ -49,7 +49,7 @@ async function seed() {
   // ];
   // const characteristics = ['HP', 'MP', 'Strength', 'Agility', 'Intellect'];
 
-  const races = [
+  const baseRaces = [
     { code: 'human', name: 'Людина' },
     { code: 'elf', name: 'Ельф' },
     { code: 'orc', name: 'Орк' },
@@ -59,8 +59,14 @@ async function seed() {
     { code: 'demon', name: 'Демон' },
     { code: 'beastkin', name: 'Звіролюд' },
     { code: 'angel', name: 'Ангел' },
-    { code: 'lizardman', name: 'Ящіролюд' }
+    { code: 'lizardman', name: 'Ящіролюд' },
   ];
+
+  const races = [];
+  for (const r of baseRaces) {
+    races.push({ code: `${r.code}_male`, name: `${r.name} (чоловік)` });
+    races.push({ code: `${r.code}_female`, name: `${r.name} (жінка)` });
+  }
   const professions = [
     { code: 'warrior', name: 'Воїн' },
     { code: 'mage', name: 'Маг' },
