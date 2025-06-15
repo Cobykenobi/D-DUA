@@ -68,7 +68,7 @@ export default function CharacterCard({
           {character.inventory && character.inventory.map((it, idx) => {
             const bonus = it.bonus && Object.keys(it.bonus).length
               ? ' (' + Object.entries(it.bonus)
-                  .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k, k)}`)
+                  .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k.toLowerCase(), k)}`)
                   .join(', ') + ')'
               : '';
             return (
