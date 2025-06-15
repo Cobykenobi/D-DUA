@@ -26,7 +26,7 @@ This project combines an Express/MongoDB backend with a React frontend.
 3. **Seed starter data** (optional)
 
    After updating your `.env` file, populate the database with approximately
-   ten races and ten professions along with five core characteristics:
+   ten races and six professions along with six core characteristics:
 
    ```bash
    cd backend
@@ -119,27 +119,26 @@ Every adventurer starts with five basic attributes. All of them have a value of
 
 Choosing a race grants specific bonuses to your starting stats:
 
-- **Human** – +1 to all stats
-- **Elf** – +2 DEX, +1 INT
-- **Orc** – +2 STR, +1 CON
-- **Gnome** – +2 CON, +1 INT
-- **Dwarf** – +2 STR, +1 CHA
-- **Halfling** – +2 DEX, +1 CHA
-- **Demon** – +2 INT, +1 CHA
-- **Beastkin** – +2 DEX, +1 CON
-- **Angel** – +2 CHA, +1 INT
-- **Lizardman** – +2 STR, +1 CON
+- **Людина (чоловік)**
+- **Людина (жінка)**
+- **Ельф (чоловік)**
+- **Ельф (жінка)**
+- **Орк (чоловік)**
+- **Орк (жінка)**
+- **Гном (чоловік)**
+- **Гном (жінка)**
+- **Дварф (чоловік)**
+- **Дварф (жінка)**
 
 ### Classes and Minimums
 
-Each of the seven classes expects certain ability thresholds before the hero can
+Each of the six classes expects certain ability thresholds before the hero can
 take up the role:
 
 - **Warrior** – STR 13, CON 12
 - **Mage** – INT 13, CHA 11
-- **Rogue** – DEX 13, INT 11
+- **Archer** – DEX 12, STR 12
 - **Healer** – CHA 13, CON 11
-- **Ranger** – DEX 12, STR 12
 - **Bard** – CHA 13, DEX 12
 - **Paladin** – STR 13, CHA 13
 
@@ -150,7 +149,7 @@ insufficient attributes. Finally, untouched stats are randomised between **8**
 and **15**, but never drop below their current value.
 
 ```js
-const stats = generateStats('Elf', 'Mage');
+const stats = generateStats('Ельф (жінка)', 'Маг');
 // => { STR: 10, DEX: 12, INT: 13, CON: 10, CHA: 11 }
 ```
 
@@ -161,7 +160,7 @@ added to the pack. The `generateInventory` helper merges both lists when a
 character is created.
 
 ```js
-const inventory = generateInventory('Orc', 'Warrior');
+const inventory = generateInventory('Орк (чоловік)', 'Воїн');
 // => ['Меч', 'Щит', 'Шкіряна броня', 'Зілля здоров’я', 'Кістяний талісман']
 ```
 
