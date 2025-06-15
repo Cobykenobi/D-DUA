@@ -27,12 +27,22 @@ export default function PlayerCard({ character, onSelect }) {
       )}
       {character.inventory && character.inventory.length > 0 && (
         <ul className="text-xs list-disc pl-4 mt-2 space-y-0.5">
-          {character.inventory.map((it, idx) => (
-            <li key={idx}>
-              {it.item}
-              {it.amount > 1 ? ` x${it.amount}` : ''}
-            </li>
-          ))}
+          {character.inventory.map((it, idx) => {
+            const bonus = it.bonus && Object.keys(it.bonus).length
+              ? ' (' +
+                Object.entries(it.bonus)
+                  .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k.toLowerCase(), k)}`)
+                  .join(', ') +
+                ')'
+              : '';
+            return (
+              <li key={idx}>
+                {it.item}
+                {it.amount > 1 ? ` x${it.amount}` : ''}
+                {bonus}
+              </li>
+            );
+          })}
         </ul>
       )}
       {onSelect && (
