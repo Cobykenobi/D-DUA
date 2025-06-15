@@ -100,13 +100,13 @@ export default function GameTablePage() {
         </div>
         {/* Нижня панель */}
         <div
-          className={`md:absolute md:bottom-4 md:left-1/2 md:-translate-x-1/2 z-20 mt-4 md:mt-0 flex gap-4 ${isGM ? 'flex-row flex-wrap md:flex-nowrap justify-center items-end md:w-auto w-full' : 'flex-row justify-center w-full'}`}
+          className={`md:absolute md:bottom-4 md:left-1/2 md:-translate-x-1/2 z-20 mt-4 md:mt-0 flex flex-wrap gap-4 ${isGM ? 'justify-center items-end md:w-auto w-full' : 'justify-center w-full'}`}
         >
           {isGM ? (
             <>
               <ChatComponent tableId={tableId} user={user} messages={messages} socket={socket} />
-              <MusicPlayer isGM={isGM} className="w-60" />
-              <GMPanel tableId={tableId} socket={socket} players={players} className="w-60" />
+              <MusicPlayer isGM={isGM} className="w-48" />
+              <GMPanel tableId={tableId} socket={socket} players={players} className="w-48" />
               <DiceBox className="self-end w-40" />
             </>
           ) : (
