@@ -23,11 +23,11 @@ export default function CharacterCard({
       <h3 className="text-xl text-dndgold text-center font-dnd mb-2">{character.name}</h3>
       <div className="text-base">
         <strong className="text-dndgold">Раса:</strong>{' '}
-        {character.race?.code ? t(`races.${character.race.code}`) : (character.race?.name || '—')}
+        {character.race?.code ? t(`races.${character.race.code.toLowerCase()}`, character.race.name || character.race.code) : (character.race?.name || '—')}
       </div>
       <div className="text-base">
         <strong className="text-dndgold">Клас:</strong>{' '}
-        {character.profession?.code ? t(`classes.${character.profession.code}`) : (character.profession?.name || '—')}
+        {character.profession?.code ? t(`classes.${character.profession.code.toLowerCase()}`, character.profession.name || character.profession.code) : (character.profession?.name || '—')}
       </div>
 
       <div className="text-sm">
@@ -68,7 +68,7 @@ export default function CharacterCard({
           {character.inventory && character.inventory.map((it, idx) => {
             const bonus = it.bonus && Object.keys(it.bonus).length
               ? ' (' + Object.entries(it.bonus)
-                  .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${k}`)
+                  .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k, k)}`)
                   .join(', ') + ')'
               : '';
             return (

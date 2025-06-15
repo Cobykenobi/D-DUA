@@ -15,6 +15,12 @@
     "gnome_female": "Gnome (female)",
     "dwarf_male": "Dwarf (male)",
     "dwarf_female": "Dwarf (female)"
+    ,
+    "human": "Human",
+    "elf": "Elf",
+    "orc": "Orc",
+    "gnome": "Gnome",
+    "dwarf": "Dwarf"
   },
   "classes": {
     "warrior": "Warrior",

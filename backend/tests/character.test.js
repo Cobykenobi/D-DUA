@@ -10,6 +10,7 @@ jest.mock('../src/models/Profession');
 jest.mock('../src/models/Character');
 jest.mock('../src/models/StartingSet');
 jest.mock('../src/utils/generateInventory');
+const generateStats = require('../src/utils/generateStats');
 
 beforeEach(() => {
   jest.clearAllMocks();
@@ -51,6 +52,36 @@ describe('Character Controller - create', () => {
     expect(saved.stats.agility).toBe(7); // Elf agility bonus applied
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalled();
+  });
+
+  it('handles gendered race codes correctly', async () => {
+    Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Орк (чоловік)', code: 'orc_male' }]);
+    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Warrior', code: 'warrior' }]);
+    StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
+
+    let saved;
+    Character.mockImplementation(data => {
+      saved = data;
+      return { save: jest.fn().mockResolvedValue(data) };
+    });
+
+    jest.spyOn(Math, 'random').mockReturnValue(0);
+
+    const req = { user: { id: 'u1' }, body: { name: 'Hero' } };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+    await characterController.create(req, res);
+
+    Math.random.mockRestore();
+
+    expect(saved.stats).toEqual({
+      health: 6,
+      defense: 6,
+      strength: 9,
+      intellect: 5,
+      agility: 5,
+      charisma: 5
+    });
   });
 
   it('passes codes to generateInventory and saves its result', async () => {
