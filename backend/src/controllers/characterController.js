@@ -21,7 +21,7 @@ exports.getAllByUser = async (req, res) => {
 // Створити персонажа
 exports.create = async (req, res) => {
   try {
-    let { name, description, image } = req.body;
+    let { name, description, image, raceId, professionId } = req.body;
 
     if (!name || typeof name !== 'string' || !name.trim() || name.trim().length > 50) {
       return res.status(400).json({ message: 'Invalid name' });
@@ -42,17 +42,29 @@ exports.create = async (req, res) => {
     const uploaded = req.file ? `/uploads/avatars/${req.file.filename}` : null;
 
 
-    // Обрати рандомно расу, професію і базові стати з колекції
-  let race = await Race.aggregate([{ $sample: { size: 1 } }]);
-  if (!race.length) {
-    const fallback = await Race.find().limit(1);
-    race = fallback;
+    // Обрати расу та професію (використати передані id або згенерувати випадково)
+  let race;
+  if (raceId) {
+    const found = await Race.findById(raceId);
+    race = found ? [found] : [];
+  } else {
+    race = await Race.aggregate([{ $sample: { size: 1 } }]);
+    if (!race.length) {
+      const fallback = await Race.find().limit(1);
+      race = fallback;
+    }
   }
 
-  let profession = await Profession.aggregate([{ $sample: { size: 1 } }]);
-  if (!profession.length) {
-    const fallback = await Profession.find().limit(1);
-    profession = fallback;
+  let profession;
+  if (professionId) {
+    const found = await Profession.findById(professionId);
+    profession = found ? [found] : [];
+  } else {
+    profession = await Profession.aggregate([{ $sample: { size: 1 } }]);
+    if (!profession.length) {
+      const fallback = await Profession.find().limit(1);
+      profession = fallback;
+    }
   }
 
   if (!race.length || !profession.length) {
