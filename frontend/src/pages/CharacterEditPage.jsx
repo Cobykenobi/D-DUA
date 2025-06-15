@@ -63,11 +63,6 @@ export default function CharacterEditPage() {
         onChange={e => setDescription(e.target.value)}
         placeholder="Опис"
       />
-      <input
-        type="file"
-        accept="image/*"
-        onChange={e => setImage(e.target.files[0])}
-      />
       <button type="submit">Зберегти</button>
     </form>
   );
