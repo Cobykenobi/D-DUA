@@ -3,7 +3,7 @@
 ## Current status
 - The repository includes avatar assets in `frontend/public/avatars` and a default avatar in `frontend/public/default-avatar.png`.
 - These assets total about 40 KB.
-- Other static images such as map backgrounds account for roughly 8.5 MB.
+- Other static images such as map backgrounds account for approximately 4.8 MB.
 
 ## Using a CDN or object storage
 Hosting the avatars on a CDN (Content Delivery Network) or object storage service (e.g. S3, Cloudflare R2, GCS) would:
