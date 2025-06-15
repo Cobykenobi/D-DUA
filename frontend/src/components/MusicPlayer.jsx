@@ -64,7 +64,7 @@ export default function MusicPlayer({ isGM, className = '' }) {
         <span className="text-sm">Гучність</span>
         <input type="range" min={0} max={1} step={0.01} value={volume} onChange={e => changeVolume(parseFloat(e.target.value))} />
       </div>
-      <ul className="divide-y divide-dndgold/20 max-h-40 overflow-y-auto text-sm">
+      <ul className="divide-y divide-dndgold/20 max-h-32 overflow-y-auto text-sm">
         {tracks.map(track => (
           <li key={track._id} className="flex justify-between items-center py-1">
             <button onClick={() => setCurrent(track)} className="hover:underline flex-1 text-left">

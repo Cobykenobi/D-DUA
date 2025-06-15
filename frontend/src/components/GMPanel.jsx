@@ -36,31 +36,40 @@ export default function GMPanel({ tableId, socket, players, className = '' }) {
   return (
     <div className={`bg-[#25160f]/80 rounded-2xl p-4 mb-2 mt-4 text-center ${className}`}>
       <div className="text-dndgold text-xl font-bold mb-2">GM-панель</div>
-      {/* Додавання монстра */}
-      <div className="mb-2">
-        <input
-          className="rounded px-2 py-1 mr-2"
-          value={monsterName}
-          onChange={e => setMonsterName(e.target.value)}
-          placeholder="Ім'я монстра"
-        />
-        <button className="bg-dndgold text-dndred font-dnd px-4 py-2 rounded-xl" onClick={addMonster}>Додати монстра</button>
-      </div>
-      {/* Кік гравців */}
-      <div className="mb-2">
-        {players.map(p => (
-          <button key={p.user} onClick={() => kick(p.user)} className="bg-dndred px-3 py-1 rounded-xl m-1 text-white">{p.name} Кік</button>
-        ))}
-      </div>
-      {/* Ініціатива */}
-      <div className="mb-2">
-        <button className="bg-dndgold text-dndred font-dnd px-4 py-2 rounded-xl" onClick={handleInitiativeInput}>Згенерувати ініціативу</button>
-        <button className="bg-dndgold text-dndred font-dnd px-4 py-2 rounded-xl ml-2" onClick={startInitiative}>Почати ініціативу</button>
-      </div>
-      {/* Оновити карту */}
-      <div>
-        <input className="rounded px-2 py-1 mr-2" value={mapUrl} onChange={e => setMapUrl(e.target.value)} placeholder="Посилання на карту" />
-        <button className="bg-dndgold text-dndred font-dnd px-4 py-2 rounded-xl" onClick={updateMap}>Оновити карту</button>
+      <div className="flex flex-col gap-2">
+        {/* Додавання монстра */}
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <input
+            className="rounded px-2 py-1"
+            value={monsterName}
+            onChange={e => setMonsterName(e.target.value)}
+            placeholder="Ім'я монстра"
+          />
+          <button className="bg-dndgold text-dndred font-dnd px-4 py-2 rounded-xl" onClick={addMonster}>Додати монстра</button>
+        </div>
+        {/* Кік гравців */}
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          {players.map(p => (
+            <button key={p.user} onClick={() => kick(p.user)} className="bg-dndred px-3 py-1 rounded-xl text-white">
+              {p.name} Кік
+            </button>
+          ))}
+        </div>
+        {/* Ініціатива */}
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <button className="bg-dndgold text-dndred font-dnd px-4 py-2 rounded-xl" onClick={handleInitiativeInput}>Згенерувати ініціативу</button>
+          <button className="bg-dndgold text-dndred font-dnd px-4 py-2 rounded-xl" onClick={startInitiative}>Почати ініціативу</button>
+        </div>
+        {/* Оновити карту */}
+        <div className="flex flex-wrap items-center justify-center gap-2">
+          <input
+            className="rounded px-2 py-1"
+            value={mapUrl}
+            onChange={e => setMapUrl(e.target.value)}
+            placeholder="Посилання на карту"
+          />
+          <button className="bg-dndgold text-dndred font-dnd px-4 py-2 rounded-xl" onClick={updateMap}>Оновити карту</button>
+        </div>
       </div>
     </div>
   );
