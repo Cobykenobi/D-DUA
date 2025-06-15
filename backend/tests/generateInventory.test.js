@@ -22,7 +22,7 @@ describe('generateInventory', () => {
       { item: 'Меч', amount: 1, bonus: {} },
       { item: 'Шкіряна броня', amount: 1, bonus: {} },
       { item: 'Зілля здоров’я', amount: 1, bonus: {} },
-      { item: 'Кістяний талісман', amount: 1, bonus: { STR: 1 } }
+      { item: 'Кістяний талісман', amount: 1, bonus: { strength: 1 } }
     ]);
   });
 
@@ -37,7 +37,7 @@ describe('generateInventory', () => {
       { item: 'Сокира', amount: 1, bonus: {} },
       { item: 'Щит', amount: 1, bonus: {} },
       { item: 'Зілля здоров’я', amount: 1, bonus: {} },
-      { item: 'Кістяний талісман', amount: 1, bonus: { STR: 1 } }
+      { item: 'Кістяний талісман', amount: 1, bonus: { strength: 1 } }
     ]);
   });
 

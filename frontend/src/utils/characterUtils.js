@@ -1,23 +1,22 @@
 export const races = [
-  'Human',
-  'Elf',
-  'Orc',
-  'Gnome',
-  'Dwarf',
-  'Halfling',
-  'Demon',
-  'Beastkin',
-  'Angel',
-  'Lizardman'
+  'Human (male)',
+  'Human (female)',
+  'Elf (male)',
+  'Elf (female)',
+  'Orc (male)',
+  'Orc (female)',
+  'Gnome (male)',
+  'Gnome (female)',
+  'Dwarf (male)',
+  'Dwarf (female)'
 ];
 export const classes = [
   'Warrior',
   'Mage',
-  'Rogue',
-  'Healer',
-  'Ranger',
+  'Archer',
+  'Paladin',
   'Bard',
-  'Paladin'
+  'Healer'
 ];
 
 
