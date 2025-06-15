@@ -36,7 +36,7 @@ export default function GMPanel({ tableId, socket, players, className = '' }) {
   return (
     <div className={`bg-[#25160f]/80 rounded-2xl p-4 mb-2 mt-4 text-center ${className}`}>
       <div className="text-dndgold text-xl font-bold mb-2">GM-панель</div>
-      <div className="flex flex-col gap-2">
+      <div className="flex flex-row flex-wrap gap-2">
         {/* Додавання монстра */}
         <div className="flex flex-wrap items-center justify-center gap-2">
           <input
