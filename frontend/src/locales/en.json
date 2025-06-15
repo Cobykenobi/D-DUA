@@ -15,10 +15,28 @@
     "beastkin": "Beastkin",
     "angel": "Angel",
     "lizardman": "Lizardman",
-    "dragonborn": "Dragonborn",
-    "half-elf": "Half-Elf",
-    "half-orc": "Half-Orc",
-    "tiefling": "Tiefling"
+
+    "human_male": "Human (male)",
+    "human_female": "Human (female)",
+    "elf_male": "Elf (male)",
+    "elf_female": "Elf (female)",
+    "orc_male": "Orc (male)",
+    "orc_female": "Orc (female)",
+    "gnome_male": "Gnome (male)",
+    "gnome_female": "Gnome (female)",
+    "dwarf_male": "Dwarf (male)",
+    "dwarf_female": "Dwarf (female)",
+    "halfling_male": "Halfling (male)",
+    "halfling_female": "Halfling (female)",
+    "demon_male": "Demon (male)",
+    "demon_female": "Demon (female)",
+    "beastkin_male": "Beastkin (male)",
+    "beastkin_female": "Beastkin (female)",
+    "angel_male": "Angel (male)",
+    "angel_female": "Angel (female)",
+    "lizardman_male": "Lizardman (male)",
+    "lizardman_female": "Lizardman (female)"
+ main
   },
   "classes": {
     "warrior": "Warrior",
@@ -35,10 +53,11 @@
     "barbarian": "Barbarian"
   },
   "stats": {
-    "STR": "Strength",
-    "DEX": "Dexterity",
-    "INT": "Intelligence",
-    "CON": "Constitution",
-    "CHA": "Charisma"
+    "health": "Health",
+    "defense": "Defense",
+    "strength": "Strength",
+    "intellect": "Intellect",
+    "agility": "Agility",
+    "charisma": "Charisma"
   }
 }

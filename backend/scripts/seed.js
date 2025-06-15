@@ -49,7 +49,7 @@ async function seed() {
   // ];
   // const characteristics = ['HP', 'MP', 'Strength', 'Agility', 'Intellect'];
 
-  const races = [
+  const baseRaces = [
     { code: 'human', name: 'Людина' },
     { code: 'elf', name: 'Ельф' },
     { code: 'orc', name: 'Орк' },
@@ -59,8 +59,14 @@ async function seed() {
     { code: 'demon', name: 'Демон' },
     { code: 'beastkin', name: 'Звіролюд' },
     { code: 'angel', name: 'Ангел' },
-    { code: 'lizardman', name: 'Ящіролюд' }
+    { code: 'lizardman', name: 'Ящіролюд' },
   ];
+
+  const races = [];
+  for (const r of baseRaces) {
+    races.push({ code: `${r.code}_male`, name: `${r.name} (чоловік)` });
+    races.push({ code: `${r.code}_female`, name: `${r.name} (жінка)` });
+  }
   const professions = [
     { code: 'warrior', name: 'Воїн' },
     { code: 'mage', name: 'Маг' },
@@ -71,22 +77,23 @@ async function seed() {
     { code: 'paladin', name: 'Паладин' }
   ];
   const characteristics = [
-    'STR',
-    'DEX',
-    'INT',
-    'CON',
-    'CHA'
+    'health',
+    'defense',
+    'strength',
+    'intellect',
+    'agility',
+    'charisma'
   ];
 
   const classInventory = {
     warrior: {
       weapon: [
-        { item: 'Меч', bonus: { STR: 2 } },
-        { item: 'Сокира', bonus: { STR: 2 } }
+        { item: 'Меч', bonus: { strength: 2 } },
+        { item: 'Сокира', bonus: { strength: 2 } }
       ],
       armor: [
-        { item: 'Щит', bonus: { CON: 1 } },
-        { item: 'Шкіряна броня', bonus: { DEX: 1 } }
+        { item: 'Щит', bonus: { defense: 1 } },
+        { item: 'Шкіряна броня', bonus: { agility: 1 } }
       ],
       misc: [
         { item: 'Зілля здоров’я' }
@@ -94,12 +101,12 @@ async function seed() {
     },
     mage: {
       weapon: [
-        { item: 'Магічний посох', bonus: { INT: 2 } },
-        { item: 'Чарівна паличка', bonus: { INT: 1 } }
+        { item: 'Магічний посох', bonus: { intellect: 2 } },
+        { item: 'Чарівна паличка', bonus: { intellect: 1 } }
       ],
       armor: [
-        { item: 'Обруч мудрості', bonus: { INT: 1 } },
-        { item: 'Тканинна мантія', bonus: { CON: 1 } }
+        { item: 'Обруч мудрості', bonus: { intellect: 1 } },
+        { item: 'Тканинна мантія', bonus: { health: 1 } }
       ],
       misc: [
         { item: 'Мана-зілля' },
@@ -108,12 +115,12 @@ async function seed() {
     },
     rogue: {
       weapon: [
-        { item: 'Кинджал', bonus: { DEX: 1 } },
-        { item: 'Короткий меч', bonus: { DEX: 1 } }
+        { item: 'Кинджал', bonus: { agility: 1 } },
+        { item: 'Короткий меч', bonus: { agility: 1 } }
       ],
       armor: [
-        { item: 'Плащ тіні', bonus: { DEX: 1 } },
-        { item: 'Легка броня', bonus: { DEX: 1 } }
+        { item: 'Плащ тіні', bonus: { agility: 1 } },
+        { item: 'Легка броня', bonus: { agility: 1 } }
       ],
       misc: [
         { item: 'Відмички' }
@@ -121,11 +128,11 @@ async function seed() {
     },
     healer: {
       weapon: [
-        { item: 'Жезл лікування', bonus: { CHA: 1 } },
-        { item: 'Священний посох', bonus: { CHA: 1 } }
+        { item: 'Жезл лікування', bonus: { charisma: 1 } },
+        { item: 'Священний посох', bonus: { charisma: 1 } }
       ],
       armor: [
-        { item: 'Легка ряса', bonus: { CON: 1 } },
+        { item: 'Легка ряса', bonus: { health: 1 } },
         { item: 'Травник' }
       ],
       misc: [
@@ -134,11 +141,11 @@ async function seed() {
     },
     ranger: {
       weapon: [
-        { item: 'Лук', bonus: { DEX: 1 } },
-        { item: 'Арбалет', bonus: { DEX: 1 } }
+        { item: 'Лук', bonus: { agility: 1 } },
+        { item: 'Арбалет', bonus: { agility: 1 } }
       ],
       armor: [
-        { item: 'Шкіряна броня', bonus: { DEX: 1 } },
+        { item: 'Шкіряна броня', bonus: { agility: 1 } },
         { item: 'Ніж для виживання' }
       ],
       misc: [
@@ -147,23 +154,23 @@ async function seed() {
     },
     bard: {
       weapon: [
-        { item: 'Лютня', bonus: { CHA: 1 } },
-        { item: 'Легкий меч', bonus: { DEX: 1 } }
+        { item: 'Лютня', bonus: { charisma: 1 } },
+        { item: 'Легкий меч', bonus: { agility: 1 } }
       ],
       armor: [
-        { item: 'Короткий лук', bonus: { DEX: 1 } },
+        { item: 'Короткий лук', bonus: { agility: 1 } },
         { item: 'Пісенник' }
       ],
       misc: []
     },
     paladin: {
       weapon: [
-        { item: 'Молот', bonus: { STR: 1 } },
-        { item: 'Святий меч', bonus: { STR: 2 } }
+        { item: 'Молот', bonus: { strength: 1 } },
+        { item: 'Святий меч', bonus: { strength: 2 } }
       ],
       armor: [
-        { item: 'Латна броня', bonus: { CON: 2 } },
-        { item: 'Святий щит', bonus: { CHA: 1 } }
+        { item: 'Латна броня', bonus: { health: 2 } },
+        { item: 'Святий щит', bonus: { charisma: 1 } }
       ],
       misc: [
         { item: 'Святий амулет' }
@@ -172,16 +179,16 @@ async function seed() {
   };
 
   const raceInventory = {
-    elf: [{ item: 'Ельфійські стріли', bonus: { DEX: 1 } }],
-    orc: [{ item: 'Кістяний талісман', bonus: { STR: 1 } }],
-    human: [{ item: 'Монета удачі', bonus: { CHA: 1 } }],
+    elf: [{ item: 'Ельфійські стріли', bonus: { agility: 1 } }],
+    orc: [{ item: 'Кістяний талісман', bonus: { strength: 1 } }],
+    human: [{ item: 'Монета удачі', bonus: { charisma: 1 } }],
     gnome: [{ item: 'Гвинтовий ключ' }],
-    dwarf: [{ item: 'Похідна кружка', bonus: { CON: 1 } }],
-    halfling: [{ item: 'Трубка та тютюн', bonus: { CHA: 1 } }],
-    demon: [{ item: 'Темний камінь', bonus: { INT: 1 } }],
-    beastkin: [{ item: 'Кігтістий амулет', bonus: { DEX: 1 } }],
-    angel: [{ item: 'Пір’я з крила', bonus: { CHA: 1 } }],
-    lizardman: [{ item: 'Луска пращура', bonus: { CON: 1 } }]
+    dwarf: [{ item: 'Похідна кружка', bonus: { health: 1 } }],
+    halfling: [{ item: 'Трубка та тютюн', bonus: { charisma: 1 } }],
+    demon: [{ item: 'Темний камінь', bonus: { intellect: 1 } }],
+    beastkin: [{ item: 'Кігтістий амулет', bonus: { agility: 1 } }],
+    angel: [{ item: 'Пір’я з крила', bonus: { charisma: 1 } }],
+    lizardman: [{ item: 'Луска пращура', bonus: { health: 1 } }]
   };
 
   if (await Race.countDocuments() === 0) {
