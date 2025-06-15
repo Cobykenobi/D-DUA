@@ -74,7 +74,7 @@ export default function GameTablePage() {
           <LogoutButton />
         </div>
       </div>
-      <div className="relative flex-1 h-[80vh] bg-[#1b110a]/80 rounded-b-2xl px-6 pb-4 overflow-hidden">
+      <div className="relative flex-1 h-[80vh] bg-[#1b110a]/80 rounded-b-2xl px-6 pb-4 md:pb-32 overflow-hidden">
         {/* Ліві слоти гравців */}
         <div className="md:absolute md:left-2 md:top-1/2 md:-translate-y-1/2 flex flex-col gap-2">
           {visiblePlayers.slice(0,3).map((p,i) => (
@@ -105,7 +105,7 @@ export default function GameTablePage() {
           {isGM ? (
             <>
               <ChatComponent tableId={tableId} user={user} messages={messages} socket={socket} />
-              <MusicPlayer isGM={isGM} className="w-48" />
+              <MusicPlayer isGM={isGM} className="w-32 md:w-40" />
               <GMPanel tableId={tableId} socket={socket} players={players} className="w-48" />
               <DiceBox className="self-end w-40" />
             </>
