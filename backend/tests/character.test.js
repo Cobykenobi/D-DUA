@@ -53,13 +53,18 @@ describe('Character Controller - create', () => {
     expect(res.json).toHaveBeenCalled();
   });
 
-  it('passes codes to generateInventory', async () => {
+  it('passes codes to generateInventory and saves its result', async () => {
     Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Elf', code: 'elf' }]);
     Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Mage', code: 'mage' }]);
 
-    generateInventory.mockResolvedValue([]);
+    const inv = [{ item: 'Test', amount: 1, bonus: {} }];
+    generateInventory.mockResolvedValue(inv);
 
-    Character.mockImplementation(data => ({ save: jest.fn().mockResolvedValue(data) }));
+    let saved;
+    Character.mockImplementation(data => {
+      saved = data;
+      return { save: jest.fn().mockResolvedValue(data) };
+    });
 
     const req = { user: { id: 'u1' }, body: { name: 'Hero' } };
     const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
@@ -67,6 +72,7 @@ describe('Character Controller - create', () => {
     await characterController.create(req, res);
 
     expect(generateInventory).toHaveBeenCalledWith('elf', 'mage');
+    expect(saved.inventory).toEqual(inv);
   });
 
   it('returns 400 if races or professions are missing', async () => {

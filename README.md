@@ -106,7 +106,8 @@ npm run format
 
 ## Character Basics
 
-Characters use five core statistics which start at **10** each:
+Every adventurer starts with five basic attributes. All of them have a value of
+**10** before any racial or class adjustments are applied:
 
 - **STR** – Strength
 - **DEX** – Dexterity
@@ -116,34 +117,37 @@ Characters use five core statistics which start at **10** each:
 
 ### Races and Bonuses
 
-Ten playable races provide bonuses to these stats:
+Choosing a race grants specific bonuses to your starting stats:
 
-- Human – +1 to all stats
-- Elf – +2 DEX, +1 INT
-- Orc – +2 STR, +1 CON
-- Gnome – +2 CON, +1 INT
-- Dwarf – +2 STR, +1 CHA
-- Halfling – +2 DEX, +1 CHA
-- Demon – +2 INT, +1 CHA
-- Beastkin – +2 DEX, +1 CON
-- Angel – +2 CHA, +1 INT
-- Lizardman – +2 STR, +1 CON
+- **Human** – +1 to all stats
+- **Elf** – +2 DEX, +1 INT
+- **Orc** – +2 STR, +1 CON
+- **Gnome** – +2 CON, +1 INT
+- **Dwarf** – +2 STR, +1 CHA
+- **Halfling** – +2 DEX, +1 CHA
+- **Demon** – +2 INT, +1 CHA
+- **Beastkin** – +2 DEX, +1 CON
+- **Angel** – +2 CHA, +1 INT
+- **Lizardman** – +2 STR, +1 CON
 
 ### Classes and Minimums
 
-Seven classes require minimum statistics:
+Each of the seven classes expects certain ability thresholds before the hero can
+take up the role:
 
-- Warrior – STR 13, CON 12
-- Mage – INT 13, CHA 11
-- Rogue – DEX 13, INT 11
-- Healer – CHA 13, CON 11
-- Ranger – DEX 12, STR 12
-- Bard – CHA 13, DEX 12
-- Paladin – STR 13, CHA 13
+- **Warrior** – STR 13, CON 12
+- **Mage** – INT 13, CHA 11
+- **Rogue** – DEX 13, INT 11
+- **Healer** – CHA 13, CON 11
+- **Ranger** – DEX 12, STR 12
+- **Bard** – CHA 13, DEX 12
+- **Paladin** – STR 13, CHA 13
 
 ### Stat Generation
 
-When creating a character, the race bonuses are applied first. Any class minimums are enforced next. All remaining stats are randomised between **8** and **15** but never lowered below their current values.
+When generating stats, race bonuses apply first. Class minimums then raise any
+insufficient attributes. Finally, untouched stats are randomised between **8**
+and **15**, but never drop below their current value.
 
 ```js
 const stats = generateStats('Elf', 'Mage');
@@ -152,7 +156,9 @@ const stats = generateStats('Elf', 'Mage');
 
 ### Starter Inventory
 
-Each class begins with a predefined set of equipment which can be supplemented by race-specific items. The `generateInventory` utility merges these sets when a character is created.
+Each class provides a starter kit of equipment. Race specific trinkets are then
+added to the pack. The `generateInventory` helper merges both lists when a
+character is created.
 
 ```js
 const inventory = generateInventory('Orc', 'Warrior');

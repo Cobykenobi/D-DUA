@@ -18,12 +18,11 @@ describe('generateInventory', () => {
     const items = await generateInventory('orc_male', 'warrior');
     Math.random.mockRestore();
 
-    const names = items.map(i => i.item);
-    expect(names).toEqual([
-      'Меч',
-      'Шкіряна броня',
-      'Зілля здоров’я',
-      'Кістяний талісман'
+    expect(items).toEqual([
+      { item: 'Меч', amount: 1, bonus: {} },
+      { item: 'Шкіряна броня', amount: 1, bonus: {} },
+      { item: 'Зілля здоров’я', amount: 1, bonus: {} },
+      { item: 'Кістяний талісман', amount: 1, bonus: { STR: 1 } }
     ]);
   });
 
@@ -34,12 +33,11 @@ describe('generateInventory', () => {
     const items = await generateInventory('orc_female', 'warrior');
     Math.random.mockRestore();
 
-    const names = items.map(i => i.item);
-    expect(names).toEqual([
-      'Сокира',
-      'Щит',
-      'Зілля здоров’я',
-      'Кістяний талісман'
+    expect(items).toEqual([
+      { item: 'Сокира', amount: 1, bonus: {} },
+      { item: 'Щит', amount: 1, bonus: {} },
+      { item: 'Зілля здоров’я', amount: 1, bonus: {} },
+      { item: 'Кістяний талісман', amount: 1, bonus: { STR: 1 } }
     ]);
   });
 
