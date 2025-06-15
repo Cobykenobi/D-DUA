@@ -75,22 +75,20 @@ exports.create = async (req, res) => {
 
 
 
-  const stats = generateStats(
-    (race[0].code || race[0].name)?.toLowerCase(),
-    (profession[0].code || profession[0].name)?.toLowerCase()
-  );
+  const raceCodeRaw = (race[0].code || race[0].name).toLowerCase();
+  const gender = raceCodeRaw.endsWith('_female') ? 'female' : 'male';
+  const raceBase = raceCodeRaw.replace(/_(male|female)$/, '');
+  const classCodeLower = (profession[0].code || profession[0].name).toLowerCase();
+
+  const stats = generateStats(raceBase, classCodeLower, gender);
  
 
     // Логіка вибору аватара
     const avatar = uploaded || (image ? image : '');
 
-
-
-    const raceCode = (race[0].code || race[0].name).toLowerCase();
-    const classCode = (profession[0].code || profession[0].name).toLowerCase();
-    const inventory = await generateInventory(raceCode, classCode);
+    const inventory = await generateInventory(raceCodeRaw, classCodeLower);
     if (!inventory.length) {
-      console.warn(`Empty inventory for race ${raceCode} class ${classCode}`);
+      console.warn(`Empty inventory for race ${raceCodeRaw} class ${classCodeLower}`);
     }
 
 

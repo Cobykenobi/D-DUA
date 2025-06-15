@@ -15,6 +15,12 @@
     "gnome_female": "Гном (жінка)",
     "dwarf_male": "Дварф (чоловік)",
     "dwarf_female": "Дварф (жінка)"
+    ,
+    "human": "Людина",
+    "elf": "Ельф",
+    "orc": "Орк",
+    "gnome": "Гном",
+    "dwarf": "Дварф"
   },
   "classes": {
     "warrior": "Воїн",
