@@ -2,9 +2,11 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LogoutButton from "../components/LogoutButton";
 import { createCharacter, getRaces, getProfessions } from '../utils/api';
+import { useTranslation } from 'react-i18next';
 
 export default function CharacterCreatePage() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [form, setForm] = useState({ name: '', race: '', profession: '' });
   const [image, setImage] = useState(null);
   const [error, setError] = useState(null);
