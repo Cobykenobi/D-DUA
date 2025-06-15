@@ -15,6 +15,7 @@
     "beastkin": "Звіролюдина",
     "angel": "Ангел",
     "lizardman": "Ящіролюд",
+
     "human_male": "Людина (чоловік)",
     "human_female": "Людина (жінка)",
     "elf_male": "Ельф (чоловік)",
@@ -35,6 +36,7 @@
     "angel_female": "Ангел (жінка)",
     "lizardman_male": "Ящіролюд (чоловік)",
     "lizardman_female": "Ящіролюд (жінка)"
+ main
   },
   "classes": {
     "warrior": "Воїн",
@@ -43,7 +45,12 @@
     "healer": "Лікар",
     "ranger": "Рейнджер",
     "bard": "Бард",
-    "paladin": "Паладин"
+    "paladin": "Паладин",
+    "wizard": "Чарівник",
+    "cleric": "Клерик",
+    "druid": "Друїд",
+    "monk": "Монах",
+    "barbarian": "Варвар"
   },
   "stats": {
     "health": "Здоров'я",

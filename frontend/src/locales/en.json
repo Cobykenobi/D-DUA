@@ -15,6 +15,7 @@
     "beastkin": "Beastkin",
     "angel": "Angel",
     "lizardman": "Lizardman",
+
     "human_male": "Human (male)",
     "human_female": "Human (female)",
     "elf_male": "Elf (male)",
@@ -35,6 +36,7 @@
     "angel_female": "Angel (female)",
     "lizardman_male": "Lizardman (male)",
     "lizardman_female": "Lizardman (female)"
+ main
   },
   "classes": {
     "warrior": "Warrior",
@@ -43,7 +45,12 @@
     "healer": "Healer",
     "ranger": "Ranger",
     "bard": "Bard",
-    "paladin": "Paladin"
+    "paladin": "Paladin",
+    "wizard": "Wizard",
+    "cleric": "Cleric",
+    "druid": "Druid",
+    "monk": "Monk",
+    "barbarian": "Barbarian"
   },
   "stats": {
     "health": "Health",
