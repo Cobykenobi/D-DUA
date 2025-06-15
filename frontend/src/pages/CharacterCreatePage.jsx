@@ -1,22 +1,16 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LogoutButton from "../components/LogoutButton";
-import { createCharacter, getRaces, getProfessions } from '../utils/api';
+import { createCharacter } from '../utils/api';
 import { useTranslation } from 'react-i18next';
 
 export default function CharacterCreatePage() {
   const navigate = useNavigate();
   const { t } = useTranslation();
-  const [form, setForm] = useState({ name: '', race: '', profession: '' });
+  const [form, setForm] = useState({ name: '' });
   const [image, setImage] = useState(null);
   const [error, setError] = useState(null);
-  const [races, setRaces] = useState([]);
-  const [professions, setProfessions] = useState([]);
 
-  useEffect(() => {
-    getRaces().then(setRaces).catch(() => {});
-    getProfessions().then(setProfessions).catch(() => {});
-  }, []);
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -29,11 +23,9 @@ export default function CharacterCreatePage() {
         setError("Будь ласка, заповніть ім'я персонажа.");
         return;
       }
-      const payload = {
-        name: form.name,
-        raceId: form.race,
-        professionId: form.profession,
-      };
+        const payload = {
+          name: form.name,
+        };
       if (image) payload.image = image;
       await createCharacter(payload);
       navigate('/profile');
@@ -67,34 +59,7 @@ export default function CharacterCreatePage() {
           onChange={handleChange}
           className="w-full mb-4 px-3 py-2 rounded bg-[#2d1a10] border border-dndgold text-white"
         />
-        <label className="block text-sm mb-1">Раса</label>
-        <select
-          name="race"
-          value={form.race}
-          onChange={handleChange}
-          className="w-full mb-4 px-3 py-2 rounded bg-[#2d1a10] border border-dndgold text-white"
-        >
-          <option value="">Оберіть расу</option>
-          {races.map((r) => (
-            <option key={r._id || r.id || r.code} value={r._id || r.id}>
-              {t('races.' + (r.code || '')) || r.name}
-            </option>
-          ))}
-        </select>
-        <label className="block text-sm mb-1">Клас</label>
-        <select
-          name="profession"
-          value={form.profession}
-          onChange={handleChange}
-          className="w-full mb-4 px-3 py-2 rounded bg-[#2d1a10] border border-dndgold text-white"
-        >
-          <option value="">Оберіть клас</option>
-          {professions.map((p) => (
-            <option key={p._id || p.id || p.code} value={p._id || p.id}>
-              {t('classes.' + (p.code || '')) || p.name}
-            </option>
-          ))}
-        </select>
+
         <label className="block text-sm mb-1">Зображення</label>
         <input
           type="file"
