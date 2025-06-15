@@ -14,7 +14,11 @@
     "demon": "Demon",
     "beastkin": "Beastkin",
     "angel": "Angel",
-    "lizardman": "Lizardman"
+    "lizardman": "Lizardman",
+    "dragonborn": "Dragonborn",
+    "half-elf": "Half-Elf",
+    "half-orc": "Half-Orc",
+    "tiefling": "Tiefling"
   },
   "classes": {
     "warrior": "Warrior",
@@ -23,7 +27,12 @@
     "healer": "Healer",
     "ranger": "Ranger",
     "bard": "Bard",
-    "paladin": "Paladin"
+    "paladin": "Paladin",
+    "wizard": "Wizard",
+    "cleric": "Cleric",
+    "druid": "Druid",
+    "monk": "Monk",
+    "barbarian": "Barbarian"
   },
   "stats": {
     "STR": "Strength",

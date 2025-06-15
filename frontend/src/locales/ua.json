@@ -14,7 +14,11 @@
     "demon": "Демон",
     "beastkin": "Звіролюдина",
     "angel": "Ангел",
-    "lizardman": "Ящіролюд"
+    "lizardman": "Ящіролюд",
+    "dragonborn": "Драконопокій",
+    "half-elf": "Напівельф",
+    "half-orc": "Напіворк",
+    "tiefling": "Тіфлінг"
   },
   "classes": {
     "warrior": "Воїн",
@@ -23,7 +27,12 @@
     "healer": "Лікар",
     "ranger": "Рейнджер",
     "bard": "Бард",
-    "paladin": "Паладин"
+    "paladin": "Паладин",
+    "wizard": "Чарівник",
+    "cleric": "Клерик",
+    "druid": "Друїд",
+    "monk": "Монах",
+    "barbarian": "Варвар"
   },
   "stats": {
     "STR": "Сила",
