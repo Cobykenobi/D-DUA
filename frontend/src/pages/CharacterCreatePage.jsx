@@ -75,7 +75,7 @@ export default function CharacterCreatePage() {
           <option value="">Оберіть расу</option>
           {races.map((r) => (
             <option key={r._id || r.id || r.code} value={r._id || r.id}>
-              {r.name}
+              {t('races.' + (r.code || '')) || r.name}
             </option>
           ))}
         </select>
@@ -89,7 +89,7 @@ export default function CharacterCreatePage() {
           <option value="">Оберіть клас</option>
           {professions.map((p) => (
             <option key={p._id || p.id || p.code} value={p._id || p.id}>
-              {p.name}
+              {t('classes.' + (p.code || '')) || p.name}
             </option>
           ))}
         </select>
