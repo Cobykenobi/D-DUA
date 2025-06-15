@@ -28,34 +28,13 @@ const raceModifiers = {
     male: { strength: 2, charisma: 1 },
     female: { strength: 2, charisma: 1 },
   },
-  halfling: {
-    male: { agility: 2, charisma: 1 },
-    female: { agility: 2, charisma: 1 },
-  },
-  demon: {
-    male: { intellect: 2, charisma: 1 },
-    female: { intellect: 2, charisma: 1 },
-  },
-  beastkin: {
-    male: { agility: 2, health: 1 },
-    female: { agility: 2, health: 1 },
-  },
-  angel: {
-    male: { charisma: 2, intellect: 1 },
-    female: { charisma: 2, intellect: 1 },
-  },
-  lizardman: {
-    male: { strength: 2, health: 1 },
-    female: { strength: 2, health: 1 },
-  },
 };
 
 const classModifiers = {
   warrior: { strength: 2, defense: 1 },
   mage: { intellect: 2, charisma: 1 },
-  rogue: { agility: 2, intellect: 1 },
   healer: { charisma: 2, health: 1 },
-  ranger: { agility: 1, strength: 1 },
+  archer: { agility: 1, strength: 1 },
   bard: { charisma: 2, agility: 1 },
   paladin: { strength: 2, charisma: 2 },
 };

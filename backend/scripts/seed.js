@@ -49,32 +49,26 @@ async function seed() {
   // ];
   // const characteristics = ['HP', 'MP', 'Strength', 'Agility', 'Intellect'];
 
-  const baseRaces = [
-    { code: 'human', name: 'Людина' },
-    { code: 'elf', name: 'Ельф' },
-    { code: 'orc', name: 'Орк' },
-    { code: 'gnome', name: 'Гном' },
-    { code: 'dwarf', name: 'Дварф' },
-    { code: 'halfling', name: 'Напіврослик' },
-    { code: 'demon', name: 'Демон' },
-    { code: 'beastkin', name: 'Звіролюд' },
-    { code: 'angel', name: 'Ангел' },
-    { code: 'lizardman', name: 'Ящіролюд' },
+  // Gendered races
+  const races = [
+    { code: 'human_male', name: 'Людина (чоловік)' },
+    { code: 'human_female', name: 'Людина (жінка)' },
+    { code: 'elf_male', name: 'Ельф (чоловік)' },
+    { code: 'elf_female', name: 'Ельф (жінка)' },
+    { code: 'orc_male', name: 'Орк (чоловік)' },
+    { code: 'orc_female', name: 'Орк (жінка)' },
+    { code: 'gnome_male', name: 'Гном (чоловік)' },
+    { code: 'gnome_female', name: 'Гном (жінка)' },
+    { code: 'dwarf_male', name: 'Дварф (чоловік)' },
+    { code: 'dwarf_female', name: 'Дварф (жінка)' },
   ];
-
-  const races = [];
-  for (const r of baseRaces) {
-    races.push({ code: `${r.code}_male`, name: `${r.name} (чоловік)` });
-    races.push({ code: `${r.code}_female`, name: `${r.name} (жінка)` });
-  }
   const professions = [
     { code: 'warrior', name: 'Воїн' },
     { code: 'mage', name: 'Маг' },
-    { code: 'rogue', name: 'Шахрай' },
-    { code: 'healer', name: 'Цілитель' },
-    { code: 'ranger', name: 'Рейнджер' },
+    { code: 'archer', name: 'Лучник' },
+    { code: 'paladin', name: 'Паладин' },
     { code: 'bard', name: 'Бард' },
-    { code: 'paladin', name: 'Паладин' }
+    { code: 'healer', name: 'Цілитель' }
   ];
   const characteristics = [
     'health',
@@ -113,19 +107,6 @@ async function seed() {
         { item: 'Книга заклять' }
       ]
     },
-    rogue: {
-      weapon: [
-        { item: 'Кинджал', bonus: { agility: 1 } },
-        { item: 'Короткий меч', bonus: { agility: 1 } }
-      ],
-      armor: [
-        { item: 'Плащ тіні', bonus: { agility: 1 } },
-        { item: 'Легка броня', bonus: { agility: 1 } }
-      ],
-      misc: [
-        { item: 'Відмички' }
-      ]
-    },
     healer: {
       weapon: [
         { item: 'Жезл лікування', bonus: { charisma: 1 } },
@@ -139,7 +120,7 @@ async function seed() {
         { item: 'Зілля лікування' }
       ]
     },
-    ranger: {
+    archer: {
       weapon: [
         { item: 'Лук', bonus: { agility: 1 } },
         { item: 'Арбалет', bonus: { agility: 1 } }
@@ -179,16 +160,11 @@ async function seed() {
   };
 
   const raceInventory = {
+    human: [{ item: 'Монета удачі', bonus: { charisma: 1 } }],
     elf: [{ item: 'Ельфійські стріли', bonus: { agility: 1 } }],
     orc: [{ item: 'Кістяний талісман', bonus: { strength: 1 } }],
-    human: [{ item: 'Монета удачі', bonus: { charisma: 1 } }],
     gnome: [{ item: 'Гвинтовий ключ' }],
-    dwarf: [{ item: 'Похідна кружка', bonus: { health: 1 } }],
-    halfling: [{ item: 'Трубка та тютюн', bonus: { charisma: 1 } }],
-    demon: [{ item: 'Темний камінь', bonus: { intellect: 1 } }],
-    beastkin: [{ item: 'Кігтістий амулет', bonus: { agility: 1 } }],
-    angel: [{ item: 'Пір’я з крила', bonus: { charisma: 1 } }],
-    lizardman: [{ item: 'Луска пращура', bonus: { health: 1 } }]
+    dwarf: [{ item: 'Похідна кружка', bonus: { health: 1 } }]
   };
 
   if (await Race.countDocuments() === 0) {

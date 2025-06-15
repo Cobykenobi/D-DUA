@@ -5,17 +5,6 @@
   "fields_required": "Please fill in all fields",
   "connecting": "Connecting...",
   "races": {
-    "human": "Human",
-    "elf": "Elf",
-    "orc": "Orc",
-    "gnome": "Gnome",
-    "dwarf": "Dwarf",
-    "halfling": "Halfling",
-    "demon": "Demon",
-    "beastkin": "Beastkin",
-    "angel": "Angel",
-    "lizardman": "Lizardman",
-
     "human_male": "Human (male)",
     "human_female": "Human (female)",
     "elf_male": "Elf (male)",
@@ -25,32 +14,15 @@
     "gnome_male": "Gnome (male)",
     "gnome_female": "Gnome (female)",
     "dwarf_male": "Dwarf (male)",
-    "dwarf_female": "Dwarf (female)",
-    "halfling_male": "Halfling (male)",
-    "halfling_female": "Halfling (female)",
-    "demon_male": "Demon (male)",
-    "demon_female": "Demon (female)",
-    "beastkin_male": "Beastkin (male)",
-    "beastkin_female": "Beastkin (female)",
-    "angel_male": "Angel (male)",
-    "angel_female": "Angel (female)",
-    "lizardman_male": "Lizardman (male)",
-    "lizardman_female": "Lizardman (female)"
- main
+    "dwarf_female": "Dwarf (female)"
   },
   "classes": {
     "warrior": "Warrior",
     "mage": "Mage",
-    "rogue": "Rogue",
-    "healer": "Healer",
-    "ranger": "Ranger",
-    "bard": "Bard",
+    "archer": "Archer",
     "paladin": "Paladin",
-    "wizard": "Wizard",
-    "cleric": "Cleric",
-    "druid": "Druid",
-    "monk": "Monk",
-    "barbarian": "Barbarian"
+    "bard": "Bard",
+    "healer": "Healer"
   },
   "stats": {
     "health": "Health",

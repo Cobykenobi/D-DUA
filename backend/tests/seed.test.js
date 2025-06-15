@@ -24,7 +24,7 @@ describe('seed script', () => {
   });
 
   it('creates starting sets for each class', async () => {
-    const codes = ['warrior','mage','rogue','healer','ranger','bard','paladin'];
+    const codes = ['warrior','mage','archer','paladin','bard','healer'];
     for (const code of codes) {
       const count = await StartingSet.countDocuments({ classCode: code });
       expect(count).toBeGreaterThan(0);

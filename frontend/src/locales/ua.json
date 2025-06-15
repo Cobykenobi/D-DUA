@@ -5,17 +5,6 @@
   "fields_required": "Заповніть усі поля",
   "connecting": "Підключення...",
   "races": {
-    "human": "Людина",
-    "elf": "Ельф",
-    "orc": "Орк",
-    "gnome": "Гном",
-    "dwarf": "Дварф",
-    "halfling": "Хафлінг",
-    "demon": "Демон",
-    "beastkin": "Звіролюдина",
-    "angel": "Ангел",
-    "lizardman": "Ящіролюд",
-
     "human_male": "Людина (чоловік)",
     "human_female": "Людина (жінка)",
     "elf_male": "Ельф (чоловік)",
@@ -25,32 +14,15 @@
     "gnome_male": "Гном (чоловік)",
     "gnome_female": "Гном (жінка)",
     "dwarf_male": "Дварф (чоловік)",
-    "dwarf_female": "Дварф (жінка)",
-    "halfling_male": "Хафлінг (чоловік)",
-    "halfling_female": "Хафлінг (жінка)",
-    "demon_male": "Демон (чоловік)",
-    "demon_female": "Демон (жінка)",
-    "beastkin_male": "Звіролюдина (чоловік)",
-    "beastkin_female": "Звіролюдина (жінка)",
-    "angel_male": "Ангел (чоловік)",
-    "angel_female": "Ангел (жінка)",
-    "lizardman_male": "Ящіролюд (чоловік)",
-    "lizardman_female": "Ящіролюд (жінка)"
- main
+    "dwarf_female": "Дварф (жінка)"
   },
   "classes": {
     "warrior": "Воїн",
     "mage": "Маг",
-    "rogue": "Розбійник",
-    "healer": "Лікар",
-    "ranger": "Рейнджер",
-    "bard": "Бард",
+    "archer": "Лучник",
     "paladin": "Паладин",
-    "wizard": "Чарівник",
-    "cleric": "Клерик",
-    "druid": "Друїд",
-    "monk": "Монах",
-    "barbarian": "Варвар"
+    "bard": "Бард",
+    "healer": "Лікар"
   },
   "stats": {
     "health": "Здоров'я",

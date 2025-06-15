@@ -153,7 +153,7 @@ describe('Character Controller - create', () => {
 
   it('uses provided raceId and professionId', async () => {
     Race.findById.mockResolvedValue({ _id: 'r2', name: 'Orc', code: 'orc' });
-    Profession.findById.mockResolvedValue({ _id: 'p2', name: 'Rogue', code: 'rogue' });
+    Profession.findById.mockResolvedValue({ _id: 'p2', name: 'Archer', code: 'archer' });
 
     let saved;
     Character.mockImplementation(data => {
