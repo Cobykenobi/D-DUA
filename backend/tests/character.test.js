@@ -144,4 +144,28 @@ describe('Character Controller - create', () => {
     expect(res.status).toHaveBeenCalledWith(400);
     expect(res.json).toHaveBeenCalledWith({ message: 'Invalid image' });
   });
+
+  it('uses provided raceId and professionId', async () => {
+    Race.findById.mockResolvedValue({ _id: 'r2', name: 'Orc', code: 'orc' });
+    Profession.findById.mockResolvedValue({ _id: 'p2', name: 'Rogue', code: 'rogue' });
+
+    let saved;
+    Character.mockImplementation(data => {
+      saved = data;
+      return { save: jest.fn().mockResolvedValue(data) };
+    });
+
+    const req = { user: { id: 'u1' }, body: { name: 'Hero', raceId: 'r2', professionId: 'p2' } };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+    await characterController.create(req, res);
+
+    expect(Race.findById).toHaveBeenCalledWith('r2');
+    expect(Profession.findById).toHaveBeenCalledWith('p2');
+    expect(Race.aggregate).not.toHaveBeenCalled();
+    expect(Profession.aggregate).not.toHaveBeenCalled();
+    expect(saved.race).toBe('r2');
+    expect(saved.profession).toBe('p2');
+    expect(res.status).toHaveBeenCalledWith(201);
+  });
 });
