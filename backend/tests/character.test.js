@@ -47,8 +47,8 @@ describe('Character Controller - create', () => {
 
     Math.random.mockRestore();
 
-    expect(saved.stats.INT).toBeGreaterThanOrEqual(13); // Mage minimum
-    expect(saved.stats.DEX).toBe(12); // Elf bonus applied
+    expect(saved.stats.intellect).toBe(8); // Mage intellect bonus applied
+    expect(saved.stats.agility).toBe(7); // Elf agility bonus applied
     expect(res.status).toHaveBeenCalledWith(201);
     expect(res.json).toHaveBeenCalled();
   });
