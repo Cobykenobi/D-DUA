@@ -1,54 +1,83 @@
 const baseStats = {
-  STR: 10,
-  DEX: 10,
-  INT: 10,
-  CON: 10,
-  CHA: 10,
+  health: 5,
+  defense: 5,
+  strength: 5,
+  intellect: 5,
+  agility: 5,
+  charisma: 5,
 };
 
-const raceBonuses = {
-  human:     { STR: 1, DEX: 1, INT: 1, CON: 1, CHA: 1 },
-  elf:       { DEX: 2, INT: 1 },
-  orc:       { STR: 2, CON: 1 },
-  gnome:     { CON: 2, INT: 1 },
-  dwarf:     { STR: 2, CHA: 1 },
-  halfling:  { DEX: 2, CHA: 1 },
-  demon:     { INT: 2, CHA: 1 },
-  beastkin:  { DEX: 2, CON: 1 },
-  angel:     { CHA: 2, INT: 1 },
-  lizardman: { STR: 2, CON: 1 },
+const raceModifiers = {
+  human: {
+    male: { health: 1, defense: 1, strength: 1, intellect: 1, agility: 1, charisma: 1 },
+    female: { health: 1, defense: 1, strength: 1, intellect: 1, agility: 1, charisma: 1 },
+  },
+  elf: {
+    male: { agility: 2, intellect: 1 },
+    female: { agility: 2, intellect: 1 },
+  },
+  orc: {
+    male: { strength: 2, health: 1 },
+    female: { strength: 2, health: 1 },
+  },
+  gnome: {
+    male: { health: 2, intellect: 1 },
+    female: { health: 2, intellect: 1 },
+  },
+  dwarf: {
+    male: { strength: 2, charisma: 1 },
+    female: { strength: 2, charisma: 1 },
+  },
+  halfling: {
+    male: { agility: 2, charisma: 1 },
+    female: { agility: 2, charisma: 1 },
+  },
+  demon: {
+    male: { intellect: 2, charisma: 1 },
+    female: { intellect: 2, charisma: 1 },
+  },
+  beastkin: {
+    male: { agility: 2, health: 1 },
+    female: { agility: 2, health: 1 },
+  },
+  angel: {
+    male: { charisma: 2, intellect: 1 },
+    female: { charisma: 2, intellect: 1 },
+  },
+  lizardman: {
+    male: { strength: 2, health: 1 },
+    female: { strength: 2, health: 1 },
+  },
 };
 
-const classMinimums = {
-  warrior: { STR: 13, CON: 12 },
-  mage: { INT: 13, CHA: 11 },
-  rogue: { DEX: 13, INT: 11 },
-  healer: { CHA: 13, CON: 11 },
-  ranger: { DEX: 12, STR: 12 },
-  bard: { CHA: 13, DEX: 12 },
-  paladin: { STR: 13, CHA: 13 },
+const classModifiers = {
+  warrior: { strength: 2, defense: 1 },
+  mage: { intellect: 2, charisma: 1 },
+  rogue: { agility: 2, intellect: 1 },
+  healer: { charisma: 2, health: 1 },
+  ranger: { agility: 1, strength: 1 },
+  bard: { charisma: 2, agility: 1 },
+  paladin: { strength: 2, charisma: 2 },
 };
 
-function generateStats(race, charClass) {
+function generateStats(race, charClass, gender = 'male') {
   const stats = { ...baseStats };
 
-  const bonuses = raceBonuses[race] || {};
-  for (const key in bonuses) {
-    stats[key] += bonuses[key];
+  const raceMods = (raceModifiers[race] && raceModifiers[race][gender]) || {};
+  for (const key in raceMods) {
+    stats[key] += raceMods[key];
   }
 
-  const mins = classMinimums[charClass] || {};
-  for (const key in mins) {
-    if (stats[key] < mins[key]) {
-      stats[key] = mins[key];
-    }
+  const classMods = classModifiers[charClass] || {};
+  for (const key in classMods) {
+    stats[key] += classMods[key];
   }
 
   for (const key of Object.keys(stats)) {
-    const hasBonus = bonuses[key] !== undefined;
-    const hasMin = mins[key] !== undefined;
-    if (!hasBonus && !hasMin) {
-      stats[key] = Math.max(stats[key], Math.floor(Math.random() * 8) + 8);
+    const hasRace = raceMods[key] !== undefined;
+    const hasClass = classMods[key] !== undefined;
+    if (!hasRace && !hasClass) {
+      stats[key] = Math.max(stats[key], Math.floor(Math.random() * 8) + 3);
     }
   }
 

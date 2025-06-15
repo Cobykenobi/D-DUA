@@ -2,16 +2,16 @@
 const StartingSet = require('../models/StartingSet');
 
 const raceInventory = {
-  elf: [{ item: 'Ельфійські стріли', amount: 1, bonus: { DEX: 1 } }],
-  orc: [{ item: 'Кістяний талісман', amount: 1, bonus: { STR: 1 } }],
-  human: [{ item: 'Монета удачі', amount: 1, bonus: { CHA: 1 } }],
+  elf: [{ item: 'Ельфійські стріли', amount: 1, bonus: { agility: 1 } }],
+  orc: [{ item: 'Кістяний талісман', amount: 1, bonus: { strength: 1 } }],
+  human: [{ item: 'Монета удачі', amount: 1, bonus: { charisma: 1 } }],
   gnome: [{ item: 'Гвинтовий ключ', amount: 1 }],
-  dwarf: [{ item: 'Похідна кружка', amount: 1, bonus: { CON: 1 } }],
-  halfling: [{ item: 'Трубка та тютюн', amount: 1, bonus: { CHA: 1 } }],
-  demon: [{ item: 'Темний камінь', amount: 1, bonus: { INT: 1 } }],
-  beastkin: [{ item: 'Кігтістий амулет', amount: 1, bonus: { DEX: 1 } }],
-  angel: [{ item: 'Пір’я з крила', amount: 1, bonus: { CHA: 1 } }],
-  lizardman: [{ item: 'Луска пращура', amount: 1, bonus: { CON: 1 } }]
+  dwarf: [{ item: 'Похідна кружка', amount: 1, bonus: { health: 1 } }],
+  halfling: [{ item: 'Трубка та тютюн', amount: 1, bonus: { charisma: 1 } }],
+  demon: [{ item: 'Темний камінь', amount: 1, bonus: { intellect: 1 } }],
+  beastkin: [{ item: 'Кігтістий амулет', amount: 1, bonus: { agility: 1 } }],
+  angel: [{ item: 'Пір’я з крила', amount: 1, bonus: { charisma: 1 } }],
+  lizardman: [{ item: 'Луска пращура', amount: 1, bonus: { health: 1 } }]
 };
 
 function randomItem(list) {

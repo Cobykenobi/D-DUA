@@ -46,10 +46,11 @@
     "paladin": "Paladin"
   },
   "stats": {
-    "STR": "Strength",
-    "DEX": "Dexterity",
-    "INT": "Intelligence",
-    "CON": "Constitution",
-    "CHA": "Charisma"
+    "health": "Health",
+    "defense": "Defense",
+    "strength": "Strength",
+    "intellect": "Intellect",
+    "agility": "Agility",
+    "charisma": "Charisma"
   }
 }

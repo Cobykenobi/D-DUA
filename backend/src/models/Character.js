@@ -7,11 +7,12 @@ const characterSchema = new mongoose.Schema({
   race: { type: mongoose.Schema.Types.ObjectId, ref: 'Race' },
   profession: { type: mongoose.Schema.Types.ObjectId, ref: 'Profession' },
   stats: {
-    STR: { type: Number, default: 10 },
-    DEX: { type: Number, default: 10 },
-    INT: { type: Number, default: 10 },
-    CON: { type: Number, default: 10 },
-    CHA: { type: Number, default: 10 }
+    health: { type: Number, default: 5 },
+    defense: { type: Number, default: 5 },
+    strength: { type: Number, default: 5 },
+    intellect: { type: Number, default: 5 },
+    agility: { type: Number, default: 5 },
+    charisma: { type: Number, default: 5 }
   },
   inventory: [{
     item: { type: String },
