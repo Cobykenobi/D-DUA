@@ -1,18 +1,25 @@
 import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Dice5 } from 'lucide-react';
 
 export default function DiceBox({ className = '' }) {
   const [diceResult, setDiceResult] = useState(null);
   const [diceAnim, setDiceAnim] = useState(false);
 
   const rollDice = (type = 'd20') => {
+    setDiceResult(null);
     setDiceAnim(true);
+
+    const audio = new Audio('/dice.mp3');
+    audio.play().catch(() => {});
+
     setTimeout(() => {
-      setDiceAnim(false);
       const res = type === 'd20'
         ? Math.ceil(Math.random() * 20)
         : Math.ceil(Math.random() * 6);
       setDiceResult(res);
-    }, 600);
+      setDiceAnim(false);
+    }, 800);
   };
 
   return (
@@ -33,7 +40,15 @@ export default function DiceBox({ className = '' }) {
           </button>
         </div>
         {diceAnim && (
-          <div className="animate-bounce text-3xl text-dndgold mt-2"> ...</div>
+          <motion.div
+            key="dice"
+            initial={{ rotate: 0 }}
+            animate={{ rotate: 360 }}
+            transition={{ duration: 0.8 }}
+            className="mt-2 text-dndgold"
+          >
+            <Dice5 size={36} />
+          </motion.div>
         )}
         {diceResult && !diceAnim && (
           <div className="text-xl text-dndgold font-bold mt-2">Результат: {diceResult}</div>
