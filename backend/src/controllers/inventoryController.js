@@ -15,7 +15,7 @@ exports.update = async (req, res) => {
     const { items } = req.body;
     const characterId = req.params.characterId;
 
-    if (req.user.role !== 'admin' && req.user.role !== 'master') {
+    if (req.user.role !== 'admin' && req.user.role !== 'gm') {
       const char = await Character.findOne({ _id: characterId, user: req.user.id });
       if (!char) {
         return res.status(403).json({ message: 'Forbidden' });

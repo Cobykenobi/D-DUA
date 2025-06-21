@@ -23,7 +23,7 @@ afterAll((done) => {
 test('start-game notifies all lobby members', (done) => {
   const url = `http://localhost:${addr.port}`;
   const tableId = 'room1';
-  const gm = { _id: 'u1', username: 'GM', role: 'master' };
+  const gm = { _id: 'u1', username: 'GM', role: 'gm' };
   const player = { _id: 'u2', username: 'P1', role: 'player' };
 
   const c1 = Client(url);
