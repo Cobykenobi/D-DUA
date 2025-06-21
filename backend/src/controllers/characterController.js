@@ -81,7 +81,7 @@ exports.create = async (req, res) => {
   const classCodeLower = (profession[0].code || profession[0].name).toLowerCase();
 
   const stats = generateStats(raceBase, classCodeLower, gender);
- 
+
 
     // Логіка вибору аватара
     const avatar = uploaded || (image ? image : '');
