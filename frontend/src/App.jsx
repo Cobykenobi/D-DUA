@@ -33,7 +33,7 @@ const isAdmin = () => {
 const isGM = () => {
   try {
     const data = JSON.parse(localStorage.getItem('user-storage') || '{}');
-    return data.state?.user?.role === 'master';
+    return data.state?.user?.role === 'gm';
   } catch {
     return false;
   }
@@ -64,9 +64,11 @@ const App = () => {
 
 
     <Route path="/table/:tableId" element={<GameTablePage />} />
+
     <Route path="/gm-dashboard" element={<PrivateRoute roles={['master']}><GMDashboard /></PrivateRoute>} />
     <Route path="/gm-table/:tableId" element={<PrivateRoute roles={['master']}><GMTablePage /></PrivateRoute>} />
     <Route path="/gm-control/:id" element={<PrivateRoute roles={['master']}><GMControlPage /></PrivateRoute>} />
+
     <Route path="*" element={<Navigate to="/" />} />
   </Routes>
   );

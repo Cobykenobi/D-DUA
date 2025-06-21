@@ -25,7 +25,7 @@ jest.setTimeout(10000);
 test('GM updates propagate to players', (done) => {
   const url = `http://localhost:${addr.port}`;
   const tableId = 't1';
-  const gm = { _id: 'g1', username: 'GM', role: 'master' };
+  const gm = { _id: 'g1', username: 'GM', role: 'gm' };
   const player = { _id: 'p1', username: 'PL', role: 'player' };
 
   const c1 = Client(url);
