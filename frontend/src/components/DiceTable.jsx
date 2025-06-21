@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 const diceTypes = ["d4", "d6", "d8", "d10", "d12", "d20"];
 
-export default function DiceTable({ isMaster }) {
+export default function DiceTable({ isGM }) {
   const [lastRoll, setLastRoll] = useState(null);
 
   const roll = (type) => {
