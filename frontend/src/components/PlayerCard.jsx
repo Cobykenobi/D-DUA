@@ -1,12 +1,17 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { withApiHost } from '../utils/imageUtils';
-import { useTranslation } from 'react-i18next';
+import { raceUA, classUA, statUA } from '../translations/ua';
 import { getClassBorderColor } from '../utils/classColors';
 import Modal from './Modal';
 
+function translateEffect(effectString) {
+  return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
+    return `+${num} до ${statUA[stat] || stat}`;
+  });
+}
+
 export default function PlayerCard({ character, onSelect }) {
-  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const borderColor = getClassBorderColor(
     character.profession?.code || character.profession?.name
@@ -27,12 +32,8 @@ export default function PlayerCard({ character, onSelect }) {
         />
         <h3 className="text-lg text-dndgold text-center mb-1">{character.name}</h3>
         <p className="text-xs text-center">
-          {character.race?.code
-            ? t(`races.${character.race.code.toLowerCase()}`, character.race.name || character.race.code)
-            : character.race?.name || ''}{' '}/{' '}
-          {character.profession?.code
-            ? t(`classes.${character.profession.code.toLowerCase()}`, character.profession.name || character.profession.code)
-            : character.profession?.name || ''}
+          {raceUA[character.race?.code || character.race] || character.race?.name || character.race?.code || ''}{' '}/{' '}
+          {classUA[character.profession?.code || character.profession] || character.profession?.name || character.profession?.code || ''}
         </p>
         <button
           onClick={() => setOpen(true)}
@@ -55,7 +56,7 @@ export default function PlayerCard({ character, onSelect }) {
           <ul className="list-none pl-0 text-lg font-bold space-y-0.5">
             {Object.entries(character.stats).map(([key, val]) => (
               <li key={key}>
-                {t('stats.' + key) || key}: {val}
+                {statUA[key.toUpperCase()] || key}: {val}
               </li>
             ))}
           </ul>
@@ -68,7 +69,7 @@ export default function PlayerCard({ character, onSelect }) {
                   ?
                       ' (' +
                       Object.entries(it.bonus)
-                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k.toLowerCase(), k)}`)
+                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${statUA[k.toUpperCase()] || k}`)
                         .join(', ') +
                       ')'
                   : '';
@@ -77,6 +78,7 @@ export default function PlayerCard({ character, onSelect }) {
                   {it.item}
                   {it.amount > 1 ? ` x${it.amount}` : ''}
                   {bonus}
+                  {it.effect ? ` (${translateEffect(it.effect)})` : ''}
                 </li>
               );
             })}
