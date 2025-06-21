@@ -51,6 +51,7 @@ const App = () => {
       <Route path="/" element={<Navigate to={homeRoute()} />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/admin/login" element={<AdminLoginPage />} />
+      <Route path="/ping" element={<div>ok</div>} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/characters" element={isAuthenticated() ? <ProfilePage /> : <Navigate to="/login" />} />
       <Route path="/create-character" element={isAuthenticated() ? <CharacterCreatePage /> : <Navigate to="/login" />} />
