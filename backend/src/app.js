@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const fs = require('fs');
 const path = require('path');
 const http = require('http');
+const fetch = require('node-fetch');
 const adminRouter = require('./routes/admin');
 
 const app = express();
@@ -66,6 +67,16 @@ mongoose.connect(MONGO_URI)
     server.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
+
+    // Periodically ping the frontend to prevent it from idling
+    const pingTarget = allowedOrigins[0];
+    if (pingTarget) {
+      setInterval(() => {
+        fetch(pingTarget)
+          .then(() => console.log('[KeepAlive] Ping to frontend OK'))
+          .catch(() => console.log('[KeepAlive] Frontend unreachable'));
+      }, 600_000); // 10 minutes
+    }
   })
   .catch((err) => console.error('MongoDB error:', err));
 
