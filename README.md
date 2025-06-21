@@ -11,6 +11,10 @@ This project combines an Express/MongoDB backend with a React frontend.
    ./setup.sh
    ```
 
+   If `npm audit` prints warnings afterwards, you can run `npm audit fix`
+   (or `npm audit fix --force` if necessary) in each directory to address
+   potential vulnerabilities.
+
 2. **Environment variables**
    Copy `backend/.env.example` to `backend/.env` and adjust the values:
    - `MONGO_URI` – MongoDB connection string
@@ -116,6 +120,8 @@ cd backend
 npm run lint
 npm run format
 ```
+
+The frontend does not currently include separate lint or format commands.
 
 ## Character Basics
 
