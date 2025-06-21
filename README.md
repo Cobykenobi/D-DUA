@@ -158,8 +158,8 @@ take up the role:
 ### Stat Generation
 
 When generating stats, race bonuses apply first. Class minimums then raise any
-insufficient attributes. Finally, untouched stats are randomised between **8**
-and **15**, but never drop below their current value.
+insufficient attributes. Finally, untouched stats are randomised between **3**
+and **10**, but never drop below their current value.
 
 ```js
 const stats = generateStats('Ельф (жінка)', 'Маг');
