@@ -1,12 +1,18 @@
 import { useNavigate } from 'react-router-dom';
+import api from "../api/axios";
 
 export default function GMDashboard() {
   const navigate = useNavigate();
 
-  const createTable = () => {
-    const tableId = Math.random().toString(36).substring(2, 8);
-    navigate(`/gm-table/${tableId}`);
-    window.open(`/gm-control/${tableId}`, '_blank');
+  const createTable = async () => {
+    try {
+      const res = await api.post('/table');
+      const { tableId } = res.data;
+      navigate(`/gm-table/${tableId}`);
+      window.open(`/gm-control/${tableId}`, '_blank');
+    } catch {
+      // fail silently
+    }
   };
 
   return (
