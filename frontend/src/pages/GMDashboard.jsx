@@ -1,15 +1,28 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import api from "../api/axios";
 
 export default function GMDashboard() {
   const navigate = useNavigate();
+  const [tables, setTables] = useState([]);
+
+  useEffect(() => {
+    api.get('/table')
+      .then(res => setTables(res.data || []))
+      .catch(() => setTables([]));
+  }, []);
+
+  const openTable = (id) => {
+    navigate(`/gm-table/${id}`);
+    window.open(`/gm-control/${id}`, '_blank');
+  };
 
   const createTable = async () => {
     try {
       const res = await api.post('/table');
       const { tableId } = res.data;
-      navigate(`/gm-table/${tableId}`);
-      window.open(`/gm-control/${tableId}`, '_blank');
+      openTable(tableId);
+      setTables(t => [...t, res.data]);
     } catch {
       // fail silently
     }
@@ -24,6 +37,25 @@ export default function GMDashboard() {
       >
         Створити новий стіл
       </button>
+      <div className="mt-6 w-full max-w-md">
+        <h2 className="text-xl mb-2">Мої столи</h2>
+        <ul className="flex flex-col gap-2">
+          {tables.map((t) => (
+            <li key={t.tableId} className="flex justify-between items-center bg-[#2c1a12] p-2 rounded">
+              <span>{t.tableId}</span>
+              <button
+                onClick={() => openTable(t.tableId)}
+                className="bg-dndgold text-dndred font-dnd rounded px-3 py-1 transition active:scale-95"
+              >
+                Відкрити
+              </button>
+            </li>
+          ))}
+          {tables.length === 0 && (
+            <li className="text-center text-sm text-dndgold/80">Немає створених столів</li>
+          )}
+        </ul>
+      </div>
     </div>
   );
 }
