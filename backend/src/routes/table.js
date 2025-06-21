@@ -30,9 +30,14 @@ router.get('/:id', auth, async (req, res) => {
 // Update table (gm only)
 router.put('/:id', auth, gm, async (req, res) => {
   try {
+    const allowed = ['mapUrl', 'musicTrack', 'playerInfo', 'players', 'state'];
+    const update = {};
+    for (const key of allowed) {
+      if (key in req.body) update[key] = req.body[key];
+    }
     const table = await Table.findOneAndUpdate(
       { tableId: req.params.id },
-      req.body,
+      update,
       { new: true }
     );
     if (!table) return res.status(404).json({ message: 'Table not found' });
