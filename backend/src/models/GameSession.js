@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const GameSessionSchema = new mongoose.Schema({
   tableId: { type: String, required: true, unique: true },
   gm: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
-  players: [{ 
+  players: [{
     user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     name: String,
     characterId: String,
