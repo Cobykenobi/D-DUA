@@ -21,7 +21,7 @@ function Navbar() {
         <span className="font-dnd text-2xl">D-DUA</span>
       </Link>
       <div className="flex items-center gap-4 flex-1">
-        <Link to="/profile" className="hover:text-white">Profile</Link>
+        <Link to="/characters" className="hover:text-white">Profile</Link>
         <Link to="/settings" className="hover:text-white">Settings</Link>
         {token && (
           <button onClick={handleLogout} className="text-dndred hover:text-dndgold">

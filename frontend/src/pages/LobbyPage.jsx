@@ -80,7 +80,7 @@ export default function LobbyPage() {
     >
       <div className="absolute top-4 right-4 flex gap-2">
         <button
-          onClick={() => navigate('/profile')}
+          onClick={() => navigate('/characters')}
           className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-4 py-2 transition active:scale-95"
         >
           Назад
