@@ -106,7 +106,7 @@ are redirected to `/characters` where they can manage their heroes. Users with t
 `gm` role start at `/gm-dashboard` and gain access to additional GM routes:
 
 - `/gm-dashboard` – overview for game masters
-- `/gm-table/:id` – run a specific table
+- `/gm-table/:tableId` – run a specific table
 - `/gm-control/:id` – manage player controls
 
 These routes are protected in the frontend using `PrivateRoute`, which now checks
