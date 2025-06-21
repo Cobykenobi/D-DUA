@@ -68,7 +68,7 @@ const App = () => {
     <Route path="/gm-control/:id" element={<PrivateRoute roles={['master']}><GMControlPage /></PrivateRoute>} />
     <Route path="*" element={<Navigate to="/" />} />
   </Routes>
-);
-
+  );
+};
 
 export default App;
