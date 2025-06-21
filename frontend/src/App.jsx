@@ -11,6 +11,7 @@ import AdminUsersPage from './pages/admin/AdminUsersPage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
 import GameTablePage from './pages/GameTablePage';
 import AdminLoginPage from './pages/AdminLoginPage';
+import SettingsPanel from './pages/SettingsPanel';
 
 const isAuthenticated = () => !!localStorage.getItem('token');
 const isAdmin = () => {
@@ -35,6 +36,7 @@ const App = () => (
     <Route path="/admin/inventory/:characterId" element={isAdmin() ? <AdminInventoryPage /> : <Navigate to="/admin/login" />} />
     <Route path="/admin/users" element={isAdmin() ? <AdminUsersPage /> : <Navigate to="/admin/login" />} />
     <Route path="/change-password" element={isAuthenticated() ? <ChangePasswordPage /> : <Navigate to="/login" />} />
+    <Route path="/settings" element={isAuthenticated() ? <SettingsPanel /> : <Navigate to="/login" />} />
     <Route path="/table/:tableId" element={<GameTablePage />} />
     <Route path="*" element={<Navigate to="/" />} />
   </Routes>
