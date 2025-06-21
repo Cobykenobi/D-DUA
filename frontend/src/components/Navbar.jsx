@@ -28,6 +28,9 @@ function Navbar() {
             Logout
           </button>
         )}
+        <Link to="/settings" className="text-sm hover:underline">
+          ⚙️
+        </Link>
       </div>
       <div className="flex items-center gap-3 ml-auto">
         <ThemeToggle />

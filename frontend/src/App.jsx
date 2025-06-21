@@ -36,7 +36,9 @@ const App = () => (
     <Route path="/admin/inventory/:characterId" element={isAdmin() ? <AdminInventoryPage /> : <Navigate to="/admin/login" />} />
     <Route path="/admin/users" element={isAdmin() ? <AdminUsersPage /> : <Navigate to="/admin/login" />} />
     <Route path="/change-password" element={isAuthenticated() ? <ChangePasswordPage /> : <Navigate to="/login" />} />
-    <Route path="/settings" element={isAuthenticated() ? <SettingsPanel /> : <Navigate to="/login" />} />
+
+    <Route path="/settings" element={<SettingsPanel />} />
+
     <Route path="/table/:tableId" element={<GameTablePage />} />
     <Route path="*" element={<Navigate to="/" />} />
   </Routes>
