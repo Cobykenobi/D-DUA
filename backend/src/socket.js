@@ -13,6 +13,8 @@ function getSession(id) {
       initiative: [],
       map: '',
       chat: [],
+      hp: {},
+      music: null,
       state: 'lobby'
     };
   }
@@ -102,6 +104,8 @@ function init(httpServer) {
         initiative: sess.initiative
       });
       if (sess.map) socket.emit('map-update', sess.map);
+      socket.emit('hp-update-all', sess.hp);
+      if (sess.music) socket.emit('music-change', sess.music);
     });
 
     socket.on('monster-add', ({ tableId, monster }) => {
@@ -126,6 +130,18 @@ function init(httpServer) {
       const sess = getSession(tableId);
       sess.map = map;
       io.to(tableId).emit('map-update', sess.map);
+    });
+
+    socket.on('player-hp-update', ({ tableId, userId, hp }) => {
+      const sess = getSession(tableId);
+      sess.hp[userId] = hp;
+      io.to(tableId).emit('player-hp-update', { userId, hp });
+    });
+
+    socket.on('music-change', ({ tableId, track }) => {
+      const sess = getSession(tableId);
+      sess.music = track;
+      io.to(tableId).emit('music-change', track);
     });
 
     socket.on('kick-player', ({ tableId, userId }) => {

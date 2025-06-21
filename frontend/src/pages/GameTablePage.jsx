@@ -1,18 +1,15 @@
-import GMPanel from "../components/GMPanel";
 import InitiativeList from "../components/InitiativeList";
 import ChatComponent from "../components/ChatComponent";
 import PlayerCard from "../components/PlayerCard";
-import MusicPlayer from "../components/MusicPlayer";
 import DiceBox from "../components/DiceBox";
 import LogoutButton from "../components/LogoutButton";
+import GMTableView from "../components/GMTableView";
+import GMControlPanel from "../components/GMControlPanel";
 import { useState, useEffect } from 'react';
-import { io } from 'socket.io-client';
+import socket from '../api/socket';
+import { GameStateProvider, useGameState } from '../context/GameStateContext';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { useUserStore } from '../store/user';
-
-// socket connection URL configurable via env
-// Fallback to localhost if env variable is missing
-const socket = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000');
 
 export default function GameTablePage() {
   const { user } = useUserStore();
@@ -24,12 +21,11 @@ export default function GameTablePage() {
   const [gm, setGm] = useState(null);
   const [visiblePlayers, setVisiblePlayers] = useState([]);
   const [initiative, setInitiative] = useState([]);
-  const [map, setMap] = useState("");
   const [messages, setMessages] = useState([]);
+  const { map } = useGameState();
 
   // SOCKET.IO підключення
   useEffect(() => {
-    socket.emit("join-table", { tableId, user, characterId });
     socket.on("table-players", data => {
       setPlayers(data.players || []);
       setGm(data.gm || null);
@@ -37,16 +33,21 @@ export default function GameTablePage() {
       setVisiblePlayers((data.players || []).filter(p => p.user !== data.gm));
     });
     socket.on("initiative-update", setInitiative);
-    socket.on("map-update", setMap);
     socket.on("chat-history", setMessages);
     socket.on("chat-message", msg => setMessages(m => [...m, msg]));
-    return () => socket.disconnect();
+    return () => {
+      socket.off("table-players");
+      socket.off("initiative-update");
+      socket.off("chat-history");
+      socket.off("chat-message");
+    };
   }, [tableId, user, characterId]);
 
   const isGM = (user?.role === 'gm') || (gm && user && gm.toString() === user._id);
 
 
   return (
+    <GameStateProvider tableId={tableId} user={user}>
     <div
       style={{
         minHeight: "100vh",
@@ -89,13 +90,7 @@ export default function GameTablePage() {
         </div>
         {/* Центральна зона столу */}
         <div className="flex flex-col items-center justify-center h-full z-0 md:mx-60">
-          <div className="w-full h-[40vh] flex items-center justify-center rounded-2xl shadow-dnd bg-[#160b06]/90 mb-4 border-2 border-dndgold">
-            {map ? (
-              <img src={map} alt="Map" className="max-h-full max-w-full rounded-xl" />
-            ) : (
-              <span className="text-dndgold font-dnd text-2xl">[Карта ще не обрана]</span>
-            )}
-          </div>
+          <GMTableView players={players} isGM={isGM} />
           <InitiativeList initiative={initiative} />
         </div>
         {/* Нижня панель */}
@@ -105,9 +100,7 @@ export default function GameTablePage() {
           {isGM ? (
             <>
               <ChatComponent tableId={tableId} user={user} messages={messages} socket={socket} />
-              <MusicPlayer isGM={isGM} className="w-32 md:w-40" />
-              <GMPanel tableId={tableId} socket={socket} players={players} className="w-48" />
-              <DiceBox className="self-end w-40" />
+              <GMControlPanel />
             </>
           ) : (
             <>
@@ -123,5 +116,6 @@ export default function GameTablePage() {
         © {new Date().getFullYear()} D&D Online Tabletop
       </div>
     </div>
+    </GameStateProvider>
   );
 }
