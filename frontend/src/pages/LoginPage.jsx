@@ -52,7 +52,7 @@ function LoginPage() {
 
       navigate(getPostLoginRedirect(res.data.user.role));
 
-      if (res.data.user.role === 'master') {
+      if (res.data.user.role === 'gm') {
         navigate('/gm-dashboard');
       } else {
         navigate('/characters');
