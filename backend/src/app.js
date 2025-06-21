@@ -48,6 +48,7 @@ app.use('/api/music', require('./routes/music'));
 app.use('/api/profession', require('./routes/profession'));
 app.use('/api/race', require('./routes/race'));
 app.use('/api/roll', require('./routes/roll'));
+app.use('/api/table', require('./routes/table'));
 app.use('/api/session', require('./routes/session'));
 app.use('/api/user', require('./routes/user'));
 

@@ -10,6 +10,7 @@ import AdminInventoryPage from './pages/admin/AdminInventoryPage';
 import AdminUsersPage from './pages/admin/AdminUsersPage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
 import GameTablePage from './pages/GameTablePage';
+import GMTablePage from './pages/gm/GMTablePage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import SettingsPanel from './pages/SettingsPanel';
 
@@ -63,9 +64,11 @@ const App = () => {
 
 
     <Route path="/table/:tableId" element={<GameTablePage />} />
+
     <Route path="/gm-dashboard" element={<PrivateRoute roles={['gm']}><GMDashboard /></PrivateRoute>} />
     <Route path="/gm-table/:id" element={<PrivateRoute roles={['gm']}><GameTablePage /></PrivateRoute>} />
     <Route path="/gm-control/:id" element={<PrivateRoute roles={['gm']}><GMControlPage /></PrivateRoute>} />
+
     <Route path="*" element={<Navigate to="/" />} />
   </Routes>
   );
