@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useUserStore } from '../store/user';
 
@@ -45,7 +46,11 @@ export default function ChatBox({ sessionId }) {
                 className={`mb-1 ${msg.userRole === 'gm' ? 'bg-dndred/30 text-dndgold px-1 rounded' : ''}`}
               >
                 <span className="font-dnd text-dndgold/80">{msg.user || 'Гість'}:</span>{' '}
-                <span dangerouslySetInnerHTML={{ __html: marked.parse(msg.text || '') }} />
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(marked.parse(msg.text || '')),
+                  }}
+                />
               </motion.div>
             ))}
           </AnimatePresence>

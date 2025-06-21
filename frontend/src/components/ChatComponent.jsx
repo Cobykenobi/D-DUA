@@ -1,6 +1,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { marked } from 'marked';
+import DOMPurify from 'dompurify';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function ChatComponent({ tableId, user, messages, socket }) {
@@ -33,7 +34,11 @@ export default function ChatComponent({ tableId, user, messages, socket }) {
                 className={`mb-1 ${m.userRole === 'gm' ? 'bg-dndred/30 text-dndgold px-1 rounded' : ''}`}
               >
                 <b>{m.user}:</b>{' '}
-                <span dangerouslySetInnerHTML={{ __html: marked.parse(m.text || '') }} />
+                <span
+                  dangerouslySetInnerHTML={{
+                    __html: DOMPurify.sanitize(marked.parse(m.text || '')),
+                  }}
+                />
               </motion.div>
             ))}
           </AnimatePresence>
