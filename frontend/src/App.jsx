@@ -16,7 +16,8 @@ import SettingsPanel from './pages/SettingsPanel';
 import GMDashboard from './pages/GMDashboard';
 import GMControlPanel from './pages/GMControlPanel';
 
-
+import GMDashboardPage from './pages/gm/GMDashboardPage';
+import GMControlPage from './pages/gm/GMControlPage';
 import GMTablePage from './pages/gm/GMTablePage';
 
 import PrivateRoute from './PrivateRoute';
