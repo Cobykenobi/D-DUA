@@ -93,6 +93,19 @@ cd backend && npm test
 cd ../frontend && npm test
 ```
 
+## Navigation
+
+After signing in, players and game masters land on different pages. Regular players
+are redirected to `/characters` where they can manage their heroes. Users with the
+`master` role start at `/gm-dashboard` and gain access to additional GM routes:
+
+- `/gm-dashboard` – overview for game masters
+- `/gm-table/:id` – run a specific table
+- `/gm-control/:id` – manage player controls
+
+These routes are protected in the frontend using `PrivateRoute`, which now checks
+the stored user role.
+
 ## Linting and formatting
 
 ESLint and Prettier configuration live in the `backend` folder. You can lint and

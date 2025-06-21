@@ -1,4 +1,12 @@
 
+import { statUA } from '../translations/ua';
+
+function translateEffect(effectString) {
+  return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
+    return `+${num} до ${statUA[stat] || stat}`;
+  });
+}
+
 export default function InventoryList({ items, filter = 'all' }) {
   if (!items || !items.length) return null;
 
@@ -20,6 +28,7 @@ export default function InventoryList({ items, filter = 'all' }) {
           <li key={i} className="text-dndgold">
             {item.item || item.name || item}
             {item.amount ? `x${item.amount}` : ''}
+            {item.effect ? ` (${translateEffect(item.effect)})` : ''}
           </li>
         ))}
       </ul>

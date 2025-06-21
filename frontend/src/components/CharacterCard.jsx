@@ -1,7 +1,13 @@
 
 import { withApiHost } from '../utils/imageUtils';
 import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { raceUA, classUA, statUA } from '../translations/ua';
+
+function translateEffect(effectString) {
+  return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
+    return `+${num} до ${statUA[stat] || stat}`;
+  });
+}
 
 export default function CharacterCard({
   character,
@@ -11,7 +17,6 @@ export default function CharacterCard({
   editLabel = 'Редагувати',
   deleteLabel = 'Видалити',
 }) {
-  const { t } = useTranslation();
   const [desc, setDesc] = useState(character.description || '');
   return (
     <div className="bg-[#1c120a]/80 text-white border border-dndgold rounded-xl shadow-lg p-4 space-y-2">
@@ -23,11 +28,11 @@ export default function CharacterCard({
       <h3 className="text-xl text-dndgold text-center font-dnd mb-2">{character.name}</h3>
       <div className="text-base">
         <strong className="text-dndgold">Раса:</strong>{' '}
-        {character.race?.code ? t(`races.${character.race.code.toLowerCase()}`, character.race.name || character.race.code) : (character.race?.name || '—')}
+        {raceUA[character.race?.code || character.race] || character.race?.name || character.race?.code || '—'}
       </div>
       <div className="text-base">
         <strong className="text-dndgold">Клас:</strong>{' '}
-        {character.profession?.code ? t(`classes.${character.profession.code.toLowerCase()}`, character.profession.name || character.profession.code) : (character.profession?.name || '—')}
+        {classUA[character.profession?.code || character.profession] || character.profession?.name || character.profession?.code || '—'}
       </div>
 
       <div className="text-sm">
@@ -56,7 +61,7 @@ export default function CharacterCard({
           <ul className="list-none pl-0 text-lg font-bold space-y-0.5">
             {Object.entries(character.stats).map(([key, val]) => (
               <li key={key}>
-                {t('stats.' + key) || key}: {val}
+                {statUA[key.toUpperCase()] || key}: {val}
               </li>
             ))}
           </ul>
@@ -67,13 +72,16 @@ export default function CharacterCard({
         <ul className="list-none pl-0 text-base space-y-0.5">
           {character.inventory && character.inventory.map((it, idx) => {
             const bonus = it.bonus && Object.keys(it.bonus).length
-              ? ' (' + Object.entries(it.bonus)
-                  .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k.toLowerCase(), k)}`)
-                  .join(', ') + ')'
+              ? ' (' +
+                  Object.entries(it.bonus)
+                    .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${statUA[k.toUpperCase()] || k}`)
+                    .join(', ') +
+                  ')'
               : '';
             return (
               <li key={idx}>
                 {it.item} {it.amount > 1 ? `x${it.amount}` : ''}{bonus}
+                {it.effect ? ` (${translateEffect(it.effect)})` : ''}
               </li>
             );
           })}

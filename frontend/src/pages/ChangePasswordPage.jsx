@@ -21,7 +21,7 @@ function ChangePasswordPage() {
       setMessage("Пароль успішно змінено.");
       setCurrentPassword("");
       setNewPassword("");
-      setTimeout(() => navigate("/profile"), 2000);
+      setTimeout(() => navigate("/characters"), 2000);
     } catch (err) {
       setMessage(err.response?.data?.message || "Помилка зміни пароля");
     }

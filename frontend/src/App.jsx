@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom'; // <== Додано Navigate
+import { Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
@@ -12,8 +12,15 @@ import ChangePasswordPage from './pages/ChangePasswordPage';
 import GameTablePage from './pages/GameTablePage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import SettingsPanel from './pages/SettingsPanel';
+
 import GMDashboard from './pages/GMDashboard';
 import GMControlPanel from './pages/GMControlPanel';
+
+
+import GMTablePage from './pages/gm/GMTablePage';
+
+import PrivateRoute from './PrivateRoute';
+ main
 
 const isAuthenticated = () => !!localStorage.getItem('token');
 const isAdmin = () => {
@@ -25,13 +32,27 @@ const isAdmin = () => {
   }
 };
 
+const isGM = () => {
+  try {
+    const data = JSON.parse(localStorage.getItem('user-storage') || '{}');
+    return data.state?.user?.role === 'master';
+  } catch {
+    return false;
+  }
+};
+
+const homeRoute = () => {
+  if (!isAuthenticated()) return '/login';
+  return isGM() ? '/gm-dashboard' : '/characters';
+};
+
 const App = () => (
   <Routes>
-    <Route path="/" element={<Navigate to={isAuthenticated() ? "/profile" : "/login"} />} />
+    <Route path="/" element={<Navigate to={homeRoute()} />} />
     <Route path="/login" element={<LoginPage />} />
     <Route path="/admin/login" element={<AdminLoginPage />} />
     <Route path="/register" element={<RegisterPage />} />
-    <Route path="/profile" element={isAuthenticated() ? <ProfilePage /> : <Navigate to="/login" />} />
+    <Route path="/characters" element={isAuthenticated() ? <ProfilePage /> : <Navigate to="/login" />} />
     <Route path="/create-character" element={isAuthenticated() ? <CharacterCreatePage /> : <Navigate to="/login" />} />
     <Route path="/lobby" element={isAuthenticated() ? <LobbyPage /> : <Navigate to="/login" />} />
     <Route path="/gm-dashboard" element={isAuthenticated() ? <GMDashboard /> : <Navigate to="/login" />} />
@@ -45,6 +66,9 @@ const App = () => (
     <Route path="/settings" element={<SettingsPanel />} />
 
     <Route path="/table/:tableId" element={<GameTablePage />} />
+    <Route path="/gm-dashboard" element={<PrivateRoute roles={['master']}><GMDashboardPage /></PrivateRoute>} />
+    <Route path="/gm-table/:id" element={<PrivateRoute roles={['master']}><GMTablePage /></PrivateRoute>} />
+    <Route path="/gm-control/:id" element={<PrivateRoute roles={['master']}><GMControlPage /></PrivateRoute>} />
     <Route path="*" element={<Navigate to="/" />} />
   </Routes>
 );
