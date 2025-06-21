@@ -1,13 +1,26 @@
 import { useGameState } from '../context/GameStateContext';
 
+import { useState } from 'react';
+
 export default function PlayerStatusTable({ players, isGM }) {
   const { hp, updateHp } = useGameState();
+  const [dmg, setDmg] = useState({});
+
+  const applyDamage = (uid) => {
+    const val = Number(dmg[uid]);
+    if (!Number.isNaN(val) && val !== 0) {
+      updateHp(uid, (hp[uid] ?? 0) + val);
+    }
+    setDmg((d) => ({ ...d, [uid]: '' }));
+  };
   return (
     <table className="text-dndgold text-sm w-full">
       <thead>
         <tr>
           <th className="text-left">Гравець</th>
           <th className="text-left">HP</th>
+          <th className="text-left">AC</th>
+          {isGM && <th className="text-left">Урон</th>}
           <th className="text-left">Статус</th>
         </tr>
       </thead>
@@ -27,6 +40,23 @@ export default function PlayerStatusTable({ players, isGM }) {
                 hp[p.user] ?? '-'
               )}
             </td>
+            <td>{p.character?.stats?.defense ?? '-'}</td>
+            {isGM && (
+              <td>
+                <input
+                  type="number"
+                  value={dmg[p.user] ?? ''}
+                  onChange={e =>
+                    setDmg(d => ({ ...d, [p.user]: e.target.value }))
+                  }
+                  onBlur={() => applyDamage(p.user)}
+                  onKeyDown={e => {
+                    if (e.key === 'Enter') applyDamage(p.user);
+                  }}
+                  className="w-16 text-black rounded"
+                />
+              </td>
+            )}
             <td>{p.status || ''}</td>
           </tr>
         ))}
