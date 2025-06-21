@@ -13,7 +13,7 @@ import GameTablePage from './pages/GameTablePage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import SettingsPanel from './pages/SettingsPanel';
 
-import GMDashboardPage from './pages/gm/GMDashboardPage';
+import GMDashboard from './pages/GMDashboard';
 import GMControlPage from './pages/gm/GMControlPage';
 
 import PrivateRoute from './PrivateRoute';
@@ -61,13 +61,14 @@ const App = () => {
 
       <Route path="/settings" element={<SettingsPanel />} />
 
-      <Route path="/table/:tableId" element={<GameTablePage />} />
-      <Route path="/gm-dashboard" element={<PrivateRoute roles={['master']}><GMDashboardPage /></PrivateRoute>} />
-      <Route path="/gm-table/:id" element={<PrivateRoute roles={['master']}><GameTablePage /></PrivateRoute>} />
-      <Route path="/gm-control/:id" element={<PrivateRoute roles={['master']}><GMControlPage /></PrivateRoute>} />
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
-  );
-};
+
+    <Route path="/table/:tableId" element={<GameTablePage />} />
+    <Route path="/gm-dashboard" element={<PrivateRoute roles={['master']}><GMDashboard /></PrivateRoute>} />
+    <Route path="/gm-table/:id" element={<PrivateRoute roles={['master']}><GameTablePage /></PrivateRoute>} />
+    <Route path="/gm-control/:id" element={<PrivateRoute roles={['master']}><GMControlPage /></PrivateRoute>} />
+    <Route path="*" element={<Navigate to="/" />} />
+  </Routes>
+);
+
 
 export default App;
