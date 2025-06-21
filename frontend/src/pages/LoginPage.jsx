@@ -51,12 +51,6 @@ function LoginPage() {
       setUser(res.data.user, res.data.token);
 
       navigate(getPostLoginRedirect(res.data.user.role));
-
-      if (res.data.user.role === 'gm') {
-        navigate('/gm-dashboard');
-      } else {
-        navigate('/characters');
-      }
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     } finally {

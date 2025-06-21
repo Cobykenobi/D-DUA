@@ -1,5 +1,5 @@
 function getPostLoginRedirect(role) {
-  return role === 'gm' || role === 'admin' ? '/gm-dashboard' : '/profile';
+  return role === 'gm' || role === 'admin' ? '/gm-dashboard' : '/characters';
 }
 
 module.exports = getPostLoginRedirect;
