@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import LanguageSwitch from './LanguageSwitch';
+import ThemeToggle from './ThemeToggle';
 
 function Navbar() {
   const navigate = useNavigate();
@@ -14,23 +15,25 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-gray-800 text-white px-6 py-3 flex justify-between items-center">
-      <Link to="/" className="text-xl font-bold">
-        D-DUA
+    <nav className="bg-dndbg text-dndgold flex items-center px-4 py-2 shadow-md dark:bg-gray-900 dark:text-white">
+      <Link to="/" className="flex items-center mr-6">
+        <img src="/logo.png" alt="Logo" className="w-8 h-8 mr-2" />
+        <span className="font-dnd text-2xl">D-DUA</span>
       </Link>
-      <div className="flex items-center gap-4">
-        {user && <span className="text-sm"> {user.login}</span>}
+      <div className="flex items-center gap-4 flex-1">
+        <Link to="/profile" className="hover:text-white">Profile</Link>
+        <Link to="/settings" className="hover:text-white">Settings</Link>
         {token && (
-          <button
-            onClick={handleLogout}
-            className="bg-red-500 hover:bg-red-600 px-3 py-1 rounded text-sm"
-          >
-            Вийти
+          <button onClick={handleLogout} className="text-dndred hover:text-dndgold">
+            Logout
           </button>
         )}
       </div>
-    <div className='ml-auto'><LanguageSwitch /></div>
-</nav>
+      <div className="flex items-center gap-3 ml-auto">
+        <ThemeToggle />
+        <LanguageSwitch />
+      </div>
+    </nav>
   );
 }
 
