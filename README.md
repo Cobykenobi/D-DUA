@@ -103,7 +103,7 @@ cd ../frontend && npm test
 
 After signing in, players and game masters land on different pages. Regular players
 are redirected to `/characters` where they can manage their heroes. Users with the
-`master` role start at `/gm-dashboard` and gain access to additional GM routes:
+`gm` role start at `/gm-dashboard` and gain access to additional GM routes:
 
 - `/gm-dashboard` – overview for game masters
 - `/gm-table/:id` – run a specific table
