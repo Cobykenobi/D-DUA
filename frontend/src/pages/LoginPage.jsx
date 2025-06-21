@@ -57,7 +57,6 @@ function LoginPage() {
       } else {
         navigate('/characters');
       }
- main
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     } finally {

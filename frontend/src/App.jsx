@@ -20,7 +20,6 @@ import GMControlPanel from './pages/GMControlPanel';
 import GMTablePage from './pages/gm/GMTablePage';
 
 import PrivateRoute from './PrivateRoute';
- main
 
 const isAuthenticated = () => !!localStorage.getItem('token');
 const isAdmin = () => {
