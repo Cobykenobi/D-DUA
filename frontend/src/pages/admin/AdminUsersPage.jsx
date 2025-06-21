@@ -20,7 +20,7 @@ export default function AdminUsersPage() {
   useEffect(() => { fetchUsers(); }, []);
 
   const toggleRole = async (id, role) => {
-    const newRole = role === 'master' ? 'player' : 'master';
+    const newRole = role === 'gm' ? 'player' : 'gm';
     try {
       await updateUserRole(id, newRole);
       setUsers(u => u.map(user => user._id === id ? { ...user, role: newRole } : user));

@@ -39,8 +39,8 @@ exports.history = async (req, res) => {
   try {
     const { session } = req.query;
     const query = { session };
-    // Майстер бачить всі, інші тільки публічні
-    if (req.user.role !== 'master') query.isPrivate = false;
+    // ГМ бачить всі, інші тільки публічні
+    if (req.user.role !== 'gm') query.isPrivate = false;
     const rolls = await Roll.find(query).sort({ createdAt: -1 }).limit(50);
     res.json(rolls);
   } catch (err) {

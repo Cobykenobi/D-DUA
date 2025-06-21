@@ -21,11 +21,15 @@ exports.register = async (req, res) => {
     }
 
     const hash = await bcrypt.hash(password, 10);
+    let finalRole = 'player';
+    if (['gm', 'admin'].includes(role)) {
+      finalRole = role;
+    }
     const user = new User({
       login,
       password: hash,
       username: finalUsername,
-      role: role === 'master' ? 'master' : 'player',
+      role: finalRole,
     });
     await user.save();
 

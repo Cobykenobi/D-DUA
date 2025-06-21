@@ -12,7 +12,7 @@ exports.getUsers = async (req, res) => {
 exports.updateUserRole = async (req, res) => {
   try {
     const { role } = req.body;
-    if (!['player', 'master', 'admin'].includes(role)) {
+    if (!['player', 'gm', 'admin'].includes(role)) {
       return res.status(400).json({ message: 'Invalid role' });
     }
     const user = await User.findByIdAndUpdate(

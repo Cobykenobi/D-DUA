@@ -19,7 +19,7 @@ export default function LobbyPage() {
   const [players, setPlayers] = useState([]);
   const [gm, setGm] = useState(null);
   const [character, setCharacter] = useState(null);
-  const [isGM, setIsGM] = useState(user?.role === 'master');
+  const [isGM, setIsGM] = useState(user?.role === 'gm');
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -44,7 +44,7 @@ export default function LobbyPage() {
       setPlayers(data.players);
       setGm(data.gm || null);
       if (user) {
-        setIsGM(user.role === 'master' || (data.gm && data.gm.toString() === user._id));
+        setIsGM(user.role === 'gm' || (data.gm && data.gm.toString() === user._id));
       }
     });
     socket.on('gm-assigned', () => {
@@ -57,7 +57,7 @@ export default function LobbyPage() {
 
   useEffect(() => {
     if (!user) return;
-    setIsGM(user.role === 'master' || (gm && gm.toString() === user._id));
+    setIsGM(user.role === 'gm' || (gm && gm.toString() === user._id));
   }, [user, gm]);
 
   const startGame = () => {
@@ -133,7 +133,7 @@ export default function LobbyPage() {
           {players.map(pl => (
             <li key={pl.user} className="text-dndgold mb-2">
               <div className="font-bold">
-                {pl.name} {pl.user === gm && ' (Мастер)'}
+                {pl.name} {pl.user === gm && ' (ГМ)'}
               </div>
               <div className="ml-2">
                 {pl.character ? (

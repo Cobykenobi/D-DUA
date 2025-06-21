@@ -12,6 +12,8 @@ import ChangePasswordPage from './pages/ChangePasswordPage';
 import GameTablePage from './pages/GameTablePage';
 import AdminLoginPage from './pages/AdminLoginPage';
 import SettingsPanel from './pages/SettingsPanel';
+import GMDashboard from './pages/GMDashboard';
+import GMControlPanel from './pages/GMControlPanel';
 
 const isAuthenticated = () => !!localStorage.getItem('token');
 const isAdmin = () => {
@@ -32,6 +34,9 @@ const App = () => (
     <Route path="/profile" element={isAuthenticated() ? <ProfilePage /> : <Navigate to="/login" />} />
     <Route path="/create-character" element={isAuthenticated() ? <CharacterCreatePage /> : <Navigate to="/login" />} />
     <Route path="/lobby" element={isAuthenticated() ? <LobbyPage /> : <Navigate to="/login" />} />
+    <Route path="/gm-dashboard" element={isAuthenticated() ? <GMDashboard /> : <Navigate to="/login" />} />
+    <Route path="/gm-table/:id" element={isAuthenticated() ? <GameTablePage /> : <Navigate to="/login" />} />
+    <Route path="/gm-control/:id" element={isAuthenticated() ? <GMControlPanel /> : <Navigate to="/login" />} />
     <Route path="/admin" element={isAdmin() ? <AdminPage /> : <Navigate to="/admin/login" />} />
     <Route path="/admin/inventory/:characterId" element={isAdmin() ? <AdminInventoryPage /> : <Navigate to="/admin/login" />} />
     <Route path="/admin/users" element={isAdmin() ? <AdminUsersPage /> : <Navigate to="/admin/login" />} />

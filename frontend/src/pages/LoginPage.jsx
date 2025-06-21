@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { useUserStore } from '../store/user';
 import { useState, useEffect } from 'react';
 import api from "../api/axios";
+import getPostLoginRedirect from '../utils/getPostLoginRedirect.cjs';
 
 function LoginPage() {
   const [login, setLogin] = useState("");
@@ -48,7 +49,7 @@ function LoginPage() {
     try {
       const res = await api.post("/auth/login", { login, password });
       setUser(res.data.user, res.data.token);
-      navigate("/profile");
+      navigate(getPostLoginRedirect(res.data.user.role));
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     } finally {
