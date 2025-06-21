@@ -48,7 +48,11 @@ function LoginPage() {
     try {
       const res = await api.post("/auth/login", { login, password });
       setUser(res.data.user, res.data.token);
-      navigate("/profile");
+      if (res.data.user.role === 'master') {
+        navigate('/gm-dashboard');
+      } else {
+        navigate('/characters');
+      }
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     } finally {
