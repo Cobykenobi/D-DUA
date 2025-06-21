@@ -14,7 +14,12 @@ export default function AdminInventoryPage() {
       try {
         const res = await api.get(`/inventory/${characterId}`);
         const data = res.data?.items || [];
-        setItems(data.map(it => it.name || it.item || it));
+        setItems(
+          data.map((it) => ({
+            item: it.name || it.item || it,
+            type: it.type || 'misc',
+          }))
+        );
       } catch (err) {
         setItems([]);
       }
@@ -26,7 +31,7 @@ export default function AdminInventoryPage() {
   const handleSave = async () => {
     await api.put(
       `/inventory/${characterId}`,
-      { items: items.map(name => ({ name })) }
+      { items: items.map(it => ({ name: it.item, type: it.type })) }
     );
     alert('Збережено');
   };
