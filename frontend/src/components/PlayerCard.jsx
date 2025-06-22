@@ -10,7 +10,9 @@ import { translateOrRaw } from '../utils/i18nHelpers';
 function translateEffect(effectString, t) {
   return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
     const key = stat.toLowerCase();
-    return `+${num} ${translateOrRaw(t, 'stats.' + key)}`;
+
+    return `+${num} ${t('bonuses.' + key, t('stats.' + key, t('unknown')))}`;
+
   });
 }
 
@@ -97,13 +99,15 @@ export default function PlayerCard({ character, onSelect }) {
                       ?
                           ' (' +
                           Object.entries(it.bonus)
-                            .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
+
+                            .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('bonuses.' + k.toLowerCase(), t('stats.' + k.toLowerCase(), t('unknown')))}`)
+
                             .join(', ') +
                           ')'
                       : '';
                   return (
                     <li key={idx}>
-                      {it.item}
+                      {t(`inventory.${it.item}`, it.item)}
                       {it.amount > 1 ? ` x${it.amount}` : ''}
                       {bonusData}
                       {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
@@ -124,13 +128,15 @@ export default function PlayerCard({ character, onSelect }) {
                       ?
                           ' (' +
                           Object.entries(it.bonus)
-                            .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
+
+                            .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('bonuses.' + k.toLowerCase(), t('stats.' + k.toLowerCase(), t('unknown')))}`)
+
                             .join(', ') +
                           ')'
                       : '';
                   return (
                     <li key={key}>
-                      {it.item}
+                      {t(`inventory.${it.item}`, it.item)}
                       {it.amount > 1 ? ` x${it.amount}` : ''}
                       {bonusData}
                       {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
@@ -142,7 +148,7 @@ export default function PlayerCard({ character, onSelect }) {
           }
           return (
             <ul className="list-disc pl-4 mt-2 space-y-0.5">
-              <li>Інвентар порожній</li>
+              <li>{t('inventory.empty')}</li>
             </ul>
           );
         })()}
