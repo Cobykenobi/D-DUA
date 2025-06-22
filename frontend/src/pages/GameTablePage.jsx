@@ -52,6 +52,11 @@ export default function GameTablePage() {
     socket.on("initiative-update", setInitiative);
     socket.on("chat-history", setMessages);
     socket.on("chat-message", msg => setMessages(m => [...m, msg]));
+    socket.on("gm-message", msg => {
+      if (msg.targetUserId === 'all' || msg.targetUserId === user?._id) {
+        setMessages(m => [...m, { user: 'GM', text: msg.text, userRole: 'gm' }]);
+      }
+    });
     return () => {
       socket.off("table-players");
       socket.off('inventory-update', onInv);
@@ -59,6 +64,7 @@ export default function GameTablePage() {
       socket.off("initiative-update");
       socket.off("chat-history");
       socket.off("chat-message");
+      socket.off("gm-message");
     };
   }, [tableId, user, characterId]);
 

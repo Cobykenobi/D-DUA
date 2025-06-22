@@ -17,8 +17,10 @@ function Control() {
   const [mapFile, setMapFile] = useState(null);
   const [trackUrl, setTrackUrl] = useState('');
   const [players, setPlayers] = useState([]);
-  const [selectedChar, setSelectedChar] = useState('');
-  const [inventory, setInventory] = useState([]);
+
+  const [target, setTarget] = useState('all');
+  const [message, setMessage] = useState('');
+
   const { id } = useParams();
 
   useEffect(() => {
@@ -100,13 +102,12 @@ function Control() {
     }
   };
 
-  const handleInventoryChange = async (items) => {
-    setInventory(items);
-    if (!selectedChar) return;
-    await api.put(`/inventory/${selectedChar}`, {
-      items: items.map(it => ({ name: it.item, type: it.type }))
-    });
-    socket.emit('inventory-update', { tableId: id, characterId: selectedChar, inventory: items });
+
+  const sendMessage = () => {
+    if (!message.trim()) return;
+    socket.emit('gm-message', { tableId: id, targetUserId: target, text: message });
+    setMessage('');
+
   };
 
   return (
@@ -144,17 +145,28 @@ function Control() {
       </div>
       <PlayerStatusTable players={players} isGM />
       <div>
-        <div className="font-bold mb-1">Інвентар</div>
+
+        <div className="font-bold mb-1">Повідомлення</div>
         <select
+          value={target}
+          onChange={e => setTarget(e.target.value)}
           className="rounded px-2 py-1 w-full text-black mb-2"
-          value={selectedChar}
-          onChange={e => setSelectedChar(e.target.value)}
         >
-          {players.filter(p => p.character).map(p => (
-            <option key={p.character._id} value={p.character._id}>{p.name}</option>
+          <option value="all">Всі</option>
+          {players.map(p => (
+            <option key={p.user} value={p.user}>{p.name}</option>
           ))}
         </select>
-        <InventoryEditor inventory={inventory} onChange={handleInventoryChange} />
+        <input
+          value={message}
+          onChange={e => setMessage(e.target.value)}
+          className="rounded px-2 py-1 w-full text-black mb-2"
+          placeholder="Текст повідомлення"
+        />
+        <button onClick={sendMessage} className="bg-dndgold text-dndred font-dnd rounded px-2 py-1 w-full">
+          Надіслати
+        </button>
+
       </div>
       <DiceBox />
       <DiceRollerHidden sessionId={id} />
