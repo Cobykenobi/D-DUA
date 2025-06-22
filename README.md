@@ -129,7 +129,12 @@ npm run lint
 npm run format
 ```
 
-The frontend does not currently include separate lint or format commands.
+You can lint the frontend code with:
+
+```bash
+cd frontend
+npm run lint
+```
 
 ## Character Basics
 
