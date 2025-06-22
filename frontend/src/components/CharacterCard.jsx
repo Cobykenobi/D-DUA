@@ -1,11 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { normalizeInventory } from '../utils/inventoryUtils';
+import { translateOrRaw } from '../utils/i18nHelpers';
 
 function translateEffect(effectString, t) {
   return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
     const key = stat.toLowerCase();
-    return `+${num} ${t('stats.' + key, t('unknown'))}`;
+    return `+${num} ${translateOrRaw(t, 'stats.' + key)}`;
   });
 }
 
@@ -27,19 +28,16 @@ export default function CharacterCard({ character }) {
       <h3>{character.name}</h3>
       <p>
 
-        {t(`races.${raceKey}`, t('unknown'))}
+        {translateOrRaw(t, `races.${raceKey}`)}
 
       </p>
       <p>
-        {t(
-          `classes.${classKey}`,
-          t('unknown')
-        )}
+        {translateOrRaw(t, `classes.${classKey}`)}
       </p>
       <ul>
         {Object.entries(character.stats || {}).map(([key, value]) => (
           <li key={key}>
-            {t(`stats.${key.toLowerCase()}`, t('unknown'))}: {value}
+            {translateOrRaw(t, `stats.${key.toLowerCase()}`)}: {value}
           </li>
         ))}
       </ul>
@@ -54,7 +52,7 @@ export default function CharacterCard({ character }) {
                   ?
                       ' (' +
                       Object.entries(it.bonus)
-                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k.toLowerCase(), t('unknown'))}`)
+                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
                         .join(', ') +
                       ')'
                   : '';
@@ -75,7 +73,7 @@ export default function CharacterCard({ character }) {
                   ?
                       ' (' +
                       Object.entries(it.bonus)
-                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k.toLowerCase(), t('unknown'))}`)
+                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
                         .join(', ') +
                       ')'
                   : '';
