@@ -9,9 +9,11 @@ import DiceBox from '../../components/DiceBox';
 import socket from '../../api/socket';
 import api from '../../api/axios';
 
+
 function Control() {
   const { updateMap, changeMusic, music } = useGameState();
   const [mapUrl, setMapUrl] = useState('');
+  const [mapFile, setMapFile] = useState(null);
   const [trackUrl, setTrackUrl] = useState('');
   const [players, setPlayers] = useState([]);
   const [selectedChar, setSelectedChar] = useState('');
@@ -67,10 +69,26 @@ function Control() {
     fetchInv();
   }, [selectedChar]);
 
-  const sendMap = () => {
+  const sendMap = async () => {
     if (mapUrl) {
       updateMap(mapUrl);
       setMapUrl('');
+      return;
+    }
+    if (mapFile) {
+      const formData = new FormData();
+      formData.append('name', mapFile.name || 'map');
+      formData.append('image', mapFile);
+      try {
+        const res = await api.post('/map', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
+        const image = withApiHost(res.data.image);
+        updateMap(image);
+        setMapFile(null);
+      } catch (e) {
+        console.error(e);
+      }
     }
   };
 
@@ -99,6 +117,12 @@ function Control() {
           onChange={(e) => setMapUrl(e.target.value)}
           className="rounded px-2 py-1 w-full text-black mb-2"
           placeholder="URL карти"
+        />
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setMapFile(e.target.files[0])}
+          className="rounded px-2 py-1 w-full text-black mb-2"
         />
         <button onClick={sendMap} className="bg-dndgold text-dndred font-dnd rounded px-2 py-1 w-full">
           Оновити карту
