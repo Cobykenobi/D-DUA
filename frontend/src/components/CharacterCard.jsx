@@ -2,6 +2,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { normalizeInventory } from '../utils/inventoryUtils';
 
+function translateEffect(effectString, t) {
+  return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
+    const key = stat.toLowerCase();
+    return `+${num} ${t('stats.' + key, t('unknown'))}`;
+  });
+}
+
 export default function CharacterCard({ character }) {
   const { t } = useTranslation();
   const race =
@@ -40,11 +47,47 @@ export default function CharacterCard({ character }) {
       <ul>
         {(() => {
           const inv = normalizeInventory(character.inventory);
-          if (inv.type === 'array') {
-            return inv.items.map((item, index) => <li key={index}>{item}</li>);
+          if (inv.type === 'array' && inv.items.length > 0) {
+            return inv.items.map((it, idx) => {
+              const bonus =
+                it.bonus && Object.keys(it.bonus).length
+                  ?
+                      ' (' +
+                      Object.entries(it.bonus)
+                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k.toLowerCase(), t('unknown'))}`)
+                        .join(', ') +
+                      ')'
+                  : '';
+              return (
+                <li key={idx}>
+                  {it.item}
+                  {it.amount > 1 ? ` x${it.amount}` : ''}
+                  {bonus}
+                  {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
+                </li>
+              );
+            });
           }
-          if (inv.type === 'object') {
-            return inv.items.map(([key, item]) => <li key={key}>{item}</li>);
+          if (inv.type === 'object' && inv.items.length > 0) {
+            return inv.items.map(([key, it]) => {
+              const bonus =
+                it.bonus && Object.keys(it.bonus).length
+                  ?
+                      ' (' +
+                      Object.entries(it.bonus)
+                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k.toLowerCase(), t('unknown'))}`)
+                        .join(', ') +
+                      ')'
+                  : '';
+              return (
+                <li key={key}>
+                  {it.item}
+                  {it.amount > 1 ? ` x${it.amount}` : ''}
+                  {bonus}
+                  {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
+                </li>
+              );
+            });
           }
           return <li>Інвентар порожній</li>;
         })()}
