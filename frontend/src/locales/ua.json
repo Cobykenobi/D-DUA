@@ -44,7 +44,14 @@
     "strength": "Сила",
     "intellect": "Інтелект",
     "agility": "Спритність",
-    "charisma": "Харизма"
+    "charisma": "Харизма",
+    "str": "СИЛ",
+    "dex": "СПР",
+    "int": "ІНТ",
+    "con": "ВИТ",
+    "cha": "ХАР",
+    "hp": "HP",
+    "mp": "MP"
   },
   "inventory": {
     "title": "Інвентар:",
