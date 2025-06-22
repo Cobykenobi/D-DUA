@@ -29,16 +29,16 @@ export default function CharacterCard({ character }) {
       <h3>{character.name}</h3>
       <p>
 
-        {translateKey(t, `races.${raceKey}`)}
+        {translateOrRaw(t, `races.${raceKey}`)}
 
       </p>
       <p>
-        {translateKey(t, `classes.${classKey}`)}
+        {translateOrRaw(t, `classes.${classKey}`)}
       </p>
       <ul>
         {Object.entries(character.stats || {}).map(([key, value]) => (
           <li key={key}>
-            {translateKey(t, `stats.${key.toLowerCase()}`)}: {value}
+            {translateOrRaw(t, `stats.${key.toLowerCase()}`)}: {value}
           </li>
         ))}
       </ul>
@@ -56,7 +56,7 @@ export default function CharacterCard({ character }) {
                       ' (' +
                       Object.entries(it.bonus)
 
-                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateKey(t, 'stats.' + k.toLowerCase())}`)
+                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
 
                         .join(', ') +
                       ')'
@@ -64,7 +64,7 @@ export default function CharacterCard({ character }) {
               return (
                 <li key={idx}>
 
-                  {translateKey(t, `inventory.${it.item.toLowerCase()}`, it.item)}
+                  {translateOrRaw(t, `inventory.${it.item.toLowerCase()}`, it.item)}
 
                   {it.amount > 1 ? ` x${it.amount}` : ''}
                   {bonusData}
@@ -83,14 +83,14 @@ export default function CharacterCard({ character }) {
                       ' (' +
                       Object.entries(it.bonus)
 
-                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateKey(t, 'stats.' + k.toLowerCase())}`)
+                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
            .join(', ') +
                       ')'
                   : '';
               return (
                 <li key={key}>
 
-                  {translateKey(t, `inventory.${it.item.toLowerCase()}`, it.item)}
+                  {translateOrRaw(t, `inventory.${it.item.toLowerCase()}`, it.item)}
 
                   {it.amount > 1 ? ` x${it.amount}` : ''}
                   {bonusData}
