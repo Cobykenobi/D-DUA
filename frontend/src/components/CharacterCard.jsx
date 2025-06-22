@@ -50,7 +50,7 @@ export default function CharacterCard({
               onClick={onEdit}
               className="bg-dndgold text-dndred font-dnd rounded-2xl px-4 py-1 transition active:scale-95"
             >
-              {editLabel || 'Редагувати'}
+              {editLabel || t('edit')}
             </button>
           )}
           {onDelete && (
@@ -58,14 +58,14 @@ export default function CharacterCard({
               onClick={onDelete}
               className="bg-red-800 hover:bg-red-700 text-white rounded-2xl px-4 py-1 transition active:scale-95"
             >
-              Видалити
+              {t('delete')}
             </button>
           )}
           <button
             onClick={() => setOpen(true)}
             className="bg-dndgold text-dndred font-dnd rounded-2xl px-4 py-1 transition active:scale-95"
           >
-            Деталі
+            {t('details')}
           </button>
         </div>
       </div>
@@ -88,7 +88,7 @@ export default function CharacterCard({
             }}
             className="mb-2 bg-dndgold text-dndred font-dnd rounded-2xl px-4 py-1 transition active:scale-95"
           >
-            Зберегти
+            {t('save')}
           </button>
         )}
         {character.stats && (
@@ -119,7 +119,9 @@ export default function CharacterCard({
                     : '';
                 return (
                   <li key={idx}>
+
                     {translateOrRaw(t, `item.${(it.code || it.item).toLowerCase()}`, it.item)}
+
                     {it.amount > 1 ? ` x${it.amount}` : ''}
                     {bonusData}
                     {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
@@ -142,7 +144,9 @@ export default function CharacterCard({
                     : '';
                 return (
                   <li key={key}>
+
                     {translateOrRaw(t, `item.${(it.code || it.item).toLowerCase()}`, it.item)}
+
                     {it.amount > 1 ? ` x${it.amount}` : ''}
                     {bonusData}
                     {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}

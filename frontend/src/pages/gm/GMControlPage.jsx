@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import ReactPlayer from 'react-player';
 import { useUserStore } from '../../store/user';
 import { GameStateProvider, useGameState } from '../../context/GameStateContext';
@@ -20,6 +21,7 @@ function Control() {
 
   const [target, setTarget] = useState('all');
   const [message, setMessage] = useState('');
+  const { t } = useTranslation();
 
   const { id } = useParams();
 
@@ -113,12 +115,12 @@ function Control() {
   return (
     <div className="p-4 flex flex-col gap-4">
       <div>
-        <div className="font-bold mb-1">Карта</div>
+        <div className="font-bold mb-1">{t('map')}</div>
         <input
           value={mapUrl}
           onChange={(e) => setMapUrl(e.target.value)}
           className="rounded px-2 py-1 w-full text-black mb-2"
-          placeholder="URL карти"
+          placeholder={t('map_url')}
         />
         <input
           type="file"
@@ -127,11 +129,11 @@ function Control() {
           className="rounded px-2 py-1 w-full text-black mb-2"
         />
         <button onClick={sendMap} className="bg-dndgold text-dndred font-dnd rounded px-2 py-1 w-full">
-          Оновити карту
+          {t('update_map')}
         </button>
       </div>
       <div>
-        <div className="font-bold mb-1">Музика (YouTube URL)</div>
+        <div className="font-bold mb-1">{t('music_url')}</div>
         <input
           value={trackUrl}
           onChange={(e) => setTrackUrl(e.target.value)}
@@ -139,20 +141,20 @@ function Control() {
           placeholder="https://..."
         />
         <button onClick={sendMusic} className="bg-dndgold text-dndred font-dnd rounded px-2 py-1 w-full mb-2">
-          Відтворити
+          {t('play')}
         </button>
         {music && <ReactPlayer url={music} playing controls width="100%" height="50px" />}
       </div>
       <PlayerStatusTable players={players} isGM />
       <div>
 
-        <div className="font-bold mb-1">Повідомлення</div>
+        <div className="font-bold mb-1">{t('message')}</div>
         <select
           value={target}
           onChange={e => setTarget(e.target.value)}
           className="rounded px-2 py-1 w-full text-black mb-2"
         >
-          <option value="all">Всі</option>
+          <option value="all">{t('all')}</option>
           {players.map(p => (
             <option key={p.user} value={p.user}>{p.name}</option>
           ))}
@@ -161,10 +163,10 @@ function Control() {
           value={message}
           onChange={e => setMessage(e.target.value)}
           className="rounded px-2 py-1 w-full text-black mb-2"
-          placeholder="Текст повідомлення"
+          placeholder={t('message_text')}
         />
         <button onClick={sendMessage} className="bg-dndgold text-dndred font-dnd rounded px-2 py-1 w-full">
-          Надіслати
+          {t('send')}
         </button>
 
       </div>

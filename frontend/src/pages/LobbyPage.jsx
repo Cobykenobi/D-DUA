@@ -84,35 +84,35 @@ export default function LobbyPage() {
           onClick={() => navigate('/characters')}
           className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-4 py-2 transition active:scale-95"
         >
-          Назад
+          {t('back')}
         </button>
         <LogoutButton />
         <LanguageSwitch />
       </div>
       {!tableId ? (
         <div className="bg-[#322018]/90 p-6 rounded-2xl mt-10 w-full max-w-lg text-center">
-          <h1 className="text-3xl font-dnd text-dndgold mb-4">Вхід до лобі</h1>
+          <h1 className="text-3xl font-dnd text-dndgold mb-4">{t('enter_lobby')}</h1>
           <input
             value={inputId}
             onChange={(e) => setInputId(e.target.value)}
-            placeholder="Код столу"
+            placeholder={t('table_code')}
             className="w-full p-2 rounded bg-[#3c2a20] text-dndgold mb-4"
           />
           <button
             onClick={handleJoin}
             className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-6 py-2 transition active:scale-95"
           >
-            Приєднатися / Створити
+            {t('join_or_create')}
           </button>
-          <div className="text-dndgold text-sm mt-2">Залиште поле порожнім, щоб створити нове лобі</div>
+          <div className="text-dndgold text-sm mt-2">{t('empty_lobby_hint')}</div>
         </div>
       ) : (
       <div className="bg-[#322018]/90 p-6 rounded-2xl mt-10 w-full max-w-lg">
-        <h1 className="text-3xl font-dnd text-dndgold text-center mb-2">Лобі столу</h1>
+        <h1 className="text-3xl font-dnd text-dndgold text-center mb-2">{t('lobby_title')}</h1>
         {error && <div className="text-red-500 mb-2">{error}</div>}
         <div className="text-dndgold mb-2">
-          Код для підключення: <b>{tableId}</b>
-          <div className="text-sm">Поділися цим кодом або посиланням /lobby?tableId={tableId}</div>
+          {t('connect_code')} <b>{tableId}</b>
+          <div className="text-sm">{t('share_code', { tableId })}</div>
         </div>
         {character && (
           <div className="flex items-center gap-3 mb-4 text-dndgold">
@@ -130,7 +130,7 @@ export default function LobbyPage() {
             </div>
           </div>
         )}
-        <div className="text-dndgold mb-4">Гравці:</div>
+        <div className="text-dndgold mb-4">{t('players')}</div>
         <ul>
           {players.map(pl => (
             <li key={pl.user} className="text-dndgold mb-2">
@@ -149,7 +149,7 @@ export default function LobbyPage() {
                     )}
                   </>
                 ) : (
-                  <>{t('Без персонажа')}</>
+                  <>{t('no_character')}</>
                 )}
               </div>
             </li>
@@ -160,7 +160,7 @@ export default function LobbyPage() {
           className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-6 py-2 mt-6 transition active:scale-95"
           onClick={startGame}
           >
-            Розпочати гру!
+            {t('start_game')}
           </button>
         )}
       </div>
