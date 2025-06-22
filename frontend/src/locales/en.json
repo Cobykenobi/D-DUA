@@ -39,5 +39,6 @@
     "intellect": "Intellect",
     "agility": "Agility",
     "charisma": "Charisma"
-  }
+  },
+  "unknown": "Unknown"
 }
