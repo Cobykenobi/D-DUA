@@ -7,6 +7,7 @@ import LanguageSwitch from '../components/LanguageSwitch';
 import { getCharacter } from '../utils/api';
 import { withApiHost } from '../utils/imageUtils';
 import { useTranslation } from 'react-i18next';
+import translateOrRaw from '../utils/translateOrRaw.js';
 
 // Fallback to localhost if env variable is missing
 const socket = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000');
@@ -124,6 +125,9 @@ export default function LobbyPage() {
             <div>
               <div className="font-bold">{character.name}</div>
               <div className="text-sm">
+                {character.gender && (
+                  <>{translateOrRaw(t, 'gender.' + character.gender.toLowerCase(), character.gender)} · </>
+                )}
                 {character.race?.code
                   ? t(`races.${character.race.code.toLowerCase()}`)
                   : (character.race?.name || '')} &middot;{' '}
@@ -145,6 +149,9 @@ export default function LobbyPage() {
                 {pl.character ? (
                   <>
                     {pl.character.name}
+                    {pl.character.gender && (
+                      <> ({translateOrRaw(t, 'gender.' + pl.character.gender.toLowerCase(), pl.character.gender)})</>
+                    )}
                     {pl.character.race && (
                       <> – {pl.character.race.code
                         ? t(`races.${pl.character.race.code.toLowerCase()}`)

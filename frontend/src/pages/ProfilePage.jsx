@@ -8,6 +8,7 @@ import { getCharacters, deleteCharacter, updateCharacter } from '../utils/api';
 import api from '../api/axios';
 import { useUserStore } from '../store/user';
 import { useTranslation } from 'react-i18next';
+import translateOrRaw from '../utils/translateOrRaw.js';
 
 const ProfilePage = () => {
   const [characters, setCharacters] = useState([]);
@@ -95,14 +96,18 @@ const ProfilePage = () => {
           </div>
         ) : (
           characters.map((char) => (
-            <CharacterCard
-              key={char._id}
-              character={char}
-              editLabel={t('enter')}
-              onEdit={() => handleSelect(char._id)}
-              onDelete={() => handleDelete(char._id)}
-              onSaveDescription={handleSaveDescription}
-            />
+            <div key={char._id} className="flex flex-col items-center">
+              <CharacterCard
+                character={char}
+                editLabel={t('enter')}
+                onEdit={() => handleSelect(char._id)}
+                onDelete={() => handleDelete(char._id)}
+                onSaveDescription={handleSaveDescription}
+              />
+              <div className="text-xs mt-1">
+                {translateOrRaw(t, 'gender.' + (char.gender || '').toLowerCase(), char.gender)}
+              </div>
+            </div>
           ))
         )}
       </div>

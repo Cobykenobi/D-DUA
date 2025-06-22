@@ -42,7 +42,7 @@ function init(httpServer) {
           character = await Character.findById(characterId)
             .populate('race', 'name code')
             .populate('profession', 'name code')
-            .select('name image race profession stats inventory description')
+            .select('name image gender race profession stats inventory description')
             .lean();
         }
         player = { user: user._id, name: user.username, role: user.role, character, online: true };
@@ -53,7 +53,7 @@ function init(httpServer) {
           player.character = await Character.findById(characterId)
             .populate('race', 'name code')
             .populate('profession', 'name code')
-            .select('name image race profession stats inventory description')
+            .select('name image gender race profession stats inventory description')
             .lean();
         }
       }
@@ -83,7 +83,7 @@ function init(httpServer) {
           character = await Character.findById(characterId)
             .populate('race', 'name code')
             .populate('profession', 'name code')
-            .select('name image race profession stats inventory description')
+            .select('name image gender race profession stats inventory description')
             .lean();
         }
         player = { user: user._id, character, online: true };
@@ -94,7 +94,7 @@ function init(httpServer) {
           player.character = await Character.findById(characterId)
             .populate('race', 'name code')
             .populate('profession', 'name code')
-            .select('name image race profession stats inventory description')
+            .select('name image gender race profession stats inventory description')
             .lean();
         }
       }
