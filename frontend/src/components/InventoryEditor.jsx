@@ -2,9 +2,11 @@
 import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import { useToast } from '../context/ToastContext';
+import { useTranslation } from 'react-i18next';
 
 export default function InventoryEditor({ inventory, onChange }) {
   const { showToast } = useToast();
+  const { t } = useTranslation();
 
   const normalize = (list) =>
     Array.isArray(list)
@@ -30,14 +32,14 @@ export default function InventoryEditor({ inventory, onChange }) {
     setItems(newItems);
     onChange(newItems);
     setInput('');
-    showToast('Предмет додано', 'success');
+    showToast(t('inventory.item_added'), 'success');
   };
 
   const removeItem = (idx) => {
     const newItems = items.filter((_, i) => i !== idx);
     setItems(newItems);
     onChange(newItems);
-    showToast('Предмет видалено', 'success');
+    showToast(t('inventory.item_removed'), 'success');
   };
 
   const handleDragEnd = (result) => {
@@ -47,7 +49,7 @@ export default function InventoryEditor({ inventory, onChange }) {
     newItems.splice(result.destination.index, 0, moved);
     setItems(newItems);
     onChange(newItems);
-    showToast('Порядок змінено', 'success');
+    showToast(t('inventory.order_changed'), 'success');
   };
 
   return (
@@ -55,7 +57,7 @@ export default function InventoryEditor({ inventory, onChange }) {
       <div className="flex gap-2 mb-2">
         <input
           className="rounded-2xl px-3 py-1 bg-[#2c1a12] border border-dndgold text-dndgold flex-1"
-          placeholder="Новий предмет"
+          placeholder={t('inventory.new_item')}
           value={input}
           onChange={(e) => setInput(e.target.value)}
         />
@@ -64,10 +66,10 @@ export default function InventoryEditor({ inventory, onChange }) {
           onChange={(e) => setType(e.target.value)}
           className="rounded-2xl px-2 bg-[#2c1a12] border border-dndgold text-dndgold"
         >
-          <option value="weapon">Зброя</option>
-          <option value="armor">Броня</option>
-          <option value="potion">Зілля</option>
-          <option value="misc">Інше</option>
+          <option value="weapon">{t('inventory.types.weapon')}</option>
+          <option value="armor">{t('inventory.types.armor')}</option>
+          <option value="potion">{t('inventory.types.potion')}</option>
+          <option value="misc">{t('inventory.types.misc')}</option>
         </select>
         <button
           type="button"
@@ -84,11 +86,11 @@ export default function InventoryEditor({ inventory, onChange }) {
           onChange={(e) => setFilter(e.target.value)}
           className="rounded-2xl px-2 bg-[#2c1a12] border border-dndgold text-dndgold"
         >
-          <option value="all">Усі</option>
-          <option value="weapon">Зброя</option>
-          <option value="armor">Броня</option>
-          <option value="potion">Зілля</option>
-          <option value="misc">Інше</option>
+          <option value="all">{t('all')}</option>
+          <option value="weapon">{t('inventory.types.weapon')}</option>
+          <option value="armor">{t('inventory.types.armor')}</option>
+          <option value="potion">{t('inventory.types.potion')}</option>
+          <option value="misc">{t('inventory.types.misc')}</option>
         </select>
       </div>
 
@@ -111,7 +113,7 @@ export default function InventoryEditor({ inventory, onChange }) {
                         className="flex items-center gap-2 mb-1"
                       >
                         <span>{item.item}</span>
-                        <span className="text-xs text-dndgold/60">({item.type})</span>
+                        <span className="text-xs text-dndgold/60">({t(`inventory.types.${item.type}`)})</span>
                         <button
                           type="button"
                           onClick={() => removeItem(i)}
@@ -126,7 +128,7 @@ export default function InventoryEditor({ inventory, onChange }) {
               )}
               {provided.placeholder}
               {items.filter((i) => (filter === 'all' ? true : i.type === filter)).length === 0 && (
-                <li className="text-dndgold/60">Порожньо</li>
+                <li className="text-dndgold/60">{t('inventory.empty')}</li>
               )}
             </ul>
           )}
