@@ -23,7 +23,7 @@ export default function CharacterCard({ character }) {
   const classKey = charClass.toLowerCase();
 
   return (
-    <div className='character-card'>
+    <div className="card">
       <h3>{character.name}</h3>
       <p>
 
