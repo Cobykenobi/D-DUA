@@ -132,7 +132,7 @@ export default function LobbyPage() {
         )}
         <div className="text-dndgold mb-4">{t('players')}</div>
         <ul>
-          {players.map(pl => (
+          {Array.isArray(players) && players.map(pl => (
             <li key={pl.user} className="text-dndgold mb-2">
               <div className="font-bold">
                 {pl.name} {pl.user === gm && ' (ГМ)'}

@@ -30,7 +30,11 @@ export default function GMPanel({ tableId, socket, players, className = '' }) {
 
   // Додаємо гравців у ініціативу
   const handleInitiativeInput = () => {
-    setInitiativeList(players.map(p => ({ name: p.name, value: Math.ceil(Math.random()*20), type: "player" })));
+    setInitiativeList(
+      Array.isArray(players)
+        ? players.map(p => ({ name: p.name, value: Math.ceil(Math.random() * 20), type: "player" }))
+        : []
+    );
   };
 
   return (
@@ -49,7 +53,7 @@ export default function GMPanel({ tableId, socket, players, className = '' }) {
         </div>
         {/* Кік гравців */}
         <div className="flex flex-wrap items-center justify-center gap-2">
-          {players.map(p => (
+          {Array.isArray(players) && players.map(p => (
             <button key={p.user} onClick={() => kick(p.user)} className="bg-dndred px-3 py-1 rounded-xl text-white">
               {p.name} Кік
             </button>

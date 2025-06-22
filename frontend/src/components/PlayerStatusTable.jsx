@@ -26,7 +26,7 @@ export default function PlayerStatusTable({ players, isGM }) {
         </tr>
       </thead>
       <tbody>
-        {players.map(p => (
+        {Array.isArray(players) && players.map(p => (
           <tr key={p.user} className="border-t border-dndgold/20">
             <td>{p.name}</td>
             <td>

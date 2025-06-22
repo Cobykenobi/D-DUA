@@ -155,7 +155,7 @@ function Control() {
           className="rounded px-2 py-1 w-full text-black mb-2"
         >
           <option value="all">{t('all')}</option>
-          {players.map(p => (
+          {Array.isArray(players) && players.map(p => (
             <option key={p.user} value={p.user}>{p.name}</option>
           ))}
         </select>
