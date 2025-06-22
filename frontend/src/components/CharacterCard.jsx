@@ -10,7 +10,7 @@ export default function CharacterCard({ character }) {
       <p>
         {t(
           `races.${(character.race?.code || character.race || '').toLowerCase()}`,
-          character.race?.name || character.race
+          t('unknown')
         )}
       </p>
       <p>
@@ -18,13 +18,13 @@ export default function CharacterCard({ character }) {
           `classes.${(
             character.class?.code || character.class || ''
           ).toLowerCase()}`,
-          character.class?.name || character.class
+          t('unknown')
         )}
       </p>
       <ul>
         {Object.entries(character.stats || {}).map(([key, value]) => (
           <li key={key}>
-            {t(`stats.${key.toLowerCase()}`, key)}: {value}
+            {t(`stats.${key.toLowerCase()}`, t('unknown'))}: {value}
           </li>
         ))}
       </ul>

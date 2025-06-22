@@ -8,7 +8,7 @@ import Modal from './Modal';
 function translateEffect(effectString, t) {
   return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
     const key = stat.toLowerCase();
-    return `+${num} ${t('stats.' + key, stat)}`;
+    return `+${num} ${t('stats.' + key, t('unknown'))}`;
   });
 }
 
@@ -36,13 +36,13 @@ export default function PlayerCard({ character, onSelect }) {
         <p className="text-xs text-center">
           {t(
             `races.${(character.race?.code || character.race || '').toLowerCase()}`,
-            character.race?.name || character.race?.code || ''
+            t('unknown')
           )}{' '}/{' '}
           {t(
             `classes.${(
               character.profession?.code || character.profession || ''
             ).toLowerCase()}`,
-            character.profession?.name || character.profession?.code || ''
+            t('unknown')
           )}
         </p>
         <button
@@ -66,7 +66,7 @@ export default function PlayerCard({ character, onSelect }) {
           <ul className="list-none pl-0 text-lg font-bold space-y-0.5">
             {Object.entries(character.stats).map(([key, val]) => (
               <li key={key}>
-                {t(`stats.${key.toLowerCase()}`, key)}: {val}
+                {t(`stats.${key.toLowerCase()}`, t('unknown'))}: {val}
               </li>
             ))}
           </ul>
@@ -79,7 +79,7 @@ export default function PlayerCard({ character, onSelect }) {
                   ?
                       ' (' +
                       Object.entries(it.bonus)
-                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k.toLowerCase(), k)}`)
+                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k.toLowerCase(), t('unknown'))}`)
                         .join(', ') +
                       ')'
                   : '';
