@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ReactPlayer from 'react-player';
 import { useUserStore } from '../../store/user';
@@ -24,6 +24,7 @@ function Control() {
   const { t } = useTranslation();
 
   const { id } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const onPlayers = (data) => setPlayers(data.players || []);
@@ -73,6 +74,16 @@ function Control() {
     };
     fetchInv();
   }, [selectedChar]);
+
+  const kickPlayer = (uid) => {
+    socket.emit('kick-player', { tableId: id, userId: uid });
+  };
+
+  const editPlayer = (p) => {
+    if (p.character && p.character._id) {
+      navigate(`/characters/${p.character._id}/edit`);
+    }
+  };
 
   const sendMap = async () => {
     if (mapUrl) {
@@ -145,7 +156,7 @@ function Control() {
         </button>
         {music && <ReactPlayer url={music} playing controls width="100%" height="50px" />}
       </div>
-      <PlayerStatusTable players={players} isGM />
+      <PlayerStatusTable players={players} isGM onEdit={editPlayer} onKick={kickPlayer} />
       <div>
 
         <div className="font-bold mb-1">{t('message')}</div>
