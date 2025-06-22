@@ -20,30 +20,26 @@ export default function CharacterListPage() {
       <h1 className="text-3xl text-dndgold mb-6">Твої персонажі</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {characters.map(c => {
-          const raceVal =
+          const raceCode =
             typeof c.race === 'string'
               ? c.race
-              : typeof c.race?.code === 'string'
-              ? c.race.code
-              : c.race?.en || '';
-          const raceKey = (raceVal || '').toLowerCase();
-          const raceText = raceVal
+              : c.race?.code || '';
+          const raceKey = (raceCode || '').toLowerCase();
+          const raceText = raceCode
 
-            ? translateOrRaw(t, `races.${raceVal.toLowerCase()}`, raceVal)
-            : c.race?.name || translateOrRaw(t, '');
+            ? translateOrRaw(t, `races.${raceKey}`, c.race?.name || raceCode)
+            : c.race?.name || '';
 
 
-          const classVal =
+          const classCode =
             typeof c.profession === 'string'
               ? c.profession
-              : typeof c.profession?.code === 'string'
-              ? c.profession.code
-              : c.profession?.en || '';
-          const classKey = (classVal || '').toLowerCase();
-          const classText = classVal
+              : c.profession?.code || '';
+          const classKey = (classCode || '').toLowerCase();
+          const classText = classCode
 
-            ? translateOrRaw(t, `classes.${classVal.toLowerCase()}`, classVal)
-            : c.profession?.name || translateOrRaw(t, '');
+            ? translateOrRaw(t, `classes.${classKey}`, c.profession?.name || classCode)
+            : c.profession?.name || '';
 
 
           return (

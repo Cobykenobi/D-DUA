@@ -48,16 +48,24 @@ export default function PlayerStatusTable({ players, isGM, onEdit, onKick }) {
       </thead>
       <tbody>
         {Array.isArray(players) && players.map(p => {
-          const raceKey =
+          const raceCode =
             typeof p.character?.race === 'string'
               ? p.character.race
-              : p.character?.race?.code || p.character?.race?.name || '';
-          const race = translateOrRaw(t, `races.${(raceKey || '').toLowerCase()}`, raceKey);
-          const clsKey =
+              : p.character?.race?.code || '';
+          const race = translateOrRaw(
+            t,
+            `races.${(raceCode || '').toLowerCase()}`,
+            p.character?.race?.name || raceCode
+          );
+          const clsCode =
             typeof p.character?.profession === 'string'
               ? p.character.profession
-              : p.character?.profession?.code || p.character?.profession?.name || '';
-          const cls = translateOrRaw(t, `classes.${(clsKey || '').toLowerCase()}`, clsKey);
+              : p.character?.profession?.code || '';
+          const cls = translateOrRaw(
+            t,
+            `classes.${(clsCode || '').toLowerCase()}`,
+            p.character?.profession?.name || clsCode
+          );
           return (
             <tr key={p.user} className="border-t border-dndgold/20">
               <td>{p.name || '-'}</td>
