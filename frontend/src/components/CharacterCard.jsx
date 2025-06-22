@@ -38,8 +38,8 @@ export default function CharacterCard({
         />
         <h3 className="text-lg text-center text-dndgold mb-1">{character.name}</h3>
         <p className="text-sm text-center mb-2">
-          {translateOrRaw(t, `races.${raceKeyLower}`)} /{' '}
-          {translateOrRaw(t, `classes.${classKeyLower}`)}
+          {translateOrRaw(t, `races.${raceKeyLower}`, raceKey)} /{' '}
+          {translateOrRaw(t, `classes.${classKeyLower}`, classKey)}
         </p>
         {character.description && (
           <p className="text-sm italic mb-2 text-center">{character.description}</p>
@@ -72,8 +72,8 @@ export default function CharacterCard({
       <Modal open={open} onClose={() => setOpen(false)}>
         <h3 className="text-lg text-dndgold text-center mb-2">{character.name}</h3>
         <p className="text-sm text-center mb-2">
-          {translateOrRaw(t, `races.${raceKeyLower}`)} /{' '}
-          {translateOrRaw(t, `classes.${classKeyLower}`)}
+          {translateOrRaw(t, `races.${raceKeyLower}`, raceKey)} /{' '}
+          {translateOrRaw(t, `classes.${classKeyLower}`, classKey)}
         </p>
         <textarea
           className="w-full rounded-lg p-2 bg-[#2c1a12] border border-dndgold text-dndgold mb-2"
@@ -95,7 +95,7 @@ export default function CharacterCard({
           <ul className="list-none pl-0 text-sm mb-2 space-y-0.5">
             {Object.entries(character.stats).map(([key, value]) => (
               <li key={key}>
-                {translateOrRaw(t, `stats.${key.toLowerCase()}`)}: {value}
+                {translateOrRaw(t, `stats.${key.toLowerCase()}`, key)}: {value}
               </li>
             ))}
           </ul>
@@ -113,7 +113,7 @@ export default function CharacterCard({
                     ?
                         ' (' +
                         Object.entries(it.bonus)
-                          .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
+                          .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase(), k)}`)
                           .join(', ') +
                         ')'
                     : '';
@@ -136,7 +136,7 @@ export default function CharacterCard({
                     ?
                         ' (' +
                         Object.entries(it.bonus)
-                          .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
+                          .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase(), k)}`)
                           .join(', ') +
                         ')'
                     : '';

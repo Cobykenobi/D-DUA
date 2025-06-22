@@ -46,8 +46,8 @@ export default function PlayerCard({ character, onSelect }) {
         <h3 className="text-lg text-dndgold text-center mb-1">{character.name}</h3>
         <p className="text-xs text-center">
 
-          {translateOrRaw(t, `races.${raceKey}`)}{' '}/{' '}
-          {translateOrRaw(t, `classes.${classKey}`)}
+          {translateOrRaw(t, `races.${raceKey}`, race)}{' '}/{' '}
+          {translateOrRaw(t, `classes.${classKey}`, charClass)}
 
         </p>
         <button
@@ -71,7 +71,7 @@ export default function PlayerCard({ character, onSelect }) {
           <ul className="list-none pl-0 text-lg font-bold space-y-0.5">
               {Object.entries(character.stats).map(([key, val]) => (
               <li key={key}>
-                {translateOrRaw(t, `stats.${key.toLowerCase()}`)}: {val}
+                {translateOrRaw(t, `stats.${key.toLowerCase()}`, key)}: {val}
               </li>
             ))}
           </ul>
@@ -90,7 +90,7 @@ export default function PlayerCard({ character, onSelect }) {
                           ' (' +
                           Object.entries(it.bonus)
 
-                            .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
+                            .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase(), k)}`)
 
                             .join(', ') +
                           ')'
@@ -121,7 +121,7 @@ export default function PlayerCard({ character, onSelect }) {
                           ' (' +
                           Object.entries(it.bonus)
 
-                            .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
+                            .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase(), k)}`)
 
                             .join(', ') +
                           ')'
