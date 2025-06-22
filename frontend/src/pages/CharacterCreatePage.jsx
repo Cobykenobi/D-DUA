@@ -39,7 +39,7 @@ export default function CharacterCreatePage() {
   return (
     <div
       className="relative flex justify-center items-center min-h-screen font-dnd text-white bg-cover bg-center"
-      style={{ backgroundImage: "url('/map-bg.jpg')" }}
+      style={{ backgroundImage: "url('./map-bg.jpg')" }}
     >
       <div className="absolute top-4 right-4 flex gap-2 flex-wrap">
         <button

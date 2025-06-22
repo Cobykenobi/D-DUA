@@ -76,7 +76,7 @@ export default function GameTablePage() {
     <div
       style={{
         minHeight: "100vh",
-        backgroundImage: `url('/nd-bg.png')`,
+        backgroundImage: `url('./nd-bg.png')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundAttachment: "fixed",
