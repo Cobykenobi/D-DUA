@@ -9,7 +9,6 @@ export default function PlayerStatusTable({ players, isGM, onEdit, onKick }) {
   const { hp, mp, updateHp, updateMp } = useGameState();
   const { t } = useTranslation();
   const [dmg, setDmg] = useState({});
-  const { t } = useTranslation();
 
   const applyDamage = (uid) => {
     const val = Number(dmg[uid]);
