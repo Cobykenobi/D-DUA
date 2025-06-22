@@ -1,111 +1,52 @@
+// CharacterCard.jsx (patched with UA localization)
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 
-import { withApiHost } from '../utils/imageUtils';
-import { useState } from 'react';
-import { raceUA, classUA, statUA } from '../translations/ua';
+const raceMap = {
+  Human: 'Людина',
+  Elf: 'Ельф',
+  Orc: 'Орк',
+  Dwarf: 'Гном',
+  Lizardman: 'Ящір',
+};
 
-function translateEffect(effectString) {
-  return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
-    return `+${num} до ${statUA[stat] || stat}`;
-  });
-}
+const classMap = {
+  Paladin: 'Паладин',
+  Rogue: 'Шпигун',
+  Warrior: 'Воїн',
+  Mage: 'Маг',
+};
 
-export default function CharacterCard({
-  character,
-  onEdit,
-  onDelete,
-  onSaveDescription,
-  editLabel = 'Редагувати',
-  deleteLabel = 'Видалити',
-}) {
-  const [desc, setDesc] = useState(character.description || '');
+const statMap = {
+  health: "Здоров'я",
+  strength: 'Сила',
+  defense: 'Захист',
+  intelligence: 'Інтелект',
+  agility: 'Спритність',
+  charisma: 'Харизма',
+};
+
+export default function CharacterCard({ character }) {
+  const { i18n } = useTranslation();
+
   return (
-    <div className="bg-[#1c120a]/80 text-white border border-dndgold rounded-xl shadow-lg p-4 space-y-2">
-      <img
-        src={withApiHost(character.image) || "/default-avatar.png"}
-        alt={character.name}
-        className="w-20 h-20 object-cover rounded mx-auto mb-2"
-      />
-      <h3 className="text-xl text-dndgold text-center font-dnd mb-2">{character.name}</h3>
-      <div className="text-base">
-        <strong className="text-dndgold">Раса:</strong>{' '}
-        {raceUA[character.race?.code || character.race] || character.race?.name || character.race?.code || '—'}
-      </div>
-      <div className="text-base">
-        <strong className="text-dndgold">Клас:</strong>{' '}
-        {classUA[character.profession?.code || character.profession] || character.profession?.name || character.profession?.code || '—'}
-      </div>
-
-      <div className="text-sm">
-        <strong className="text-dndgold">Опис:</strong>{' '}
-        {character.description ? (
-          <span>{character.description}</span>
-        ) : (
-          <textarea
-            className="w-full mt-1 px-2 py-1 rounded bg-[#2c1a12] border border-dndgold text-white"
-            value={desc}
-            onChange={e => setDesc(e.target.value)}
-          />
-        )}
-      </div>
-      {!character.description && (
-        <button
-          onClick={() => onSaveDescription && onSaveDescription(character._id || character.id, desc)}
-          className="bg-dndgold text-dndred font-dnd rounded-2xl px-3 py-1 mt-1"
-        >
-          Зберегти опис
-        </button>
-      )}
-      <div className="mt-2">
-        <div className="text-dndgold font-semibold mb-1">Стати:</div>
-        {character.stats && (
-          <ul className="list-none pl-0 text-lg font-bold space-y-0.5">
-            {Object.entries(character.stats).map(([key, val]) => (
-              <li key={key}>
-                {statUA[key.toUpperCase()] || key}: {val}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-      <div className="mt-2">
-        <div className="text-dndgold font-semibold mb-1">Інвентар:</div>
-        <ul className="list-none pl-0 text-base space-y-0.5">
-          {character.inventory && character.inventory.map((it, idx) => {
-            const bonus = it.bonus && Object.keys(it.bonus).length
-              ? ' (' +
-                  Object.entries(it.bonus)
-                    .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${statUA[k.toUpperCase()] || k}`)
-                    .join(', ') +
-                  ')'
-              : '';
-            return (
-              <li key={idx}>
-                {it.item} {it.amount > 1 ? `x${it.amount}` : ''}{bonus}
-                {it.effect ? ` (${translateEffect(it.effect)})` : ''}
-              </li>
-            );
-          })}
-        </ul>
-      </div>
-      <div className="mt-3 flex gap-2 justify-center">
-        {onEdit && (
-          <button
-            onClick={() => onEdit(character)}
-            disabled={!character.description}
-            className={`bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-3 py-1 transition ${!character.description ? 'opacity-50 cursor-not-allowed' : ''}`}
-          >
-            {editLabel}
-          </button>
-        )}
-        {onDelete && (
-          <button
-            onClick={() => onDelete(character._id || character.id)}
-            className="bg-dndred hover:bg-dndgold text-white hover:text-dndred font-dnd rounded-2xl px-3 py-1 transition"
-          >
-            {deleteLabel}
-          </button>
-        )}
-      </div>
+    <div className='character-card'>
+      <h3>{character.name}</h3>
+      <p>Раса: {raceMap[character.race] || character.race}</p>
+      <p>Клас: {classMap[character.class] || character.class}</p>
+      <ul>
+        {Object.entries(character.stats || {}).map(([key, value]) => (
+          <li key={key}>
+            {statMap[key] || key}: {value}
+          </li>
+        ))}
+      </ul>
+      <h4>Інвентар:</h4>
+      <ul>
+        {(character.inventory || []).map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
     </div>
   );
 }

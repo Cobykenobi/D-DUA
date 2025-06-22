@@ -1,0 +1,30 @@
+{
+  "race": {
+    "Human": "Людина",
+    "Elf": "Ельф",
+    "Orc": "Орк",
+    "Dwarf": "Гном",
+    "Lizardman": "Ящір"
+  },
+  "class": {
+    "Paladin": "Паладин",
+    "Rogue": "Шпигун",
+    "Warrior": "Воїн",
+    "Mage": "Маг"
+  },
+  "stat": {
+    "health": "Здоров'я",
+    "strength": "Сила",
+    "defense": "Захист",
+    "intelligence": "Інтелект",
+    "agility": "Спритність",
+    "charisma": "Харизма"
+  },
+  "buttons": {
+    "enter": "Увійти",
+    "delete": "Видалити",
+    "save": "Зберегти",
+    "logout": "Вийти",
+    "back": "Назад"
+  }
+}

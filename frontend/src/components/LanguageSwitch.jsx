@@ -1,17 +1,20 @@
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 
-import i18n from '../i18n';
+const LanguageSwitch = () => {
+  const { i18n } = useTranslation();
 
-export default function LanguageSwitch() {
-  const changeLanguage = (lang) => {
-    localStorage.setItem('lang', lang);
-    i18n.changeLanguage(lang);
+  const toggleLanguage = () => {
+    const newLang = i18n.language === 'ua' ? 'en' : 'ua';
+    i18n.changeLanguage(newLang);
+    localStorage.setItem('lang', newLang);
   };
 
   return (
-    <div className="text-sm space-x-2 text-white">
-      <button onClick={() => changeLanguage("ua")} className="hover:underline">UA</button>
-      <span>|</span>
-      <button onClick={() => changeLanguage("en")} className="hover:underline">EN</button>
-    </div>
+    <button onClick={toggleLanguage} style={{ marginLeft: '1rem' }}>
+      🌐 {i18n.language === 'ua' ? 'EN' : 'UA'}
+    </button>
   );
-}
+};
+
+export default LanguageSwitch;
