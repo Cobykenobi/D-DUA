@@ -21,3 +21,7 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
   }
 }
+
+.card {
+  @apply border rounded-lg p-4 bg-[#1c120a]/80 text-dndgold shadow-lg;
+}
