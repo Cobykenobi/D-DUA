@@ -116,10 +116,6 @@ function Control() {
     }
   };
 
-  const kickPlayer = (uid) => {
-    socket.emit('kick-player', { tableId: id, userId: uid });
-  };
-
 
   const sendMessage = () => {
     if (!message.trim()) return;
