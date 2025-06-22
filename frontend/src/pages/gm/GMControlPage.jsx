@@ -5,7 +5,6 @@ import ReactPlayer from 'react-player';
 import { useUserStore } from '../../store/user';
 import { GameStateProvider, useGameState } from '../../context/GameStateContext';
 import PlayerStatusTable from '../../components/PlayerStatusTable';
-import InventoryEditor from '../../components/InventoryEditor';
 import DiceBox from '../../components/DiceBox';
 import DiceRollerHidden from '../../components/DiceRollerHidden';
 import socket from '../../api/socket';
