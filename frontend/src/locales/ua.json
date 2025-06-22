@@ -3,6 +3,26 @@
     "male": "Чоловіча",
     "female": "Жіноча"
   },
+  "races": {
+    "human_male": "Людина (чоловік)",
+    "human_female": "Людина (жінка)",
+    "elf_male": "Ельф (чоловік)",
+    "elf_female": "Ельф (жінка)",
+    "orc_male": "Орк (чоловік)",
+    "orc_female": "Орк (жінка)",
+    "gnome_male": "Гном (чоловік)",
+    "gnome_female": "Гном (жінка)",
+    "dwarf_male": "Дварф (чоловік)",
+    "dwarf_female": "Дварф (жінка)"
+  },
+  "classes": {
+    "warrior": "Воїн",
+    "mage": "Маг",
+    "archer": "Лучник",
+    "paladin": "Паладин",
+    "bard": "Бард",
+    "healer": "Цілитель"
+  },
   "welcome": "Ласкаво просимо",
   "login": "Увійти",
   "password": "Пароль"
