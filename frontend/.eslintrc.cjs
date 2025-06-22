@@ -1,4 +1,5 @@
 module.exports = {
+
   extends: ['eslint:recommended', 'plugin:react/recommended'],
   env: {
     browser: true,
@@ -14,4 +15,5 @@ module.exports = {
       version: 'detect',
     },
   },
+
 };

@@ -5,7 +5,9 @@ Thank you for helping improve this project! Please follow these guidelines when 
 ## Development setup
 - Run `./setup.sh` to install backend and frontend dependencies.
 - See `MANUAL_QA.md` for manual testing steps.
+
 - Run `npm run lint` in `frontend` before committing React changes.
+
 
 ## Binary assets
 Avatar images and other static artwork are stored directly in this repository. The current avatar assets occupy about **40 KB** in total.
