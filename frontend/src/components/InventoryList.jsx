@@ -5,7 +5,9 @@ import translateOrRaw from '../utils/translateOrRaw.js';
 function translateEffect(effectString, t) {
   return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
     const key = stat.toLowerCase();
+
     return `+${num} ${translateOrRaw(t, 'stats.' + key, stat)}`;
+
   });
 }
 
@@ -25,11 +27,13 @@ export default function InventoryList({ items, filter = 'all' }) {
 
   return (
     <div className="bg-[#20100a]/90 p-2 rounded-2xl mb-4 w-full max-w-xl mx-auto">
-      <div className="text-dndgold font-bold mb-1">Інвентар:</div>
+      <div className="text-dndgold font-bold mb-1">{t('inventory.title')}</div>
       <ul className="list-disc pl-5">
         {filtered.map((item, i) => (
           <li key={i} className="text-dndgold">
+
             {translateOrRaw(t, `inventory.${(item.item || item.name || item).toLowerCase()}`, item.item || item.name || item)}
+
             {item.amount ? `x${item.amount}` : ''}
             {item.effect ? ` (${translateEffect(item.effect, t)})` : ''}
           </li>

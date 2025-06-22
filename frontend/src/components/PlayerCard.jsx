@@ -5,13 +5,22 @@ import { useTranslation } from 'react-i18next';
 import { getClassBorderColor } from '../utils/classColors';
 import Modal from './Modal';
 import { normalizeInventory } from '../utils/inventoryUtils';
+
 import translateOrRaw from '../utils/translateOrRaw.js';
+
 
 function translateEffect(effectString, t) {
   return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
     const key = stat.toLowerCase();
+
     return `+${num} ${translateOrRaw(t, 'stats.' + key)}`;
+
   });
+}
+
+function translateOrRaw(t, key) {
+  const translated = t(key);
+  return translated === key ? key.split('.').pop() : translated;
 }
 
 export default function PlayerCard({ character, onSelect }) {
@@ -25,13 +34,13 @@ export default function PlayerCard({ character, onSelect }) {
     typeof character.race === 'string'
       ? character.race
       : character.race?.code || character.race?.en || '';
-  const raceKey = race.toLowerCase();
+  const raceKey = (race || '').toLowerCase();
 
   const charClass =
     typeof character.profession === 'string'
       ? character.profession
       : character.profession?.code || character.profession?.en || '';
-  const classKey = charClass.toLowerCase();
+  const classKey = (charClass || '').toLowerCase();
 
   return (
     <>
@@ -48,8 +57,10 @@ export default function PlayerCard({ character, onSelect }) {
         />
         <h3 className="text-lg text-dndgold text-center mb-1">{character.name}</h3>
         <p className="text-xs text-center">
+
           {translateOrRaw(t, `races.${raceKey}`)}{' '}/{' '}
           {translateOrRaw(t, `classes.${classKey}`)}
+
         </p>
         <button
           onClick={() => setOpen(true)}
@@ -70,7 +81,7 @@ export default function PlayerCard({ character, onSelect }) {
         <h3 className="text-lg text-dndgold text-center mb-2">{character.name}</h3>
         {character.stats && (
           <ul className="list-none pl-0 text-lg font-bold space-y-0.5">
-            {Object.entries(character.stats).map(([key, val]) => (
+              {Object.entries(character.stats).map(([key, val]) => (
               <li key={key}>
                 {translateOrRaw(t, `stats.${key.toLowerCase()}`)}: {val}
               </li>
@@ -83,20 +94,26 @@ export default function PlayerCard({ character, onSelect }) {
             return (
               <ul className="list-disc pl-4 mt-2 space-y-0.5">
                 {inv.items.map((it, idx) => {
-                  const bonus =
-                    it.bonus && Object.keys(it.bonus).length
+                  const bonusData =
+                    it.bonus &&
+                    typeof it.bonus === 'object' &&
+                    Object.keys(it.bonus).length
                       ?
                           ' (' +
                           Object.entries(it.bonus)
+
                             .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
+
                             .join(', ') +
                           ')'
                       : '';
                   return (
                     <li key={idx}>
+
                       {translateOrRaw(t, `inventory.${it.item.toLowerCase()}`, it.item)}
+
                       {it.amount > 1 ? ` x${it.amount}` : ''}
-                      {bonus}
+                      {bonusData}
                       {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
                     </li>
                   );
@@ -108,20 +125,26 @@ export default function PlayerCard({ character, onSelect }) {
             return (
               <ul className="list-disc pl-4 mt-2 space-y-0.5">
                 {inv.items.map(([key, it]) => {
-                  const bonus =
-                    it.bonus && Object.keys(it.bonus).length
+                  const bonusData =
+                    it.bonus &&
+                    typeof it.bonus === 'object' &&
+                    Object.keys(it.bonus).length
                       ?
                           ' (' +
                           Object.entries(it.bonus)
+
                             .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
+
                             .join(', ') +
                           ')'
                       : '';
                   return (
                     <li key={key}>
+
                       {translateOrRaw(t, `inventory.${it.item.toLowerCase()}`, it.item)}
+
                       {it.amount > 1 ? ` x${it.amount}` : ''}
-                      {bonus}
+                      {bonusData}
                       {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
                     </li>
                   );
@@ -131,7 +154,7 @@ export default function PlayerCard({ character, onSelect }) {
           }
           return (
             <ul className="list-disc pl-4 mt-2 space-y-0.5">
-              <li>Інвентар порожній</li>
+              <li>{t('inventory.empty')}</li>
             </ul>
           );
         })()}
