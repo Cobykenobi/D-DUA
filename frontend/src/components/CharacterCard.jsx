@@ -21,9 +21,9 @@ export default function CharacterCard({
       ? character.race
       : character.race?.name || character.race?.code || '';
   const classKey =
-    typeof character.class === 'string'
-      ? character.class
-      : character.class?.name || character.class?.code || '';
+    typeof character.profession === 'string'
+      ? character.profession
+      : character.profession?.name || character.profession?.code || '';
   const raceKeyLower = (raceKey || '').toLowerCase();
   const classKeyLower = (classKey || '').toLowerCase();
 
