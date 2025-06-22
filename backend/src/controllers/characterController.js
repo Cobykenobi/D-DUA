@@ -36,7 +36,9 @@ exports.getAllByUser = async (req, res) => {
 // Створити персонажа
 exports.create = async (req, res) => {
   try {
+
     let { name, description, image, gender, raceId, professionId } = req.body;
+
 
     if (!name || typeof name !== 'string' || !name.trim() || name.trim().length > 50) {
       return res.status(400).json({ message: 'Invalid name' });
@@ -62,6 +64,9 @@ exports.create = async (req, res) => {
   if (raceId) {
     const found = await Race.findById(raceId);
     race = found ? [found] : [];
+  } else if (raceCode) {
+    const found = await Race.findOne({ code: raceCode });
+    race = found ? [found] : [];
   } else {
     race = await Race.aggregate([{ $sample: { size: 1 } }]);
     if (!race.length) {
@@ -73,6 +78,9 @@ exports.create = async (req, res) => {
   let profession;
   if (professionId) {
     const found = await Profession.findById(professionId);
+    profession = found ? [found] : [];
+  } else if (professionCode) {
+    const found = await Profession.findOne({ code: professionCode });
     profession = found ? [found] : [];
   } else {
     profession = await Profession.aggregate([{ $sample: { size: 1 } }]);
@@ -111,6 +119,7 @@ exports.create = async (req, res) => {
   const newChar = new Character({
       user: req.user.id,
       name,
+      gender,
       description,
       image: avatar,
       gender: finalGender,
