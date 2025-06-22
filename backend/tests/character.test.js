@@ -205,4 +205,28 @@ describe('Character Controller - create', () => {
     expect(saved.profession).toBe('p2');
     expect(res.status).toHaveBeenCalledWith(201);
   });
+
+  it('resolves race and profession codes to IDs', async () => {
+    Race.findOne.mockResolvedValue({ _id: 'r3', name: 'Orc', code: 'orc' });
+    Profession.findOne.mockResolvedValue({ _id: 'p3', name: 'Mage', code: 'mage' });
+
+    let saved;
+    Character.mockImplementation(data => {
+      saved = data;
+      return { save: jest.fn().mockResolvedValue(data) };
+    });
+
+    const req = { user: { id: 'u1' }, body: { name: 'Hero', race: 'orc', profession: 'mage' } };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+    await characterController.create(req, res);
+
+    expect(Race.findOne).toHaveBeenCalledWith({ code: 'orc' });
+    expect(Profession.findOne).toHaveBeenCalledWith({ code: 'mage' });
+    expect(Race.aggregate).not.toHaveBeenCalled();
+    expect(Profession.aggregate).not.toHaveBeenCalled();
+    expect(saved.race).toBe('r3');
+    expect(saved.profession).toBe('p3');
+    expect(res.status).toHaveBeenCalledWith(201);
+  });
 });
