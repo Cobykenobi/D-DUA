@@ -8,7 +8,7 @@ import Modal from './Modal';
 function translateEffect(effectString, t) {
   return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
     const key = stat.toLowerCase();
-    return `+${num} ${t('stats.' + key, stat)}`;
+    return `+${num} ${t('stats.' + key, t('unknown'))}`;
   });
 }
 
@@ -44,12 +44,18 @@ export default function PlayerCard({ character, onSelect }) {
         />
         <h3 className="text-lg text-dndgold text-center mb-1">{character.name}</h3>
         <p className="text-xs text-center">
-          {raceKey
-            ? t(`races.${raceKey}`, character.race?.name || character.race?.code || '')
-            : t('unknown')}{' '}/{' '}
-          {classKey
-            ? t(`classes.${classKey}`, character.profession?.name || character.profession?.code || '')
-            : t('unknown')}
+
+          {t(
+            `races.${(character.race?.code || character.race || '').toLowerCase()}`,
+            t('unknown')
+          )}{' '}/{' '}
+          {t(
+            `classes.${(
+              character.profession?.code || character.profession || ''
+            ).toLowerCase()}`,
+            t('unknown')
+          )}
+
         </p>
         <button
           onClick={() => setOpen(true)}
@@ -72,7 +78,7 @@ export default function PlayerCard({ character, onSelect }) {
           <ul className="list-none pl-0 text-lg font-bold space-y-0.5">
             {Object.entries(character.stats).map(([key, val]) => (
               <li key={key}>
-                {t(`stats.${key.toLowerCase()}`, key)}: {val}
+                {t(`stats.${key.toLowerCase()}`, t('unknown'))}: {val}
               </li>
             ))}
           </ul>
@@ -85,7 +91,7 @@ export default function PlayerCard({ character, onSelect }) {
                   ?
                       ' (' +
                       Object.entries(it.bonus)
-                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k.toLowerCase(), k)}`)
+                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k.toLowerCase(), t('unknown'))}`)
                         .join(', ') +
                       ')'
                   : '';

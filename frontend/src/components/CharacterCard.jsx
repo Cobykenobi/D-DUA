@@ -12,22 +12,27 @@ export default function CharacterCard({ character }) {
     <div className='character-card'>
       <h3>{character.name}</h3>
       <p>
-        {raceKey
-          ? t(`races.${raceKey.toLowerCase()}`, character.race?.name || raceKey)
-          : t('unknown')}
+
+        {t(
+          `races.${(character.race?.code || character.race || '').toLowerCase()}`,
+          t('unknown')
+        )}
+
       </p>
       <p>
         {t(
           `classes.${(
             character.profession?.code || character.profession || ''
           ).toLowerCase()}`,
-          character.profession?.name || character.profession
+
+          t('unknown')
+
         )}
       </p>
       <ul>
         {Object.entries(character.stats || {}).map(([key, value]) => (
           <li key={key}>
-            {t(`stats.${key.toLowerCase()}`, key)}: {value}
+            {t(`stats.${key.toLowerCase()}`, t('unknown'))}: {value}
           </li>
         ))}
       </ul>
