@@ -1,8 +1,14 @@
 {
-  "gender": {"male": "Чоловіча", "female": "Жіноча"}
+ {
+  "gender": {
+    "male": "Male",
+    "female": "Female"
+  },
   "welcome": "Welcome",
   "login": "Login",
-  "password": "Password",
+  "password": "Password"
+}
+
   "register": "Register",
   "admin": "Admin",
   "fields_required": "Please fill in all fields",
