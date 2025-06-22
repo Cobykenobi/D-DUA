@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 function translateEffect(effectString, t) {
   return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
     const key = stat.toLowerCase();
-    return `+${num} ${t('stats.' + key, stat)}`;
+    return `+${num} ${t('bonuses.' + key, t('stats.' + key, stat))}`;
   });
 }
 
@@ -24,11 +24,11 @@ export default function InventoryList({ items, filter = 'all' }) {
 
   return (
     <div className="bg-[#20100a]/90 p-2 rounded-2xl mb-4 w-full max-w-xl mx-auto">
-      <div className="text-dndgold font-bold mb-1">Інвентар:</div>
+      <div className="text-dndgold font-bold mb-1">{t('inventory.title')}</div>
       <ul className="list-disc pl-5">
         {filtered.map((item, i) => (
           <li key={i} className="text-dndgold">
-            {item.item || item.name || item}
+            {t(`inventory.${item.item || item.name || item}`, item.item || item.name || item)}
             {item.amount ? `x${item.amount}` : ''}
             {item.effect ? ` (${translateEffect(item.effect, t)})` : ''}
           </li>

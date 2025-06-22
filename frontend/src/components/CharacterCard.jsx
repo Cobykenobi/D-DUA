@@ -5,7 +5,7 @@ import { normalizeInventory } from '../utils/inventoryUtils';
 function translateEffect(effectString, t) {
   return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
     const key = stat.toLowerCase();
-    return `+${num} ${t('stats.' + key, t('unknown'))}`;
+    return `+${num} ${t('bonuses.' + key, t('stats.' + key, t('unknown')))}`;
   });
 }
 
@@ -43,7 +43,7 @@ export default function CharacterCard({ character }) {
           </li>
         ))}
       </ul>
-      <h4>Інвентар:</h4>
+      <h4>{t('inventory.title')}</h4>
       <ul>
         {(() => {
           const inv = normalizeInventory(character.inventory);
@@ -54,13 +54,13 @@ export default function CharacterCard({ character }) {
                   ?
                       ' (' +
                       Object.entries(it.bonus)
-                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k.toLowerCase(), t('unknown'))}`)
+                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('bonuses.' + k.toLowerCase(), t('stats.' + k.toLowerCase(), t('unknown')))}`)
                         .join(', ') +
                       ')'
                   : '';
               return (
                 <li key={idx}>
-                  {it.item}
+                  {t(`inventory.${it.item}`, it.item)}
                   {it.amount > 1 ? ` x${it.amount}` : ''}
                   {bonus}
                   {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
@@ -75,13 +75,13 @@ export default function CharacterCard({ character }) {
                   ?
                       ' (' +
                       Object.entries(it.bonus)
-                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k.toLowerCase(), t('unknown'))}`)
+                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('bonuses.' + k.toLowerCase(), t('stats.' + k.toLowerCase(), t('unknown')))}`)
                         .join(', ') +
                       ')'
                   : '';
               return (
                 <li key={key}>
-                  {it.item}
+                  {t(`inventory.${it.item}`, it.item)}
                   {it.amount > 1 ? ` x${it.amount}` : ''}
                   {bonus}
                   {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
@@ -89,7 +89,7 @@ export default function CharacterCard({ character }) {
               );
             });
           }
-          return <li>Інвентар порожній</li>;
+          return <li>{t('inventory.empty')}</li>;
         })()}
       </ul>
     </div>
