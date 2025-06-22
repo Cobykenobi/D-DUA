@@ -14,6 +14,8 @@ function getSession(id) {
       map: '',
       chat: [],
       hp: {},
+      mp: {},
+      inventory: {},
       music: null,
       state: 'lobby'
     };
@@ -105,6 +107,8 @@ function init(httpServer) {
       });
       if (sess.map) socket.emit('map-update', sess.map);
       socket.emit('hp-update-all', sess.hp);
+      socket.emit('mp-update-all', sess.mp);
+      socket.emit('inventory-update-all', sess.inventory);
       if (sess.music) socket.emit('music-change', sess.music);
     });
 
@@ -136,6 +140,18 @@ function init(httpServer) {
       const sess = getSession(tableId);
       sess.hp[userId] = hp;
       io.to(tableId).emit('player-hp-update', { userId, hp });
+    });
+
+    socket.on('player-mp-update', ({ tableId, userId, mp }) => {
+      const sess = getSession(tableId);
+      sess.mp[userId] = mp;
+      io.to(tableId).emit('player-mp-update', { userId, mp });
+    });
+
+    socket.on('inventory-update', ({ tableId, characterId, inventory }) => {
+      const sess = getSession(tableId);
+      sess.inventory[characterId] = inventory;
+      io.to(tableId).emit('inventory-update', { characterId, inventory });
     });
 
     socket.on('music-change', ({ tableId, track }) => {

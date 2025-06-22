@@ -33,11 +33,29 @@ export default function GameTablePage() {
       setInitiative(data.initiative || []);
       setVisiblePlayers((data.players || []).filter(p => p.user !== data.gm));
     });
+    const onInv = ({ characterId, inventory }) => {
+      setPlayers(ps => ps.map(p => (
+        p.character && p.character._id === characterId
+          ? { ...p, character: { ...p.character, inventory } }
+          : p
+      )));
+    };
+    const onInvAll = data => {
+      setPlayers(ps => ps.map(p => (
+        p.character && data[p.character._id]
+          ? { ...p, character: { ...p.character, inventory: data[p.character._id] } }
+          : p
+      )));
+    };
+    socket.on('inventory-update', onInv);
+    socket.on('inventory-update-all', onInvAll);
     socket.on("initiative-update", setInitiative);
     socket.on("chat-history", setMessages);
     socket.on("chat-message", msg => setMessages(m => [...m, msg]));
     return () => {
       socket.off("table-players");
+      socket.off('inventory-update', onInv);
+      socket.off('inventory-update-all', onInvAll);
       socket.off("initiative-update");
       socket.off("chat-history");
       socket.off("chat-message");
