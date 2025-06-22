@@ -1,13 +1,15 @@
 
-import { statUA } from '../translations/ua';
+import { useTranslation } from 'react-i18next';
 
-function translateEffect(effectString) {
+function translateEffect(effectString, t) {
   return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
-    return `+${num} до ${statUA[stat] || stat}`;
+    const key = stat.toLowerCase();
+    return `+${num} ${t('stats.' + key, stat)}`;
   });
 }
 
 export default function InventoryList({ items, filter = 'all' }) {
+  const { t } = useTranslation();
   if (!items || !items.length) return null;
 
   const filtered =
@@ -28,7 +30,7 @@ export default function InventoryList({ items, filter = 'all' }) {
           <li key={i} className="text-dndgold">
             {item.item || item.name || item}
             {item.amount ? `x${item.amount}` : ''}
-            {item.effect ? ` (${translateEffect(item.effect)})` : ''}
+            {item.effect ? ` (${translateEffect(item.effect, t)})` : ''}
           </li>
         ))}
       </ul>
