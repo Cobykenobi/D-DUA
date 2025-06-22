@@ -6,6 +6,7 @@ import { GameStateProvider, useGameState } from '../../context/GameStateContext'
 import PlayerStatusTable from '../../components/PlayerStatusTable';
 import InventoryEditor from '../../components/InventoryEditor';
 import DiceBox from '../../components/DiceBox';
+import DiceRollerHidden from '../../components/DiceRollerHidden';
 import socket from '../../api/socket';
 import api from '../../api/axios';
 
@@ -156,6 +157,7 @@ function Control() {
         <InventoryEditor inventory={inventory} onChange={handleInventoryChange} />
       </div>
       <DiceBox />
+      <DiceRollerHidden sessionId={id} />
     </div>
   );
 }
