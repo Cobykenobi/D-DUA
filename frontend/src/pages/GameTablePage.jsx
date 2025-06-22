@@ -11,6 +11,7 @@ import socket from '../api/socket';
 import { GameStateProvider, useGameState } from '../context/GameStateContext';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { useUserStore } from '../store/user';
+import { useTranslation } from 'react-i18next';
 
 export default function GameTablePage() {
   const { user } = useUserStore();
@@ -24,6 +25,7 @@ export default function GameTablePage() {
   const [initiative, setInitiative] = useState([]);
   const [messages, setMessages] = useState([]);
   const { map } = useGameState();
+  const { t } = useTranslation();
 
   // SOCKET.IO підключення
   useEffect(() => {
@@ -90,12 +92,12 @@ export default function GameTablePage() {
           D&D Online Tabletop
         </div>
         <div className="flex items-center gap-2 flex-wrap">
-          <span className="font-dnd text-dndgold whitespace-nowrap">Стiл: {tableId}</span>
+          <span className="font-dnd text-dndgold whitespace-nowrap">{t('table')}: {tableId}</span>
           <button
             onClick={() => navigate(`/lobby?tableId=${tableId}${characterId ? `&char=${characterId}` : ''}`)}
             className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-4 py-2 transition active:scale-95"
           >
-            Назад
+            {t('back')}
           </button>
           <LogoutButton />
           <LanguageSwitch />

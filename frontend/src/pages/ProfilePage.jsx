@@ -7,11 +7,13 @@ import CharacterCard from '../components/CharacterCard';
 import { getCharacters, deleteCharacter, updateCharacter } from '../utils/api';
 import api from '../api/axios';
 import { useUserStore } from '../store/user';
+import { useTranslation } from 'react-i18next';
 
 const ProfilePage = () => {
   const [characters, setCharacters] = useState([]);
   const navigate = useNavigate();
   const { user } = useUserStore();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchChars = async () => {
@@ -65,39 +67,39 @@ const ProfilePage = () => {
           onClick={() => navigate('/login')}
           className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-4 py-2 transition active:scale-95"
         >
-          Назад
+          {t('back')}
         </button>
         <LogoutButton />
         <LanguageSwitch />
       </div>
-      <h2 className="text-2xl mb-4 text-shadow">Твої персонажі</h2>
+      <h2 className="text-2xl mb-4 text-shadow">{t('your_characters')}</h2>
       <div className="flex gap-2 mb-6">
         <button
           onClick={handleCreate}
           className="bg-dndgold text-dndred rounded-2xl px-4 py-2 font-semibold transition active:scale-95"
         >
-          Створити нового
+          {t('create_new')}
         </button>
         {user?.role === 'gm' && (
           <button
             onClick={createTable}
             className="bg-yellow-600 hover:bg-yellow-700 text-white rounded-2xl px-4 py-2 font-semibold transition active:scale-95"
           >
-            Створити стіл
+            {t('create_table')}
           </button>
         )}
       </div>
       <div className="w-full flex flex-wrap justify-center gap-4 max-w-5xl overflow-y-auto">
         {characters.length === 0 ? (
           <div className="col-span-full text-center text-dndgold/80">
-            Тут поки пусто. Створи першого героя!
+            {t('empty_profile')}
           </div>
         ) : (
           characters.map((char) => (
             <CharacterCard
               key={char._id}
               character={char}
-              editLabel="Увійти"
+              editLabel={t('enter')}
               onEdit={() => handleSelect(char._id)}
               onDelete={() => handleDelete(char._id)}
               onSaveDescription={handleSaveDescription}

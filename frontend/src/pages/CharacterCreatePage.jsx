@@ -21,7 +21,7 @@ export default function CharacterCreatePage() {
     e.preventDefault();
     try {
       if (!form.name) {
-        setError("Будь ласка, заповніть ім'я персонажа.");
+        setError(t('fill_name'));
         return;
       }
         const payload = {
@@ -32,7 +32,7 @@ export default function CharacterCreatePage() {
       navigate('/characters');
     } catch (err) {
       console.error(err);
-      setError(err.message || 'Помилка створення персонажа');
+      setError(err.message || t('create_error'));
     }
   };
 
@@ -46,15 +46,15 @@ export default function CharacterCreatePage() {
           onClick={() => navigate('/characters')}
           className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-4 py-2 transition active:scale-95"
         >
-          Назад
+          {t('back')}
         </button>
         <LogoutButton />
         <LanguageSwitch />
       </div>
       <form onSubmit={handleSubmit} className="bg-[#1c120a]/80 p-8 rounded-xl w-full max-w-md shadow-2xl">
-        <h2 className="text-2xl text-dndgold mb-6 text-center">Створення персонажа</h2>
+        <h2 className="text-2xl text-dndgold mb-6 text-center">{t('create_character')}</h2>
         {error && <div className="text-red-400 mb-2">{error}</div>}
-        <label className="block text-sm mb-1">Ім’я</label>
+        <label className="block text-sm mb-1">{t('name')}</label>
         <input
           name="name"
           value={form.name}
@@ -62,7 +62,7 @@ export default function CharacterCreatePage() {
           className="w-full mb-4 px-3 py-2 rounded bg-[#2d1a10] border border-dndgold text-white"
         />
 
-        <label className="block text-sm mb-1">Зображення</label>
+        <label className="block text-sm mb-1">{t('image')}</label>
         <input
           type="file"
           accept="image/*"
@@ -73,7 +73,7 @@ export default function CharacterCreatePage() {
           type="submit"
           className="w-full bg-dndgold text-dndred hover:bg-dndred hover:text-white font-dnd rounded-2xl py-2 transition active:scale-95"
         >
-          Створити
+          {t('create')}
         </button>
       </form>
     </div>
