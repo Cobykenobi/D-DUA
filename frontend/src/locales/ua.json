@@ -6,6 +6,7 @@
   "admin": "Адмінка",
   "fields_required": "Заповніть усі поля",
   "connecting": "Підключення...",
+  "unknown": "Невідомо",
   "races": {
     "human_male": "Людина (чоловік)",
     "human_female": "Людина (жінка)",
