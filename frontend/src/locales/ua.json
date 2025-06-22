@@ -1,6 +1,7 @@
 {
   "welcome": "Ласкаво просимо",
   "login": "Увійти",
+  "password": "Пароль",
   "register": "Реєстрація",
   "fields_required": "Заповніть усі поля",
   "connecting": "Підключення...",
