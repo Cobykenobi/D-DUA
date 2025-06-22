@@ -1,10 +1,13 @@
 import { useGameState } from '../context/GameStateContext';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import translateOrRaw from '../utils/translateOrRaw';
 
 export default function PlayerStatusTable({ players, isGM, onEdit, onKick }) {
+
   const { hp, mp, updateHp, updateMp } = useGameState();
+  const { t } = useTranslation();
   const [dmg, setDmg] = useState({});
   const { t } = useTranslation();
 
@@ -30,6 +33,7 @@ export default function PlayerStatusTable({ players, isGM, onEdit, onKick }) {
       <thead>
         <tr>
           <th className="text-left">{t('player')}</th>
+
           <th className="text-left">ID</th>
           <th className="text-left">{t('name')}</th>
           <th className="text-left">{t('race')}</th>
@@ -40,6 +44,7 @@ export default function PlayerStatusTable({ players, isGM, onEdit, onKick }) {
           <th className="text-left">{t('stats')}</th>
           {isGM && <th className="text-left">DMG</th>}
           {isGM && <th className="text-left">{t('actions')}</th>}
+
         </tr>
       </thead>
       <tbody>
@@ -73,6 +78,7 @@ export default function PlayerStatusTable({ players, isGM, onEdit, onKick }) {
                   hp[p.user] ?? '-'
                 )}
               </td>
+
               <td>
                 {isGM ? (
                   <input
@@ -126,6 +132,7 @@ export default function PlayerStatusTable({ players, isGM, onEdit, onKick }) {
             </tr>
           );
         })}
+
       </tbody>
     </table>
   );

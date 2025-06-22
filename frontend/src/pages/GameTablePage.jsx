@@ -6,6 +6,7 @@ import LogoutButton from "../components/LogoutButton";
 import LanguageSwitch from "../components/LanguageSwitch";
 import GMTableView from "../components/GMTableView";
 import GMControlPanel from "../components/GMControlPanel";
+import PlayerStatusTable from "../components/PlayerStatusTable";
 import { useState, useEffect } from 'react';
 import socket from '../api/socket';
 import { GameStateProvider } from '../context/GameStateContext';
@@ -24,6 +25,7 @@ export default function GameTablePage() {
   const [visiblePlayers, setVisiblePlayers] = useState([]);
   const [initiative, setInitiative] = useState([]);
   const [messages, setMessages] = useState([]);
+  const [tab, setTab] = useState('game');
   const { t } = useTranslation();
 
   // SOCKET.IO підключення
@@ -70,6 +72,9 @@ export default function GameTablePage() {
   }, [tableId, user, characterId]);
 
   const isGM = (user?.role === 'gm') || (gm && user && gm.toString() === user._id);
+  const kickPlayer = (uid) => {
+    socket.emit('kick-player', { tableId, userId: uid });
+  };
 
 
   return (
@@ -102,6 +107,24 @@ export default function GameTablePage() {
           <LanguageSwitch />
         </div>
       </div>
+      {isGM && (
+        <div className="bg-[#322018]/90 flex justify-center gap-2 py-2">
+          <button
+            className={`px-4 py-1 rounded-2xl font-dnd ${tab === 'game' ? 'bg-dndgold text-dndred' : 'bg-[#1b110a] text-dndgold'}`}
+            onClick={() => setTab('game')}
+          >
+            {t('game_field')}
+          </button>
+          <button
+            className={`px-4 py-1 rounded-2xl font-dnd ${tab === 'dashboard' ? 'bg-dndgold text-dndred' : 'bg-[#1b110a] text-dndgold'}`}
+            onClick={() => setTab('dashboard')}
+          >
+            {t('gm_dashboard')}
+          </button>
+        </div>
+      )}
+
+      {(!isGM || tab === 'game') && (
       <div className="relative flex-1 h-[80vh] bg-[#1b110a]/80 rounded-b-2xl px-6 pb-4 md:pb-32 overflow-hidden">
         {/* Ліві слоти гравців */}
         <div className="md:absolute md:left-2 md:top-1/2 md:-translate-y-1/2 flex flex-col gap-2">
@@ -139,6 +162,13 @@ export default function GameTablePage() {
           )}
         </div>
       </div>
+      )}
+
+      {isGM && tab === 'dashboard' && (
+        <div className="p-4 bg-[#1b110a]/80 rounded-b-2xl h-[80vh] overflow-auto">
+          <PlayerStatusTable players={players} isGM onKick={kickPlayer} />
+        </div>
+      )}
       <div className="p-4 bg-[#322018]/90 text-center font-dnd text-dndgold rounded-b-2xl">
         © {new Date().getFullYear()} D&D Online Tabletop
       </div>

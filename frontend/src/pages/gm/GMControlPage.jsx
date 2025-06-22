@@ -5,7 +5,6 @@ import ReactPlayer from 'react-player';
 import { useUserStore } from '../../store/user';
 import { GameStateProvider, useGameState } from '../../context/GameStateContext';
 import PlayerStatusTable from '../../components/PlayerStatusTable';
-import InventoryEditor from '../../components/InventoryEditor';
 import DiceBox from '../../components/DiceBox';
 import DiceRollerHidden from '../../components/DiceRollerHidden';
 import socket from '../../api/socket';
@@ -18,6 +17,8 @@ function Control() {
   const [mapFile, setMapFile] = useState(null);
   const [trackUrl, setTrackUrl] = useState('');
   const [players, setPlayers] = useState([]);
+  const [selectedChar, setSelectedChar] = useState(null);
+  const [inventory, setInventory] = useState([]);
 
   const [target, setTarget] = useState('all');
   const [message, setMessage] = useState('');
@@ -115,6 +116,10 @@ function Control() {
     }
   };
 
+  const kickPlayer = (uid) => {
+    socket.emit('kick-player', { tableId: id, userId: uid });
+  };
+
 
   const sendMessage = () => {
     if (!message.trim()) return;
@@ -156,7 +161,9 @@ function Control() {
         </button>
         {music && <ReactPlayer url={music} playing controls width="100%" height="50px" />}
       </div>
+
       <PlayerStatusTable players={players} isGM onEdit={editPlayer} onKick={kickPlayer} />
+
       <div>
 
         <div className="font-bold mb-1">{t('message')}</div>
