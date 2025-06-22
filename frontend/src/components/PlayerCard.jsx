@@ -8,20 +8,8 @@ import { normalizeInventory } from '../utils/inventoryUtils';
 
 import translateOrRaw from '../utils/translateOrRaw.js';
 
+import translateEffect from '../utils/effectUtils.js';
 
-function translateEffect(effectString, t) {
-  return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
-    const key = stat.toLowerCase();
-
-    return `+${num} ${translateOrRaw(t, 'stats.' + key)}`;
-
-  });
-}
-
-function translateKey(t, key) {
-  const translated = t(key);
-  return translated === key ? key.split('.').pop() : translated;
-}
 
 export default function PlayerCard({ character, onSelect }) {
   const [open, setOpen] = useState(false);
