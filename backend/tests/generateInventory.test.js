@@ -19,10 +19,10 @@ describe('generateInventory', () => {
     Math.random.mockRestore();
 
     expect(items).toEqual([
-      { item: 'Меч', amount: 1, bonus: {} },
-      { item: 'Шкіряна броня', amount: 1, bonus: {} },
-      { item: 'Зілля здоров’я', amount: 1, bonus: {} },
-      { item: 'Кістяний талісман', amount: 1, bonus: { strength: 1 } }
+      { item: 'Меч', code: 'меч', amount: 1, bonus: {} },
+      { item: 'Шкіряна броня', code: 'шкіряна_броня', amount: 1, bonus: {} },
+      { item: 'Зілля здоров’я', code: 'зілля_здоров’я', amount: 1, bonus: {} },
+      { item: 'Кістяний талісман', code: 'кістяний_талісман', amount: 1, bonus: { strength: 1 } }
     ]);
   });
 
@@ -34,10 +34,10 @@ describe('generateInventory', () => {
     Math.random.mockRestore();
 
     expect(items).toEqual([
-      { item: 'Сокира', amount: 1, bonus: {} },
-      { item: 'Щит', amount: 1, bonus: {} },
-      { item: 'Зілля здоров’я', amount: 1, bonus: {} },
-      { item: 'Кістяний талісман', amount: 1, bonus: { strength: 1 } }
+      { item: 'Сокира', code: 'сокира', amount: 1, bonus: {} },
+      { item: 'Щит', code: 'щит', amount: 1, bonus: {} },
+      { item: 'Зілля здоров’я', code: 'зілля_здоров’я', amount: 1, bonus: {} },
+      { item: 'Кістяний талісман', code: 'кістяний_талісман', amount: 1, bonus: { strength: 1 } }
     ]);
   });
 

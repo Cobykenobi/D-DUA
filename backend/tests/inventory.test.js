@@ -24,7 +24,11 @@ describe('Inventory Controller - update', () => {
     await inventoryController.update(req, res);
 
     expect(Inventory.findOneAndUpdate).toHaveBeenCalled();
-    expect(res.json).toHaveBeenCalledWith({ items: [{ item: 'Sword' }] });
+    expect(res.json).toHaveBeenCalledWith({
+      items: [
+        { item: 'Sword', code: 'sword', amount: undefined, description: undefined, bonus: {} }
+      ]
+    });
   });
 
   it('allows admin to update inventory without ownership', async () => {

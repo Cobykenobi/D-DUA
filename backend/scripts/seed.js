@@ -9,7 +9,7 @@ const Item = require('../src/models/Item');
 const StartingSet = require('../src/models/StartingSet');
 const bcrypt = require('bcrypt');
 
-const slug = str => str.toLowerCase().replace(/\s+/g, '_');
+const slug = require('../src/utils/slugify');
 
 const MONGO_URI = process.env.MONGO_URI;
 
@@ -184,7 +184,12 @@ async function seed() {
 
   const addItem = (map, def, type) => {
     if (!map.has(def.item)) {
-      map.set(def.item, { name: def.item, type, bonuses: def.bonus || {} });
+      map.set(def.item, {
+        name: def.item,
+        code: slug(def.item),
+        type,
+        bonuses: def.bonus || {}
+      });
     }
   };
 

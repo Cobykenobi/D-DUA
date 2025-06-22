@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 const itemSchema = new mongoose.Schema({
   name: { type: String, required: true, unique: true },
+  code: { type: String, required: true, unique: true },
   type: { type: String, default: '' },
   description: { type: String, default: '' },
   bonuses: { type: Map, of: Number, default: {} }
