@@ -105,6 +105,10 @@ function Control() {
     }
   };
 
+  const kickPlayer = (uid) => {
+    socket.emit('kick-player', { tableId: id, userId: uid });
+  };
+
 
   const sendMessage = () => {
     if (!message.trim()) return;
@@ -146,7 +150,7 @@ function Control() {
         </button>
         {music && <ReactPlayer url={music} playing controls width="100%" height="50px" />}
       </div>
-      <PlayerStatusTable players={players} isGM />
+      <PlayerStatusTable players={players} isGM onKick={kickPlayer} />
       <div>
 
         <div className="font-bold mb-1">{t('message')}</div>
