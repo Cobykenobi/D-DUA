@@ -114,7 +114,17 @@
   },
   "inventory": {
     "title": "Inventory:",
-    "empty": "Inventory is empty"
+    "empty": "Inventory is empty",
+    "item_added": "Item added",
+    "item_removed": "Item removed",
+    "order_changed": "Order changed",
+    "new_item": "New item",
+    "types": {
+      "weapon": "Weapon",
+      "armor": "Armor",
+      "potion": "Potion",
+      "misc": "Misc"
+    }
   },
   "item": {
     "меч": "Sword",

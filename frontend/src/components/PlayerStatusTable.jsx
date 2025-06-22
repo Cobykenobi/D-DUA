@@ -122,7 +122,7 @@ export default function PlayerStatusTable({ players, isGM, onEdit, onKick }) {
                         onClick={() => onKick(p.user)}
                         className="bg-dndred text-white rounded px-2 py-1"
                       >
-                        Kick
+                        {t('kick')}
                       </button>
                     )}
                   </td>
