@@ -23,7 +23,8 @@
     "elf": "Ельф",
     "orc": "Орк",
     "gnome": "Гном",
-    "dwarf": "Дварф"
+    "dwarf": "Дварф",
+    "lizardman": "Ящірка"
   },
   "classes": {
     "warrior": "Воїн",
@@ -31,7 +32,8 @@
     "archer": "Лучник",
     "paladin": "Паладин",
     "bard": "Бард",
-    "healer": "Лікар"
+    "healer": "Цілитель",
+    "rogue": "Шпигун"
   },
   "stats": {
     "health": "Здоров'я",

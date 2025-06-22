@@ -23,7 +23,8 @@
     "elf": "Elf",
     "orc": "Orc",
     "gnome": "Gnome",
-    "dwarf": "Dwarf"
+    "dwarf": "Dwarf",
+    "lizardman": "Lizardman"
   },
   "classes": {
     "warrior": "Warrior",
@@ -31,7 +32,8 @@
     "archer": "Archer",
     "paladin": "Paladin",
     "bard": "Bard",
-    "healer": "Healer"
+    "healer": "Healer",
+    "rogue": "Rogue"
   },
   "stats": {
     "health": "Health",
