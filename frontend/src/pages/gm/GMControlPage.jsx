@@ -18,6 +18,8 @@ function Control() {
   const [mapFile, setMapFile] = useState(null);
   const [trackUrl, setTrackUrl] = useState('');
   const [players, setPlayers] = useState([]);
+  const [selectedChar, setSelectedChar] = useState(null);
+  const [inventory, setInventory] = useState([]);
 
   const [target, setTarget] = useState('all');
   const [message, setMessage] = useState('');
