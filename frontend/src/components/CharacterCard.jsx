@@ -28,6 +28,9 @@ export default function CharacterCard({
   const classKeyLower = (classCode || '').toLowerCase();
   const raceName = character.race?.name || raceCode;
   const className = character.profession?.name || classCode;
+  const raceKey = character?.race?.code || character?.race?.name || 'unknown';
+  const classKey = character?.profession?.code || character?.profession?.name ||
+    'unknown';
 
   return (
     <>
