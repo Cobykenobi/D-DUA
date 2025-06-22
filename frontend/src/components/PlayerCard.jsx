@@ -19,15 +19,17 @@ export default function PlayerCard({ character, onSelect }) {
     character.profession?.code || character.profession?.name
   );
 
-  const raceKey =
-    typeof (character.race?.code || character.race) === 'string'
-      ? (character.race?.code || character.race).toLowerCase()
-      : '';
+  const race =
+    typeof character.race === 'string'
+      ? character.race
+      : character.race?.code || character.race?.en || '';
+  const raceKey = race.toLowerCase();
 
-  const classKey =
-    typeof (character.profession?.code || character.profession) === 'string'
-      ? (character.profession?.code || character.profession).toLowerCase()
-      : '';
+  const charClass =
+    typeof character.profession === 'string'
+      ? character.profession
+      : character.profession?.code || character.profession?.en || '';
+  const classKey = charClass.toLowerCase();
 
   return (
     <>
@@ -45,16 +47,8 @@ export default function PlayerCard({ character, onSelect }) {
         <h3 className="text-lg text-dndgold text-center mb-1">{character.name}</h3>
         <p className="text-xs text-center">
 
-          {t(
-            `races.${(character.race?.code || character.race || '').toLowerCase()}`,
-            t('unknown')
-          )}{' '}/{' '}
-          {t(
-            `classes.${(
-              character.profession?.code || character.profession || ''
-            ).toLowerCase()}`,
-            t('unknown')
-          )}
+          {t(`races.${raceKey}`, t('unknown'))}{' '}/{' '}
+          {t(`classes.${classKey}`, t('unknown'))}
 
         </p>
         <button
