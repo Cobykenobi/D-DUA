@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createCharacter } from '../../utils/api';
+import { createCharacter } from '../utils/api';
 
 const CharacterCreatePage = () => {
   const [name, setName] = useState('');
