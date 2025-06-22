@@ -7,7 +7,9 @@ import Modal from './Modal';
 import { normalizeInventory } from '../utils/inventoryUtils';
 
 import translateOrRaw from '../utils/translateOrRaw.js';
+
 import translateEffect from '../utils/effectUtils.js';
+
 
 export default function PlayerCard({ character, onSelect }) {
   const [open, setOpen] = useState(false);
@@ -44,8 +46,8 @@ export default function PlayerCard({ character, onSelect }) {
         <h3 className="text-lg text-dndgold text-center mb-1">{character.name}</h3>
         <p className="text-xs text-center">
 
-          {translateOrRaw(t, `races.${raceKey}`)}{' '}/{' '}
-          {translateOrRaw(t, `classes.${classKey}`)}
+          {translateKey(t, `races.${raceKey}`)}{' '}/{' '}
+          {translateKey(t, `classes.${classKey}`)}
 
         </p>
         <button
@@ -69,7 +71,7 @@ export default function PlayerCard({ character, onSelect }) {
           <ul className="list-none pl-0 text-lg font-bold space-y-0.5">
               {Object.entries(character.stats).map(([key, val]) => (
               <li key={key}>
-                {translateOrRaw(t, `stats.${key.toLowerCase()}`)}: {val}
+                {translateKey(t, `stats.${key.toLowerCase()}`)}: {val}
               </li>
             ))}
           </ul>
@@ -88,7 +90,7 @@ export default function PlayerCard({ character, onSelect }) {
                           ' (' +
                           Object.entries(it.bonus)
 
-                            .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
+                            .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateKey(t, 'stats.' + k.toLowerCase())}`)
 
                             .join(', ') +
                           ')'
@@ -96,7 +98,7 @@ export default function PlayerCard({ character, onSelect }) {
                   return (
                     <li key={idx}>
 
-                      {translateOrRaw(t, `inventory.${it.item.toLowerCase()}`, it.item)}
+                      {translateKey(t, `inventory.${it.item.toLowerCase()}`, it.item)}
 
                       {it.amount > 1 ? ` x${it.amount}` : ''}
                       {bonusData}
@@ -119,7 +121,7 @@ export default function PlayerCard({ character, onSelect }) {
                           ' (' +
                           Object.entries(it.bonus)
 
-                            .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
+                            .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateKey(t, 'stats.' + k.toLowerCase())}`)
 
                             .join(', ') +
                           ')'
@@ -127,7 +129,7 @@ export default function PlayerCard({ character, onSelect }) {
                   return (
                     <li key={key}>
 
-                      {translateOrRaw(t, `inventory.${it.item.toLowerCase()}`, it.item)}
+                      {translateKey(t, `inventory.${it.item.toLowerCase()}`, it.item)}
 
                       {it.amount > 1 ? ` x${it.amount}` : ''}
                       {bonusData}
