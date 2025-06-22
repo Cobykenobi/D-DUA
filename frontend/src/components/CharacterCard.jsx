@@ -16,16 +16,16 @@ export default function CharacterCard({
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [desc, setDesc] = useState(character.description || '');
-  const race =
+  const raceKey =
     typeof character.race === 'string'
       ? character.race
-      : character.race?.code || character.race?.en || '';
-  const raceKey = (race || '').toLowerCase();
-  const charClass =
-    typeof character.profession === 'string'
-      ? character.profession
-      : character.profession?.code || character.profession?.en || '';
-  const classKey = (charClass || '').toLowerCase();
+      : character.race?.name || character.race?.code || '';
+  const classKey =
+    typeof character.class === 'string'
+      ? character.class
+      : character.class?.name || character.class?.code || '';
+  const raceKeyLower = (raceKey || '').toLowerCase();
+  const classKeyLower = (classKey || '').toLowerCase();
 
   return (
     <>
@@ -38,8 +38,8 @@ export default function CharacterCard({
         />
         <h3 className="text-lg text-center text-dndgold mb-1">{character.name}</h3>
         <p className="text-sm text-center mb-2">
-          {translateOrRaw(t, `races.${raceKey}`)} /{' '}
-          {translateOrRaw(t, `classes.${classKey}`)}
+          {translateOrRaw(t, `races.${raceKeyLower}`)} /{' '}
+          {translateOrRaw(t, `classes.${classKeyLower}`)}
         </p>
         {character.description && (
           <p className="text-sm italic mb-2 text-center">{character.description}</p>
@@ -72,8 +72,8 @@ export default function CharacterCard({
       <Modal open={open} onClose={() => setOpen(false)}>
         <h3 className="text-lg text-dndgold text-center mb-2">{character.name}</h3>
         <p className="text-sm text-center mb-2">
-          {translateOrRaw(t, `races.${raceKey}`)} /{' '}
-          {translateOrRaw(t, `classes.${classKey}`)}
+          {translateOrRaw(t, `races.${raceKeyLower}`)} /{' '}
+          {translateOrRaw(t, `classes.${classKeyLower}`)}
         </p>
         <textarea
           className="w-full rounded-lg p-2 bg-[#2c1a12] border border-dndgold text-dndgold mb-2"
