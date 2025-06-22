@@ -30,13 +30,13 @@ export default function PlayerCard({ character, onSelect }) {
     typeof character.race === 'string'
       ? character.race
       : character.race?.code || character.race?.en || '';
-  const raceKey = race.toLowerCase();
+  const raceKey = (race || '').toLowerCase();
 
   const charClass =
     typeof character.profession === 'string'
       ? character.profession
       : character.profession?.code || character.profession?.en || '';
-  const classKey = charClass.toLowerCase();
+  const classKey = (charClass || '').toLowerCase();
 
   return (
     <>
