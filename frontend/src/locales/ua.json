@@ -1,5 +1,5 @@
 {
-  'gender': {'male': 'Чоловіча', 'female': 'Жіноча'}
+  "gender": {"male": "Чоловіча", "female": "Жіноча"}
   "welcome": "Ласкаво просимо",
   "login": "Увійти",
   "password": "Пароль",
