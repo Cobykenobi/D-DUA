@@ -124,8 +124,12 @@ export default function LobbyPage() {
             <div>
               <div className="font-bold">{character.name}</div>
               <div className="text-sm">
-                {character.race?.code ? t(`races.${character.race.code}`) : (character.race?.name || '')} &middot;{' '}
-                {character.profession?.code ? t(`classes.${character.profession.code}`) : (character.profession?.name || '')}
+                {character.race?.code
+                  ? t(`races.${character.race.code.toLowerCase()}`)
+                  : (character.race?.name || '')} &middot;{' '}
+                {character.profession?.code
+                  ? t(`classes.${character.profession.code.toLowerCase()}`)
+                  : (character.profession?.name || '')}
               </div>
             </div>
           </div>
@@ -142,10 +146,14 @@ export default function LobbyPage() {
                   <>
                     {pl.character.name}
                     {pl.character.race && (
-                      <> – {pl.character.race.code ? t(`races.${pl.character.race.code}`) : (pl.character.race.name || '')}</>
+                      <> – {pl.character.race.code
+                        ? t(`races.${pl.character.race.code.toLowerCase()}`)
+                        : (pl.character.race.name || '')}</>
                     )}
                     {pl.character.profession && (
-                      <> / {pl.character.profession.code ? t(`classes.${pl.character.profession.code}`) : (pl.character.profession.name || '')}</>
+                      <> / {pl.character.profession.code
+                        ? t(`classes.${pl.character.profession.code.toLowerCase()}`)
+                        : (pl.character.profession.name || '')}</>
                     )}
                   </>
                 ) : (

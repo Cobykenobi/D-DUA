@@ -16,16 +16,18 @@ export default function CharacterCard({
   const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [desc, setDesc] = useState(character.description || '');
-  const raceKey =
+  const raceCode =
     typeof character.race === 'string'
       ? character.race
-      : character.race?.code || character.race?.name || '';
-  const classKey =
+      : character.race?.code || '';
+  const classCode =
     typeof character.profession === 'string'
       ? character.profession
-      : character.profession?.code || character.profession?.name || '';
-  const raceKeyLower = (raceKey || '').toLowerCase();
-  const classKeyLower = (classKey || '').toLowerCase();
+      : character.profession?.code || '';
+  const raceKeyLower = (raceCode || '').toLowerCase();
+  const classKeyLower = (classCode || '').toLowerCase();
+  const raceName = character.race?.name || raceCode;
+  const className = character.profession?.name || classCode;
 
   return (
     <>
@@ -38,8 +40,8 @@ export default function CharacterCard({
         />
         <h3 className="text-lg text-center text-dndgold mb-1">{character.name}</h3>
         <p className="text-sm text-center mb-2">
-          {translateOrRaw(t, `races.${raceKeyLower}`, raceKey)} /{' '}
-          {translateOrRaw(t, `classes.${classKeyLower}`, classKey)}
+          {translateOrRaw(t, `races.${raceKeyLower}`, raceName)} /{' '}
+          {translateOrRaw(t, `classes.${classKeyLower}`, className)}
         </p>
         {character.description && (
           <p className="text-sm italic mb-2 text-center">{character.description}</p>

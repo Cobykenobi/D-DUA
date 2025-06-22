@@ -18,17 +18,19 @@ export default function PlayerCard({ character, onSelect }) {
     character.profession?.code || character.profession?.name
   );
 
-  const race =
+  const raceCode =
     typeof character.race === 'string'
       ? character.race
-      : character.race?.code || character.race?.en || '';
-  const raceKey = (race || '').toLowerCase();
+      : character.race?.code || '';
+  const raceKey = (raceCode || '').toLowerCase();
+  const raceName = character.race?.name || raceCode;
 
   const charClass =
     typeof character.profession === 'string'
       ? character.profession
-      : character.profession?.code || character.profession?.en || '';
+      : character.profession?.code || '';
   const classKey = (charClass || '').toLowerCase();
+  const className = character.profession?.name || charClass;
 
   return (
     <>
@@ -46,8 +48,8 @@ export default function PlayerCard({ character, onSelect }) {
         <h3 className="text-lg text-dndgold text-center mb-1">{character.name}</h3>
         <p className="text-xs text-center">
 
-          {translateOrRaw(t, `races.${raceKey}`, race)}{' '}/{' '}
-          {translateOrRaw(t, `classes.${classKey}`, charClass)}
+          {translateOrRaw(t, `races.${raceKey}`, raceName)}{' '}/{' '}
+          {translateOrRaw(t, `classes.${classKey}`, className)}
 
         </p>
         <button
