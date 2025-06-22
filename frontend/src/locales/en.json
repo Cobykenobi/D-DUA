@@ -1,4 +1,5 @@
 {
+  'gender': {'male': 'Чоловіча', 'female': 'Жіноча'}
   "welcome": "Welcome",
   "login": "Login",
   "password": "Password",
