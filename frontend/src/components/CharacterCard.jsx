@@ -14,7 +14,7 @@ function translateEffect(effectString, t) {
   });
 }
 
-function translateOrRaw(t, key) {
+function translateKey(t, key) {
   const translated = t(key);
   return translated === key ? key.split('.').pop() : translated;
 }
@@ -37,16 +37,16 @@ export default function CharacterCard({ character }) {
       <h3>{character.name}</h3>
       <p>
 
-        {translateOrRaw(t, `races.${raceKey}`)}
+        {translateKey(t, `races.${raceKey}`)}
 
       </p>
       <p>
-        {translateOrRaw(t, `classes.${classKey}`)}
+        {translateKey(t, `classes.${classKey}`)}
       </p>
       <ul>
         {Object.entries(character.stats || {}).map(([key, value]) => (
           <li key={key}>
-            {translateOrRaw(t, `stats.${key.toLowerCase()}`)}: {value}
+            {translateKey(t, `stats.${key.toLowerCase()}`)}: {value}
           </li>
         ))}
       </ul>
@@ -64,7 +64,7 @@ export default function CharacterCard({ character }) {
                       ' (' +
                       Object.entries(it.bonus)
 
-                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
+                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateKey(t, 'stats.' + k.toLowerCase())}`)
 
                         .join(', ') +
                       ')'
@@ -72,7 +72,7 @@ export default function CharacterCard({ character }) {
               return (
                 <li key={idx}>
 
-                  {translateOrRaw(t, `inventory.${it.item.toLowerCase()}`, it.item)}
+                  {translateKey(t, `inventory.${it.item.toLowerCase()}`, it.item)}
 
                   {it.amount > 1 ? ` x${it.amount}` : ''}
                   {bonusData}
@@ -91,14 +91,14 @@ export default function CharacterCard({ character }) {
                       ' (' +
                       Object.entries(it.bonus)
 
-                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
+                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateKey(t, 'stats.' + k.toLowerCase())}`)
            .join(', ') +
                       ')'
                   : '';
               return (
                 <li key={key}>
 
-                  {translateOrRaw(t, `inventory.${it.item.toLowerCase()}`, it.item)}
+                  {translateKey(t, `inventory.${it.item.toLowerCase()}`, it.item)}
 
                   {it.amount > 1 ? ` x${it.amount}` : ''}
                   {bonusData}
