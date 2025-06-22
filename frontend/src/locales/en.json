@@ -1,6 +1,7 @@
 {
   "welcome": "Welcome",
   "login": "Login",
+  "password": "Password",
   "register": "Register",
   "fields_required": "Please fill in all fields",
   "connecting": "Connecting...",
