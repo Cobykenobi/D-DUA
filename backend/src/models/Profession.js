@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const professionSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
@@ -8,5 +9,6 @@ const professionSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
 
 module.exports = mongoose.model('Profession', professionSchema);

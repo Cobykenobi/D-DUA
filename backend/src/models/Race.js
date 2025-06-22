@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const raceSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
@@ -8,5 +9,6 @@ const raceSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
 
 module.exports = mongoose.model('Race', raceSchema);
