@@ -5,6 +5,7 @@ import { useUserStore } from '../../store/user';
 import { GameStateProvider, useGameState } from '../../context/GameStateContext';
 import PlayerStatusTable from '../../components/PlayerStatusTable';
 import DiceBox from '../../components/DiceBox';
+import DiceRollerHidden from '../../components/DiceRollerHidden';
 import socket from '../../api/socket';
 
 function Control() {
@@ -65,6 +66,7 @@ function Control() {
       </div>
       <PlayerStatusTable players={players} isGM />
       <DiceBox />
+      <DiceRollerHidden sessionId={id} />
     </div>
   );
 }
