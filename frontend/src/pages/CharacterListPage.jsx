@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react';
 import api from "../api/axios";
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
-import { translateOrRaw } from '../utils/i18nHelpers';
+
+import translateOrRaw from '../utils/translateOrRaw.js';
+
 
 export default function CharacterListPage() {
   const [characters, setCharacters] = useState([]);
@@ -27,9 +29,9 @@ export default function CharacterListPage() {
           const raceKey = (raceVal || '').toLowerCase();
           const raceText = raceVal
 
-            ? t(`races.${raceKey}`, raceVal)
+            ? translateOrRaw(t, `races.${raceVal.toLowerCase()}`, raceVal)
+            : c.race?.name || translateOrRaw(t, '');
 
-            : c.race?.name || t('unknown');
 
           const classVal =
             typeof c.profession === 'string'
@@ -40,9 +42,9 @@ export default function CharacterListPage() {
           const classKey = (classVal || '').toLowerCase();
           const classText = classVal
 
-            ? t(`classes.${classKey}`, classVal)
+            ? translateOrRaw(t, `classes.${classVal.toLowerCase()}`, classVal)
+            : c.profession?.name || translateOrRaw(t, '');
 
-            : c.profession?.name || t('unknown');
 
           return (
           <div key={c._id} className="bg-[#1c120a]/80 p-4 rounded-xl shadow-lg border border-dndgold">

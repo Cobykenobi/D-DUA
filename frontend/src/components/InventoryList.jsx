@@ -1,10 +1,13 @@
 
 import { useTranslation } from 'react-i18next';
+import translateOrRaw from '../utils/translateOrRaw.js';
 
 function translateEffect(effectString, t) {
   return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
     const key = stat.toLowerCase();
-    return `+${num} ${t('bonuses.' + key, t('stats.' + key, stat))}`;
+
+    return `+${num} ${translateOrRaw(t, 'stats.' + key, stat)}`;
+
   });
 }
 
@@ -28,7 +31,9 @@ export default function InventoryList({ items, filter = 'all' }) {
       <ul className="list-disc pl-5">
         {filtered.map((item, i) => (
           <li key={i} className="text-dndgold">
-            {t(`inventory.${item.item || item.name || item}`, item.item || item.name || item)}
+
+            {translateOrRaw(t, `inventory.${(item.item || item.name || item).toLowerCase()}`, item.item || item.name || item)}
+
             {item.amount ? `x${item.amount}` : ''}
             {item.effect ? ` (${translateEffect(item.effect, t)})` : ''}
           </li>

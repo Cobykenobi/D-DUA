@@ -5,13 +5,15 @@ import { useTranslation } from 'react-i18next';
 import { getClassBorderColor } from '../utils/classColors';
 import Modal from './Modal';
 import { normalizeInventory } from '../utils/inventoryUtils';
-import { translateOrRaw } from '../utils/i18nHelpers';
+
+import translateOrRaw from '../utils/translateOrRaw.js';
+
 
 function translateEffect(effectString, t) {
   return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
     const key = stat.toLowerCase();
 
-    return `+${num} ${t('bonuses.' + key, t('stats.' + key, t('unknown')))}`;
+    return `+${num} ${translateOrRaw(t, 'stats.' + key)}`;
 
   });
 }
@@ -100,14 +102,16 @@ export default function PlayerCard({ character, onSelect }) {
                           ' (' +
                           Object.entries(it.bonus)
 
-                            .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('bonuses.' + k.toLowerCase(), t('stats.' + k.toLowerCase(), t('unknown')))}`)
+                            .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
 
                             .join(', ') +
                           ')'
                       : '';
                   return (
                     <li key={idx}>
-                      {t(`inventory.${it.item}`, it.item)}
+
+                      {translateOrRaw(t, `inventory.${it.item.toLowerCase()}`, it.item)}
+
                       {it.amount > 1 ? ` x${it.amount}` : ''}
                       {bonusData}
                       {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
@@ -129,14 +133,16 @@ export default function PlayerCard({ character, onSelect }) {
                           ' (' +
                           Object.entries(it.bonus)
 
-                            .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('bonuses.' + k.toLowerCase(), t('stats.' + k.toLowerCase(), t('unknown')))}`)
+                            .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
 
                             .join(', ') +
                           ')'
                       : '';
                   return (
                     <li key={key}>
-                      {t(`inventory.${it.item}`, it.item)}
+
+                      {translateOrRaw(t, `inventory.${it.item.toLowerCase()}`, it.item)}
+
                       {it.amount > 1 ? ` x${it.amount}` : ''}
                       {bonusData}
                       {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
