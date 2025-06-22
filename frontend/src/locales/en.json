@@ -3,6 +3,7 @@
   "login": "Login",
   "password": "Password",
   "register": "Register",
+  "admin": "Admin",
   "fields_required": "Please fill in all fields",
   "connecting": "Connecting...",
   "races": {

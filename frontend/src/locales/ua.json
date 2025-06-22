@@ -3,6 +3,7 @@
   "login": "Увійти",
   "password": "Пароль",
   "register": "Реєстрація",
+  "admin": "Адмінка",
   "fields_required": "Заповніть усі поля",
   "connecting": "Підключення...",
   "races": {
