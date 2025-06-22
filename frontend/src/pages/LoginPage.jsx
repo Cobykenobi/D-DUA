@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import axios from 'axios';
+import api from '../api/axios';
 import { useUserStore } from '../store/user';
 
 function LoginPage() {
@@ -11,10 +11,10 @@ function LoginPage() {
 
   const handleLogin = async (event) => {
     event.preventDefault();
-    const { username, password } = event.target.elements;
+    const { login: loginInput, password } = event.target.elements;
 
-    const res = await axios.post('/api/login', {
-      username: username.value,
+    const res = await api.post('/auth/login', {
+      login: loginInput.value,
       password: password.value,
     });
 
@@ -32,7 +32,7 @@ function LoginPage() {
         <h2 className="text-3xl font-dnd mb-4">{t('login')}</h2>
         <form onSubmit={handleLogin} className="flex flex-col items-center gap-4">
           <input
-            name="username"
+            name="login"
             placeholder={t('login')}
             className="p-2 rounded bg-[#3c2a20] text-white placeholder:text-gray-300 w-full min-w-[300px]"
             required
