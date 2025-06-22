@@ -5,10 +5,13 @@ import LogoutButton from '../components/LogoutButton';
 import LanguageSwitch from '../components/LanguageSwitch';
 import CharacterCard from '../components/CharacterCard';
 import { getCharacters, deleteCharacter, updateCharacter } from '../utils/api';
+import api from '../api/axios';
+import { useUserStore } from '../store/user';
 
 const ProfilePage = () => {
   const [characters, setCharacters] = useState([]);
   const navigate = useNavigate();
+  const { user } = useUserStore();
 
   useEffect(() => {
     const fetchChars = async () => {
@@ -37,6 +40,21 @@ const ProfilePage = () => {
     setCharacters(prev => prev.map(c => c._id === id ? updated : c));
   };
 
+  const openTable = (id) => {
+    navigate(`/gm-table/${id}`);
+    window.open(`/gm-control/${id}`, '_blank');
+  };
+
+  const createTable = async () => {
+    try {
+      const res = await api.post('/table');
+      const { tableId } = res.data;
+      openTable(tableId);
+    } catch {
+      // fail silently
+    }
+  };
+
   return (
     <div
       className="relative min-h-screen bg-dndbg bg-cover bg-center flex flex-col items-center p-6 font-dnd text-dndgold text-shadow"
@@ -53,12 +71,22 @@ const ProfilePage = () => {
         <LanguageSwitch />
       </div>
       <h2 className="text-2xl mb-4 text-shadow">Твої персонажі</h2>
-      <button
-        onClick={handleCreate}
-        className="bg-dndgold text-dndred rounded-2xl px-4 py-2 font-semibold mb-6 transition active:scale-95"
-      >
-        Створити нового
-      </button>
+      <div className="flex gap-2 mb-6">
+        <button
+          onClick={handleCreate}
+          className="bg-dndgold text-dndred rounded-2xl px-4 py-2 font-semibold transition active:scale-95"
+        >
+          Створити нового
+        </button>
+        {user?.role === 'gm' && (
+          <button
+            onClick={createTable}
+            className="bg-yellow-600 hover:bg-yellow-700 text-white rounded-2xl px-4 py-2 font-semibold transition active:scale-95"
+          >
+            Створити стіл
+          </button>
+        )}
+      </div>
       <div className="w-full flex flex-wrap justify-center gap-4 max-w-5xl overflow-y-auto">
         {characters.length === 0 ? (
           <div className="col-span-full text-center text-dndgold/80">
