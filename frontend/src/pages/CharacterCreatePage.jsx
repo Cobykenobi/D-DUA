@@ -6,7 +6,7 @@ import { createCharacter } from '../../utils/api';
 const CharacterCreatePage = () => {
   const [name, setName] = useState('');
   const [gender, setGender] = useState('male');
-  const [race, setRace] = useState('wood_elf');
+  const [race, setRace] = useState('human_male');
   const [profession, setProfession] = useState('warrior');
   const [description, setDescription] = useState('');
   const navigate = useNavigate();
@@ -34,18 +34,24 @@ const CharacterCreatePage = () => {
           <option value="female">Жінка</option>
         </select>
         <select value={race} onChange={(e) => setRace(e.target.value)}>
-          <option value="wood_elf">Лісовий ельф</option>
-          <option value="dark_elf">Темний ельф</option>
-          <option value="human">Людина</option>
-          <option value="halfling">Піврослик</option>
-          <option value="lizardman">Ящеролюдина</option>
+          <option value="human_male">Людина (чоловік)</option>
+          <option value="human_female">Людина (жінка)</option>
+          <option value="elf_male">Ельф (чоловік)</option>
+          <option value="elf_female">Ельф (жінка)</option>
+          <option value="orc_male">Орк (чоловік)</option>
+          <option value="orc_female">Орк (жінка)</option>
+          <option value="gnome_male">Гном (чоловік)</option>
+          <option value="gnome_female">Гном (жінка)</option>
+          <option value="dwarf_male">Дварф (чоловік)</option>
+          <option value="dwarf_female">Дварф (жінка)</option>
         </select>
         <select value={profession} onChange={(e) => setProfession(e.target.value)}>
           <option value="warrior">Воїн</option>
+          <option value="mage">Маг</option>
+          <option value="archer">Лучник</option>
           <option value="paladin">Паладин</option>
-          <option value="wizard">Маг</option>
           <option value="bard">Бард</option>
-          <option value="assassin">Асасін</option>
+          <option value="healer">Цілитель</option>
         </select>
         <textarea
           placeholder="Опис"

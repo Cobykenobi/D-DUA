@@ -6,7 +6,6 @@ export function getClassBorderColor(profession) {
     paladin: 'border-yellow-600',
     bard: 'border-purple-600',
     healer: 'border-teal-600',
-    druid: 'border-green-700',
   };
   const key = (profession || '').toLowerCase();
   if (!key) return 'border-dndgold';
