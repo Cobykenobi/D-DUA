@@ -38,10 +38,10 @@ export default function PlayerCard({ character, onSelect }) {
         className={`border rounded-lg shadow-lg p-4 bg-gradient-to-br from-gray-800 to-black text-white font-dnd w-56 ${borderColor}`}
       >
         <img
-          src={withApiHost(character.image) || './default-avatar.png'}
+          src={withApiHost(character.image) || '/default-avatar.png'}
           alt="character"
           className="rounded mb-2 h-28 w-full object-cover"
-          onError={e => (e.currentTarget.src = './default-avatar.png')}
+          onError={e => (e.currentTarget.src = '/default-avatar.png')}
         />
         <h3 className="text-lg text-dndgold text-center mb-1">{character.name}</h3>
         <p className="text-xs text-center">
