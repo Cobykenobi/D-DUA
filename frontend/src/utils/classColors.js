@@ -8,7 +8,8 @@ export function getClassBorderColor(profession) {
     healer: 'border-teal-600',
     druid: 'border-green-700',
   };
-  if (!profession) return 'border-dndgold';
+  if (typeof profession !== 'string' || profession.trim() === '')
+    return 'border-dndgold';
   const key = profession.toLowerCase();
   return map[key] || 'border-dndgold';
 }
