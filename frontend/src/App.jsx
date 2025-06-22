@@ -1,21 +1,23 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
-import ProfilePage from './pages/ProfilePage';
-import CharacterCreatePage from './pages/CharacterCreatePage';
-import LobbyPage from './pages/LobbyPage';
-import AdminPage from './pages/AdminPage';
-import AdminInventoryPage from './pages/admin/AdminInventoryPage';
-import AdminUsersPage from './pages/admin/AdminUsersPage';
-import ChangePasswordPage from './pages/ChangePasswordPage';
-import GameTablePage from './pages/GameTablePage';
-import GMTablePage from './pages/gm/GMTablePage';
-import AdminLoginPage from './pages/AdminLoginPage';
-import SettingsPanel from './pages/SettingsPanel';
+import Loader from './components/Loader';
 
-import GMDashboard from './pages/GMDashboard';
-import GMControlPage from './pages/gm/GMControlPage';
+const LoginPage = React.lazy(() => import('./pages/LoginPage'));
+const RegisterPage = React.lazy(() => import('./pages/RegisterPage'));
+const ProfilePage = React.lazy(() => import('./pages/ProfilePage'));
+const CharacterCreatePage = React.lazy(() => import('./pages/CharacterCreatePage'));
+const LobbyPage = React.lazy(() => import('./pages/LobbyPage'));
+const AdminPage = React.lazy(() => import('./pages/AdminPage'));
+const AdminInventoryPage = React.lazy(() => import('./pages/admin/AdminInventoryPage'));
+const AdminUsersPage = React.lazy(() => import('./pages/admin/AdminUsersPage'));
+const ChangePasswordPage = React.lazy(() => import('./pages/ChangePasswordPage'));
+const GameTablePage = React.lazy(() => import('./pages/GameTablePage'));
+const GMTablePage = React.lazy(() => import('./pages/gm/GMTablePage'));
+const AdminLoginPage = React.lazy(() => import('./pages/AdminLoginPage'));
+const SettingsPanel = React.lazy(() => import('./pages/SettingsPanel'));
+
+const GMDashboard = React.lazy(() => import('./pages/GMDashboard'));
+const GMControlPage = React.lazy(() => import('./pages/gm/GMControlPage'));
 
 import PrivateRoute from './PrivateRoute';
 import useKeepAlive from './hooks/useKeepAlive';
@@ -47,6 +49,7 @@ const homeRoute = () => {
 const App = () => {
   useKeepAlive();
   return (
+    <React.Suspense fallback={<Loader />}>
     <Routes>
       <Route path="/" element={<Navigate to={homeRoute()} />} />
       <Route path="/login" element={<LoginPage />} />
@@ -72,6 +75,7 @@ const App = () => {
 
     <Route path="*" element={<Navigate to="/" />} />
   </Routes>
+    </React.Suspense>
   );
 };
 
