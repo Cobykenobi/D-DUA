@@ -119,7 +119,9 @@ export default function CharacterCard({
                     : '';
                 return (
                   <li key={idx}>
-                    {translateOrRaw(t, `inventory.${it.item}`, it.item)}
+
+                    {translateOrRaw(t, `item.${(it.code || it.item).toLowerCase()}`, it.item)}
+
                     {it.amount > 1 ? ` x${it.amount}` : ''}
                     {bonusData}
                     {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
@@ -142,7 +144,9 @@ export default function CharacterCard({
                     : '';
                 return (
                   <li key={key}>
-                    {translateOrRaw(t, `inventory.${it.item}`, it.item)}
+
+                    {translateOrRaw(t, `item.${(it.code || it.item).toLowerCase()}`, it.item)}
+
                     {it.amount > 1 ? ` x${it.amount}` : ''}
                     {bonusData}
                     {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}

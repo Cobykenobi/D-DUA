@@ -5,6 +5,16 @@ const Profession = require('../models/Profession');
 
 const generateStats = require('../utils/generateStats');
 const generateInventory = require('../utils/generateInventory');
+const slug = require('../utils/slugify');
+
+function mapInventory(inv) {
+  return (inv || []).map(it => ({
+    item: it.item,
+    amount: it.amount,
+    bonus: it.bonus ? Object.fromEntries(it.bonus) : {},
+    code: slug(it.item)
+  }));
+}
 
 // Отримати всіх персонажів користувача
 exports.getAllByUser = async (req, res) => {
@@ -12,7 +22,12 @@ exports.getAllByUser = async (req, res) => {
     const characters = await Character.find({ user: req.user.id })
       .populate('race', 'name code')
       .populate('profession', 'name code');
-    res.json(characters);
+    const mapped = characters.map(ch => {
+      const obj = ch.toObject ? ch.toObject() : ch;
+      obj.inventory = mapInventory(obj.inventory);
+      return obj;
+    });
+    res.json(mapped);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -108,7 +123,9 @@ exports.create = async (req, res) => {
     const populated = await Character.findById(newChar._id)
       .populate('race', 'name code')
       .populate('profession', 'name code');
-    res.status(201).json(populated);
+    const obj = populated.toObject ? populated.toObject() : populated;
+    obj.inventory = mapInventory(obj.inventory);
+    res.status(201).json(obj);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -121,7 +138,9 @@ exports.getOne = async (req, res) => {
       .populate('race', 'name code')
       .populate('profession', 'name code');
     if (!char) return res.status(404).json({ message: 'Not found' });
-    res.json(char);
+    const obj = char.toObject ? char.toObject() : char;
+    obj.inventory = mapInventory(obj.inventory);
+    res.json(obj);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
@@ -147,7 +166,9 @@ exports.update = async (req, res) => {
     const populated = await Character.findById(char._id)
       .populate('race', 'name code')
       .populate('profession', 'name code');
-    res.json(populated);
+    const obj = populated.toObject ? populated.toObject() : populated;
+    obj.inventory = mapInventory(obj.inventory);
+    res.json(obj);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

@@ -24,7 +24,9 @@ export default function InventoryList({ items, filter = 'all' }) {
         {filtered.map((item, i) => (
           <li key={i} className="text-dndgold">
 
-            {translateOrRaw(t, `inventory.${item.item || item.name || item}`, item.item || item.name || item)}
+
+            {translateOrRaw(t, `item.${(item.code || item.item || item.name || item).toLowerCase()}`, item.item || item.name || item)}
+
 
             {item.amount ? `x${item.amount}` : ''}
             {item.effect ? ` (${translateEffect(item.effect, t)})` : ''}
