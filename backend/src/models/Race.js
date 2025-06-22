@@ -1,11 +1,14 @@
-const mongoose = require('mongoose');
 
+// backend/models/Race.js
+const mongoose = require('mongoose');
 
 const raceSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true },
+    name: { type: String, required: true, unique: true },
     code: { type: String, required: true, unique: true },
-    description: { type: String, default: '' }
+    description: { type: String, default: '' },
+    modifiers: { type: Map, of: Number, default: {} }
+
   },
   { timestamps: true }
 );
