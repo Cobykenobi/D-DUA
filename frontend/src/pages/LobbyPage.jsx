@@ -3,6 +3,7 @@ import { io } from 'socket.io-client';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useUserStore } from '../store/user';
 import LogoutButton from '../components/LogoutButton';
+import LanguageSwitch from '../components/LanguageSwitch';
 import { getCharacter } from '../utils/api';
 import { withApiHost } from '../utils/imageUtils';
 import { useTranslation } from 'react-i18next';
@@ -78,7 +79,7 @@ export default function LobbyPage() {
       className="relative flex flex-col items-center min-h-screen bg-dndbg bg-cover bg-center"
       style={{ backgroundImage: "url('/nd-bg.png')" }}
     >
-      <div className="absolute top-4 right-4 flex gap-2">
+      <div className="absolute top-4 right-4 flex gap-2 flex-wrap">
         <button
           onClick={() => navigate('/characters')}
           className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-4 py-2 transition active:scale-95"
@@ -86,6 +87,7 @@ export default function LobbyPage() {
           Назад
         </button>
         <LogoutButton />
+        <LanguageSwitch />
       </div>
       {!tableId ? (
         <div className="bg-[#322018]/90 p-6 rounded-2xl mt-10 w-full max-w-lg text-center">
