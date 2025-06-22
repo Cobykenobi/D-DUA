@@ -19,11 +19,11 @@ export default function CharacterCard({
   const raceKey =
     typeof character.race === 'string'
       ? character.race
-      : character.race?.name || character.race?.code || '';
+      : character.race?.code || character.race?.name || '';
   const classKey =
     typeof character.profession === 'string'
       ? character.profession
-      : character.profession?.name || character.profession?.code || '';
+      : character.profession?.code || character.profession?.name || '';
   const raceKeyLower = (raceKey || '').toLowerCase();
   const classKeyLower = (classKey || '').toLowerCase();
 
