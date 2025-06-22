@@ -63,6 +63,11 @@
   "delete": "Delete",
   "details": "Details",
   "save": "Save",
+  "player": "Player",
+  "race": "Race",
+  "class": "Class",
+  "stats": "Stats",
+  "actions": "Actions",
   "races": {
     "human_male": "Human (male)",
     "human_female": "Human (female)",
