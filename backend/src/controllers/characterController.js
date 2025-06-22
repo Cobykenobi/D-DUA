@@ -110,6 +110,7 @@ exports.create = async (req, res) => {
   const newChar = new Character({
       user: req.user.id,
       name,
+      gender,
       description,
       image: avatar,
       race: race[0]?._id,
