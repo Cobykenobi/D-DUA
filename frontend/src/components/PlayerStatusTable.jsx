@@ -3,7 +3,7 @@ import { useGameState } from '../context/GameStateContext';
 import { useState } from 'react';
 
 export default function PlayerStatusTable({ players, isGM }) {
-  const { hp, updateHp } = useGameState();
+  const { hp, mp, updateHp, updateMp } = useGameState();
   const [dmg, setDmg] = useState({});
 
   const applyDamage = (uid) => {
@@ -19,6 +19,7 @@ export default function PlayerStatusTable({ players, isGM }) {
         <tr>
           <th className="text-left">Гравець</th>
           <th className="text-left">HP</th>
+          <th className="text-left">MP</th>
           <th className="text-left">AC</th>
           {isGM && <th className="text-left">Урон</th>}
           <th className="text-left">Статус</th>
@@ -38,6 +39,18 @@ export default function PlayerStatusTable({ players, isGM }) {
                 />
               ) : (
                 hp[p.user] ?? '-'
+              )}
+            </td>
+            <td>
+              {isGM ? (
+                <input
+                  type="number"
+                  value={mp[p.user] ?? ''}
+                  onChange={e => updateMp(p.user, Number(e.target.value))}
+                  className="w-16 text-black rounded"
+                />
+              ) : (
+                mp[p.user] ?? '-'
               )}
             </td>
             <td>{p.character?.stats?.defense ?? '-'}</td>
