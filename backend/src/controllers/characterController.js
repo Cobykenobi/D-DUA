@@ -36,7 +36,9 @@ exports.getAllByUser = async (req, res) => {
 // Створити персонажа
 exports.create = async (req, res) => {
   try {
-    let { name, description, image, raceId, professionId, race: raceCode, profession: professionCode } = req.body;
+
+    let { name, description, image, gender, raceId, professionId } = req.body;
+
 
     if (!name || typeof name !== 'string' || !name.trim() || name.trim().length > 50) {
       return res.status(400).json({ message: 'Invalid name' });
@@ -97,11 +99,12 @@ exports.create = async (req, res) => {
 
 
   const raceCodeRaw = (race[0].code || race[0].name).toLowerCase();
-  const gender = raceCodeRaw.endsWith('_female') ? 'female' : 'male';
+  const detectedGender = raceCodeRaw.endsWith('_female') ? 'female' : 'male';
+  const finalGender = (gender && ['male', 'female'].includes(gender)) ? gender : detectedGender;
   const raceBase = raceCodeRaw.replace(/_(male|female)$/, '');
   const classCodeLower = (profession[0].code || profession[0].name).toLowerCase();
 
-  const stats = generateStats(raceBase, classCodeLower, gender);
+  const stats = generateStats(raceBase, classCodeLower, finalGender);
 
 
     // Логіка вибору аватара
@@ -119,6 +122,7 @@ exports.create = async (req, res) => {
       gender,
       description,
       image: avatar,
+      gender: finalGender,
       race: race[0]?._id,
       profession: profession[0]?._id,
       stats,

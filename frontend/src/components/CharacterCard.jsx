@@ -24,6 +24,7 @@ export default function CharacterCard({
     typeof character.profession === 'string'
       ? character.profession
       : character.profession?.code || '';
+  const genderCode = (character.gender || '').toLowerCase();
   const raceKeyLower = (raceCode || '').toLowerCase();
   const classKeyLower = (classCode || '').toLowerCase();
   const raceName = character.race?.name || raceCode;
@@ -43,6 +44,7 @@ export default function CharacterCard({
         />
         <h3 className="text-lg text-center text-dndgold mb-1">{character.name}</h3>
         <p className="text-sm text-center mb-2">
+          {translateOrRaw(t, 'gender.' + genderCode, genderCode)} ·{' '}
           {translateOrRaw(t, `races.${raceKeyLower}`, raceName)} /{' '}
           {translateOrRaw(t, `classes.${classKeyLower}`, className)}
         </p>
@@ -77,6 +79,7 @@ export default function CharacterCard({
       <Modal open={open} onClose={() => setOpen(false)}>
         <h3 className="text-lg text-dndgold text-center mb-2">{character.name}</h3>
         <p className="text-sm text-center mb-2">
+          {translateOrRaw(t, 'gender.' + genderCode, genderCode)} ·{' '}
           {translateOrRaw(t, `races.${raceKeyLower}`, raceKey)} /{' '}
           {translateOrRaw(t, `classes.${classKeyLower}`, classKey)}
         </p>
