@@ -11,7 +11,6 @@ import InventoryEditor from '../../components/InventoryEditor';
 import { withApiHost } from '../../utils/imageUtils';
 import socket from '../../api/socket';
 import api from '../../api/axios';
-import { withApiHost } from '../../utils/imageUtils';
 
 
 function Control({ tableId }) {
