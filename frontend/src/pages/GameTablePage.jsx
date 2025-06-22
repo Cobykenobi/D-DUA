@@ -8,7 +8,7 @@ import GMTableView from "../components/GMTableView";
 import GMControlPanel from "../components/GMControlPanel";
 import { useState, useEffect } from 'react';
 import socket from '../api/socket';
-import { GameStateProvider, useGameState } from '../context/GameStateContext';
+import { GameStateProvider } from '../context/GameStateContext';
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom';
 import { useUserStore } from '../store/user';
 import { useTranslation } from 'react-i18next';
@@ -24,7 +24,6 @@ export default function GameTablePage() {
   const [visiblePlayers, setVisiblePlayers] = useState([]);
   const [initiative, setInitiative] = useState([]);
   const [messages, setMessages] = useState([]);
-  const { map } = useGameState();
   const { t } = useTranslation();
 
   // SOCKET.IO підключення
