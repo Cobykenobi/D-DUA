@@ -4,6 +4,7 @@ import { withApiHost } from '../utils/imageUtils';
 import { useTranslation } from 'react-i18next';
 import { getClassBorderColor } from '../utils/classColors';
 import Modal from './Modal';
+import { normalizeInventory } from '../utils/inventoryUtils';
 
 function translateEffect(effectString, t) {
   return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
@@ -77,29 +78,64 @@ export default function PlayerCard({ character, onSelect }) {
             ))}
           </ul>
         )}
-        {character.inventory && character.inventory.length > 0 && (
-          <ul className="list-disc pl-4 mt-2 space-y-0.5">
-            {character.inventory.map((it, idx) => {
-              const bonus =
-                it.bonus && Object.keys(it.bonus).length
-                  ?
-                      ' (' +
-                      Object.entries(it.bonus)
-                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k.toLowerCase(), t('unknown'))}`)
-                        .join(', ') +
-                      ')'
-                  : '';
-              return (
-                <li key={idx}>
-                  {it.item}
-                  {it.amount > 1 ? ` x${it.amount}` : ''}
-                  {bonus}
-                  {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
-                </li>
-              );
-            })}
-          </ul>
-        )}
+        {(() => {
+          const inv = normalizeInventory(character.inventory);
+          if (inv.type === 'array' && inv.items.length > 0) {
+            return (
+              <ul className="list-disc pl-4 mt-2 space-y-0.5">
+                {inv.items.map((it, idx) => {
+                  const bonus =
+                    it.bonus && Object.keys(it.bonus).length
+                      ?
+                          ' (' +
+                          Object.entries(it.bonus)
+                            .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k.toLowerCase(), t('unknown'))}`)
+                            .join(', ') +
+                          ')'
+                      : '';
+                  return (
+                    <li key={idx}>
+                      {it.item}
+                      {it.amount > 1 ? ` x${it.amount}` : ''}
+                      {bonus}
+                      {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
+                    </li>
+                  );
+                })}
+              </ul>
+            );
+          }
+          if (inv.type === 'object' && inv.items.length > 0) {
+            return (
+              <ul className="list-disc pl-4 mt-2 space-y-0.5">
+                {inv.items.map(([key, it]) => {
+                  const bonus =
+                    it.bonus && Object.keys(it.bonus).length
+                      ?
+                          ' (' +
+                          Object.entries(it.bonus)
+                            .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k.toLowerCase(), t('unknown'))}`)
+                            .join(', ') +
+                          ')'
+                      : '';
+                  return (
+                    <li key={key}>
+                      {it.item}
+                      {it.amount > 1 ? ` x${it.amount}` : ''}
+                      {bonus}
+                      {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
+                    </li>
+                  );
+                })}
+              </ul>
+            );
+          }
+          return (
+            <ul className="list-disc pl-4 mt-2 space-y-0.5">
+              <li>Інвентар порожній</li>
+            </ul>
+          );
+        })()}
       </Modal>
     </>
   );

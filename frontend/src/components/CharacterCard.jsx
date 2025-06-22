@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { normalizeInventory } from '../utils/inventoryUtils';
 
 export default function CharacterCard({ character }) {
   const { t } = useTranslation();
@@ -37,9 +38,16 @@ export default function CharacterCard({ character }) {
       </ul>
       <h4>Інвентар:</h4>
       <ul>
-        {(character.inventory || []).map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
+        {(() => {
+          const inv = normalizeInventory(character.inventory);
+          if (inv.type === 'array') {
+            return inv.items.map((item, index) => <li key={index}>{item}</li>);
+          }
+          if (inv.type === 'object') {
+            return inv.items.map(([key, item]) => <li key={key}>{item}</li>);
+          }
+          return <li>Інвентар порожній</li>;
+        })()}
       </ul>
     </div>
   );
