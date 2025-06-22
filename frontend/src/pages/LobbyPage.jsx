@@ -77,7 +77,7 @@ export default function LobbyPage() {
   return (
     <div
       className="relative flex flex-col items-center min-h-screen bg-dndbg bg-cover bg-center"
-      style={{ backgroundImage: "url('/nd-bg.png')" }}
+      style={{ backgroundImage: "url('./nd-bg.png')" }}
     >
       <div className="absolute top-4 right-4 flex gap-2 flex-wrap">
         <button
@@ -117,7 +117,7 @@ export default function LobbyPage() {
         {character && (
           <div className="flex items-center gap-3 mb-4 text-dndgold">
             <img
-              src={withApiHost(character.image) || '/default-avatar.png'}
+              src={withApiHost(character.image) || './default-avatar.png'}
               alt={character.name}
               className="w-12 h-12 object-cover rounded-full"
             />
