@@ -1,9 +1,11 @@
 import { useGameState } from '../context/GameStateContext';
 
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function PlayerStatusTable({ players, isGM, onKick }) {
   const { hp, mp, updateHp, updateMp } = useGameState();
+  const { t } = useTranslation();
   const [dmg, setDmg] = useState({});
 
   const applyDamage = (uid) => {
@@ -17,13 +19,15 @@ export default function PlayerStatusTable({ players, isGM, onKick }) {
     <table className="text-dndgold text-sm w-full">
       <thead>
         <tr>
-          <th className="text-left">Гравець</th>
+          <th className="text-left">{t('player')}</th>
           <th className="text-left">HP</th>
           <th className="text-left">MP</th>
           <th className="text-left">AC</th>
+
           {isGM && <th className="text-left">Урон</th>}
           <th className="text-left">Статус</th>
           {isGM && (onKick ? <th className="text-left">Kick</th> : null)}
+
         </tr>
       </thead>
       <tbody>
