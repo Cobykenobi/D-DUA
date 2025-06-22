@@ -31,6 +31,7 @@ export default function PlayerCard({ character, onSelect }) {
       : character.profession?.code || '';
   const classKey = (charClass || '').toLowerCase();
   const className = character.profession?.name || charClass;
+  const genderCode = (character.gender || '').toLowerCase();
 
   return (
     <>
@@ -47,10 +48,9 @@ export default function PlayerCard({ character, onSelect }) {
         />
         <h3 className="text-lg text-dndgold text-center mb-1">{character.name}</h3>
         <p className="text-xs text-center">
-
+          {translateOrRaw(t, 'gender.' + genderCode, genderCode)} ·{' '}
           {translateOrRaw(t, `races.${raceKey}`, raceName)}{' '}/{' '}
           {translateOrRaw(t, `classes.${classKey}`, className)}
-
         </p>
         <button
           onClick={() => setOpen(true)}

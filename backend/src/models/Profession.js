@@ -1,3 +1,4 @@
+
 // backend/models/Profession.js
 const mongoose = require('mongoose');
 
@@ -8,8 +9,10 @@ const professionSchema = new mongoose.Schema(
     description: { type: String, default: '' },
     modifiers: { type: Map, of: Number, default: {} },
     inventory: [{ type: String }]
+
   },
   { timestamps: true }
 );
+
 
 module.exports = mongoose.model('Profession', professionSchema);
