@@ -44,7 +44,6 @@ const ProfilePage = () => {
 
   const openTable = (id) => {
     navigate(`/gm-table/${id}`);
-    window.open(`/gm-control/${id}`, '_blank');
   };
 
   const createTable = async () => {

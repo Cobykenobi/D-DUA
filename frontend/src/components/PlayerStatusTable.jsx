@@ -2,7 +2,7 @@ import { useGameState } from '../context/GameStateContext';
 
 import { useState } from 'react';
 
-export default function PlayerStatusTable({ players, isGM }) {
+export default function PlayerStatusTable({ players, isGM, onKick }) {
   const { hp, mp, updateHp, updateMp } = useGameState();
   const [dmg, setDmg] = useState({});
 
@@ -23,6 +23,7 @@ export default function PlayerStatusTable({ players, isGM }) {
           <th className="text-left">AC</th>
           {isGM && <th className="text-left">Урон</th>}
           <th className="text-left">Статус</th>
+          {isGM && (onKick ? <th className="text-left">Kick</th> : null)}
         </tr>
       </thead>
       <tbody>
@@ -71,6 +72,17 @@ export default function PlayerStatusTable({ players, isGM }) {
               </td>
             )}
             <td>{p.status || ''}</td>
+            {isGM && onKick && (
+              <td>
+                <button
+                  type="button"
+                  onClick={() => onKick(p.user)}
+                  className="bg-dndred text-white rounded px-2 py-1"
+                >
+                  Kick
+                </button>
+              </td>
+            )}
           </tr>
         ))}
       </tbody>
