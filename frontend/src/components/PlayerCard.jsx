@@ -19,6 +19,16 @@ export default function PlayerCard({ character, onSelect }) {
     character.profession?.code || character.profession?.name
   );
 
+  const raceKey =
+    typeof (character.race?.code || character.race) === 'string'
+      ? (character.race?.code || character.race).toLowerCase()
+      : '';
+
+  const classKey =
+    typeof (character.profession?.code || character.profession) === 'string'
+      ? (character.profession?.code || character.profession).toLowerCase()
+      : '';
+
   return (
     <>
       <motion.div
@@ -34,6 +44,7 @@ export default function PlayerCard({ character, onSelect }) {
         />
         <h3 className="text-lg text-dndgold text-center mb-1">{character.name}</h3>
         <p className="text-xs text-center">
+
           {t(
             `races.${(character.race?.code || character.race || '').toLowerCase()}`,
             t('unknown')
@@ -44,6 +55,7 @@ export default function PlayerCard({ character, onSelect }) {
             ).toLowerCase()}`,
             t('unknown')
           )}
+
         </p>
         <button
           onClick={() => setOpen(true)}

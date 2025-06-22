@@ -3,22 +3,30 @@ import { useTranslation } from 'react-i18next';
 
 export default function CharacterCard({ character }) {
   const { t } = useTranslation();
+  const raceKey =
+    typeof character.race === 'string'
+      ? character.race
+      : character.race?.code;
 
   return (
     <div className='character-card'>
       <h3>{character.name}</h3>
       <p>
+
         {t(
           `races.${(character.race?.code || character.race || '').toLowerCase()}`,
           t('unknown')
         )}
+
       </p>
       <p>
         {t(
           `classes.${(
-            character.class?.code || character.class || ''
+            character.profession?.code || character.profession || ''
           ).toLowerCase()}`,
+
           t('unknown')
+
         )}
       </p>
       <ul>

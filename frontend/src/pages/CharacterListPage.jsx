@@ -21,10 +21,12 @@ export default function CharacterListPage() {
             <h2 className="text-xl text-dndgold">{c.name}</h2>
             <p className="text-base italic mb-2">{c.description}</p>
             <p className="text-xs">
+
               Раса: {c.race?.code ? t(`races.${c.race.code.toLowerCase()}`, t('unknown')) : (c.race?.name || t('unknown'))}
             </p>
             <p className="text-xs">
               Клас: {c.profession?.code ? t(`classes.${c.profession.code.toLowerCase()}`, t('unknown')) : (c.profession?.name || t('unknown'))}
+
             </p>
             <button
               onClick={() => navigate(`/lobby?char=${c._id}`)}
