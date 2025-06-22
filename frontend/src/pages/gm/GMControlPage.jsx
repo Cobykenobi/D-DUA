@@ -12,6 +12,8 @@ function Control() {
   const [mapUrl, setMapUrl] = useState('');
   const [trackUrl, setTrackUrl] = useState('');
   const [players, setPlayers] = useState([]);
+  const [target, setTarget] = useState('all');
+  const [message, setMessage] = useState('');
   const { id } = useParams();
 
   useEffect(() => {
@@ -34,6 +36,12 @@ function Control() {
       changeMusic(trackUrl);
       setTrackUrl('');
     }
+  };
+
+  const sendMessage = () => {
+    if (!message.trim()) return;
+    socket.emit('gm-message', { tableId: id, targetUserId: target, text: message });
+    setMessage('');
   };
 
   return (
@@ -64,6 +72,28 @@ function Control() {
         {music && <ReactPlayer url={music} playing controls width="100%" height="50px" />}
       </div>
       <PlayerStatusTable players={players} isGM />
+      <div>
+        <div className="font-bold mb-1">Повідомлення</div>
+        <select
+          value={target}
+          onChange={e => setTarget(e.target.value)}
+          className="rounded px-2 py-1 w-full text-black mb-2"
+        >
+          <option value="all">Всі</option>
+          {players.map(p => (
+            <option key={p.user} value={p.user}>{p.name}</option>
+          ))}
+        </select>
+        <input
+          value={message}
+          onChange={e => setMessage(e.target.value)}
+          className="rounded px-2 py-1 w-full text-black mb-2"
+          placeholder="Текст повідомлення"
+        />
+        <button onClick={sendMessage} className="bg-dndgold text-dndred font-dnd rounded px-2 py-1 w-full">
+          Надіслати
+        </button>
+      </div>
       <DiceBox />
     </div>
   );

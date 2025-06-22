@@ -162,6 +162,18 @@ function init(httpServer) {
       io.to(tableId).emit('chat-message', msg);
     });
 
+    socket.on('gm-message', ({ tableId, targetUserId = 'all', text }) => {
+      if (!tableId || !text) return;
+      const msg = {
+        user: 'GM',
+        userRole: 'gm',
+        targetUserId,
+        text,
+        timestamp: Date.now(),
+      };
+      io.to(tableId).emit('gm-message', msg);
+    });
+
     socket.on('disconnect', () => {
       const { tableId, userId } = socket.data;
       if (!tableId || !userId) return;
