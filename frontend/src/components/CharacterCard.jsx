@@ -3,21 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { normalizeInventory } from '../utils/inventoryUtils';
 
 import translateOrRaw from '../utils/translateOrRaw.js';
-
-
-function translateEffect(effectString, t) {
-  return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
-    const key = stat.toLowerCase();
-
-    return `+${num} ${translateOrRaw(t, 'stats.' + key)}`;
-
-  });
-}
-
-function translateOrRaw(t, key) {
-  const translated = t(key);
-  return translated === key ? key.split('.').pop() : translated;
-}
+import translateEffect from '../utils/effectUtils.js';
 
 export default function CharacterCard({ character }) {
   const { t } = useTranslation();

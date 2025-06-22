@@ -1,15 +1,7 @@
 
 import { useTranslation } from 'react-i18next';
 import translateOrRaw from '../utils/translateOrRaw.js';
-
-function translateEffect(effectString, t) {
-  return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
-    const key = stat.toLowerCase();
-
-    return `+${num} ${translateOrRaw(t, 'stats.' + key, stat)}`;
-
-  });
-}
+import translateEffect from '../utils/effectUtils.js';
 
 export default function InventoryList({ items, filter = 'all' }) {
   const { t } = useTranslation();
