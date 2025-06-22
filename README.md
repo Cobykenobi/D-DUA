@@ -93,9 +93,8 @@ npm start
 
 Both the backend and frontend use **Jest**. Install dependencies in each
 directory with `npm install` (or run the helper script `./setup.sh`) before
-running the tests.  The frontend tests rely on Node's experimental VM modules
-feature, so set `NODE_OPTIONS=--experimental-vm-modules` when invoking `npm
-test` there.  Then execute:
+running the tests. The frontend test script now sets the required Node option
+automatically using `cross-env`, so simply run:
 
 ```bash
 cd backend && npm test
