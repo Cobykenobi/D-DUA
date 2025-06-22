@@ -59,7 +59,7 @@ const ProfilePage = () => {
       >
         Створити нового
       </button>
-      <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl">
+      <div className="w-full flex flex-wrap justify-center gap-4 max-w-5xl overflow-y-auto">
         {characters.length === 0 ? (
           <div className="col-span-full text-center text-dndgold/80">
             Тут поки пусто. Створи першого героя!

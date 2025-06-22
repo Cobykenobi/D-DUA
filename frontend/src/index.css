@@ -23,5 +23,5 @@ body {
 }
 
 .card {
-  @apply border rounded-lg p-4 bg-[#1c120a]/80 text-dndgold shadow-lg;
+  @apply border-2 rounded-lg p-4 bg-[#1c120a]/70 text-dndgold shadow-lg;
 }
