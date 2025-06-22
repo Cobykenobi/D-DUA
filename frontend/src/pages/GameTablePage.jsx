@@ -6,7 +6,7 @@ import LogoutButton from "../components/LogoutButton";
 import LanguageSwitch from "../components/LanguageSwitch";
 import GMTableView from "../components/GMTableView";
 import GMControlPanel from "../components/GMControlPanel";
-import PlayerStatusTable from "../components/PlayerStatusTable";
+import { GMTools } from "./gm/GMControlPage";
 import { useState, useEffect } from 'react';
 import socket from '../api/socket';
 import { GameStateProvider } from '../context/GameStateContext';
@@ -72,9 +72,6 @@ export default function GameTablePage() {
   }, [tableId, user, characterId]);
 
   const isGM = (user?.role === 'gm') || (gm && user && gm.toString() === user._id);
-  const kickPlayer = (uid) => {
-    socket.emit('kick-player', { tableId, userId: uid });
-  };
 
 
   return (
@@ -116,10 +113,10 @@ export default function GameTablePage() {
             {t('game_field')}
           </button>
           <button
-            className={`px-4 py-1 rounded-2xl font-dnd ${tab === 'dashboard' ? 'bg-dndgold text-dndred' : 'bg-[#1b110a] text-dndgold'}`}
-            onClick={() => setTab('dashboard')}
+            className={`px-4 py-1 rounded-2xl font-dnd ${tab === 'panel' ? 'bg-dndgold text-dndred' : 'bg-[#1b110a] text-dndgold'}`}
+            onClick={() => setTab('panel')}
           >
-            {t('gm_dashboard')}
+            {t('gm_panel')}
           </button>
         </div>
       )}
@@ -164,9 +161,9 @@ export default function GameTablePage() {
       </div>
       )}
 
-      {isGM && tab === 'dashboard' && (
+      {isGM && tab === 'panel' && (
         <div className="p-4 bg-[#1b110a]/80 rounded-b-2xl h-[80vh] overflow-auto">
-          <PlayerStatusTable players={players} isGM onKick={kickPlayer} />
+          <GMTools tableId={tableId} />
         </div>
       )}
       <div className="p-4 bg-[#322018]/90 text-center font-dnd text-dndgold rounded-b-2xl">

@@ -9,9 +9,10 @@ import DiceBox from '../../components/DiceBox';
 import DiceRollerHidden from '../../components/DiceRollerHidden';
 import socket from '../../api/socket';
 import api from '../../api/axios';
+import { withApiHost } from '../../utils/imageUtils';
 
 
-function Control() {
+function Control({ tableId }) {
   const { updateMap, changeMusic, music } = useGameState();
   const [mapUrl, setMapUrl] = useState('');
   const [mapFile, setMapFile] = useState(null);
@@ -24,7 +25,8 @@ function Control() {
   const [message, setMessage] = useState('');
   const { t } = useTranslation();
 
-  const { id } = useParams();
+  const params = useParams();
+  const id = tableId || params.tableId || params.id;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -196,8 +198,10 @@ export default function GMControlPage() {
   return (
     <GameStateProvider tableId={id} user={user}>
       <div className="min-h-screen bg-dndbg text-dndgold font-dnd flex justify-center items-start pt-4">
-        <Control />
+        <Control tableId={id} />
       </div>
     </GameStateProvider>
   );
 }
+
+export { Control as GMTools };
