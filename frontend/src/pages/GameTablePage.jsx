@@ -3,6 +3,7 @@ import ChatComponent from "../components/ChatComponent";
 import PlayerCard from "../components/PlayerCard";
 import DiceBox from "../components/DiceBox";
 import LogoutButton from "../components/LogoutButton";
+import LanguageSwitch from "../components/LanguageSwitch";
 import GMTableView from "../components/GMTableView";
 import GMControlPanel from "../components/GMControlPanel";
 import { useState, useEffect } from 'react';
@@ -64,7 +65,7 @@ export default function GameTablePage() {
         <div className="font-dnd text-dndgold text-2xl tracking-widest text-center flex-1">
           D&D Online Tabletop
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 flex-wrap">
           <span className="font-dnd text-dndgold whitespace-nowrap">Стiл: {tableId}</span>
           <button
             onClick={() => navigate(`/lobby?tableId=${tableId}${characterId ? `&char=${characterId}` : ''}`)}
@@ -73,6 +74,7 @@ export default function GameTablePage() {
             Назад
           </button>
           <LogoutButton />
+          <LanguageSwitch />
         </div>
       </div>
       <div className="relative flex-1 h-[80vh] bg-[#1b110a]/80 rounded-b-2xl px-6 pb-4 md:pb-32 overflow-hidden">

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LogoutButton from "../components/LogoutButton";
+import LanguageSwitch from '../components/LanguageSwitch';
 import { createCharacter } from '../utils/api';
 import { useTranslation } from 'react-i18next';
 
@@ -40,7 +41,7 @@ export default function CharacterCreatePage() {
       className="relative flex justify-center items-center min-h-screen font-dnd text-white bg-cover bg-center"
       style={{ backgroundImage: "url('/map-bg.jpg')" }}
     >
-      <div className="absolute top-4 right-4 flex gap-2">
+      <div className="absolute top-4 right-4 flex gap-2 flex-wrap">
         <button
           onClick={() => navigate('/characters')}
           className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-4 py-2 transition active:scale-95"
@@ -48,6 +49,7 @@ export default function CharacterCreatePage() {
           Назад
         </button>
         <LogoutButton />
+        <LanguageSwitch />
       </div>
       <form onSubmit={handleSubmit} className="bg-[#1c120a]/80 p-8 rounded-xl w-full max-w-md shadow-2xl">
         <h2 className="text-2xl text-dndgold mb-6 text-center">Створення персонажа</h2>

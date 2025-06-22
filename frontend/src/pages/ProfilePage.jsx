@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LogoutButton from '../components/LogoutButton';
+import LanguageSwitch from '../components/LanguageSwitch';
 import CharacterCard from '../components/CharacterCard';
 import { getCharacters, deleteCharacter, updateCharacter } from '../utils/api';
 
@@ -41,7 +42,7 @@ const ProfilePage = () => {
       className="relative min-h-screen bg-dndbg bg-cover bg-center flex flex-col items-center p-6 font-dnd text-dndgold text-shadow"
       style={{ backgroundImage: "url('/map-bg.jpg')" }}
     >
-      <div className="absolute top-4 right-4 flex gap-2">
+      <div className="absolute top-4 right-4 flex gap-2 flex-wrap">
         <button
           onClick={() => navigate('/login')}
           className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-4 py-2 transition active:scale-95"
@@ -49,6 +50,7 @@ const ProfilePage = () => {
           Назад
         </button>
         <LogoutButton />
+        <LanguageSwitch />
       </div>
       <h2 className="text-2xl mb-4 text-shadow">Твої персонажі</h2>
       <button
