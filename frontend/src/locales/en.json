@@ -6,7 +6,6 @@
   "admin": "Admin",
   "fields_required": "Please fill in all fields",
   "connecting": "Connecting...",
-  "unknown": "Unknown",
   "create_table": "Create table",
   "map_from_file": "Map from file",
   "mp": "MP",
@@ -67,6 +66,7 @@
     "orc": "Orc",
     "gnome": "Gnome",
     "dwarf": "Dwarf",
+    "halfling": "Halfling",
     "lizardman": "Lizardman"
   },
   "classes": {

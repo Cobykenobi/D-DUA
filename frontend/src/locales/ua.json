@@ -6,7 +6,6 @@
   "admin": "Адмінка",
   "fields_required": "Заповніть усі поля",
   "connecting": "Підключення...",
-  "unknown": "Невідомо",
   "create_table": "Створити стіл",
   "map_from_file": "Карта з файлу",
   "mp": "MP",
@@ -67,6 +66,7 @@
     "orc": "Орк",
     "gnome": "Гном",
     "dwarf": "Дварф",
+    "halfling": "Гобіт",
     "lizardman": "Ящірка"
   },
   "classes": {
