@@ -31,9 +31,9 @@ export default function CharacterCard({
     <>
       <div className="card max-w-[400px] flex flex-col items-center">
         <img
-          src={withApiHost(character.image) || './default-avatar.png'}
+          src={withApiHost(character.image) || '/default-avatar.png'}
           alt={character.name}
-          onError={(e) => (e.currentTarget.src = './default-avatar.png')}
+          onError={(e) => (e.currentTarget.src = '/default-avatar.png')}
           className="w-full h-40 object-cover rounded mb-2"
         />
         <h3 className="text-lg text-center text-dndgold mb-1">{character.name}</h3>

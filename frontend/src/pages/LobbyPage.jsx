@@ -117,7 +117,7 @@ export default function LobbyPage() {
         {character && (
           <div className="flex items-center gap-3 mb-4 text-dndgold">
             <img
-              src={withApiHost(character.image) || './default-avatar.png'}
+              src={withApiHost(character.image) || '/default-avatar.png'}
               alt={character.name}
               className="w-12 h-12 object-cover rounded-full"
             />

@@ -58,7 +58,7 @@ const ProfilePage = () => {
   return (
     <div
       className="relative min-h-screen bg-dndbg bg-cover bg-center flex flex-col items-center p-6 font-dnd text-dndgold text-shadow"
-      style={{ backgroundImage: "url('./map-bg.jpg')" }}
+      style={{ backgroundImage: "url('/map-bg.jpg')" }}
     >
       <div className="absolute top-4 right-4 flex gap-2 flex-wrap">
         <button

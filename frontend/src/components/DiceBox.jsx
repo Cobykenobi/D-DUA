@@ -10,7 +10,7 @@ export default function DiceBox({ className = '' }) {
     setDiceResult(null);
     setDiceAnim(true);
 
-    const audio = new Audio('./dice.mp3');
+    const audio = new Audio('/dice.mp3');
     audio.play().catch(() => {});
 
     setTimeout(() => {

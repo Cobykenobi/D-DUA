@@ -84,7 +84,7 @@ export default function AdminPage() {
   return (
     <div
       className="min-h-screen bg-cover bg-center p-8 font-dnd text-white"
-      style={{ backgroundImage: "url('./map-bg.jpg')" }}
+      style={{ backgroundImage: "url('/map-bg.jpg')" }}
     >
       <h1 className="text-3xl text-dndgold mb-6">Панель Адміністратора</h1>
 
