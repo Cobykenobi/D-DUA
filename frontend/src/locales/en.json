@@ -84,7 +84,14 @@
     "strength": "Strength",
     "intellect": "Intellect",
     "agility": "Agility",
-    "charisma": "Charisma"
+    "charisma": "Charisma",
+    "str": "STR",
+    "dex": "DEX",
+    "int": "INT",
+    "con": "CON",
+    "cha": "CHA",
+    "hp": "HP",
+    "mp": "MP"
   },
   "inventory": {
     "title": "Inventory:",
