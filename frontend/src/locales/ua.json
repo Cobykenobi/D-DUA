@@ -7,6 +7,9 @@
   "fields_required": "Заповніть усі поля",
   "connecting": "Підключення...",
   "unknown": "Невідомо",
+  "create_table": "Створити стіл",
+  "map_from_file": "Карта з файлу",
+  "mp": "MP",
   "races": {
     "human_male": "Людина (чоловік)",
     "human_female": "Людина (жінка)",
