@@ -7,6 +7,8 @@ import { GameStateProvider, useGameState } from '../../context/GameStateContext'
 import PlayerStatusTable from '../../components/PlayerStatusTable';
 import DiceBox from '../../components/DiceBox';
 import DiceRollerHidden from '../../components/DiceRollerHidden';
+import InventoryEditor from '../../components/InventoryEditor';
+import { withApiHost } from '../../utils/imageUtils';
 import socket from '../../api/socket';
 import api from '../../api/axios';
 
@@ -116,6 +118,22 @@ function Control() {
     }
   };
 
+  const updateInventory = async (items) => {
+    setInventory(items);
+    socket.emit('inventory-update', {
+      tableId: id,
+      characterId: selectedChar,
+      inventory: items,
+    });
+    try {
+      await api.put(`/inventory/${selectedChar}`, {
+        items: items.map((it) => ({ name: it.item, type: it.type })),
+      });
+    } catch (err) {
+      // ignore error; optimistic update via socket
+    }
+  };
+
 
   const sendMessage = () => {
     if (!message.trim()) return;
@@ -159,6 +177,26 @@ function Control() {
       </div>
 
       <PlayerStatusTable players={players} isGM onEdit={editPlayer} onKick={kickPlayer} />
+
+      {players.some(p => p.character) && (
+        <div>
+          <div className="font-bold mb-1">{t('inventory.title')}</div>
+          <select
+            value={selectedChar || ''}
+            onChange={e => setSelectedChar(e.target.value)}
+            className="rounded px-2 py-1 w-full text-black mb-2"
+          >
+            {players.filter(p => p.character).map(p => (
+              <option key={p.character._id} value={p.character._id}>
+                {p.character.name}
+              </option>
+            ))}
+          </select>
+          {selectedChar && (
+            <InventoryEditor inventory={inventory} onChange={updateInventory} />
+          )}
+        </div>
+      )}
 
       <div>
 
