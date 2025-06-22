@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import api from "../api/axios";
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next';
+import { translateOrRaw } from '../utils/i18nHelpers';
 
 export default function CharacterListPage() {
   const [characters, setCharacters] = useState([]);
@@ -25,7 +26,9 @@ export default function CharacterListPage() {
               : c.race?.en || '';
           const raceKey = (raceVal || '').toLowerCase();
           const raceText = raceVal
+
             ? t(`races.${raceKey}`, raceVal)
+
             : c.race?.name || t('unknown');
 
           const classVal =
@@ -36,7 +39,9 @@ export default function CharacterListPage() {
               : c.profession?.en || '';
           const classKey = (classVal || '').toLowerCase();
           const classText = classVal
+
             ? t(`classes.${classKey}`, classVal)
+
             : c.profession?.name || t('unknown');
 
           return (

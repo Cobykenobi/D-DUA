@@ -1,12 +1,18 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { normalizeInventory } from '../utils/inventoryUtils';
+import { translateOrRaw } from '../utils/i18nHelpers';
 
 function translateEffect(effectString, t) {
   return effectString.replace(/\+(\d+)\s([A-Z]+)/g, (_, num, stat) => {
     const key = stat.toLowerCase();
-    return `+${num} ${t('stats.' + key, t('unknown'))}`;
+    return `+${num} ${translateOrRaw(t, 'stats.' + key)}`;
   });
+}
+
+function translateOrRaw(t, key) {
+  const translated = t(key);
+  return translated === key ? key.split('.').pop() : translated;
 }
 
 export default function CharacterCard({ character }) {
@@ -27,19 +33,16 @@ export default function CharacterCard({ character }) {
       <h3>{character.name}</h3>
       <p>
 
-        {t(`races.${raceKey}`, t('unknown'))}
+        {translateOrRaw(t, `races.${raceKey}`)}
 
       </p>
       <p>
-        {t(
-          `classes.${classKey}`,
-          t('unknown')
-        )}
+        {translateOrRaw(t, `classes.${classKey}`)}
       </p>
       <ul>
         {Object.entries(character.stats || {}).map(([key, value]) => (
           <li key={key}>
-            {t(`stats.${key.toLowerCase()}`, t('unknown'))}: {value}
+            {translateOrRaw(t, `stats.${key.toLowerCase()}`)}: {value}
           </li>
         ))}
       </ul>
@@ -49,12 +52,14 @@ export default function CharacterCard({ character }) {
           const inv = normalizeInventory(character.inventory);
           if (inv.type === 'array' && inv.items.length > 0) {
             return inv.items.map((it, idx) => {
-              const bonus =
-                it.bonus && Object.keys(it.bonus).length
+              const bonusData =
+                it.bonus &&
+                typeof it.bonus === 'object' &&
+                Object.keys(it.bonus).length
                   ?
                       ' (' +
                       Object.entries(it.bonus)
-                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k.toLowerCase(), t('unknown'))}`)
+                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
                         .join(', ') +
                       ')'
                   : '';
@@ -62,7 +67,7 @@ export default function CharacterCard({ character }) {
                 <li key={idx}>
                   {it.item}
                   {it.amount > 1 ? ` x${it.amount}` : ''}
-                  {bonus}
+                  {bonusData}
                   {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
                 </li>
               );
@@ -70,12 +75,14 @@ export default function CharacterCard({ character }) {
           }
           if (inv.type === 'object' && inv.items.length > 0) {
             return inv.items.map(([key, it]) => {
-              const bonus =
-                it.bonus && Object.keys(it.bonus).length
+              const bonusData =
+                it.bonus &&
+                typeof it.bonus === 'object' &&
+                Object.keys(it.bonus).length
                   ?
                       ' (' +
                       Object.entries(it.bonus)
-                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${t('stats.' + k.toLowerCase(), t('unknown'))}`)
+                        .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase())}`)
                         .join(', ') +
                       ')'
                   : '';
@@ -83,7 +90,7 @@ export default function CharacterCard({ character }) {
                 <li key={key}>
                   {it.item}
                   {it.amount > 1 ? ` x${it.amount}` : ''}
-                  {bonus}
+                  {bonusData}
                   {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
                 </li>
               );
