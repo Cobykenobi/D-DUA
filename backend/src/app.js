@@ -56,6 +56,11 @@ app.use('/api/ai', require('./routes/ai'));
 // Simple ping route used to wake the server
 app.use('/api/ping', require('./routes/ping'));
 
+// 404 handler for unmatched API routes
+app.use((req, res) => {
+  res.status(404).json({ message: 'Not found' });
+});
+
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
 
