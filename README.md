@@ -10,6 +10,11 @@ This project combines an Express/MongoDB backend with a React frontend.
    ```bash
    ./setup.sh
    ```
+
+   This installs tools like `cross-env`, **Jest** and **ESLint** used by the
+   project. Attempting `npm run lint` or `npm test` before running this script
+   will fail with "command not found" errors.
+
    You may optionally run `npm audit fix --force` inside `backend` and
    `frontend` to address any security warnings.
 
