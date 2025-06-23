@@ -1,7 +1,9 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { createCharacter } from '../utils/api';
+import translateOrRaw from '../utils/translateOrRaw.js';
 
 const CharacterCreatePage = () => {
   const [name, setName] = useState('');
@@ -10,6 +12,7 @@ const CharacterCreatePage = () => {
   const [profession, setProfession] = useState('warrior');
   const [description, setDescription] = useState('');
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +24,7 @@ const CharacterCreatePage = () => {
 
   return (
     <div className="character-create-page">
-      <h2>Створити персонажа</h2>
+      <h2>{t('create_character')}</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -30,29 +33,47 @@ const CharacterCreatePage = () => {
           onChange={(e) => setName(e.target.value)}
         />
         <select value={gender} onChange={(e) => setGender(e.target.value)}>
-          <option value="male">Чоловік</option>
-          <option value="female">Жінка</option>
+          <option value="male">{t('gender.male')}</option>
+          <option value="female">{t('gender.female')}</option>
         </select>
         <select value={race} onChange={(e) => setRace(e.target.value)}>
-          <option value="wood_elf">Лісовий ельф</option>
-          <option value="dark_elf">Темний ельф</option>
-          <option value="human">Людина</option>
-          <option value="halfling">Піврослик</option>
-          <option value="lizardman">Ящеролюдина</option>
+          <option value="wood_elf">
+            {translateOrRaw(t, 'races.wood_elf', 'Лісовий ельф')}
+          </option>
+          <option value="dark_elf">
+            {translateOrRaw(t, 'races.dark_elf', 'Темний ельф')}
+          </option>
+          <option value="human">
+            {translateOrRaw(t, 'races.human', 'Людина')}
+          </option>
+          <option value="halfling">
+            {translateOrRaw(t, 'races.halfling', 'Піврослик')}
+          </option>
+          <option value="lizardman">
+            {translateOrRaw(t, 'races.lizardman', 'Ящеролюдина')}
+          </option>
         </select>
         <select value={profession} onChange={(e) => setProfession(e.target.value)}>
-          <option value="warrior">Воїн</option>
-          <option value="paladin">Паладин</option>
-          <option value="wizard">Маг</option>
-          <option value="bard">Бард</option>
-          <option value="assassin">Асасін</option>
+          <option value="warrior">
+            {translateOrRaw(t, 'classes.warrior', 'Воїн')}
+          </option>
+          <option value="paladin">
+            {translateOrRaw(t, 'classes.paladin', 'Паладин')}
+          </option>
+          <option value="wizard">
+            {translateOrRaw(t, 'classes.wizard', 'Маг')}
+          </option>
+          <option value="bard">{translateOrRaw(t, 'classes.bard', 'Бард')}</option>
+          <option value="assassin">
+            {translateOrRaw(t, 'classes.assassin', 'Асасін')}
+          </option>
         </select>
         <textarea
           placeholder="Опис"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-        <button type="submit">Створити персонажа</button>
+        <button type="submit">{t('create_character')}</button>
       </form>
     </div>
   );

@@ -13,7 +13,12 @@
     "gnome_male": "Гном (чоловік)",
     "gnome_female": "Гном (жінка)",
     "dwarf_male": "Дварф (чоловік)",
-    "dwarf_female": "Дварф (жінка)"
+    "dwarf_female": "Дварф (жінка)",
+    "wood_elf": "Лісовий ельф",
+    "dark_elf": "Темний ельф",
+    "human": "Людина",
+    "halfling": "Піврослик",
+    "lizardman": "Ящеролюдина"
   },
   "classes": {
     "warrior": "Воїн",
@@ -21,9 +26,12 @@
     "archer": "Лучник",
     "paladin": "Паладин",
     "bard": "Бард",
-    "healer": "Цілитель"
+    "healer": "Цілитель",
+    "wizard": "Маг",
+    "assassin": "Асасін"
   },
   "welcome": "Ласкаво просимо",
   "login": "Увійти",
-  "password": "Пароль"
+  "password": "Пароль",
+  "create_character": "Створити персонажа"
 }
