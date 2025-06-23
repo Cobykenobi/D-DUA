@@ -15,7 +15,7 @@ describe('generateInventory', () => {
     StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue(sets) });
     jest.spyOn(Math, 'random').mockReturnValueOnce(0.3);
 
-    const items = await generateInventory('orc_male', 'warrior');
+    const items = await generateInventory('orc', 'warrior');
     Math.random.mockRestore();
 
     expect(items).toEqual([
@@ -30,7 +30,7 @@ describe('generateInventory', () => {
     StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue(sets) });
     jest.spyOn(Math, 'random').mockReturnValueOnce(0.6);
 
-    const items = await generateInventory('orc_female', 'warrior');
+    const items = await generateInventory('orc', 'warrior');
     Math.random.mockRestore();
 
     expect(items).toEqual([
