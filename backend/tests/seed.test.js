@@ -23,11 +23,18 @@ describe('seed script', () => {
     console.warn.mockRestore();
   });
 
-  it('creates starting sets for each class', async () => {
-    const codes = ['warrior','mage','archer','paladin','bard','healer'];
-    for (const code of codes) {
-      const count = await StartingSet.countDocuments({ classCode: code });
-      expect(count).toBeGreaterThan(0);
+  it('creates three sets for each race and class combination', async () => {
+    const races = [
+      'human_male','human_female','elf_male','elf_female',
+      'orc_male','orc_female','gnome_male','gnome_female',
+      'dwarf_male','dwarf_female'
+    ];
+    const classes = ['warrior','mage','archer','paladin','bard','healer'];
+    for (const r of races) {
+      for (const c of classes) {
+        const count = await StartingSet.countDocuments({ raceCode: r, classCode: c });
+        expect(count).toBe(3);
+      }
     }
   });
 });

@@ -13,10 +13,13 @@ describe('generateInventory', () => {
 
   it('selects random items for each category', async () => {
     StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue(sets) });
+    const spy = StartingSet.find;
     jest.spyOn(Math, 'random').mockReturnValueOnce(0.3);
 
     const items = await generateInventory('orc_male', 'warrior');
     Math.random.mockRestore();
+
+    expect(spy).toHaveBeenCalledWith({ classCode: 'warrior', raceCode: 'orc_male' });
 
     expect(items).toEqual([
       { item: 'Меч', code: 'меч', amount: 1, bonus: {} },
@@ -28,10 +31,13 @@ describe('generateInventory', () => {
 
   it('mixes items across sets', async () => {
     StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue(sets) });
+    const spy2 = StartingSet.find;
     jest.spyOn(Math, 'random').mockReturnValueOnce(0.6);
 
     const items = await generateInventory('orc_female', 'warrior');
     Math.random.mockRestore();
+
+    expect(spy2).toHaveBeenCalledWith({ classCode: 'warrior', raceCode: 'orc_female' });
 
     expect(items).toEqual([
       { item: 'Сокира', code: 'сокира', amount: 1, bonus: {} },

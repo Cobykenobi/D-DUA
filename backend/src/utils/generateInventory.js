@@ -17,7 +17,7 @@ function randomItem(list) {
 async function generateInventory(raceCode, classCode) {
   const result = [];
 
-  const sets = await StartingSet.find({ classCode }).populate('items');
+  const sets = await StartingSet.find({ classCode, raceCode }).populate('items');
   if (sets.length) {
     const selected = randomItem(sets);
     for (const item of selected.items) {
