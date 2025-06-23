@@ -59,10 +59,12 @@ async function seed() {
   ];
   const professions = [
     { code: 'warrior', name: 'Воїн' },
-    { code: 'wizard', name: 'Маг' },
-    { code: 'assassin', name: 'Асасін' },
+    { code: 'mage', name: 'Маг' },
     { code: 'paladin', name: 'Паладин' },
-    { code: 'bard', name: 'Бард' }
+    { code: 'bard', name: 'Бард' },
+    { code: 'healer', name: 'Цілитель' },
+    { code: 'archer', name: 'Лучник' },
+    { code: 'assassin', name: 'Асасін' }
   ];
   const characteristics = [
     'health',
@@ -87,7 +89,7 @@ async function seed() {
         { item: 'Зілля здоров’я' }
       ]
     },
-    wizard: {
+    mage: {
       weapon: [
         { item: 'Магічний посох', bonus: { intellect: 2 } },
         { item: 'Чарівна паличка', bonus: { intellect: 1 } }
