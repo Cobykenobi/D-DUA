@@ -26,6 +26,16 @@
   "password": "Password",
   "create_character": "Create Character",
 
-  "unknown": "Unknown"
+  "unknown": "Unknown",
+  "player_characters": "Player characters of {{login}}",
+  "character_list_empty": "The character list is currently empty.",
+  "create_new": "Create new",
+  "edit_character": "Edit character",
+  "name": "Name",
+  "description": "Description",
+  "save": "Save",
+  "loading": "Loading...",
+  "error_load_character": "Failed to load character",
+  "error_save_changes": "Failed to save changes"
 
 }

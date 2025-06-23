@@ -1,10 +1,12 @@
 import api from "../api/axios";
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 
 export default function CharacterEditPage() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [character, setCharacter] = useState(null);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -19,7 +21,7 @@ export default function CharacterEditPage() {
         setName(res.data.name || "");
         setDescription(res.data.description || "");
       })
-      .catch(() => setError("Не вдалося завантажити персонажа"));
+      .catch(() => setError(t('error_load_character')));
   }, [id]);
 
   const handleSave = async (e) => {
@@ -42,28 +44,28 @@ export default function CharacterEditPage() {
       await api.put(`/character/${id}`, payload, { headers });
       navigate("/characters");
     } catch (err) {
-      setError("Не вдалося зберегти зміни");
+      setError(t('error_save_changes'));
     }
   };
 
   if (error) return <div style={{ color: "red" }}>{error}</div>;
-  if (!character) return <div>Завантаження...</div>;
+  if (!character) return <div>{t('loading')}</div>;
 
   return (
     <form onSubmit={handleSave}>
-      <h2>Редагування персонажа</h2>
+      <h2>{t('edit_character')}</h2>
       <input
         value={name}
         onChange={e => setName(e.target.value)}
-        placeholder="Ім'я"
+        placeholder={t('name')}
         required
       />
       <textarea
         value={description}
         onChange={e => setDescription(e.target.value)}
-        placeholder="Опис"
+        placeholder={t('description')}
       />
-      <button type="submit">Зберегти</button>
+      <button type="submit">{t('save')}</button>
     </form>
   );
 }

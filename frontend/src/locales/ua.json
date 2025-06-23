@@ -26,6 +26,16 @@
   "password": "Пароль",
   "create_character": "Створити персонажа",
 
-  "unknown": "Невідомо"
+  "unknown": "Невідомо",
+  "player_characters": "Персонажі гравця {{login}}",
+  "character_list_empty": "Список персонажів поки порожній.",
+  "create_new": "Створити нового",
+  "edit_character": "Редагування персонажа",
+  "name": "Ім'я",
+  "description": "Опис",
+  "save": "Зберегти",
+  "loading": "Завантаження...",
+  "error_load_character": "Не вдалося завантажити персонажа",
+  "error_save_changes": "Не вдалося зберегти зміни"
 
 }
