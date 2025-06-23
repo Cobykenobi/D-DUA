@@ -15,3 +15,13 @@ Given the small size and infrequent updates of the current avatars, the added co
 
 ## Recommendation
 Keeping the avatars in git is acceptable while their total size remains under 100 KB. Reevaluate if more binary images are added or if users start uploading many custom avatars.
+
+## File naming and fallback avatars
+
+Uploaded or AI-generated images are saved to `uploads/avatars` using a timestamp
+based filename (e.g. `1678890123456.png`). This avoids collisions when multiple
+files are written at the same time.
+
+When no avatar is provided during character creation, the backend tries to
+generate one via the configured AI service. If `OPENAI_API_KEY` is missing, a
+random preset from `frontend/public/avatars` is used instead.
