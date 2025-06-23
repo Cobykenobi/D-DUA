@@ -4,17 +4,20 @@ const Profession = require('../src/models/Profession');
 const Character = require('../src/models/Character');
 const StartingSet = require('../src/models/StartingSet');
 const generateInventory = require('../src/utils/generateInventory');
+const generateAvatar = require('../src/utils/generateAvatar');
 
 jest.mock('../src/models/Race');
 jest.mock('../src/models/Profession');
 jest.mock('../src/models/Character');
 jest.mock('../src/models/StartingSet');
 jest.mock('../src/utils/generateInventory');
+jest.mock('../src/utils/generateAvatar');
 const generateStats = require('../src/utils/generateStats');
 
 beforeEach(() => {
   jest.clearAllMocks();
   generateInventory.mockResolvedValue([]);
+  generateAvatar.mockResolvedValue('/avatars/test.png');
   jest.spyOn(console, 'warn').mockImplementation(() => {});
   const q = Promise.resolve({ _id: 'c1', race: { name: 'Elf', code: 'elf' }, profession: { name: 'Mage', code: 'mage' } });
   q.populate = jest.fn().mockReturnValue(q);
@@ -152,6 +155,27 @@ describe('Character Controller - create', () => {
     expect(saved.image).toBe('/uploads/avatars/avatar.png');
     expect(saved.gender).toBe('male');
     expect(res.status).toHaveBeenCalledWith(201);
+  });
+
+  it('generates avatar when none provided', async () => {
+    Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Elf', code: 'elf' }]);
+    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Mage', code: 'mage' }]);
+    StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
+    generateAvatar.mockResolvedValue('/avatars/x.png');
+
+    let saved;
+    Character.mockImplementation(data => {
+      saved = data;
+      return { save: jest.fn().mockResolvedValue(data) };
+    });
+
+    const req = { user: { id: 'u1' }, body: { name: 'Hero' } };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+    await characterController.create(req, res);
+
+    expect(generateAvatar).toHaveBeenCalledWith('male', 'elf', 'mage');
+    expect(saved.image).toBe('/avatars/x.png');
   });
 
   it('returns 400 when name is invalid', async () => {
