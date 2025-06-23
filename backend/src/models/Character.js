@@ -15,7 +15,8 @@ const characterSchema = new mongoose.Schema({
     strength: { type: Number, default: 5 },
     intellect: { type: Number, default: 5 },
     agility: { type: Number, default: 5 },
-    charisma: { type: Number, default: 5 }
+    charisma: { type: Number, default: 5 },
+    mp: { type: Number, default: 5 }
   },
   inventory: [{
     item: { type: String },

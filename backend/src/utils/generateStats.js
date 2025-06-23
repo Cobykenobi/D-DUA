@@ -8,6 +8,7 @@ const baseStats = {
   intellect: 5,
   agility: 5,
   charisma: 5,
+  mp: 5,
 };
 
 

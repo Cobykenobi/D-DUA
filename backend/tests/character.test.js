@@ -84,7 +84,8 @@ describe('Character Controller - create', () => {
       strength: 9,
       intellect: 5,
       agility: 5,
-      charisma: 5
+      charisma: 5,
+      mp: 5
     });
     expect(saved.gender).toBe('male');
   });
