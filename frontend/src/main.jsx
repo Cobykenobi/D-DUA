@@ -5,7 +5,12 @@ import App from './App';
 import { SettingsProvider } from './context/SettingsContext';
 import { ToastProvider } from './context/ToastContext';
 import AxiosToastProvider from './components/AxiosToastProvider';
-import './i18n';
+import i18n from './i18n';
+
+// Set Ukrainian as the default language on first load
+if (!localStorage.getItem('lang')) {
+  i18n.changeLanguage('ua');
+}
 import './index.css';
 import './App.css';
 
