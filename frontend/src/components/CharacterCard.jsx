@@ -25,7 +25,9 @@ export default function CharacterCard({
       ? character.profession
       : character.profession?.code || '';
   const genderCode = (character.gender || '').toLowerCase();
-  const raceKeyLower = (raceCode || '').toLowerCase();
+  const raceKeyLower = (raceCode || '')
+    .toLowerCase()
+    .replace(/_(male|female)$/, '');
   const classKeyLower = (classCode || '').toLowerCase();
   const raceName = character.race?.name || raceCode;
   const className = character.profession?.name || classCode;

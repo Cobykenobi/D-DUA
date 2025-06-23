@@ -4,21 +4,12 @@
     "female": "Жіноча"
   },
   "races": {
-    "human_male": "Людина (чоловік)",
-    "human_female": "Людина (жінка)",
-    "elf_male": "Ельф (чоловік)",
-    "elf_female": "Ельф (жінка)",
-    "orc_male": "Орк (чоловік)",
-    "orc_female": "Орк (жінка)",
-    "gnome_male": "Гном (чоловік)",
-    "gnome_female": "Гном (жінка)",
-    "dwarf_male": "Дварф (чоловік)",
-    "dwarf_female": "Дварф (жінка)",
+    "human": "Людина",
     "wood_elf": "Лісовий ельф",
     "dark_elf": "Темний ельф",
-    "human": "Людина",
-    "halfling": "Піврослик",
-    "lizardman": "Ящеролюдина"
+    "gnome": "Гном",
+    "dwarf": "Дварф",
+    "orc": "Орк"
   },
   "classes": {
     "warrior": "Воїн",

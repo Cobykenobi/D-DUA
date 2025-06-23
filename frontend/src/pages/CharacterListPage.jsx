@@ -24,7 +24,9 @@ export default function CharacterListPage() {
             typeof c.race === 'string'
               ? c.race
               : c.race?.code || '';
-          const raceKey = (raceCode || '').toLowerCase();
+          const raceKey = (raceCode || '')
+            .toLowerCase()
+            .replace(/_(male|female)$/, '');
           const raceText = raceCode
 
             ? translateOrRaw(t, `races.${raceKey}`, c.race?.name || raceCode)
