@@ -50,19 +50,19 @@ async function seed() {
   // const characteristics = ['HP', 'MP', 'Strength', 'Agility', 'Intellect'];
 
   const races = [
-    { code: 'human', name: 'Людина' },
-    { code: 'forest_elf', name: 'Лісовий ельф' },
-    { code: 'dark_elf', name: 'Темний ельф' },
-    { code: 'gnome', name: 'Гном' },
-    { code: 'dwarf', name: 'Дварф' },
-    { code: 'orc', name: 'Орк' },
+    { code: 'human', name: 'Людина', modifiers: { health: 0, defense: 0, strength: 0, intellect: 0, agility: 0, charisma: 0, mp: 0 } },
+    { code: 'forest_elf', name: 'Лісовий ельф', modifiers: { health: 0, defense: 0, strength: 0, intellect: 1, agility: 2, charisma: 0, mp: 0 } },
+    { code: 'dark_elf', name: 'Темний ельф', modifiers: { health: 0, defense: 0, strength: 0, intellect: 1, agility: 1, charisma: 0, mp: 0 } },
+    { code: 'gnome', name: 'Гном', modifiers: { health: 0, defense: 0, strength: 0, intellect: 0, agility: 0, charisma: 0, mp: 0 } },
+    { code: 'dwarf', name: 'Дварф', modifiers: { health: 1, defense: 1, strength: 0, intellect: 0, agility: 0, charisma: 0, mp: 0 } },
+    { code: 'orc', name: 'Орк', modifiers: { health: 1, defense: 0, strength: 2, intellect: 0, agility: 0, charisma: 0, mp: 0 } },
   ];
   const professions = [
-    { code: 'warrior', name: 'Воїн' },
-    { code: 'wizard', name: 'Маг' },
-    { code: 'assassin', name: 'Асасін' },
-    { code: 'paladin', name: 'Паладин' },
-    { code: 'bard', name: 'Бард' }
+    { code: 'warrior', name: 'Воїн', modifiers: { health: 0, defense: 1, strength: 2, intellect: 0, agility: 0, charisma: 0, mp: 0 } },
+    { code: 'wizard', name: 'Маг', modifiers: { health: 0, defense: 0, strength: 0, intellect: 2, agility: 0, charisma: 0, mp: 1 } },
+    { code: 'assassin', name: 'Асасін', modifiers: { health: 0, defense: 0, strength: 1, intellect: 0, agility: 1, charisma: 0, mp: 0 } },
+    { code: 'paladin', name: 'Паладин', modifiers: { health: 1, defense: 0, strength: 1, intellect: 0, agility: 0, charisma: 1, mp: 0 } },
+    { code: 'bard', name: 'Бард', modifiers: { health: 0, defense: 0, strength: 0, intellect: 0, agility: 0, charisma: 1, mp: 0 } }
   ];
   const characteristics = [
     'health',
@@ -70,7 +70,8 @@ async function seed() {
     'strength',
     'intellect',
     'agility',
-    'charisma'
+    'charisma',
+    'mp'
   ];
 
   const classInventory = {
