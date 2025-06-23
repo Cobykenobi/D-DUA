@@ -24,5 +24,31 @@
   "welcome": "Welcome",
   "login": "Login",
   "password": "Password",
-  "create_character": "Create Character"
+  "create_character": "Create Character",
+  "back": "Back",
+  "your_characters": "Your Characters",
+  "create_new": "Create New",
+  "create_table": "Create Table",
+  "create_new_table": "Create New Table",
+  "gm_dashboard": "GM Dashboard",
+  "my_tables": "My Tables",
+  "open": "Open",
+  "no_tables": "No tables yet",
+  "empty_profile": "No characters yet",
+  "enter": "Enter",
+  "edit": "Edit",
+  "delete": "Delete",
+  "details": "Details",
+  "save": "Save",
+  "inventory": {
+    "title": "Inventory",
+    "empty": "Empty"
+  },
+  "unknown": "Unknown",
+  "name": "Name",
+  "gm_panel": "GM Panel",
+  "game_field": "Game Field",
+  "table": "Table",
+  "start_game": "Start Game",
+  "no_character": "No character"
 }
