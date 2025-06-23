@@ -209,14 +209,28 @@ async function seed() {
   };
 
   if (await StartingSet.countDocuments() === 0) {
+    const inventorySets = {};
+    for (const race of races) {
+      inventorySets[race.code] = {};
+      for (const [cls, groups] of Object.entries(classInventory)) {
+        const arrays = Object.values(groups)
+          .filter(a => a.length)
+          .map(a => a.map(d => d.item));
+        const combos = combine(arrays).slice(0, 3);
+        inventorySets[race.code][cls] = combos;
+      }
+    }
+
     const sets = [];
-    for (const [cls, groups] of Object.entries(classInventory)) {
-      const arrays = Object.values(groups)
-        .filter(a => a.length)
-        .map(a => a.map(d => d.item));
-      const combos = combine(arrays);
-      for (const combo of combos) {
-        sets.push({ classCode: cls.toLowerCase(), items: combo.map(name => itemsByName[name]) });
+    for (const [raceCode, classes] of Object.entries(inventorySets)) {
+      for (const [cls, combos] of Object.entries(classes)) {
+        for (const combo of combos) {
+          sets.push({
+            raceCode,
+            classCode: cls.toLowerCase(),
+            items: combo.map(name => itemsByName[name])
+          });
+        }
       }
     }
     if (sets.length) {

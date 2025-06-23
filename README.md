@@ -187,13 +187,24 @@ const stats = generateStats('elf', 'mage', 'female');
 
 ### Starter Inventory
 
-Each class provides a starter kit of equipment. Race specific trinkets are then
-added to the pack. The `generateInventory` helper merges both lists when a
-character is created.
+Starting equipment now depends on **both** race and class. The seed script
+creates three starter sets for every combination using an `inventorySets`
+object. `generateInventory` picks a random set for the provided codes and then
+adds race specific items.
 
 ```js
+const inventorySets = {
+  orc_male: {
+    warrior: [
+      ['Меч', 'Щит', 'Зілля здоров’я'],
+      ['Меч', 'Шкіряна броня', 'Зілля здоров’я'],
+      ['Сокира', 'Щит', 'Зілля здоров’я']
+    ]
+  }
+};
+
 const inventory = generateInventory('Орк (чоловік)', 'Воїн');
-// => ['Меч', 'Щит', 'Шкіряна броня', 'Зілля здоров’я', 'Кістяний талісман']
+// => ['Меч', 'Шкіряна броня', 'Зілля здоров’я', 'Кістяний талісман']
 ```
 
 ## Contributing
