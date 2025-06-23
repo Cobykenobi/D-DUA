@@ -39,6 +39,9 @@ exports.create = async (req, res) => {
 
     let { name, description, image, gender, raceId, professionId } = req.body;
 
+    const raceCode = req.body.race || req.body.raceCode;
+    const professionCode = req.body.profession || req.body.professionCode;
+
 
     if (!name || typeof name !== 'string' || !name.trim() || name.trim().length > 50) {
       return res.status(400).json({ message: 'Invalid name' });
