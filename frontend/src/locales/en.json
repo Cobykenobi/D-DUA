@@ -24,5 +24,6 @@
   "welcome": "Welcome",
   "login": "Login",
   "password": "Password",
-  "create_character": "Create Character"
+  "create_character": "Create Character",
+  "unknown": "Unknown"
 }

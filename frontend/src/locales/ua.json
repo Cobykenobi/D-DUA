@@ -24,5 +24,6 @@
   "welcome": "Ласкаво просимо",
   "login": "Увійти",
   "password": "Пароль",
-  "create_character": "Створити персонажа"
+  "create_character": "Створити персонажа",
+  "unknown": "Невідомо"
 }
