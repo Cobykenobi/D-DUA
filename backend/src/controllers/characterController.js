@@ -46,8 +46,9 @@ exports.create = async (req, res) => {
       gender,
       raceId,
       professionId,
-      race: raceCode,
-      profession: professionCode
+
+      raceCode,
+      professionCode
     } = req.body;
 
 
