@@ -12,7 +12,11 @@ const raceModifiers = {
     male: { health: 1, defense: 1, strength: 1, intellect: 1, agility: 1, charisma: 1 },
     female: { health: 1, defense: 1, strength: 1, intellect: 1, agility: 1, charisma: 1 },
   },
-  elf: {
+  forest_elf: {
+    male: { agility: 2, intellect: 1 },
+    female: { agility: 2, intellect: 1 },
+  },
+  dark_elf: {
     male: { agility: 2, intellect: 1 },
     female: { agility: 2, intellect: 1 },
   },
@@ -32,9 +36,8 @@ const raceModifiers = {
 
 const classModifiers = {
   warrior: { strength: 2, defense: 1 },
-  mage: { intellect: 2, charisma: 1 },
-  healer: { charisma: 2, health: 1 },
-  archer: { agility: 1, strength: 1 },
+  wizard: { intellect: 2, charisma: 1 },
+  assassin: { agility: 1, strength: 1 },
   bard: { charisma: 2, agility: 1 },
   paladin: { strength: 2, charisma: 2 },
 };
