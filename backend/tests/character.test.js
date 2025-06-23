@@ -221,7 +221,10 @@ describe('Character Controller - create', () => {
       return { save: jest.fn().mockResolvedValue(data) };
     });
 
-    const req = { user: { id: 'u1' }, body: { name: 'Hero', race: 'orc', profession: 'mage' } };
+    const req = {
+      user: { id: 'u1' },
+      body: { name: 'Hero', raceCode: 'orc', professionCode: 'mage' }
+    };
     const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
 
     await characterController.create(req, res);
