@@ -13,7 +13,12 @@
     "gnome_male": "Gnome (male)",
     "gnome_female": "Gnome (female)",
     "dwarf_male": "Dwarf (male)",
-    "dwarf_female": "Dwarf (female)"
+    "dwarf_female": "Dwarf (female)",
+    "wood_elf": "Wood Elf",
+    "dark_elf": "Dark Elf",
+    "human": "Human",
+    "halfling": "Halfling",
+    "lizardman": "Lizardman"
   },
   "classes": {
     "warrior": "Warrior",
@@ -21,9 +26,12 @@
     "archer": "Archer",
     "paladin": "Paladin",
     "bard": "Bard",
-    "healer": "Healer"
+    "healer": "Healer",
+    "wizard": "Wizard",
+    "assassin": "Assassin"
   },
   "welcome": "Welcome",
   "login": "Login",
-  "password": "Password"
+  "password": "Password",
+  "create_character": "Create Character"
 }

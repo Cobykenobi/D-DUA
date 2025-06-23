@@ -5,6 +5,7 @@ const Profession = require('../models/Profession');
 
 const generateStats = require('../utils/generateStats');
 const generateInventory = require('../utils/generateInventory');
+const generateAvatar = require('../utils/generateAvatar');
 const slug = require('../utils/slugify');
 
 function mapInventory(inv) {
@@ -37,6 +38,7 @@ exports.getAllByUser = async (req, res) => {
 exports.create = async (req, res) => {
   try {
 
+
     let {
       name,
       description,
@@ -47,6 +49,7 @@ exports.create = async (req, res) => {
       race: raceCode,
       profession: professionCode
     } = req.body;
+
 
 
     if (!name || typeof name !== 'string' || !name.trim() || name.trim().length > 50) {
@@ -108,16 +111,18 @@ exports.create = async (req, res) => {
 
 
   const raceCodeRaw = (race[0].code || race[0].name).toLowerCase();
-  const detectedGender = raceCodeRaw.endsWith('_female') ? 'female' : 'male';
-  const finalGender = (gender && ['male', 'female'].includes(gender)) ? gender : detectedGender;
-  const raceBase = raceCodeRaw.replace(/_(male|female)$/, '');
+  const finalGender = (gender && ['male', 'female'].includes(gender)) ? gender : 'male';
+  const raceBase = raceCodeRaw.replace(/_(male|female)$/i, '');
   const classCodeLower = (profession[0].code || profession[0].name).toLowerCase();
 
   const stats = generateStats(raceBase, classCodeLower, finalGender);
 
 
     // Логіка вибору аватара
-    const avatar = uploaded || (image ? image : '');
+    let avatar = uploaded || (image ? image : '');
+    if (!avatar) {
+      avatar = await generateAvatar(finalGender, raceCodeRaw, classCodeLower);
+    }
 
     const inventory = await generateInventory(raceCodeRaw, classCodeLower);
     if (!inventory.length) {
@@ -128,7 +133,6 @@ exports.create = async (req, res) => {
   const newChar = new Character({
       user: req.user.id,
       name,
-      gender,
       description,
       image: avatar,
       gender: finalGender,
