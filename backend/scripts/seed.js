@@ -58,11 +58,13 @@ async function seed() {
     { code: 'orc', name: 'Орк', modifiers: { health: 1, defense: 0, strength: 2, intellect: 0, agility: 0, charisma: 0, mp: 0 } },
   ];
   const professions = [
+
     { code: 'warrior', name: 'Воїн', modifiers: { health: 0, defense: 1, strength: 2, intellect: 0, agility: 0, charisma: 0, mp: 0 } },
     { code: 'wizard', name: 'Маг', modifiers: { health: 0, defense: 0, strength: 0, intellect: 2, agility: 0, charisma: 0, mp: 1 } },
     { code: 'assassin', name: 'Асасін', modifiers: { health: 0, defense: 0, strength: 1, intellect: 0, agility: 1, charisma: 0, mp: 0 } },
     { code: 'paladin', name: 'Паладин', modifiers: { health: 1, defense: 0, strength: 1, intellect: 0, agility: 0, charisma: 1, mp: 0 } },
     { code: 'bard', name: 'Бард', modifiers: { health: 0, defense: 0, strength: 0, intellect: 0, agility: 0, charisma: 1, mp: 0 } }
+
   ];
   const characteristics = [
     'health',
@@ -88,7 +90,7 @@ async function seed() {
         { item: 'Зілля здоров’я' }
       ]
     },
-    wizard: {
+    mage: {
       weapon: [
         { item: 'Магічний посох', bonus: { intellect: 2 } },
         { item: 'Чарівна паличка', bonus: { intellect: 1 } }
