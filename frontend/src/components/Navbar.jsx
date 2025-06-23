@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import LanguageSwitch from './LanguageSwitch';
 import ThemeToggle from './ThemeToggle';
 
@@ -7,6 +8,7 @@ function Navbar() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user") || "null");
+  const { t } = useTranslation();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -21,11 +23,11 @@ function Navbar() {
         <span className="font-dnd text-2xl">D-DUA</span>
       </Link>
       <div className="flex items-center gap-4 flex-1">
-        <Link to="/characters" className="hover:text-white">Profile</Link>
-        <Link to="/settings" className="hover:text-white">Settings</Link>
+        <Link to="/characters" className="hover:text-white">{t('profile')}</Link>
+        <Link to="/settings" className="hover:text-white">{t('settings')}</Link>
         {token && (
           <button onClick={handleLogout} className="text-dndred hover:text-dndgold">
-            Logout
+            {t('logout')}
           </button>
         )}
         <Link to="/settings" className="text-sm hover:underline">

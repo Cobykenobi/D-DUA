@@ -25,6 +25,9 @@
   "login": "Login",
   "password": "Password",
   "create_character": "Create Character",
+  "profile": "Profile",
+  "settings": "Settings",
+  "logout": "Logout",
 
 
   "unknown": "Unknown",
