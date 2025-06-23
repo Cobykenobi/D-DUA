@@ -52,9 +52,12 @@ export default function PlayerStatusTable({ players, isGM, onEdit, onKick }) {
             typeof p.character?.race === 'string'
               ? p.character.race
               : p.character?.race?.code || '';
+          const raceKey = (raceCode || '')
+            .toLowerCase()
+            .replace(/_(male|female)$/, '');
           const race = translateOrRaw(
             t,
-            `races.${(raceCode || '').toLowerCase()}`,
+            `races.${raceKey}`,
             p.character?.race?.name || raceCode
           );
           const clsCode =

@@ -22,7 +22,9 @@ export default function PlayerCard({ character, onSelect }) {
     typeof character.race === 'string'
       ? character.race
       : character.race?.code || '';
-  const raceKey = (raceCode || '').toLowerCase();
+  const raceKey = (raceCode || '')
+    .toLowerCase()
+    .replace(/_(male|female)$/, '');
   const raceName = character.race?.name || raceCode;
 
   const charClass =

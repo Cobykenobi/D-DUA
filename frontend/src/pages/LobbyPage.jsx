@@ -129,7 +129,7 @@ export default function LobbyPage() {
                   <>{translateOrRaw(t, 'gender.' + character.gender.toLowerCase(), character.gender)} · </>
                 )}
                 {character.race?.code
-                  ? t(`races.${character.race.code.toLowerCase()}`)
+                  ? t(`races.${character.race.code.toLowerCase().replace(/_(male|female)$/, '')}`)
                   : (character.race?.name || '')} &middot;{' '}
                 {character.profession?.code
                   ? t(`classes.${character.profession.code.toLowerCase()}`)
@@ -154,7 +154,7 @@ export default function LobbyPage() {
                     )}
                     {pl.character.race && (
                       <> – {pl.character.race.code
-                        ? t(`races.${pl.character.race.code.toLowerCase()}`)
+                        ? t(`races.${pl.character.race.code.toLowerCase().replace(/_(male|female)$/, '')}`)
                         : (pl.character.race.name || '')}</>
                     )}
                     {pl.character.profession && (

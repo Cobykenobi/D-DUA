@@ -4,21 +4,12 @@
     "female": "Female"
   },
   "races": {
-    "human_male": "Human (male)",
-    "human_female": "Human (female)",
-    "elf_male": "Elf (male)",
-    "elf_female": "Elf (female)",
-    "orc_male": "Orc (male)",
-    "orc_female": "Orc (female)",
-    "gnome_male": "Gnome (male)",
-    "gnome_female": "Gnome (female)",
-    "dwarf_male": "Dwarf (male)",
-    "dwarf_female": "Dwarf (female)",
+    "human": "Human",
     "wood_elf": "Wood Elf",
     "dark_elf": "Dark Elf",
-    "human": "Human",
-    "halfling": "Halfling",
-    "lizardman": "Lizardman"
+    "gnome": "Gnome",
+    "dwarf": "Dwarf",
+    "orc": "Orc"
   },
   "classes": {
     "warrior": "Warrior",
