@@ -6,14 +6,11 @@ import { createCharacter } from '../utils/api';
 const CharacterCreatePage = () => {
   const [name, setName] = useState('');
   const [gender, setGender] = useState('male');
-  const [race, setRace] = useState('wood_elf');
-  const [profession, setProfession] = useState('warrior');
-  const [description, setDescription] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newChar = await createCharacter({ name, description, gender, race, profession });
+    const newChar = await createCharacter({ name, gender });
     if (newChar && newChar._id) {
       navigate('/lobby?char=' + newChar._id);
     }
@@ -33,25 +30,7 @@ const CharacterCreatePage = () => {
           <option value="male">Чоловік</option>
           <option value="female">Жінка</option>
         </select>
-        <select value={race} onChange={(e) => setRace(e.target.value)}>
-          <option value="wood_elf">Лісовий ельф</option>
-          <option value="dark_elf">Темний ельф</option>
-          <option value="human">Людина</option>
-          <option value="halfling">Піврослик</option>
-          <option value="lizardman">Ящеролюдина</option>
-        </select>
-        <select value={profession} onChange={(e) => setProfession(e.target.value)}>
-          <option value="warrior">Воїн</option>
-          <option value="paladin">Паладин</option>
-          <option value="wizard">Маг</option>
-          <option value="bard">Бард</option>
-          <option value="assassin">Асасін</option>
-        </select>
-        <textarea
-          placeholder="Опис"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        />
+        {/* Only name and gender are required for character creation */}
         <button type="submit">Створити персонажа</button>
       </form>
     </div>
