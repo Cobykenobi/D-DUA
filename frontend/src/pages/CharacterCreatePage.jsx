@@ -8,15 +8,12 @@ import translateOrRaw from '../utils/translateOrRaw.js';
 const CharacterCreatePage = () => {
   const [name, setName] = useState('');
   const [gender, setGender] = useState('male');
-  const [race, setRace] = useState('wood_elf');
-  const [profession, setProfession] = useState('warrior');
-  const [description, setDescription] = useState('');
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const newChar = await createCharacter({ name, description, gender, race, profession });
+    const newChar = await createCharacter({ name, gender });
     if (newChar && newChar._id) {
       navigate('/lobby?char=' + newChar._id);
     }
@@ -36,6 +33,7 @@ const CharacterCreatePage = () => {
           <option value="male">{t('gender.male')}</option>
           <option value="female">{t('gender.female')}</option>
         </select>
+
         <select value={race} onChange={(e) => setRace(e.target.value)}>
           <option value="wood_elf">
             {translateOrRaw(t, 'races.wood_elf', 'Лісовий ельф')}
@@ -74,6 +72,7 @@ const CharacterCreatePage = () => {
           onChange={(e) => setDescription(e.target.value)}
         />
         <button type="submit">{t('create_character')}</button>
+
       </form>
     </div>
   );
