@@ -8,6 +8,23 @@ const generateInventory = require('../utils/generateInventory');
 const generateAvatar = require('../utils/generateAvatar');
 const slug = require('../utils/slugify');
 
+const allowedRaceCodes = new Set([
+  'human',
+  'forest_elf',
+  'dark_elf',
+  'gnome',
+  'dwarf',
+  'orc'
+]);
+const allowedClassCodes = new Set([
+  'warrior',
+  'wizard',
+  'assassin',
+  'paladin',
+  'bard'
+]);
+const professionAliases = { mage: 'wizard' };
+
 function mapInventory(inv) {
   return (inv || []).map(it => ({
     item: it.item,
@@ -40,6 +57,10 @@ exports.create = async (req, res) => {
 
 
     let { name, description, image, gender, raceId, professionId, race: raceCode, profession: professionCode } = req.body;
+
+    if (professionAliases[professionCode]) {
+      professionCode = professionAliases[professionCode];
+    }
 
 
 
@@ -97,6 +118,15 @@ exports.create = async (req, res) => {
     return res.status(400).json({
       message: 'Missing races or professions to create character'
     });
+  }
+
+  const raceCodeValue = (race[0].code || '').toLowerCase();
+  const profCodeValue = (profession[0].code || '').toLowerCase();
+  if (!allowedRaceCodes.has(raceCodeValue)) {
+    return res.status(400).json({ message: 'Invalid race' });
+  }
+  if (!allowedClassCodes.has(profCodeValue)) {
+    return res.status(400).json({ message: 'Invalid class' });
   }
 
 

@@ -264,4 +264,32 @@ describe('Character Controller - create', () => {
     expect(saved.profession).toBe('p3');
     expect(res.status).toHaveBeenCalledWith(201);
   });
+
+  it('returns 400 for invalid race code', async () => {
+    Race.aggregate.mockResolvedValue([{ _id: 'r99', name: 'Alien', code: 'alien' }]);
+    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Wizard', code: 'wizard' }]);
+    StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
+
+    const req = { user: { id: 'u1' }, body: { name: 'Hero' } };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+    await characterController.create(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({ message: 'Invalid race' });
+  });
+
+  it('returns 400 for invalid class code', async () => {
+    Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Orc', code: 'orc' }]);
+    Profession.aggregate.mockResolvedValue([{ _id: 'p99', name: 'Pirate', code: 'pirate' }]);
+    StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
+
+    const req = { user: { id: 'u1' }, body: { name: 'Hero' } };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+    await characterController.create(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({ message: 'Invalid class' });
+  });
 });
