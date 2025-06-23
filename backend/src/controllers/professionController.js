@@ -11,8 +11,8 @@ exports.getAll = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    const { name, code, description } = req.body;
-    const profession = new Profession({ name, code, description });
+    const { name, code, description, modifiers } = req.body;
+    const profession = new Profession({ name, code, description, modifiers });
     await profession.save();
     res.status(201).json(profession);
   } catch (err) {
@@ -22,10 +22,10 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const { name, code, description } = req.body;
+    const { name, code, description, modifiers } = req.body;
     const profession = await Profession.findByIdAndUpdate(
       req.params.id,
-      { $set: { name, code, description } },
+      { $set: { name, code, description, modifiers } },
       { new: true }
     );
     if (!profession) return res.status(404).json({ message: 'Not found' });

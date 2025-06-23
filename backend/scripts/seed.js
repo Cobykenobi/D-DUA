@@ -49,26 +49,20 @@ async function seed() {
   // ];
   // const characteristics = ['HP', 'MP', 'Strength', 'Agility', 'Intellect'];
 
-  // Gendered races
   const races = [
-    { code: 'human_male', name: 'Людина (чоловік)' },
-    { code: 'human_female', name: 'Людина (жінка)' },
-    { code: 'elf_male', name: 'Ельф (чоловік)' },
-    { code: 'elf_female', name: 'Ельф (жінка)' },
-    { code: 'orc_male', name: 'Орк (чоловік)' },
-    { code: 'orc_female', name: 'Орк (жінка)' },
-    { code: 'gnome_male', name: 'Гном (чоловік)' },
-    { code: 'gnome_female', name: 'Гном (жінка)' },
-    { code: 'dwarf_male', name: 'Дварф (чоловік)' },
-    { code: 'dwarf_female', name: 'Дварф (жінка)' },
+    { code: 'human', name: 'Людина' },
+    { code: 'forest_elf', name: 'Лісовий ельф' },
+    { code: 'dark_elf', name: 'Темний ельф' },
+    { code: 'gnome', name: 'Гном' },
+    { code: 'dwarf', name: 'Дварф' },
+    { code: 'orc', name: 'Орк' },
   ];
   const professions = [
     { code: 'warrior', name: 'Воїн' },
-    { code: 'mage', name: 'Маг' },
-    { code: 'archer', name: 'Лучник' },
+    { code: 'wizard', name: 'Маг' },
+    { code: 'assassin', name: 'Асасін' },
     { code: 'paladin', name: 'Паладин' },
-    { code: 'bard', name: 'Бард' },
-    { code: 'healer', name: 'Цілитель' }
+    { code: 'bard', name: 'Бард' }
   ];
   const characteristics = [
     'health',
@@ -93,7 +87,7 @@ async function seed() {
         { item: 'Зілля здоров’я' }
       ]
     },
-    mage: {
+    wizard: {
       weapon: [
         { item: 'Магічний посох', bonus: { intellect: 2 } },
         { item: 'Чарівна паличка', bonus: { intellect: 1 } }
@@ -107,20 +101,7 @@ async function seed() {
         { item: 'Книга заклять' }
       ]
     },
-    healer: {
-      weapon: [
-        { item: 'Жезл лікування', bonus: { charisma: 1 } },
-        { item: 'Священний посох', bonus: { charisma: 1 } }
-      ],
-      armor: [
-        { item: 'Легка ряса', bonus: { health: 1 } },
-        { item: 'Травник' }
-      ],
-      misc: [
-        { item: 'Зілля лікування' }
-      ]
-    },
-    archer: {
+    assassin: {
       weapon: [
         { item: 'Лук', bonus: { agility: 1 } },
         { item: 'Арбалет', bonus: { agility: 1 } }
@@ -161,7 +142,8 @@ async function seed() {
 
   const raceInventory = {
     human: [{ item: 'Монета удачі', bonus: { charisma: 1 } }],
-    elf: [{ item: 'Ельфійські стріли', bonus: { agility: 1 } }],
+    forest_elf: [{ item: 'Ельфійські стріли', bonus: { agility: 1 } }],
+    dark_elf: [{ item: 'Ельфійські стріли', bonus: { agility: 1 } }],
     orc: [{ item: 'Кістяний талісман', bonus: { strength: 1 } }],
     gnome: [{ item: 'Гвинтовий ключ' }],
     dwarf: [{ item: 'Похідна кружка', bonus: { health: 1 } }]

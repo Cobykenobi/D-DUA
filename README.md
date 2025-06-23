@@ -32,7 +32,7 @@ This project combines an Express/MongoDB backend with a React frontend.
 3. **Seed starter data** (optional)
 
    After updating your `.env` file, populate the database with approximately
-   ten races and six professions along with six core characteristics:
+   ten races and six professions along with six core attributes:
 
    ```bash
    cd backend
@@ -138,14 +138,15 @@ npm run lint
 
 ## Character Basics
 
-Every adventurer starts with five basic attributes. All of them have a value of
-**10** before any racial or class adjustments are applied:
+Every adventurer starts with six basic attributes. Each begins at **5** before
+any racial or class bonuses are applied:
 
-- **STR** – Strength
-- **DEX** – Dexterity
-- **INT** – Intelligence
-- **CON** – Constitution
-- **CHA** – Charisma
+- **Health**
+- **Defense**
+- **Strength**
+- **Intellect**
+- **Agility**
+- **Charisma**
 
 ### Races and Bonuses
 
@@ -162,27 +163,26 @@ Choosing a race grants specific bonuses to your starting stats:
 - **Дварф (чоловік)**
 - **Дварф (жінка)**
 
-### Classes and Minimums
+### Professions
 
-Each of the six classes expects certain ability thresholds before the hero can
-take up the role:
+Each profession grants bonuses to your starting stats:
 
-- **Warrior** – STR 13, CON 12
-- **Mage** – INT 13, CHA 11
-- **Archer** – DEX 12, STR 12
-- **Healer** – CHA 13, CON 11
-- **Bard** – CHA 13, DEX 12
-- **Paladin** – STR 13, CHA 13
+- **Warrior** – +2 Strength, +1 Defense
+- **Mage** – +2 Intellect, +1 Charisma
+- **Archer** – +1 Agility, +1 Strength
+- **Healer** – +2 Charisma, +1 Health
+- **Bard** – +2 Charisma, +1 Agility
+- **Paladin** – +2 Strength, +2 Charisma
 
 ### Stat Generation
 
-When generating stats, race bonuses apply first. Class minimums then raise any
-insufficient attributes. Finally, untouched stats are randomised between **3**
-and **10**, but never drop below their current value.
+When generating stats, race bonuses apply first. Profession bonuses are then
+added. Attributes not modified by race or profession are randomised between
+**3** and **10**, but never drop below their current value.
 
 ```js
-const stats = generateStats('Ельф (жінка)', 'Маг');
-// => { STR: 10, DEX: 12, INT: 13, CON: 10, CHA: 11 }
+const stats = generateStats('elf', 'mage', 'female');
+// => { health: 5, defense: 5, strength: 5, intellect: 8, agility: 7, charisma: 6 }
 ```
 
 ### Starter Inventory

@@ -23,6 +23,7 @@ describe('seed script', () => {
     console.warn.mockRestore();
   });
 
+
   it('creates three sets for each race and class combination', async () => {
     const races = [
       'human_male','human_female','elf_male','elf_female',
@@ -35,6 +36,7 @@ describe('seed script', () => {
         const count = await StartingSet.countDocuments({ raceCode: r, classCode: c });
         expect(count).toBe(3);
       }
+
     }
   });
 });

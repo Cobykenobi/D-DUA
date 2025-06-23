@@ -4,7 +4,8 @@ const slug = require('./slugify');
 
 const raceInventory = {
   human: [{ item: 'Монета удачі', amount: 1, bonus: { charisma: 1 } }],
-  elf: [{ item: 'Ельфійські стріли', amount: 1, bonus: { agility: 1 } }],
+  forest_elf: [{ item: 'Ельфійські стріли', amount: 1, bonus: { agility: 1 } }],
+  dark_elf: [{ item: 'Ельфійські стріли', amount: 1, bonus: { agility: 1 } }],
   orc: [{ item: 'Кістяний талісман', amount: 1, bonus: { strength: 1 } }],
   gnome: [{ item: 'Гвинтовий ключ', amount: 1 }],
   dwarf: [{ item: 'Похідна кружка', amount: 1, bonus: { health: 1 } }]
@@ -31,7 +32,7 @@ async function generateInventory(raceCode, classCode) {
     }
   }
 
-  const baseCode = raceCode.split('_')[0];
+  const baseCode = raceCode.replace(/_(male|female)$/i, '');
   const raceItems = raceInventory[baseCode] || [];
   for (const r of raceItems) {
     result.push({
