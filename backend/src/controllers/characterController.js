@@ -37,7 +37,16 @@ exports.getAllByUser = async (req, res) => {
 exports.create = async (req, res) => {
   try {
 
-    let { name, description, image, gender, raceId, professionId } = req.body;
+    let {
+      name,
+      description,
+      image,
+      gender,
+      raceId,
+      professionId,
+      race: raceCode,
+      profession: professionCode
+    } = req.body;
 
 
     if (!name || typeof name !== 'string' || !name.trim() || name.trim().length > 50) {
