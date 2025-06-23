@@ -24,5 +24,31 @@
   "welcome": "Ласкаво просимо",
   "login": "Увійти",
   "password": "Пароль",
-  "create_character": "Створити персонажа"
+  "create_character": "Створити персонажа",
+  "back": "Назад",
+  "your_characters": "Ваші персонажі",
+  "create_new": "Створити новий",
+  "create_table": "Створити стіл",
+  "create_new_table": "Створити новий стіл",
+  "gm_dashboard": "Панель ГМа",
+  "my_tables": "Мої столи",
+  "open": "Відкрити",
+  "no_tables": "Немає столів",
+  "empty_profile": "Немає персонажів",
+  "enter": "Увійти",
+  "edit": "Редагувати",
+  "delete": "Видалити",
+  "details": "Деталі",
+  "save": "Зберегти",
+  "inventory": {
+    "title": "Інвентар", 
+    "empty": "Порожньо"
+  },
+  "unknown": "Невідомо",
+  "name": "Ім'я",
+  "gm_panel": "Панель ГМа",
+  "game_field": "Поле гри",
+  "table": "Стіл",
+  "start_game": "Почати гру",
+  "no_character": "Немає персонажа"
 }
