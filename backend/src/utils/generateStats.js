@@ -10,6 +10,7 @@ const baseStats = {
   charisma: 5,
 };
 
+
 function toObj(map) {
   if (!map) return {};
   if (typeof map.entries === 'function') {
@@ -17,6 +18,7 @@ function toObj(map) {
   }
   return map;
 }
+
 
 async function generateStats(raceCode, professionCode) {
   const stats = { ...baseStats };
