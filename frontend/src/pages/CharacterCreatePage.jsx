@@ -3,28 +3,36 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { createCharacter } from '../utils/api';
+import api from '../api/axios';
 import { getRandomElement } from '../utils/characterUtils';
-
-const raceOptions = ['human', 'forest_elf', 'dark_elf', 'gnome', 'dwarf', 'orc'];
-const classOptions = ['warrior', 'wizard', 'assassin', 'paladin', 'bard'];
 
 const CharacterCreatePage = () => {
   const [name, setName] = useState('');
   const [gender, setGender] = useState('male');
-  const [race, setRace] = useState('');
-  const [profession, setProfession] = useState('');
   const navigate = useNavigate();
   const { t } = useTranslation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const finalRace = race || getRandomElement(raceOptions);
     const finalProfession = profession || getRandomElement(classOptions);
+    let avatarUrl = '';
+    try {
+      const desc = `${gender} ${finalRace} ${finalProfession}`;
+      const res = await api.post('/ai/avatar', { description: desc });
+      avatarUrl = res.data?.url || '';
+    } catch {
+      avatarUrl = '';
+    }
+
     const newChar = await createCharacter({
       name,
       gender,
       race: finalRace,
       profession: finalProfession,
+      avatar: avatarUrl,
+
     });
     if (newChar && newChar._id) {
       navigate('/characters');
@@ -60,25 +68,6 @@ const CharacterCreatePage = () => {
         >
           <option value="male">{t('gender.male')}</option>
           <option value="female">{t('gender.female')}</option>
-        </select>
-        <select value={race} onChange={(e) => setRace(e.target.value)}>
-          <option value="">{t('random') || 'Random'}</option>
-          {raceOptions.map((r) => {
-            const key = r === 'forest_elf' ? 'wood_elf' : r;
-            return (
-              <option key={r} value={r}>
-                {t(`races.${key}`, r)}
-              </option>
-            );
-          })}
-        </select>
-        <select value={profession} onChange={(e) => setProfession(e.target.value)}>
-          <option value="">{t('random') || 'Random'}</option>
-          {classOptions.map((c) => (
-            <option key={c} value={c}>
-              {t(`classes.${c}`, c)}
-            </option>
-          ))}
         </select>
 
         <button
