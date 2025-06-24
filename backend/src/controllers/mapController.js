@@ -1,5 +1,4 @@
 const Map = require('../models/Map');
-const path = require('path');
 
 exports.getAll = async (req, res) => {
   try {

@@ -8,6 +8,7 @@ router.post('/avatar', async (req, res) => {
     const url = await generateCharacterImage(description || 'fantasy character');
     res.json({ url });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: 'AI service error' });
   }
 });

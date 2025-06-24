@@ -12,7 +12,6 @@ jest.mock('../src/models/Character');
 jest.mock('../src/models/StartingSet');
 jest.mock('../src/utils/generateInventory');
 jest.mock('../src/utils/generateAvatar');
-const generateStats = require('../src/utils/generateStats');
 
 beforeEach(() => {
   jest.clearAllMocks();

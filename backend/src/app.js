@@ -6,7 +6,6 @@ const fs = require('fs');
 const path = require('path');
 const http = require('http');
 const fetch = require('node-fetch');
-const adminRouter = require('./routes/admin');
 
 const app = express();
 const allowedOrigins = process.env.CLIENT_URL
