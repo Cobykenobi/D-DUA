@@ -4,6 +4,10 @@ This project combines an Express/MongoDB backend with a React frontend.
 
 ## Setup
 
+This project targets Node.js **v20** as specified in `.nvmrc`. Run
+`nvm use` (or an equivalent command) to ensure you're using this
+version before continuing.
+
 1. **Install dependencies**
    Run the helper script to install packages in both subprojects:
 
