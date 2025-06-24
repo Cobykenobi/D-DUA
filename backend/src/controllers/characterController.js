@@ -56,7 +56,9 @@ exports.create = async (req, res) => {
   try {
 
 
-    let { name, description, image, gender, raceId, professionId, race: raceCode, profession: professionCode } = req.body;
+    let { name, description, image, gender, raceId, professionId, race: raceCode, profession: professionCode, class: classCode } = req.body;
+
+    professionCode = professionCode || classCode;
 
     if (professionAliases[professionCode]) {
       professionCode = professionAliases[professionCode];
