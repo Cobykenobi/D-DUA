@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { createCharacter } from '../utils/api';
+import api from '../api/axios';
 import { getRandomElement } from '../utils/characterUtils';
 
 const raceOptions = ['human', 'forest_elf', 'dark_elf', 'gnome', 'dwarf', 'orc'];
@@ -20,11 +21,21 @@ const CharacterCreatePage = () => {
     e.preventDefault();
     const finalRace = race || getRandomElement(raceOptions);
     const finalProfession = profession || getRandomElement(classOptions);
+    let avatarUrl = '';
+    try {
+      const desc = `${gender} ${finalRace} ${finalProfession}`;
+      const res = await api.post('/ai/avatar', { description: desc });
+      avatarUrl = res.data?.url || '';
+    } catch {
+      avatarUrl = '';
+    }
+
     const newChar = await createCharacter({
       name,
       gender,
       race: finalRace,
       profession: finalProfession,
+      avatar: avatarUrl,
     });
     if (newChar && newChar._id) {
       navigate('/characters');
