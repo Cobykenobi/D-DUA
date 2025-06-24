@@ -45,6 +45,7 @@ exports.generateCharacterImage = async (description) => {
 };
 
 exports.generateCharacterDescription = async (params) => {
+  void params;
   // Можна підключити ChatGPT або інший сервіс
   // ...
   return 'Короткий опис персонажа з AI';
