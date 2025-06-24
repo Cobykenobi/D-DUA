@@ -8,6 +8,7 @@ const getRaceStats = async (req, res) => {
     ]);
     res.json(stats);
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: "Помилка при отриманні статистики" });
   }
 };

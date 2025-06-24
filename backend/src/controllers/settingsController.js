@@ -8,6 +8,7 @@ const saveSettings = async (req, res) => {
     }, { new: true });
     res.json({ message: "Налаштування збережено", settings: user.settings });
   } catch (err) {
+    console.error(err);
     res.status(500).json({ message: "Помилка збереження налаштувань" });
   }
 };
