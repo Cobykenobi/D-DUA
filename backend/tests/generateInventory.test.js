@@ -19,7 +19,7 @@ describe('generateInventory', () => {
     const items = await generateInventory('orc', 'warrior');
     Math.random.mockRestore();
 
-    expect(spy).toHaveBeenCalledWith({ classCode: 'warrior', raceCode: 'orc_male' });
+    expect(spy).toHaveBeenCalledWith({ classCode: 'warrior', raceCode: 'orc' });
 
     expect(items).toEqual([
       { item: 'Меч', code: 'меч', amount: 1, bonus: {} },
@@ -37,7 +37,7 @@ describe('generateInventory', () => {
     const items = await generateInventory('orc', 'warrior');
     Math.random.mockRestore();
 
-    expect(spy2).toHaveBeenCalledWith({ classCode: 'warrior', raceCode: 'orc_female' });
+    expect(spy2).toHaveBeenCalledWith({ classCode: 'warrior', raceCode: 'orc' });
 
     expect(items).toEqual([
       { item: 'Сокира', code: 'сокира', amount: 1, bonus: {} },

@@ -10,14 +10,8 @@ export const getCharacter = async (id) => {
   return res.data;
 };
 
-export const createCharacter = async (data) => {
-  let payload = data;
-  if (data.image instanceof File) {
-    payload = new FormData();
-    Object.keys(data).forEach((key) => {
-      if (data[key] !== undefined) payload.append(key, data[key]);
-    });
-  }
+export const createCharacter = async ({ name, gender, race, class: charClass, avatar }) => {
+  const payload = { name, gender, race, class: charClass, avatar };
   const res = await api.post('/character', payload);
   return res.data;
 };
