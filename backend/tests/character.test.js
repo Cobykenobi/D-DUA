@@ -5,6 +5,7 @@ const Character = require('../src/models/Character');
 const StartingSet = require('../src/models/StartingSet');
 const generateInventory = require('../src/utils/generateInventory');
 const generateAvatar = require('../src/utils/generateAvatar');
+const generateStats = require('../src/utils/generateStats');
 
 jest.mock('../src/models/Race');
 jest.mock('../src/models/Profession');
@@ -12,14 +13,17 @@ jest.mock('../src/models/Character');
 jest.mock('../src/models/StartingSet');
 jest.mock('../src/utils/generateInventory');
 jest.mock('../src/utils/generateAvatar');
+jest.mock('../src/utils/generateStats');
 
 beforeEach(() => {
   jest.clearAllMocks();
   generateInventory.mockResolvedValue([]);
   generateAvatar.mockResolvedValue('/avatars/test.png');
   jest.spyOn(console, 'warn').mockImplementation(() => {});
+
   Race.findOne.mockResolvedValue({ modifiers: new Map() });
   Profession.findOne.mockResolvedValue({ modifiers: new Map() });
+
   const q = Promise.resolve({ _id: 'c1', race: { name: 'Forest Elf', code: 'forest_elf' }, profession: { name: 'Wizard', code: 'wizard' } });
   q.populate = jest.fn().mockReturnValue(q);
   Character.findById = jest.fn(() => q);
@@ -34,10 +38,21 @@ describe('Character Controller - create', () => {
 
     Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Forest Elf', code: 'forest_elf' }]);
     Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Wizard', code: 'wizard' }]);
+
     Race.findOne.mockResolvedValue({ modifiers: new Map([['intellect', 1], ['agility', 2]]) });
     Profession.findOne.mockResolvedValue({ modifiers: new Map([['intellect', 2]]) });
 
+
     StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
+    generateStats.mockReturnValue({
+      health: 5,
+      defense: 5,
+      strength: 5,
+      intellect: 8,
+      agility: 7,
+      charisma: 5,
+      mp: 6
+    });
 
     let saved;
     Character.mockImplementation(data => {
@@ -67,6 +82,15 @@ describe('Character Controller - create', () => {
     Race.findOne.mockResolvedValue({ modifiers: new Map([['health', 1], ['strength', 2]]) });
     Profession.findOne.mockResolvedValue({ modifiers: new Map([['defense', 1], ['strength', 2]]) });
     StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
+    generateStats.mockReturnValue({
+      health: 6,
+      defense: 6,
+      strength: 9,
+      intellect: 5,
+      agility: 5,
+      charisma: 5,
+      mp: 5
+    });
 
     let saved;
     Character.mockImplementation(data => {
@@ -164,10 +188,10 @@ describe('Character Controller - create', () => {
   });
 
   it('generates avatar when none provided', async () => {
-    Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Elf', code: 'elf' }]);
+
+    Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Forest Elf', code: 'forest_elf' }]);
     Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Wizard', code: 'wizard' }]);
-    Race.findOne.mockResolvedValue({ modifiers: new Map() });
-    Profession.findOne.mockResolvedValue({ modifiers: new Map([['intellect', 2]]) });
+
     StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
     generateAvatar.mockResolvedValue('/avatars/x.png');
 
@@ -182,7 +206,9 @@ describe('Character Controller - create', () => {
 
     await characterController.create(req, res);
 
-    expect(generateAvatar).toHaveBeenCalledWith('male', 'elf', 'wizard');
+
+    expect(generateAvatar).toHaveBeenCalledWith('male', 'forest_elf', 'wizard');
+
     expect(saved.image).toBe('/avatars/x.png');
   });
 

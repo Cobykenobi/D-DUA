@@ -26,11 +26,9 @@ describe('seed script', () => {
 
   it('creates three sets for each race and class combination', async () => {
     const races = [
-      'human_male','human_female','elf_male','elf_female',
-      'orc_male','orc_female','gnome_male','gnome_female',
-      'dwarf_male','dwarf_female'
+      'human','forest_elf','dark_elf','gnome','dwarf','orc'
     ];
-    const classes = ['warrior','mage','archer','paladin','bard','healer'];
+    const classes = ['warrior','mage','assassin','paladin','bard'];
     for (const r of races) {
       for (const c of classes) {
         const count = await StartingSet.countDocuments({ raceCode: r, classCode: c });
