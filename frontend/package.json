@@ -10,7 +10,7 @@
     "start": "npx serve -s dist",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
 
-    "lint": "eslint src"
+    "lint": "eslint -c .eslintrc.cjs src"
 
   },
   "dependencies": {
