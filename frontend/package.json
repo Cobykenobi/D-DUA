@@ -8,8 +8,9 @@
     "build": "vite build",
     "preview": "vite preview",
     "start": "npx serve -s dist",
+    "pretest": "node ../scripts/check-node-modules.js",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest",
-
+    "prelint": "node ../scripts/check-node-modules.js",
     "lint": "eslint -c .eslintrc.cjs src"
 
   },

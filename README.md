@@ -12,8 +12,9 @@ This project combines an Express/MongoDB backend with a React frontend.
    ```
 
    This installs tools like `cross-env`, **Jest** and **ESLint** used by the
-   project. Attempting `npm run lint` or `npm test` before running this script
-   will fail with "command not found" errors.
+   project. **Always run `./setup.sh` before executing `npm test` or
+   `npm run lint`** in either subproject. Attempting those commands without
+   installing dependencies first will fail.
 
    You may optionally run `npm audit fix --force` inside `backend` and
    `frontend` to address any security warnings.
@@ -96,7 +97,9 @@ npm start
 
 ## Running tests
 
-Both subprojects use **Jest**. After installing dependencies, run the test
+Both subprojects use **Jest**. Ensure dependencies are installed before running
+the tests (you can run `./setup.sh` at the project root). Each test command
+first runs a small check that warns if `node_modules` are missing. Run the test
 suites from their respective folders:
 
 ```bash
@@ -125,8 +128,9 @@ the stored user role.
 
 ## Linting and formatting
 
-ESLint and Prettier configuration live in the `backend` folder. You can lint and
-format the backend code with:
+ESLint and Prettier configuration live in the `backend` folder. Ensure you've run
+`./setup.sh` so dependencies are installed before linting. The lint scripts also
+check that `node_modules` exist. You can lint and format the backend code with:
 
 ```bash
 cd backend
@@ -140,6 +144,7 @@ You can lint the frontend code with:
 cd frontend
 npm run lint
 ```
+Both lint commands run a pre-check that warns if `node_modules` are missing.
 
 ## Character Basics
 
