@@ -3,7 +3,10 @@
 Thank you for helping improve this project! Please follow these guidelines when submitting changes.
 
 ## Development setup
-- Run `./setup.sh` to install backend and frontend dependencies.
+- Run `./setup.sh` to install backend and frontend dependencies. Always execute
+  this script before running `npm test` or `npm run lint` so the required
+  packages are available. Both tasks include a small pre-check that warns if
+  `node_modules` are missing.
 - See `MANUAL_QA.md` for manual testing steps.
 
 - Run `npm run lint` in `frontend` before committing React changes.

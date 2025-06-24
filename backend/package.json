@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node src/app.js",
     "dev": "nodemon src/app.js",
+    "pretest": "node ../scripts/check-node-modules.js",
     "test": "jest",
+    "prelint": "node ../scripts/check-node-modules.js",
     "lint": "eslint .",
     "format": "prettier --write ."
   },
