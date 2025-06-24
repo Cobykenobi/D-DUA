@@ -70,7 +70,7 @@ const CharacterCreatePage = () => {
                 {t(`races.${key}`, r)}
               </option>
             );
-          })
+          })}
         </select>
         <select value={profession} onChange={(e) => setProfession(e.target.value)}>
           <option value="">{t('random') || 'Random'}</option>
