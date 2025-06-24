@@ -5,6 +5,7 @@ const Character = require('../src/models/Character');
 const StartingSet = require('../src/models/StartingSet');
 const generateInventory = require('../src/utils/generateInventory');
 const generateAvatar = require('../src/utils/generateAvatar');
+const generateStats = require('../src/utils/generateStats');
 
 jest.mock('../src/models/Race');
 jest.mock('../src/models/Profession');
@@ -12,13 +13,14 @@ jest.mock('../src/models/Character');
 jest.mock('../src/models/StartingSet');
 jest.mock('../src/utils/generateInventory');
 jest.mock('../src/utils/generateAvatar');
+jest.mock('../src/utils/generateStats');
 
 beforeEach(() => {
   jest.clearAllMocks();
   generateInventory.mockResolvedValue([]);
   generateAvatar.mockResolvedValue('/avatars/test.png');
   jest.spyOn(console, 'warn').mockImplementation(() => {});
-  const q = Promise.resolve({ _id: 'c1', race: { name: 'Forest Elf', code: 'forest_elf' }, profession: { name: 'Mage', code: 'mage' } });
+  const q = Promise.resolve({ _id: 'c1', race: { name: 'Forest Elf', code: 'forest_elf' }, profession: { name: 'Wizard', code: 'wizard' } });
   q.populate = jest.fn().mockReturnValue(q);
   Character.findById = jest.fn(() => q);
 });
@@ -31,9 +33,18 @@ describe('Character Controller - create', () => {
   it('applies race bonuses and class minimums', async () => {
 
     Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Forest Elf', code: 'forest_elf' }]);
-    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Mage', code: 'mage' }]);
+    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Wizard', code: 'wizard' }]);
 
     StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
+    generateStats.mockReturnValue({
+      health: 5,
+      defense: 5,
+      strength: 5,
+      intellect: 8,
+      agility: 7,
+      charisma: 5,
+      mp: 6
+    });
 
     let saved;
     Character.mockImplementation(data => {
@@ -61,6 +72,15 @@ describe('Character Controller - create', () => {
     Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Орк', code: 'orc' }]);
     Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Warrior', code: 'warrior' }]);
     StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
+    generateStats.mockReturnValue({
+      health: 6,
+      defense: 6,
+      strength: 9,
+      intellect: 5,
+      agility: 5,
+      charisma: 5,
+      mp: 5
+    });
 
     let saved;
     Character.mockImplementation(data => {
@@ -91,7 +111,7 @@ describe('Character Controller - create', () => {
 
   it('passes codes to generateInventory and saves its result', async () => {
     Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Forest Elf', code: 'forest_elf' }]);
-    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Mage', code: 'mage' }]);
+    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Wizard', code: 'wizard' }]);
 
     const inv = [{ item: 'Test', amount: 1, bonus: {} }];
     generateInventory.mockResolvedValue(inv);
@@ -107,7 +127,7 @@ describe('Character Controller - create', () => {
 
     await characterController.create(req, res);
 
-    expect(generateInventory).toHaveBeenCalledWith('forest_elf', 'mage');
+    expect(generateInventory).toHaveBeenCalledWith('forest_elf', 'wizard');
     expect(saved.inventory).toEqual(inv);
     expect(saved.gender).toBe('male');
   });
@@ -133,7 +153,7 @@ describe('Character Controller - create', () => {
   it('uses uploaded avatar when file provided', async () => {
 
     Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Forest Elf', code: 'forest_elf' }]);
-    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Mage', code: 'mage' }]);
+    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Wizard', code: 'wizard' }]);
 
     StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
 
@@ -158,8 +178,8 @@ describe('Character Controller - create', () => {
   });
 
   it('generates avatar when none provided', async () => {
-    Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Elf', code: 'elf' }]);
-    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Mage', code: 'mage' }]);
+    Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Forest Elf', code: 'forest_elf' }]);
+    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Wizard', code: 'wizard' }]);
     StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
     generateAvatar.mockResolvedValue('/avatars/x.png');
 
@@ -174,7 +194,7 @@ describe('Character Controller - create', () => {
 
     await characterController.create(req, res);
 
-    expect(generateAvatar).toHaveBeenCalledWith('male', 'elf', 'mage');
+    expect(generateAvatar).toHaveBeenCalledWith('male', 'forest_elf', 'wizard');
     expect(saved.image).toBe('/avatars/x.png');
   });
 
@@ -237,7 +257,7 @@ describe('Character Controller - create', () => {
 
   it('resolves race and profession codes to IDs', async () => {
     Race.findOne.mockResolvedValue({ _id: 'r3', name: 'Orc', code: 'orc' });
-    Profession.findOne.mockResolvedValue({ _id: 'p3', name: 'Mage', code: 'mage' });
+    Profession.findOne.mockResolvedValue({ _id: 'p3', name: 'Wizard', code: 'wizard' });
 
     let saved;
     Character.mockImplementation(data => {
@@ -256,7 +276,7 @@ describe('Character Controller - create', () => {
     await characterController.create(req, res);
 
     expect(Race.findOne).toHaveBeenCalledWith({ code: 'orc' });
-    expect(Profession.findOne).toHaveBeenCalledWith({ code: 'mage' });
+    expect(Profession.findOne).toHaveBeenCalledWith({ code: 'wizard' });
     expect(Race.aggregate).not.toHaveBeenCalled();
     expect(Profession.aggregate).not.toHaveBeenCalled();
     expect(saved.race).toBe('r3');
