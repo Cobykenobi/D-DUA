@@ -1,10 +1,8 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { createCharacter, getRaces, getProfessions } from '../utils/api';
-import api from '../api/axios';
-import { getRandomElement } from '../utils/characterUtils';
+import { createCharacter } from '../utils/api';
 
 import { useAppearance } from '../context/AppearanceContext';
 
@@ -12,52 +10,17 @@ import { useAppearance } from '../context/AppearanceContext';
 const CharacterCreatePage = () => {
   const [name, setName] = useState('');
   const [gender, setGender] = useState('male');
-  const [race, setRace] = useState('');
-  const [profession, setProfession] = useState('');
-  const [raceOptions, setRaceOptions] = useState([]);
-  const [classOptions, setClassOptions] = useState([]);
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  useEffect(() => {
-    const fetchOptions = async () => {
-      try {
-        const races = await getRaces();
-        setRaceOptions(races);
-      } catch {
-        setRaceOptions([]);
-      }
-      try {
-        const professions = await getProfessions();
-        setClassOptions(professions);
-      } catch {
-        setClassOptions([]);
-      }
-    };
-    fetchOptions();
-  }, []);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const finalRace = race || (getRandomElement(raceOptions) || {}).code;
-    const finalProfession = profession || (getRandomElement(classOptions) || {}).code;
-    let avatarUrl = '';
-    try {
-      const desc = `${gender} ${finalRace} ${finalProfession}`;
-      const res = await api.post('/ai/avatar', { description: desc });
-      avatarUrl = res.data?.url || '';
-    } catch {
-      avatarUrl = '';
-    }
-
     const newChar = await createCharacter({
       name,
       gender,
-      race: finalRace,
-      class: finalProfession,
-      avatar: avatarUrl,
-
     });
     if (newChar && newChar._id) {
       navigate('/characters');
@@ -94,32 +57,6 @@ const CharacterCreatePage = () => {
         >
           <option value="male">{t('gender.male')}</option>
           <option value="female">{t('gender.female')}</option>
-        </select>
-
-        <select
-          value={race}
-          onChange={(e) => setRace(e.target.value)}
-          className="p-2 rounded bg-gray-700 text-white w-64"
-        >
-          <option value="">{t('random')}</option>
-          {raceOptions.map((r) => (
-            <option key={r._id} value={r.code}>
-              {translateOrRaw(t, `races.${r.code.toLowerCase()}`, r.name)}
-            </option>
-          ))}
-        </select>
-
-        <select
-          value={profession}
-          onChange={(e) => setProfession(e.target.value)}
-          className="p-2 rounded bg-gray-700 text-white w-64"
-        >
-          <option value="">{t('random')}</option>
-          {classOptions.map((c) => (
-            <option key={c._id} value={c.code}>
-              {translateOrRaw(t, `classes.${c.code.toLowerCase()}`, c.name)}
-            </option>
-          ))}
         </select>
 
         <button
