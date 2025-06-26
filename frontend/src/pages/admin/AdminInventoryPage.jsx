@@ -35,7 +35,7 @@ export default function AdminInventoryPage() {
       `/inventory/${characterId}`,
       { items: items.map(it => ({ name: it.item, type: it.type })) }
     );
-    alert('Збережено');
+    alert(t('saved'));
   };
 
   return (
