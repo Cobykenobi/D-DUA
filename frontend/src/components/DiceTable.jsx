@@ -16,7 +16,9 @@ export default function DiceTable({ isGM }) {
 
   return (
     <div className="p-4 bg-dndbg text-dndgold rounded-lg shadow-md max-w-sm mx-auto">
+
       <h2 className="text-xl mb-2 text-center"> {t('roll_dice')}</h2>
+
       <div className="flex flex-wrap gap-2 justify-center">
         {diceTypes.map((d) => (
           <button
@@ -30,7 +32,9 @@ export default function DiceTable({ isGM }) {
       </div>
       {lastRoll && (
         <div className="mt-4 text-center">
+
           <span className="text-lg">{t('result')}: <b>{lastRoll}</b></span>
+
         </div>
       )}
     </div>

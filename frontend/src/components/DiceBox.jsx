@@ -2,11 +2,13 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { motion } from 'framer-motion';
 import { Dice5 } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function DiceBox({ className = '' }) {
   const [diceResult, setDiceResult] = useState(null);
   const { t } = useTranslation();
   const [diceAnim, setDiceAnim] = useState(false);
+  const { t } = useTranslation();
 
   const rollDice = (type = 'd20') => {
     setDiceResult(null);
@@ -32,13 +34,17 @@ export default function DiceBox({ className = '' }) {
             className="bg-dndred hover:bg-dndgold text-white hover:text-dndred font-dnd rounded-2xl px-4 py-2 transition-all"
             onClick={() => rollDice('d20')}
           >
+
             {t('roll_dice')} D20
+
           </button>
           <button
             className="bg-dndred hover:bg-dndgold text-white hover:text-dndred font-dnd rounded-2xl px-4 py-2 transition-all"
             onClick={() => rollDice('d6')}
           >
+
             {t('roll_dice')} D6
+
           </button>
         </div>
         {diceAnim && (
@@ -52,8 +58,10 @@ export default function DiceBox({ className = '' }) {
             <Dice5 size={36} />
           </motion.div>
         )}
+
         {diceResult && !diceAnim && (
           <div className="text-xl text-dndgold font-bold mt-2">{t('result')}: {diceResult}</div>
+
         )}
       </div>
     </div>
