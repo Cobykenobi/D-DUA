@@ -6,7 +6,7 @@ import { getClassBorderColor } from '../utils/classColors';
 import Modal from './Modal';
 import { normalizeInventory } from '../utils/inventoryUtils';
 
-import translateOrRaw from '../utils/translateOrRaw.js';
+import translateOrRaw from '../utils/translateOrRaw';
 
 import translateEffect from '../utils/effectUtils.js';
 

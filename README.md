@@ -33,6 +33,7 @@ version before continuing.
    - `JWT_SECRET` – secret used for signing tokens
    - `PORT` – optional server port (defaults to `5000`)
    - `CLIENT_URL` – allowed origin(s) for CORS. Set this to the URL of your frontend (comma separated to allow multiple, e.g. `http://localhost:5173,https://example.com`).
+   - `OPENAI_API_KEY` – optional key used to generate avatars and character descriptions via OpenAI APIs.
 
    Create a `.env` file inside `frontend` with the following keys:
    - `VITE_API_URL` – base URL of the backend API (e.g. `http://localhost:5000/api`).
@@ -63,6 +64,7 @@ npm run dev
 ```
 
 The backend automatically creates `uploads/` and `uploads/maps/` directories for uploaded files and exposes them from the `/uploads` path. Preset avatars are served from `/avatars`.
+An additional endpoint `POST /api/ai/description` returns a short character description when `OPENAI_API_KEY` is configured.
 
 ### Frontend
 

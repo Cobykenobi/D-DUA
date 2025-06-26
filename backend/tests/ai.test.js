@@ -2,7 +2,8 @@ const request = require('supertest');
 const express = require('express');
 
 jest.mock('../src/utils/ai', () => ({
-  generateCharacterImage: jest.fn().mockResolvedValue('http://image.test/avatar.png')
+  generateCharacterImage: jest.fn().mockResolvedValue('http://image.test/avatar.png'),
+  generateCharacterDescription: jest.fn().mockResolvedValue('A brave hero'),
 }));
 
 const aiRouter = require('../src/routes/ai');
@@ -17,6 +18,14 @@ describe('AI Routes', () => {
       const res = await request(app).post('/api/ai/avatar').send({ description: 'hero' });
       expect(res.statusCode).toBe(200);
       expect(res.body.url).toBe('http://image.test/avatar.png');
+    });
+  });
+
+  describe('POST /api/ai/description', () => {
+    it('should return generated description', async () => {
+      const res = await request(app).post('/api/ai/description').send({ raceCode: 'elf' });
+      expect(res.statusCode).toBe(200);
+      expect(res.body.description).toBe('A brave hero');
     });
   });
 });

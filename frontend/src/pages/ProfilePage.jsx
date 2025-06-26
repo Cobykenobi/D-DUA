@@ -8,8 +8,10 @@ import { getCharacters, deleteCharacter, updateCharacter } from '../utils/api';
 import api from '../api/axios';
 import { useUserStore } from '../store/user';
 import { useTranslation } from 'react-i18next';
+
 import translateOrRaw from '../utils/translateOrRaw.js';
 import { useAppearance } from '../context/AppearanceContext';
+
 
 const ProfilePage = () => {
   const [characters, setCharacters] = useState([]);
