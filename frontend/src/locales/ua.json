@@ -69,6 +69,7 @@
   "register": "Реєстрація",
   "register_submit": "Зареєструватися",
   "register_error": "Помилка реєстрації",
+  "user_already_exists": "Такий користувач вже існує",
   "fields_required": "Всі поля обов'язкові",
   "back": "Назад",
   "your_characters": "Ваші персонажі",
