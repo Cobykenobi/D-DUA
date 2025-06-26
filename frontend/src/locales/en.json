@@ -133,6 +133,14 @@
     "empty": "No items"
   },
   "random": "Random",
-  "all": "All"
+  "all": "All",
+
+  "roll_dice": "Roll Dice",
+  "roll_dice_d20": "Roll D20",
+  "roll_dice_d6": "Roll D6",
+  "roll_result": "Result",
+  "roll_visibility_gm": "Only GM sees the roll",
+  "roll_visibility_all": "All players see the roll"
+
 
 }

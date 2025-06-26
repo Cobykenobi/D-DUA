@@ -75,7 +75,7 @@ const App = () => {
 
     <Route path="/gm-dashboard" element={<PrivateRoute roles={['gm']}><GMDashboard /></PrivateRoute>} />
     <Route path="/gm-table/:tableId" element={<PrivateRoute roles={['gm']}><GameTablePage /></PrivateRoute>} />
-    <Route path="/gm-control/:id" element={<PrivateRoute roles={['gm']}><GMControlPage /></PrivateRoute>} />
+    <Route path="/gm-control/:tableId" element={<PrivateRoute roles={['gm']}><GMControlPage /></PrivateRoute>} />
 
     <Route path="*" element={<NotFoundPage />} />
   </Routes>
