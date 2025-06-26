@@ -183,11 +183,12 @@ Choosing a race grants specific bonuses to your starting stats:
 Each profession grants bonuses to your starting stats:
 
 - **Warrior** – +2 Strength, +1 Defense
-- **Wizard** – +2 Intellect, +1 Charisma
-- **Archer** – +1 Agility, +1 Strength
-- **Healer** – +2 Charisma, +1 Health
-- **Bard** – +2 Charisma, +1 Agility
-- **Paladin** – +2 Strength, +2 Charisma
+- **Wizard** – +2 Intellect, +1 MP
+- **Assassin** – +1 Strength, +1 Agility
+- **Paladin** – +1 Health, +1 Strength, +1 Charisma
+- **Bard** – +1 Charisma
+- **Archer** – +2 Agility, +1 Strength
+- **Healer** – +1 Intellect, +1 Charisma, +1 MP
 
 ### Stat Generation
 
@@ -197,9 +198,9 @@ added. Attributes not modified by race or profession are randomised between
 
 ```js
 
-const stats = generateStats('elf', 'wizard', 'female');
+const stats = generateStats('elf', 'wizard');
 
-// => { health: 5, defense: 5, strength: 5, intellect: 8, agility: 7, charisma: 6 }
+// => { health: 5, defense: 5, strength: 5, intellect: 7, agility: 5, charisma: 5, mp: 6 }
 ```
 
 ### Starter Inventory
