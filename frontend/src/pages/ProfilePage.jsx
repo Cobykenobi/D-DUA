@@ -11,6 +11,8 @@ import { useTranslation } from 'react-i18next';
 
 import translateOrRaw from '../utils/translateOrRaw.js';
 import { useAppearance } from '../context/AppearanceContext';
+import { normalizeInventory } from '../utils/inventoryUtils';
+import translateEffect from '../utils/effectUtils';
 
 
 const ProfilePage = () => {
@@ -105,20 +107,103 @@ const ProfilePage = () => {
             {t('empty_profile')}
           </div>
         ) : (
-          characters.map((char) => (
-            <div key={char._id} className="flex flex-col items-center">
-              <CharacterCard
-                character={char}
-                editLabel={t('enter')}
-                onEdit={() => handleSelect(char._id)}
-                onDelete={() => handleDelete(char._id)}
-                onSaveDescription={handleSaveDescription}
-              />
-              <div className="text-xs mt-1">
-                {translateOrRaw(t, 'gender.' + (char.gender || '').toLowerCase(), char.gender)}
+          characters.map((char) => {
+            const raceCode =
+              typeof char.race === 'string'
+                ? char.race
+                : char.race?.code || '';
+            const classCode =
+              typeof char.profession === 'string'
+                ? char.profession
+                : char.profession?.code || '';
+            const genderCode = (char.gender || '').toLowerCase();
+            const raceKeyLower = (raceCode || '')
+              .toLowerCase()
+              .replace(/_(male|female)$/, '');
+            const classKeyLower = (classCode || '').toLowerCase();
+            const raceName = char.race?.name || raceCode;
+            const className = char.profession?.name || classCode;
+            return (
+              <div key={char._id} className="flex flex-col items-center">
+                <CharacterCard
+                  character={char}
+                  editLabel={t('enter')}
+                  onEdit={() => handleSelect(char._id)}
+                  onDelete={() => handleDelete(char._id)}
+                  onSaveDescription={handleSaveDescription}
+                />
+                <div className="text-xs mt-1">
+                  {translateOrRaw(t, 'gender.' + genderCode, genderCode)}
+                </div>
+                <div className="text-xs">
+                  {translateOrRaw(t, `races.${raceKeyLower}`, raceName)} /{' '}
+                  {translateOrRaw(t, `classes.${classKeyLower}`, className)}
+                </div>
+                {char.stats && (
+                  <ul className="list-none pl-0 text-xs space-y-0.5 mt-1">
+                    {Object.entries(char.stats).map(([key, value]) => (
+                      <li key={key}>
+                        {translateOrRaw(t, `stats.${key.toLowerCase()}`, key)}: {value}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                <h4 className="text-xs mt-1">{t('inventory.title')}</h4>
+                <ul className="list-disc pl-4 text-xs space-y-0.5">
+                  {(() => {
+                    const inv = normalizeInventory(char.inventory);
+                    if (inv.type === 'array' && inv.items.length > 0) {
+                      return inv.items.map((it, idx) => {
+                        const bonusData =
+                          it.bonus &&
+                          typeof it.bonus === 'object' &&
+                          Object.keys(it.bonus).length
+                            ?
+                                ' (' +
+                                Object.entries(it.bonus)
+                                  .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase(), k)}`)
+                                  .join(', ') +
+                                ')'
+                            : '';
+                        return (
+                          <li key={idx}>
+                            {translateOrRaw(t, `item.${(it.code || it.item).toLowerCase()}`, it.item)}
+                            {it.amount > 1 ? ` x${it.amount}` : ''}
+                            {bonusData}
+                            {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
+                          </li>
+                        );
+                      });
+                    }
+                    if (inv.type === 'object' && inv.items.length > 0) {
+                      return inv.items.map(([key, it]) => {
+                        const bonusData =
+                          it.bonus &&
+                          typeof it.bonus === 'object' &&
+                          Object.keys(it.bonus).length
+                            ?
+                                ' (' +
+                                Object.entries(it.bonus)
+                                  .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase(), k)}`)
+                                  .join(', ') +
+                                ')'
+                            : '';
+                        return (
+                          <li key={key}>
+                            {translateOrRaw(t, `item.${(it.code || it.item).toLowerCase()}`, it.item)}
+                            {it.amount > 1 ? ` x${it.amount}` : ''}
+                            {bonusData}
+                            {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
+                          </li>
+                        );
+                      });
+                    }
+                    return <li>{t('inventory.empty')}</li>;
+                  })()}
+                </ul>
               </div>
-            </div>
-          ))
+            );
+          })
         )}
       </div>
     </div>
