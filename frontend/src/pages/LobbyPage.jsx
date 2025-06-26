@@ -7,7 +7,7 @@ import LanguageSwitch from '../components/LanguageSwitch';
 import { getCharacter } from '../utils/api';
 import { withApiHost } from '../utils/imageUtils';
 import { useTranslation } from 'react-i18next';
-import translateOrRaw from '../utils/translateOrRaw.js';
+import translateOrRaw from '../utils/translateOrRaw';
 
 // Fallback to localhost if env variable is missing
 const socket = io(import.meta.env.VITE_SOCKET_URL || 'http://localhost:5000');

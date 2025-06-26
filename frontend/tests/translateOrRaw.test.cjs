@@ -2,7 +2,7 @@
 
 let translateOrRaw;
 beforeAll(async () => {
-  ({ default: translateOrRaw } = await import('../src/utils/translateOrRaw.js'));
+  ({ default: translateOrRaw } = await import('../src/utils/translateOrRaw'));
 });
 
 test('returns translated string when available', () => {
