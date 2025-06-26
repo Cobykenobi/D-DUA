@@ -6,6 +6,7 @@ const Profession = require('../models/Profession');
 const generateStats = require('../utils/generateStats');
 const generateInventory = require('../utils/generateInventory');
 const generateAvatar = require('../utils/generateAvatar');
+const { generateCharacterImage } = require('../utils/ai');
 const slug = require('../utils/slugify');
 
 const allowedRaceCodes = new Set([
@@ -152,12 +153,20 @@ exports.create = async (req, res) => {
       console.warn(`Empty inventory for race ${raceCodeRaw} class ${classCodeLower}`);
     }
 
+    const avatarUrl = await generateCharacterImage(
+      raceCodeRaw,
+      classCodeLower,
+      finalGender,
+      inventory
+    );
+
 
   const newChar = new Character({
       user: req.user.id,
       name,
       description,
       image: avatar,
+      avatar: avatarUrl,
       gender: finalGender,
       race: race[0]?._id,
       profession: profession[0]?._id,
