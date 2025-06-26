@@ -150,7 +150,7 @@ export default function PlayerCard({ character, onSelect }) {
           }
           return (
             <ul className="list-disc pl-4 mt-2 space-y-0.5">
-              <li>{t('inventory.empty')}</li>
+              <li>{t('inventory_ui.empty')}</li>
             </ul>
           );
         })()}

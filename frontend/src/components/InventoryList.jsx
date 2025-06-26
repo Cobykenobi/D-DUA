@@ -19,7 +19,7 @@ export default function InventoryList({ items, filter = 'all' }) {
 
   return (
     <div className="bg-[#20100a]/90 p-2 rounded-2xl mb-4 w-full max-w-xl mx-auto">
-      <div className="text-dndgold font-bold mb-1">{t('inventory.title')}</div>
+      <div className="text-dndgold font-bold mb-1">{t('inventory')}</div>
       <ul className="list-disc pl-5">
         {filtered.map((item, i) => (
           <li key={i} className="text-dndgold">

@@ -40,7 +40,7 @@ export default function PlayerStatusTable({ players, isGM, onEdit, onKick }) {
           <th className="text-left">HP</th>
           <th className="text-left">MP</th>
           <th className="text-left">AC</th>
-          <th className="text-left">{t('stats_label')}</th>
+          <th className="text-left">{t('stats')}</th>
           {isGM && <th className="text-left">DMG</th>}
           {isGM && <th className="text-left">{t('actions')}</th>}
 

@@ -8,6 +8,8 @@ import translateEffect from '../utils/effectUtils';
 
 export default function CharacterCard({
   character,
+  stats,
+  inventory,
   editLabel,
   onEdit,
   onDelete,
@@ -53,6 +55,67 @@ export default function CharacterCard({
         {character.description && (
           <p className="text-sm italic mb-2 text-center">{character.description}</p>
         )}
+        {(stats || character.stats) && (
+          <ul className="list-none pl-0 text-xs mb-1 space-y-0.5">
+            {Object.entries(stats || character.stats).map(([key, value]) => (
+              <li key={key}>
+                {translateOrRaw(t, `stats.${key.toLowerCase()}`, key)}: {value}
+              </li>
+            ))}
+          </ul>
+        )}
+        {(inventory || character.inventory) && (() => {
+          const inv = normalizeInventory(inventory || character.inventory);
+          if (inv.type === 'array' && inv.items.length > 0) {
+            return (
+              <ul className="list-disc pl-4 text-xs space-y-0.5 mb-1">
+                {inv.items.map((it, idx) => {
+                  const bonusData =
+                    it.bonus && typeof it.bonus === 'object' && Object.keys(it.bonus).length
+                      ? ' (' +
+                        Object.entries(it.bonus)
+                          .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase(), k)}`)
+                          .join(', ') +
+                        ')'
+                      : '';
+                  return (
+                    <li key={idx}>
+                      {translateOrRaw(t, `item.${(it.code || it.item).toLowerCase()}`, it.item)}
+                      {it.amount > 1 ? ` x${it.amount}` : ''}
+                      {bonusData}
+                      {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
+                    </li>
+                  );
+                })}
+              </ul>
+            );
+          }
+          if (inv.type === 'object' && inv.items.length > 0) {
+            return (
+              <ul className="list-disc pl-4 text-xs space-y-0.5 mb-1">
+                {inv.items.map(([key, it]) => {
+                  const bonusData =
+                    it.bonus && typeof it.bonus === 'object' && Object.keys(it.bonus).length
+                      ? ' (' +
+                        Object.entries(it.bonus)
+                          .map(([k, v]) => `${v > 0 ? '+' : ''}${v} ${translateOrRaw(t, 'stats.' + k.toLowerCase(), k)}`)
+                          .join(', ') +
+                        ')'
+                      : '';
+                  return (
+                    <li key={key}>
+                      {translateOrRaw(t, `item.${(it.code || it.item).toLowerCase()}`, it.item)}
+                      {it.amount > 1 ? ` x${it.amount}` : ''}
+                      {bonusData}
+                      {it.effect ? ` (${translateEffect(it.effect, t)})` : ''}
+                    </li>
+                  );
+                })}
+              </ul>
+            );
+          }
+          return null;
+        })()}
         <div className="mt-auto flex flex-wrap justify-center gap-2">
           {onEdit && (
             <button
@@ -101,19 +164,19 @@ export default function CharacterCard({
             {t('save')}
           </button>
         )}
-        {character.stats && (
+        {(stats || character.stats) && (
           <ul className="list-none pl-0 text-sm mb-2 space-y-0.5">
-            {Object.entries(character.stats).map(([key, value]) => (
+            {Object.entries(stats || character.stats).map(([key, value]) => (
               <li key={key}>
                 {translateOrRaw(t, `stats.${key.toLowerCase()}`, key)}: {value}
               </li>
             ))}
           </ul>
         )}
-        <h4 className="text-dndgold mb-1">{t('inventory.title')}</h4>
+        <h4 className="text-dndgold mb-1">{t('inventory')}</h4>
         <ul className="list-disc pl-4 text-sm space-y-0.5">
           {(() => {
-            const inv = normalizeInventory(character.inventory);
+            const inv = normalizeInventory(inventory || character.inventory);
             if (inv.type === 'array' && inv.items.length > 0) {
               return inv.items.map((it, idx) => {
                 const bonusData =
@@ -164,7 +227,7 @@ export default function CharacterCard({
                 );
               });
             }
-            return <li>{t('inventory.empty')}</li>;
+            return <li>{t('inventory_ui.empty')}</li>;
           })()}
         </ul>
       </Modal>

@@ -181,7 +181,7 @@ function Control({ tableId }) {
 
       {players.some(p => p.character) && (
         <div>
-          <div className="font-bold mb-1">{t('inventory.title')}</div>
+          <div className="font-bold mb-1">{t('inventory')}</div>
           <select
             value={selectedChar || ''}
             onChange={e => setSelectedChar(e.target.value)}
