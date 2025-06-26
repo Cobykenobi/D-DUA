@@ -42,11 +42,13 @@ export default function DiceRoller({ sessionId, isGM }) {
       </div>
       {lastRoll !== null && (
         <div className="text-dndgold text-lg font-dnd mt-1">
+
           {t('roll_result')}: <b>{lastRoll}</b>
         </div>
       )}
       <div className="text-xs text-dndgold/60 mt-2">
         {isGM ? t('roll_visibility_gm') : t('roll_visibility_all')}
+
       </div>
     </div>
   );
