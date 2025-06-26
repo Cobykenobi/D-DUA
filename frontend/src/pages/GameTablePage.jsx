@@ -102,6 +102,14 @@ export default function GameTablePage() {
           </button>
           <LogoutButton />
           <LanguageSwitch />
+          {isGM && (
+            <button
+              onClick={() => window.open('/gm-control/' + tableId, '_blank')}
+              className="bg-dndgold hover:bg-dndred text-dndred hover:text-white font-dnd rounded-2xl px-4 py-2 transition active:scale-95"
+            >
+              {t('gm_tools')}
+            </button>
+          )}
         </div>
       </div>
       {isGM && (
