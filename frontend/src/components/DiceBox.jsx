@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 export default function DiceBox({ className = '' }) {
   const [diceResult, setDiceResult] = useState(null);
+  const { t } = useTranslation();
   const [diceAnim, setDiceAnim] = useState(false);
   const { t } = useTranslation();
 
@@ -34,7 +35,7 @@ export default function DiceBox({ className = '' }) {
             onClick={() => rollDice('d20')}
           >
 
-            {t('roll_dice_d20')}
+            {t('roll_dice')} D20
 
           </button>
           <button
@@ -42,7 +43,7 @@ export default function DiceBox({ className = '' }) {
             onClick={() => rollDice('d6')}
           >
 
-            {t('roll_dice_d6')}
+            {t('roll_dice')} D6
 
           </button>
         </div>
@@ -58,7 +59,8 @@ export default function DiceBox({ className = '' }) {
           </motion.div>
         )}
 
-          <div className="text-xl text-dndgold font-bold mt-2">{t('roll_result')}: {diceResult}</div>
+        {diceResult && !diceAnim && (
+          <div className="text-xl text-dndgold font-bold mt-2">{t('result')}: {diceResult}</div>
 
         )}
       </div>
