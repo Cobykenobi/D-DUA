@@ -63,7 +63,9 @@ async function seed() {
     { code: 'wizard', name: 'Маг', modifiers: { health: 0, defense: 0, strength: 0, intellect: 2, agility: 0, charisma: 0, mp: 1 } },
     { code: 'assassin', name: 'Асасін', modifiers: { health: 0, defense: 0, strength: 1, intellect: 0, agility: 1, charisma: 0, mp: 0 } },
     { code: 'paladin', name: 'Паладин', modifiers: { health: 1, defense: 0, strength: 1, intellect: 0, agility: 0, charisma: 1, mp: 0 } },
-    { code: 'bard', name: 'Бард', modifiers: { health: 0, defense: 0, strength: 0, intellect: 0, agility: 0, charisma: 1, mp: 0 } }
+    { code: 'bard', name: 'Бард', modifiers: { health: 0, defense: 0, strength: 0, intellect: 0, agility: 0, charisma: 1, mp: 0 } },
+    { code: 'archer', name: 'Лучник', modifiers: { health: 0, defense: 0, strength: 1, intellect: 0, agility: 2, charisma: 0, mp: 0 } },
+    { code: 'healer', name: 'Цілитель', modifiers: { health: 0, defense: 0, strength: 0, intellect: 1, agility: 0, charisma: 1, mp: 1 } }
 
   ];
   const characteristics = [
@@ -139,6 +141,32 @@ async function seed() {
       ],
       misc: [
         { item: 'Святий амулет' }
+      ]
+    },
+    archer: {
+      weapon: [
+        { item: 'Довгий лук', bonus: { agility: 2 } },
+        { item: 'Арбалет', bonus: { agility: 1 } }
+      ],
+      armor: [
+        { item: 'Шкіряна броня', bonus: { agility: 1 } },
+        { item: 'Капюшон мисливця' }
+      ],
+      misc: [
+        { item: 'Колчан стріл' }
+      ]
+    },
+    healer: {
+      weapon: [
+        { item: 'Жезл зцілення', bonus: { intellect: 1 } },
+        { item: 'Святий символ', bonus: { mp: 1 } }
+      ],
+      armor: [
+        { item: 'Ряса', bonus: { health: 1 } },
+        { item: 'Талісман віри', bonus: { charisma: 1 } }
+      ],
+      misc: [
+        { item: 'Зілля лікування' }
       ]
     }
   };
