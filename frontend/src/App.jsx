@@ -15,6 +15,7 @@ const GameTablePage = React.lazy(() => import('./pages/GameTablePage'));
 const GMTablePage = React.lazy(() => import('./pages/gm/GMTablePage'));
 const AdminLoginPage = React.lazy(() => import('./pages/AdminLoginPage'));
 const SettingsPanel = React.lazy(() => import('./pages/SettingsPanel'));
+const NotFoundPage = React.lazy(() => import('./pages/NotFoundPage'));
 
 const GMDashboard = React.lazy(() => import('./pages/GMDashboard'));
 const GMControlPage = React.lazy(() => import('./pages/gm/GMControlPage'));
@@ -73,7 +74,7 @@ const App = () => {
     <Route path="/gm-table/:tableId" element={<PrivateRoute roles={['gm']}><GameTablePage /></PrivateRoute>} />
     <Route path="/gm-control/:id" element={<PrivateRoute roles={['gm']}><GMControlPage /></PrivateRoute>} />
 
-    <Route path="*" element={<Navigate to="/" />} />
+    <Route path="*" element={<NotFoundPage />} />
   </Routes>
     </React.Suspense>
   );
