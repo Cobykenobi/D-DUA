@@ -24,6 +24,7 @@ const characterSchema = new mongoose.Schema({
     bonus: { type: Map, of: Number, default: {} }
   }],
   description: { type: String, default: '' },
+  avatar: { type: String, default: '' },
   image: { type: String, default: '' }, // посилання на файл/URL
 }, { timestamps: true });
 

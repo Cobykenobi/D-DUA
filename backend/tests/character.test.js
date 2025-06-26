@@ -5,6 +5,7 @@ const Character = require('../src/models/Character');
 const StartingSet = require('../src/models/StartingSet');
 const generateInventory = require('../src/utils/generateInventory');
 const generateAvatar = require('../src/utils/generateAvatar');
+const { generateCharacterImage } = require('../src/utils/ai');
 const generateStats = require('../src/utils/generateStats');
 
 jest.mock('../src/models/Race');
@@ -14,11 +15,13 @@ jest.mock('../src/models/StartingSet');
 jest.mock('../src/utils/generateInventory');
 jest.mock('../src/utils/generateAvatar');
 jest.mock('../src/utils/generateStats');
+jest.mock('../src/utils/ai');
 
 beforeEach(() => {
   jest.clearAllMocks();
   generateInventory.mockResolvedValue([]);
   generateAvatar.mockResolvedValue('/avatars/test.png');
+  generateCharacterImage.mockResolvedValue('/images/generated.png');
   jest.spyOn(console, 'warn').mockImplementation(() => {});
 
   Race.findOne.mockResolvedValue({ modifiers: new Map() });
@@ -140,6 +143,28 @@ describe('Character Controller - create', () => {
     expect(generateInventory).toHaveBeenCalledWith('forest_elf', 'wizard');
     expect(saved.inventory).toEqual(inv);
     expect(saved.gender).toBe('male');
+  });
+
+  it('generates character image and saves url', async () => {
+    Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Forest Elf', code: 'forest_elf' }]);
+    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Wizard', code: 'wizard' }]);
+
+    const inv = [{ item: 'Bow' }];
+    generateInventory.mockResolvedValue(inv);
+
+    let saved;
+    Character.mockImplementation(data => {
+      saved = data;
+      return { save: jest.fn().mockResolvedValue(data) };
+    });
+
+    const req = { user: { id: 'u1' }, body: { name: 'Hero' } };
+    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
+
+    await characterController.create(req, res);
+
+    expect(generateCharacterImage).toHaveBeenCalledWith('forest_elf', 'wizard', 'male', inv);
+    expect(saved.avatar).toBe('/images/generated.png');
   });
 
   it('returns 400 if races or professions are missing', async () => {
