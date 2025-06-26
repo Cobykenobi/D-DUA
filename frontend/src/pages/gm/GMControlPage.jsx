@@ -26,8 +26,10 @@ function Control({ tableId }) {
   const [message, setMessage] = useState('');
   const { t } = useTranslation();
 
-  const { tableId: routeTableId } = useParams();
-  const currentTableId = tableId || routeTableId;
+
+  const params = useParams();
+  const id = tableId || params.tableId;
+
   const navigate = useNavigate();
 
   useEffect(() => {
