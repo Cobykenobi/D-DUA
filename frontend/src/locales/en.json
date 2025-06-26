@@ -48,7 +48,6 @@
   "fields_required": "All fields required",
   "back": "Back",
   "your_characters": "Your Characters",
-  "create_new": "Create New",
   "create_table": "Create Table",
   "empty_profile": "Profile is empty",
   "enter": "Enter",
@@ -83,7 +82,6 @@
   "send": "Send",
   "actions": "Actions",
   "player": "Player",
-  "name": "Name",
   "race": "Race",
   "class": "Class",
   "stats_label": "Stats",
@@ -91,7 +89,6 @@
   "kick": "Kick",
   "delete": "Delete",
   "details": "Details",
-  "save": "Save",
   "add_monster": "Add Monster",
   "monster_name": "Monster Name",
   "generate_initiative": "Generate Initiative",
@@ -111,7 +108,6 @@
     "empty": "No items"
   },
   "random": "Random",
-  "all": "All",
-  "unknown": "Unknown"
+  "all": "All"
 
 }
