@@ -139,7 +139,7 @@ exports.create = async (req, res) => {
   const raceBase = raceCodeRaw.replace(/_(male|female)$/i, '');
   const classCodeLower = (profession[0].code || profession[0].name).toLowerCase();
 
-  const stats = generateStats(raceBase, classCodeLower, finalGender);
+  const stats = generateStats(raceBase, classCodeLower);
 
 
     // Логіка вибору аватара
