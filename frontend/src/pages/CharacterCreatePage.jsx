@@ -2,7 +2,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { createCharacter } from '../utils/api';
+
+import { createCharacter, getRaces, getProfessions } from '../utils/api';
+import api from '../api/axios';
+import { getRandomElement } from '../utils/characterUtils';
+import translateOrRaw from '../utils/translateOrRaw';
+
 
 import { useAppearance } from '../context/AppearanceContext';
 import { getStoredUserRole } from '../utils/auth';
