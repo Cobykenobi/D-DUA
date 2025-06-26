@@ -10,12 +10,12 @@ describe('generateAvatar', () => {
 
   it('returns specific avatar when file exists', async () => {
     jest.spyOn(fs, 'existsSync').mockImplementation(p =>
-      p.endsWith('male_elf_mage.png')
+      p.endsWith('male_elf_wizard.png')
     );
 
-    const path = await generateAvatar('male', 'elf', 'mage');
+    const path = await generateAvatar('male', 'elf', 'wizard');
 
-    expect(path).toBe('/avatars/male_elf_mage.png');
+    expect(path).toBe('/avatars/male_elf_wizard.png');
   });
 
   it('returns race avatar when specific file missing', async () => {
@@ -23,7 +23,7 @@ describe('generateAvatar', () => {
       .spyOn(fs, 'existsSync')
       .mockImplementation(p => p.endsWith('male_elf.png'));
 
-    const path = await generateAvatar('male', 'elf', 'mage');
+    const path = await generateAvatar('male', 'elf', 'wizard');
 
     expect(path).toBe('/avatars/male_elf.png');
   });
@@ -33,7 +33,7 @@ describe('generateAvatar', () => {
     jest.spyOn(fs, 'existsSync').mockReturnValue(false);
     jest.spyOn(ai, 'generateCharacterImage').mockResolvedValue('/avatars/ai.png');
 
-    const path = await generateAvatar('male', 'elf', 'mage');
+    const path = await generateAvatar('male', 'elf', 'wizard');
 
     expect(ai.generateCharacterImage).toHaveBeenCalled();
     expect(path).toBe('/avatars/ai.png');
@@ -43,7 +43,7 @@ describe('generateAvatar', () => {
     jest.spyOn(fs, 'existsSync').mockReturnValue(false);
     jest.spyOn(fs, 'readdirSync').mockReturnValue(['a.png', 'b.png']);
 
-    const path = await generateAvatar('male', 'elf', 'mage');
+    const path = await generateAvatar('male', 'elf', 'wizard');
 
     expect(path.startsWith('/avatars/')).toBe(true);
   });
@@ -52,7 +52,7 @@ describe('generateAvatar', () => {
     jest.spyOn(fs, 'existsSync').mockReturnValue(false);
     jest.spyOn(fs, 'readdirSync').mockReturnValue([]);
 
-    const path = await generateAvatar('male', 'elf', 'mage');
+    const path = await generateAvatar('male', 'elf', 'wizard');
 
     expect(path).toBe('');
   });

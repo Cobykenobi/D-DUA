@@ -26,7 +26,7 @@ const allowedClassCodes = new Set([
   'archer',
   'healer'
 ]);
-const professionAliases = { mage: 'wizard' };
+const professionAliases = {};
 
 function mapInventory(inv) {
   return (inv || []).map(it => ({

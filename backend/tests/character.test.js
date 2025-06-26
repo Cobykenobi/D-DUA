@@ -307,7 +307,7 @@ describe('Character Controller - create', () => {
 
     const req = {
       user: { id: 'u1' },
-      body: { name: 'Hero', race: 'orc', profession: 'mage' }
+      body: { name: 'Hero', race: 'orc', profession: 'wizard' }
     };
 
     const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };

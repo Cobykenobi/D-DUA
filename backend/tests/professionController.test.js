@@ -16,7 +16,7 @@ describe('Profession Controller', () => {
         return instance;
       });
 
-      const req = { body: { name: 'Mage', code: 'mage', description: '', modifiers: { intellect: 1 } } };
+      const req = { body: { name: 'Wizard', code: 'wizard', description: '', modifiers: { intellect: 1 } } };
       const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
 
       await professionController.create(req, res);
@@ -33,14 +33,14 @@ describe('Profession Controller', () => {
     it('updates modifiers field', async () => {
       Profession.findByIdAndUpdate.mockResolvedValue({ _id: 'p1', modifiers: { intellect: 2 } });
 
-      const req = { params: { id: 'p1' }, body: { name: 'Mage', code: 'mage', description: '', modifiers: { intellect: 2 } } };
+      const req = { params: { id: 'p1' }, body: { name: 'Wizard', code: 'wizard', description: '', modifiers: { intellect: 2 } } };
       const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
 
       await professionController.update(req, res);
 
       expect(Profession.findByIdAndUpdate).toHaveBeenCalledWith(
         'p1',
-        { $set: { name: 'Mage', code: 'mage', description: '', modifiers: { intellect: 2 } } },
+        { $set: { name: 'Wizard', code: 'wizard', description: '', modifiers: { intellect: 2 } } },
         { new: true }
       );
       expect(res.json).toHaveBeenCalledWith({ _id: 'p1', modifiers: { intellect: 2 } });
