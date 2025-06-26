@@ -6,6 +6,14 @@ const fetch = require('node-fetch');
 const fs = require('fs');
 const path = require('path');
 
+/**
+ * Generate an avatar for a character by querying an AI service.
+ *
+ * @param {string} race - Race code of the character.
+ * @param {string} profession - Profession or class code.
+ * @param {string} gender - Gender of the character.
+ * @returns {Promise<string>} Promise resolving to a URL or local path to the image.
+ */
 exports.generateCharacterImage = async (race, profession, gender) => {
   const prompt = `${gender} ${race} ${profession}`;
   // If no API key is provided, fall back to preset avatars bundled in the repo
