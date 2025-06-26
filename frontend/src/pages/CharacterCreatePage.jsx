@@ -1,11 +1,9 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
-import { createCharacter, getRaces, getProfessions } from '../utils/api';
-import api from '../api/axios';
-import { getRandomElement } from '../utils/characterUtils';
+import { createCharacter } from '../utils/api';
 
 
 import { useAppearance } from '../context/AppearanceContext';
@@ -17,6 +15,13 @@ const CharacterCreatePage = () => {
   const [gender, setGender] = useState('male');
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  useEffect(() => {
+    const role = getStoredUserRole();
+    if (role === 'gm') {
+      navigate('/gm-dashboard');
+    }
+  }, [navigate]);
 
 
 
