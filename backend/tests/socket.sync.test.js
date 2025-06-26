@@ -37,6 +37,7 @@ test('GM updates propagate to players', (done) => {
   let gotMap = false;
   let gotHp = false;
   let gotMusic = false;
+  let joined = false;
 
   const check = () => {
     if (gotMap && gotHp && gotMusic) {
@@ -50,9 +51,12 @@ test('GM updates propagate to players', (done) => {
   c2.on('player-hp-update', (d) => { expect(d.userId).toBe('p1'); expect(d.hp).toBe(3); gotHp = true; check(); });
   c2.on('music-change', (t) => { expect(t).toBe('song.mp3'); gotMusic = true; check(); });
 
-  setTimeout(() => {
-    c1.emit('map-update', { tableId, map: 'url1' });
-    c1.emit('player-hp-update', { tableId, userId: 'p1', hp: 3 });
-    c1.emit('music-change', { tableId, track: 'song.mp3' });
-  }, 100);
+  c2.on('table-players', () => {
+    if (!joined) {
+      joined = true;
+      c1.emit('map-update', { tableId, map: 'url1' });
+      c1.emit('player-hp-update', { tableId, userId: 'p1', hp: 3 });
+      c1.emit('music-change', { tableId, track: 'song.mp3' });
+    }
+  });
 });
