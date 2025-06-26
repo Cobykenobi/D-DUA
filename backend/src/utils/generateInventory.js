@@ -65,6 +65,32 @@ const classInventory = {
     misc: [
       { item: 'Святий амулет' }
     ]
+  },
+  archer: {
+    weapon: [
+      { item: 'Довгий лук', bonus: { agility: 2 } },
+      { item: 'Арбалет', bonus: { agility: 1 } }
+    ],
+    armor: [
+      { item: 'Шкіряна броня', bonus: { agility: 1 } },
+      { item: 'Капюшон мисливця' }
+    ],
+    misc: [
+      { item: 'Колчан стріл' }
+    ]
+  },
+  healer: {
+    weapon: [
+      { item: 'Жезл зцілення', bonus: { intellect: 1 } },
+      { item: 'Святий символ', bonus: { mp: 1 } }
+    ],
+    armor: [
+      { item: 'Ряса', bonus: { health: 1 } },
+      { item: 'Талісман віри', bonus: { charisma: 1 } }
+    ],
+    misc: [
+      { item: 'Зілля лікування' }
+    ]
   }
 };
 

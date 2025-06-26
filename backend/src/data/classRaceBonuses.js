@@ -12,7 +12,9 @@ const classBonuses = {
   wizard: { health: 0, defense: 0, strength: 0, intellect: 2, agility: 0, charisma: 0, mp: 1 },
   assassin: { health: 0, defense: 0, strength: 1, intellect: 0, agility: 1, charisma: 0, mp: 0 },
   paladin: { health: 1, defense: 0, strength: 1, intellect: 0, agility: 0, charisma: 1, mp: 0 },
-  bard: { health: 0, defense: 0, strength: 0, intellect: 0, agility: 0, charisma: 1, mp: 0 }
+  bard: { health: 0, defense: 0, strength: 0, intellect: 0, agility: 0, charisma: 1, mp: 0 },
+  archer: { health: 0, defense: 0, strength: 1, intellect: 0, agility: 2, charisma: 0, mp: 0 },
+  healer: { health: 0, defense: 0, strength: 0, intellect: 1, agility: 0, charisma: 1, mp: 1 }
 };
 
 module.exports = { raceBonuses, classBonuses };

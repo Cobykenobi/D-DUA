@@ -29,6 +29,34 @@ describe('generateInventory', () => {
     ]);
   });
 
+  it('generates inventory for archer', () => {
+    jest.spyOn(Math, 'random').mockReturnValueOnce(0.3);
+
+    const items = generateInventory('orc', 'archer');
+    Math.random.mockRestore();
+
+    expect(items).toEqual([
+      { item: 'Довгий лук', code: 'довгий_лук', amount: 1, bonus: { agility: 2 } },
+      { item: 'Шкіряна броня', code: 'шкіряна_броня', amount: 1, bonus: { agility: 1 } },
+      { item: 'Колчан стріл', code: 'колчан_стріл', amount: 1, bonus: {} },
+      { item: 'Кістяний талісман', code: 'кістяний_талісман', amount: 1, bonus: { strength: 1 } }
+    ]);
+  });
+
+  it('generates inventory for healer', () => {
+    jest.spyOn(Math, 'random').mockReturnValueOnce(0.3);
+
+    const items = generateInventory('orc', 'healer');
+    Math.random.mockRestore();
+
+    expect(items).toEqual([
+      { item: 'Жезл зцілення', code: 'жезл_зцілення', amount: 1, bonus: { intellect: 1 } },
+      { item: 'Ряса', code: 'ряса', amount: 1, bonus: { health: 1 } },
+      { item: 'Зілля лікування', code: 'зілля_лікування', amount: 1, bonus: {} },
+      { item: 'Кістяний талісман', code: 'кістяний_талісман', amount: 1, bonus: { strength: 1 } }
+    ]);
+  });
+
   it('returns empty array for unknown inputs and logs warning', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
     const items = generateInventory('unknown', 'unknown');
