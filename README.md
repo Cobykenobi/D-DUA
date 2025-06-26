@@ -196,7 +196,7 @@ added. Attributes not modified by race or profession are randomised between
 **3** and **10**, but never drop below their current value.
 
 ```js
-const stats = generateStats('elf', 'mage', 'female');
+const stats = generateStats('elf', 'wizard');
 // => { health: 5, defense: 5, strength: 5, intellect: 8, agility: 7, charisma: 6 }
 ```
 
