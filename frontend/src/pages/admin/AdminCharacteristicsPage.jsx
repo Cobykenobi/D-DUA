@@ -1,11 +1,13 @@
 import api from '../../api/axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next';
 export default function AdminCharacteristicsPage() {
   const [characteristics, setCharacteristics] = useState([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
 
   const fetchCharacteristics = async () => {
     setLoading(true);
@@ -59,7 +61,7 @@ export default function AdminCharacteristicsPage() {
             ))}
           </ul>
         )}
-        <Link to="/admin" className="block text-dndgold underline mt-6 text-center">← Назад</Link>
+        <Link to="/admin" className="block text-dndgold underline mt-6 text-center">← {t('back')}</Link>
       </div>
     </div>
   );

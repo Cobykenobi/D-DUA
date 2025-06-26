@@ -2,12 +2,14 @@ import { useEffect, useState, useRef } from 'react';
 import { getAppearance, updateAppearance } from '../../api/adminActions';
 import { Link } from 'react-router-dom';
 import { useAppearance } from '../../context/AppearanceContext';
+import { useTranslation } from 'react-i18next';
 
 export default function AdminAppearancePage() {
   const [theme, setTheme] = useState('light');
   const [file, setFile] = useState(null);
   const fileInput = useRef();
   const { refreshAppearance } = useAppearance();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,9 +42,9 @@ export default function AdminAppearancePage() {
           </select>
           <label className="text-dndgold">Фон (картинка):</label>
           <input type="file" accept="image/*" ref={fileInput} onChange={e => setFile(e.target.files[0])} className="bg-[#2c1a12] border border-dndgold text-dndgold rounded-2xl px-3 py-2" />
-          <button type="submit" className="bg-dndgold text-dndred font-dnd rounded-2xl px-4 py-2 transition active:scale-95">Зберегти</button>
+          <button type="submit" className="bg-dndgold text-dndred font-dnd rounded-2xl px-4 py-2 transition active:scale-95">{t('save')}</button>
         </form>
-        <Link to="/admin" className="block text-dndgold underline mt-6 text-center">← Назад</Link>
+        <Link to="/admin" className="block text-dndgold underline mt-6 text-center">← {t('back')}</Link>
       </div>
     </div>
   );

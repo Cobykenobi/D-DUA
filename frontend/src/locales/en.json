@@ -41,6 +41,11 @@
   "loading": "Loading...",
   "error_load_character": "Failed to load character",
   "error_save_changes": "Failed to save changes",
+  "edit_inventory": "Edit Inventory",
+  "admin_music": "Admin: Music",
+  "track_name": "Track name",
+  "add": "Add",
+  "listen": "Listen",
 
 
   "admin": "Admin",
@@ -48,7 +53,6 @@
   "fields_required": "All fields required",
   "back": "Back",
   "your_characters": "Your Characters",
-  "create_new": "Create New",
   "create_table": "Create Table",
   "empty_profile": "Profile is empty",
   "enter": "Enter",
@@ -111,7 +115,6 @@
     "empty": "No items"
   },
   "random": "Random",
-  "all": "All",
-  "unknown": "Unknown"
+  "all": "All"
 
 }

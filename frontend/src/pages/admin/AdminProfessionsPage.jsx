@@ -1,6 +1,7 @@
 import api from '../../api/axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next';
 export default function AdminProfessionsPage() {
   const [professions, setProfessions] = useState([]);
   const [name, setName] = useState('');
@@ -9,6 +10,7 @@ export default function AdminProfessionsPage() {
   const [editingId, setEditingId] = useState(null);
   const [editName, setEditName] = useState('');
   const [editDescription, setEditDescription] = useState('');
+  const { t } = useTranslation();
 
   const fetchProfessions = async () => {
     setLoading(true);
@@ -147,7 +149,7 @@ export default function AdminProfessionsPage() {
             </table>
           </div>
         )}
-        <Link to="/admin" className="block text-dndgold underline mt-6 text-center">← Назад</Link>
+        <Link to="/admin" className="block text-dndgold underline mt-6 text-center">← {t('back')}</Link>
       </div>
     </div>
   );
