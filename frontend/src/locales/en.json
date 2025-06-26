@@ -41,6 +41,11 @@
   "loading": "Loading...",
   "error_load_character": "Failed to load character",
   "error_save_changes": "Failed to save changes",
+  "edit_inventory": "Edit Inventory",
+  "admin_music": "Admin: Music",
+  "track_name": "Track name",
+  "add": "Add",
+  "listen": "Listen",
 
 
   "admin": "Admin",

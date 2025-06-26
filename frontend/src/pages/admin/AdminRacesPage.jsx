@@ -1,6 +1,7 @@
 import api from '../../api/axios';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next';
 export default function AdminRacesPage() {
   const [races, setRaces] = useState([]);
   const [name, setName] = useState('');
@@ -9,6 +10,7 @@ export default function AdminRacesPage() {
   const [editingId, setEditingId] = useState(null);
   const [editName, setEditName] = useState('');
   const [editDescription, setEditDescription] = useState('');
+  const { t } = useTranslation();
 
   const fetchRaces = async () => {
     setLoading(true);
@@ -148,7 +150,7 @@ export default function AdminRacesPage() {
             </table>
           </div>
         )}
-        <Link to="/admin" className="block text-dndgold underline mt-6 text-center">← Назад</Link>
+        <Link to="/admin" className="block text-dndgold underline mt-6 text-center">← {t('back')}</Link>
       </div>
     </div>
   );

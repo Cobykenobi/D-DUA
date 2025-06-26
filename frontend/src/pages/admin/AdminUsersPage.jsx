@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { getUsers, updateUserRole } from '../../api/adminActions';
+import { useTranslation } from 'react-i18next';
 
 export default function AdminUsersPage() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
 
   const fetchUsers = async () => {
     setLoading(true);
@@ -64,7 +66,7 @@ export default function AdminUsersPage() {
             </table>
           </div>
         )}
-        <Link to="/admin" className="block text-dndgold underline mt-6 text-center">← Назад</Link>
+        <Link to="/admin" className="block text-dndgold underline mt-6 text-center">← {t('back')}</Link>
       </div>
     </div>
   );

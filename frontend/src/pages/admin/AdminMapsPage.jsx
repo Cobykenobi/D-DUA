@@ -1,12 +1,14 @@
 import api from '../../api/axios';
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next';
 export default function AdminMapsPage() {
   const [maps, setMaps] = useState([]);
   const [name, setName] = useState('');
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const fileInput = useRef();
+  const { t } = useTranslation();
 
   const fetchMaps = async () => {
     setLoading(true);
@@ -68,7 +70,7 @@ export default function AdminMapsPage() {
             ))}
           </ul>
         )}
-        <Link to="/admin" className="block text-dndgold underline mt-6 text-center">← Назад</Link>
+        <Link to="/admin" className="block text-dndgold underline mt-6 text-center">← {t('back')}</Link>
       </div>
     </div>
   );
