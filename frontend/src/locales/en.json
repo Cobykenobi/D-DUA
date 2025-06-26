@@ -13,7 +13,6 @@
   },
   "classes": {
     "warrior": "Warrior",
-    "mage": "Mage",
     "archer": "Archer",
     "paladin": "Paladin",
     "bard": "Bard",

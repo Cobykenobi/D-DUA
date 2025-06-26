@@ -92,7 +92,7 @@ async function seed() {
         { item: 'Зілля здоров’я' }
       ]
     },
-    mage: {
+    wizard: {
       weapon: [
         { item: 'Магічний посох', bonus: { intellect: 2 } },
         { item: 'Чарівна паличка', bonus: { intellect: 1 } }
