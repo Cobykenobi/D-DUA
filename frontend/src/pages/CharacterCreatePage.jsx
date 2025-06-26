@@ -7,6 +7,7 @@ import api from '../api/axios';
 import { getRandomElement } from '../utils/characterUtils';
 
 import { useAppearance } from '../context/AppearanceContext';
+import { getStoredUserRole } from '../utils/auth';
 
 
 const CharacterCreatePage = () => {
@@ -18,6 +19,12 @@ const CharacterCreatePage = () => {
   const [classOptions, setClassOptions] = useState([]);
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (getStoredUserRole() === 'gm') {
+      navigate('/gm-dashboard');
+    }
+  }, [navigate]);
 
   useEffect(() => {
     const fetchOptions = async () => {
