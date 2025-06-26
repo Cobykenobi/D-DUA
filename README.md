@@ -126,7 +126,7 @@ are redirected to `/characters` where they can manage their heroes. Users with t
 
 - `/gm-dashboard` – overview for game masters
 - `/gm-table/:tableId` – run a specific table
-- `/gm-control/:id` – manage player controls
+- `/gm-control/:tableId` – manage player controls
 
 These routes are protected in the frontend using `PrivateRoute`, which now checks
 the stored user role.
