@@ -51,6 +51,7 @@
   "admin": "Адмін",
   "register": "Реєстрація",
   "register_submit": "Зареєструватися",
+  "register_error": "Помилка реєстрації",
   "fields_required": "Всі поля обов'язкові",
   "back": "Назад",
   "your_characters": "Ваші персонажі",

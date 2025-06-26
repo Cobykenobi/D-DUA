@@ -51,6 +51,7 @@
   "admin": "Admin",
   "register": "Register",
   "register_submit": "Register",
+  "register_error": "Registration error",
   "fields_required": "All fields required",
   "back": "Back",
   "your_characters": "Your Characters",
