@@ -45,6 +45,7 @@
 
   "admin": "Admin",
   "register": "Register",
+  "register_submit": "Register",
   "fields_required": "All fields required",
   "back": "Back",
   "your_characters": "Your Characters",
