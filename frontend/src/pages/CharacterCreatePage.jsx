@@ -5,7 +5,9 @@ import { useTranslation } from 'react-i18next';
 import { createCharacter, getRaces, getProfessions } from '../utils/api';
 import api from '../api/axios';
 import { getRandomElement } from '../utils/characterUtils';
-import translateOrRaw from '../utils/translateOrRaw.js';
+
+import { useAppearance } from '../context/AppearanceContext';
+
 
 const CharacterCreatePage = () => {
   const [name, setName] = useState('');
@@ -62,10 +64,11 @@ const CharacterCreatePage = () => {
     }
   };
 
+  const { background } = useAppearance();
   return (
     <div
       className="relative min-h-screen bg-dndbg bg-cover bg-center flex flex-col items-center justify-center p-6 font-dnd text-dndgold text-shadow"
-      style={{ backgroundImage: "url('/map-bg.jpg')" }}
+      style={{ backgroundImage: `url('${background}')` }}
     >
       <div className="absolute top-4 left-4">
         <button

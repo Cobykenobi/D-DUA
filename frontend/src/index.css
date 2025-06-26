@@ -6,7 +6,8 @@
 body {
   font-family: 'Cinzel', serif;
   font-size: 18px;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/map-bg.jpg');
+  --bg-image: url('/map-bg.jpg');
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), var(--bg-image);
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

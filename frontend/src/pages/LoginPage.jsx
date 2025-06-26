@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import api from '../api/axios';
 import { useUserStore } from '../store/user';
+import { useAppearance } from '../context/AppearanceContext';
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -23,10 +24,11 @@ function LoginPage() {
     navigate(user.role === 'gm' ? '/gm-dashboard' : '/characters');
   };
 
+  const { background } = useAppearance();
   return (
     <div
       className="min-h-screen bg-cover bg-center flex items-center justify-center"
-      style={{ backgroundImage: `url('/map-bg.jpg')` }}
+      style={{ backgroundImage: `url('${background}')` }}
     >
       <div className="bg-[#2d1d14]/90 p-8 rounded-lg shadow-lg w-full max-w-md text-center text-white">
         <h2 className="text-3xl font-dnd mb-4">{t('login')}</h2>

@@ -5,3 +5,4 @@ export { default as AdminMapsPage } from './AdminMapsPage';
 export { default as AdminMusicPage } from './AdminMusicPage';
 export { default as AdminInventoryPage } from './AdminInventoryPage';
 export { default as AdminUsersPage } from './AdminUsersPage';
+export { default as AdminAppearancePage } from './AdminAppearancePage';
