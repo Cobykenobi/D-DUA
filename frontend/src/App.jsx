@@ -58,7 +58,10 @@ const App = () => {
       <Route path="/ping" element={<div>ok</div>} />
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/characters" element={isAuthenticated() ? <ProfilePage /> : <Navigate to="/login" />} />
-      <Route path="/create-character" element={isAuthenticated() ? <CharacterCreatePage /> : <Navigate to="/login" />} />
+      <Route
+        path="/create-character"
+        element={isAuthenticated() ? (isGM() ? <Navigate to="/gm-dashboard" /> : <CharacterCreatePage />) : <Navigate to="/login" />}
+      />
       <Route path="/lobby" element={isAuthenticated() ? <LobbyPage /> : <Navigate to="/login" />} />
       <Route path="/admin" element={isAdmin() ? <AdminPage /> : <Navigate to="/admin/login" />} />
       <Route path="/admin/inventory/:characterId" element={isAdmin() ? <AdminInventoryPage /> : <Navigate to="/admin/login" />} />

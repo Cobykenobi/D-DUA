@@ -43,30 +43,3 @@ exports.generateCharacterImage = async (description) => {
   fs.writeFileSync(path.join(dir, filename), buffer);
   return `/uploads/avatars/${filename}`;
 };
-
-exports.generateCharacterDescription = async ({ raceCode = '', classCode = '', gender = '' } = {}) => {
-  if (!process.env.OPENAI_API_KEY) return '';
-
-  const prompt =
-    `Give a short fantasy character description. ` +
-    `Race: ${raceCode}. Class: ${classCode}. Gender: ${gender}.`;
-
-  try {
-    const res = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
-        messages: [{ role: 'user', content: prompt }],
-        max_tokens: 60,
-      }),
-    });
-    const data = await res.json();
-    return data.choices?.[0]?.message?.content?.trim() || '';
-  } catch {
-    return '';
-  }
-};

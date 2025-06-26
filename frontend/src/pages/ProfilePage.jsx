@@ -34,7 +34,13 @@ const ProfilePage = () => {
     fetchChars();
   }, []);
 
-  const handleCreate = () => navigate('/create-character');
+  const handleCreate = () => {
+    if (user?.role === 'gm') {
+      navigate('/gm-dashboard');
+    } else {
+      navigate('/create-character');
+    }
+  };
   const handleSelect = (charId) => navigate(`/lobby?char=${charId}`);
   const handleDelete = async (id) => {
     await deleteCharacter(id);
