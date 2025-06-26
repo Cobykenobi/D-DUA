@@ -27,7 +27,7 @@ function Control({ tableId }) {
   const { t } = useTranslation();
 
   const params = useParams();
-  const id = tableId || params.tableId || params.id;
+  const id = tableId || params.tableId;
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -230,12 +230,12 @@ function Control({ tableId }) {
 }
 
 export default function GMControlPage() {
-  const { id } = useParams();
+  const { tableId } = useParams();
   const { user } = useUserStore();
   return (
-    <GameStateProvider tableId={id} user={user}>
+    <GameStateProvider tableId={tableId} user={user}>
       <div className="min-h-screen bg-dndbg text-dndgold font-dnd flex justify-center items-start pt-4">
-        <Control tableId={id} />
+        <Control tableId={tableId} />
       </div>
     </GameStateProvider>
   );
