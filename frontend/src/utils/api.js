@@ -10,8 +10,8 @@ export const getCharacter = async (id) => {
   return res.data;
 };
 
-export const createCharacter = async ({ name, gender, race, class: charClass, avatar }) => {
-  const payload = { name, gender, race, class: charClass, avatar };
+export const createCharacter = async ({ name, gender }) => {
+  const payload = { name, gender };
   const res = await api.post('/character', payload);
   return res.data;
 };
