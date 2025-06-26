@@ -26,7 +26,7 @@ async function generateAvatar(gender, raceCode, classCode) {
     }
 
     if (process.env.OPENAI_API_KEY) {
-      return await ai.generateCharacterImage(`${gender} ${raceCode} ${classCode}`);
+      return await ai.generateCharacterImage(raceCode, classCode, gender);
     }
 
     const files = fs.readdirSync(avatarsDir).filter(f => !f.startsWith('.'));

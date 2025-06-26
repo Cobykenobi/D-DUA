@@ -3,9 +3,9 @@ const router = express.Router();
 const { generateCharacterImage } = require('../utils/ai');
 
 router.post('/avatar', async (req, res) => {
-  const { description } = req.body;
+  const { race = 'human', profession = 'warrior', gender = 'male' } = req.body;
   try {
-    const url = await generateCharacterImage(description || 'fantasy character');
+    const url = await generateCharacterImage(race, profession, gender);
     res.json({ url });
   } catch (err) {
     console.error(err);

@@ -10,7 +10,7 @@ describe('generateCharacterImage fallback', () => {
   it('returns random avatar path', async () => {
     jest.spyOn(fs, 'readdirSync').mockReturnValue(['a.png', 'b.png']);
 
-    const path = await generateCharacterImage('desc');
+    const path = await generateCharacterImage('elf', 'wizard', 'male');
 
     expect(path.startsWith('/avatars/')).toBe(true);
   });
@@ -18,7 +18,7 @@ describe('generateCharacterImage fallback', () => {
   it('returns empty string when no files', async () => {
     jest.spyOn(fs, 'readdirSync').mockReturnValue([]);
 
-    const path = await generateCharacterImage('desc');
+    const path = await generateCharacterImage('elf', 'wizard', 'male');
 
     expect(path).toBe('');
   });

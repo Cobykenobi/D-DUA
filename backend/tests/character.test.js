@@ -163,7 +163,7 @@ describe('Character Controller - create', () => {
 
     await characterController.create(req, res);
 
-    expect(generateCharacterImage).toHaveBeenCalledWith('forest_elf', 'wizard', 'male', inv);
+    expect(generateCharacterImage).toHaveBeenCalledWith('forest_elf', 'wizard', 'male');
     expect(saved.avatar).toBe('/images/generated.png');
   });
 

@@ -156,8 +156,7 @@ exports.create = async (req, res) => {
     const avatarUrl = await generateCharacterImage(
       raceCodeRaw,
       classCodeLower,
-      finalGender,
-      inventory
+      finalGender
     );
 
 
