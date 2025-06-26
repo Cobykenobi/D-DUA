@@ -47,6 +47,22 @@
   "add": "Add",
   "listen": "Listen",
 
+  "admin_page_title": "Admin Panel",
+  "set_music": "Set Music",
+  "create_new_race": "Create New Race",
+  "upload_map": "Upload Map",
+  "users": "Users",
+  "appearance": "Appearance",
+  "start_session": "Start Session",
+  "end_session": "End Session",
+  "race_list": "Race List",
+  "event_log": "Event Log",
+  "confirm_delete_race": "Are you sure you want to delete this race?",
+  "youtube_link_prompt": "Paste YouTube link:",
+  "race_name_prompt": "Race name:",
+  "session_started": "Session started",
+  "session_ended": "Session ended",
+
 
   "admin": "Admin",
   "register": "Register",
