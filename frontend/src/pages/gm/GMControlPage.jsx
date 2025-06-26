@@ -26,8 +26,10 @@ function Control({ tableId }) {
   const [message, setMessage] = useState('');
   const { t } = useTranslation();
 
+
   const params = useParams();
   const id = tableId || params.tableId;
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -56,7 +58,7 @@ function Control({ tableId }) {
       socket.off('inventory-update', onInv);
       socket.off('inventory-update-all', onInvAll);
     };
-  }, [id, selectedChar]);
+  }, [currentTableId, selectedChar]);
 
   useEffect(() => {
     if (players.length && !selectedChar) {
@@ -80,7 +82,7 @@ function Control({ tableId }) {
   }, [selectedChar]);
 
   const kickPlayer = (uid) => {
-    socket.emit('kick-player', { tableId: id, userId: uid });
+    socket.emit('kick-player', { tableId: currentTableId, userId: uid });
   };
 
   const editPlayer = (p) => {
@@ -122,7 +124,7 @@ function Control({ tableId }) {
   const updateInventory = async (items) => {
     setInventory(items);
     socket.emit('inventory-update', {
-      tableId: id,
+      tableId: currentTableId,
       characterId: selectedChar,
       inventory: items,
     });
@@ -138,7 +140,7 @@ function Control({ tableId }) {
 
   const sendMessage = () => {
     if (!message.trim()) return;
-    socket.emit('gm-message', { tableId: id, targetUserId: target, text: message });
+    socket.emit('gm-message', { tableId: currentTableId, targetUserId: target, text: message });
     setMessage('');
 
   };
@@ -224,7 +226,7 @@ function Control({ tableId }) {
 
       </div>
       <DiceBox />
-      <DiceRollerHidden sessionId={id} />
+      <DiceRollerHidden sessionId={currentTableId} />
     </div>
   );
 }
