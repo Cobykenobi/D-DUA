@@ -34,7 +34,11 @@ function RegisterPage() {
       localStorage.setItem("user", JSON.stringify(response.data.user));
       navigate("/");
     } catch (err) {
-      setError(err.response?.data?.message || t('register_error'));
+      if (err.response?.data?.message === 'User already exists') {
+        alert(t('user_already_exists'));
+      } else {
+        setError(err.response?.data?.message || t('register_error'));
+      }
     }
   };
 

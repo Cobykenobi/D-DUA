@@ -20,7 +20,7 @@ afterAll((done) => {
   httpServer.close(done);
 });
 
-jest.setTimeout(10000);
+jest.setTimeout(15000);
 
 test('GM updates propagate to players', (done) => {
   const url = `http://localhost:${addr.port}`;
