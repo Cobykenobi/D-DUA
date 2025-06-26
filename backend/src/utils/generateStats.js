@@ -1,5 +1,4 @@
-const Race = require('../models/Race');
-const Profession = require('../models/Profession');
+const { raceBonuses, classBonuses } = require('../data/classRaceBonuses');
 
 const baseStats = {
   health: 5,
@@ -11,37 +10,26 @@ const baseStats = {
   mp: 5,
 };
 
-
-function toObj(map) {
-  if (!map) return {};
-  if (typeof map.entries === 'function') {
-    return Object.fromEntries(map.entries());
+function applyBonuses(stats, bonuses) {
+  for (const [key, value] of Object.entries(bonuses || {})) {
+    if (stats[key] === undefined) stats[key] = 0;
+    stats[key] += value;
   }
-  return map;
 }
 
-
-async function generateStats(raceCode, professionCode) {
+function generateStats(raceCode, professionCode) {
   const stats = { ...baseStats };
 
-  const race = await Race.findOne({ code: raceCode });
-  const profession = await Profession.findOne({ code: professionCode });
+  const raceKey = (raceCode || '').replace(/_(male|female)$/i, '');
+  const raceMods = raceBonuses[raceKey] || {};
+  const classMods = classBonuses[professionCode] || {};
 
-  const raceMods = toObj(race && race.modifiers);
-  for (const key in raceMods) {
-    if (stats[key] === undefined) stats[key] = 0;
-    stats[key] += raceMods[key];
-  }
-
-  const profMods = toObj(profession && profession.modifiers);
-  for (const key in profMods) {
-    if (stats[key] === undefined) stats[key] = 0;
-    stats[key] += profMods[key];
-  }
+  applyBonuses(stats, raceMods);
+  applyBonuses(stats, classMods);
 
   for (const key of Object.keys(stats)) {
     const hasRace = raceMods[key] !== undefined;
-    const hasClass = profMods[key] !== undefined;
+    const hasClass = classMods[key] !== undefined;
     if (!hasRace && !hasClass) {
       stats[key] = Math.max(stats[key], Math.floor(Math.random() * 8) + 3);
     }

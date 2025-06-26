@@ -1,56 +1,37 @@
-const StartingSet = require('../src/models/StartingSet');
-jest.mock('../src/models/StartingSet');
-
 const generateInventory = require('../src/utils/generateInventory');
 
 describe('generateInventory', () => {
-  const sets = [
-    { items: [ { name: 'Меч' }, { name: 'Щит' }, { name: 'Зілля здоров’я' } ] },
-    { items: [ { name: 'Меч' }, { name: 'Шкіряна броня' }, { name: 'Зілля здоров’я' } ] },
-    { items: [ { name: 'Сокира' }, { name: 'Щит' }, { name: 'Зілля здоров’я' } ] },
-    { items: [ { name: 'Сокира' }, { name: 'Шкіряна броня' }, { name: 'Зілля здоров’я' } ] },
-  ];
-
-  it('selects random items for each category', async () => {
-    StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue(sets) });
-    const spy = StartingSet.find;
+  it('selects random items for each category', () => {
     jest.spyOn(Math, 'random').mockReturnValueOnce(0.3);
 
-    const items = await generateInventory('orc', 'warrior');
+    const items = generateInventory('orc', 'warrior');
     Math.random.mockRestore();
 
-    expect(spy).toHaveBeenCalledWith({ classCode: 'warrior', raceCode: 'orc' });
-
     expect(items).toEqual([
-      { item: 'Меч', code: 'меч', amount: 1, bonus: {} },
-      { item: 'Шкіряна броня', code: 'шкіряна_броня', amount: 1, bonus: {} },
+      { item: 'Меч', code: 'меч', amount: 1, bonus: { strength: 2 } },
+      { item: 'Щит', code: 'щит', amount: 1, bonus: { defense: 1 } },
       { item: 'Зілля здоров’я', code: 'зілля_здоров’я', amount: 1, bonus: {} },
       { item: 'Кістяний талісман', code: 'кістяний_талісман', amount: 1, bonus: { strength: 1 } }
     ]);
   });
 
-  it('mixes items across sets', async () => {
-    StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue(sets) });
-    const spy2 = StartingSet.find;
+  it('mixes items across sets', () => {
     jest.spyOn(Math, 'random').mockReturnValueOnce(0.6);
 
-    const items = await generateInventory('orc', 'warrior');
+    const items = generateInventory('orc', 'warrior');
     Math.random.mockRestore();
 
-    expect(spy2).toHaveBeenCalledWith({ classCode: 'warrior', raceCode: 'orc' });
-
     expect(items).toEqual([
-      { item: 'Сокира', code: 'сокира', amount: 1, bonus: {} },
-      { item: 'Щит', code: 'щит', amount: 1, bonus: {} },
+      { item: 'Меч', code: 'меч', amount: 1, bonus: { strength: 2 } },
+      { item: 'Шкіряна броня', code: 'шкіряна_броня', amount: 1, bonus: { agility: 1 } },
       { item: 'Зілля здоров’я', code: 'зілля_здоров’я', amount: 1, bonus: {} },
       { item: 'Кістяний талісман', code: 'кістяний_талісман', amount: 1, bonus: { strength: 1 } }
     ]);
   });
 
-  it('returns empty array for unknown inputs and logs warning', async () => {
-    StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([]) });
+  it('returns empty array for unknown inputs and logs warning', () => {
     const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
-    const items = await generateInventory('unknown', 'unknown');
+    const items = generateInventory('unknown', 'unknown');
     expect(warn).toHaveBeenCalled();
     warn.mockRestore();
     expect(items).toEqual([]);
