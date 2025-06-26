@@ -38,6 +38,7 @@
   "name": "Name",
   "description": "Description",
   "save": "Save",
+  "saved": "Saved",
   "loading": "Loading...",
   "error_load_character": "Failed to load character",
   "error_save_changes": "Failed to save changes",
