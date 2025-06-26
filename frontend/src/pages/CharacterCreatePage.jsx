@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { createCharacter, getRaces, getProfessions } from '../utils/api';
 import api from '../api/axios';
 import { getRandomElement } from '../utils/characterUtils';
+import translateOrRaw from '../utils/translateOrRaw';
 
 import { useAppearance } from '../context/AppearanceContext';
 
