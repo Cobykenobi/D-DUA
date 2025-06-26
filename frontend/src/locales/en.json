@@ -108,7 +108,7 @@
   "player": "Player",
   "race": "Race",
   "class": "Class",
-  "stats_label": "Stats",
+  "stats": "Stats",
   "edit": "Edit",
   "kick": "Kick",
   "delete": "Delete",
@@ -117,8 +117,8 @@
   "monster_name": "Monster Name",
   "generate_initiative": "Generate Initiative",
   "start_initiative": "Start Initiative",
-  "inventory": {
-    "title": "Inventory",
+  "inventory": "Inventory",
+  "inventory_ui": {
     "item_added": "Item added",
     "item_removed": "Item removed",
     "order_changed": "Order changed",

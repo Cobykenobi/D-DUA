@@ -127,6 +127,8 @@ const ProfilePage = () => {
               <div key={char._id} className="flex flex-col items-center">
                 <CharacterCard
                   character={char}
+                  stats={char.stats}
+                  inventory={char.inventory}
                   editLabel={t('enter')}
                   onEdit={() => handleSelect(char._id)}
                   onDelete={() => handleDelete(char._id)}
@@ -148,7 +150,7 @@ const ProfilePage = () => {
                     ))}
                   </ul>
                 )}
-                <h4 className="text-xs mt-1">{t('inventory.title')}</h4>
+                <h4 className="text-xs mt-1">{t('inventory')}</h4>
                 <ul className="list-disc pl-4 text-xs space-y-0.5">
                   {(() => {
                     const inv = normalizeInventory(char.inventory);
@@ -198,7 +200,7 @@ const ProfilePage = () => {
                         );
                       });
                     }
-                    return <li>{t('inventory.empty')}</li>;
+                    return <li>{t('inventory_ui.empty')}</li>;
                   })()}
                 </ul>
               </div>

@@ -108,7 +108,7 @@
   "player": "Гравець",
   "race": "Раса",
   "class": "Клас",
-  "stats_label": "Статистика",
+  "stats": "Статистика",
   "edit": "Редагувати",
   "kick": "Вигнати",
   "delete": "Видалити",
@@ -117,8 +117,8 @@
   "monster_name": "Ім'я монстра",
   "generate_initiative": "Згенерувати ініціативу",
   "start_initiative": "Почати ініціативу",
-  "inventory": {
-    "title": "Інвентар",
+  "inventory": "Інвентар",
+  "inventory_ui": {
     "item_added": "Предмет додано",
     "item_removed": "Предмет видалено",
     "order_changed": "Порядок змінено",
