@@ -14,7 +14,7 @@ app.use('/api/ai', aiRouter);
 describe('AI Routes', () => {
   describe('POST /api/ai/avatar', () => {
     it('should return generated image url', async () => {
-      const res = await request(app).post('/api/ai/avatar').send({ description: 'hero' });
+      const res = await request(app).post('/api/ai/avatar').send({ race: 'elf', profession: 'wizard', gender: 'male' });
       expect(res.statusCode).toBe(200);
       expect(res.body.url).toBe('http://image.test/avatar.png');
     });

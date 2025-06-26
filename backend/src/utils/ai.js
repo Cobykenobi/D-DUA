@@ -6,7 +6,8 @@ const fetch = require('node-fetch');
 const fs = require('fs');
 const path = require('path');
 
-exports.generateCharacterImage = async (description) => {
+exports.generateCharacterImage = async (race, profession, gender) => {
+  const prompt = `${gender} ${race} ${profession}`;
   // If no API key is provided, fall back to preset avatars bundled in the repo
   if (!process.env.OPENAI_API_KEY) {
     try {
@@ -27,7 +28,7 @@ exports.generateCharacterImage = async (description) => {
       'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ prompt: description, n: 1, size: '512x512' }),
+    body: JSON.stringify({ prompt, n: 1, size: '512x512' }),
   });
   const data = await res.json();
   const url = data.data?.[0]?.url;
