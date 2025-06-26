@@ -34,7 +34,7 @@ function RegisterPage() {
       localStorage.setItem("user", JSON.stringify(response.data.user));
       navigate("/");
     } catch (err) {
-      setError(err.response?.data?.message || "Помилка реєстрації");
+      setError(err.response?.data?.message || t('register_error'));
     }
   };
 
