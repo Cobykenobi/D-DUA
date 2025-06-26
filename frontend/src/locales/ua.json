@@ -48,6 +48,22 @@
   "add": "Додати",
   "listen": "Послухати",
 
+  "admin_page_title": "Панель Адміністратора",
+  "set_music": "Встановити музику",
+  "create_new_race": "Створити нову расу",
+  "upload_map": "Завантажити карту",
+  "users": "Користувачі",
+  "appearance": "Оформлення",
+  "start_session": "Запустити сесію",
+  "end_session": "Завершити сесію",
+  "race_list": "Список рас",
+  "event_log": "Журнал подій",
+  "confirm_delete_race": "Ви впевнені, що хочете видалити цю расу?",
+  "youtube_link_prompt": "Вставте YouTube посилання:",
+  "race_name_prompt": "Назва раси:",
+  "session_started": "Сесія запущена",
+  "session_ended": "Сесію завершено",
+
 
   "admin": "Адмін",
   "register": "Реєстрація",
