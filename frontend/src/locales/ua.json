@@ -132,6 +132,14 @@
     "empty": "Порожньо"
   },
   "random": "Випадково",
-  "all": "Усі"
+  "all": "Усі",
+  "roll_d20": "Кинути D20",
+  "roll_d6": "Кинути D6",
+  "result": "Результат",
+  "more_details": "Детальніше",
+  "play_character": "Грати",
+  "map_not_selected": "Карта не вибрана",
+  "gm_roll_private": "Кидок бачить лише майстер",
+  "roll_visible_all": "Кидок бачать усі гравці"
 
 }

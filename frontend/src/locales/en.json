@@ -132,6 +132,14 @@
     "empty": "No items"
   },
   "random": "Random",
-  "all": "All"
+  "all": "All",
+  "roll_d20": "Roll D20",
+  "roll_d6": "Roll D6",
+  "result": "Result",
+  "more_details": "Details",
+  "play_character": "Play",
+  "map_not_selected": "Map not selected",
+  "gm_roll_private": "Only the Game Master can see your roll",
+  "roll_visible_all": "All players can see the roll"
 
 }
