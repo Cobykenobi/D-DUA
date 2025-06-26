@@ -1,4 +1,4 @@
-import translateOrRaw from './translateOrRaw.js';
+import translateOrRaw from './translateOrRaw';
 
 export default function translateEffect(effectString, t) {
   if (!effectString) return effectString;

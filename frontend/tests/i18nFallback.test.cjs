@@ -2,7 +2,7 @@
 
 let en, ua, translateOrRaw;
 beforeAll(async () => {
-  ({ default: translateOrRaw } = await import('../src/utils/translateOrRaw.js'));
+  ({ default: translateOrRaw } = await import('../src/utils/translateOrRaw'));
   ({ default: en } = await import('../src/locales/en.json', { assert: { type: 'json' } }));
   ({ default: ua } = await import('../src/locales/ua.json', { assert: { type: 'json' } }));
 });

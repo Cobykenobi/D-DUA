@@ -1,7 +1,7 @@
 
 import { useTranslation } from 'react-i18next';
-import translateOrRaw from '../utils/translateOrRaw.js';
-import translateEffect from '../utils/effectUtils.js';
+import translateOrRaw from '../utils/translateOrRaw';
+import translateEffect from '../utils/effectUtils';
 
 export default function InventoryList({ items, filter = 'all' }) {
   const { t } = useTranslation();
