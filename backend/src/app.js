@@ -31,6 +31,8 @@ app.use(express.json());
 const uploadDir = path.join(__dirname, '..', 'uploads');
 const mapsDir = path.join(uploadDir, 'maps');
 fs.mkdirSync(mapsDir, { recursive: true });
+const bgDir = path.join(uploadDir, 'backgrounds');
+fs.mkdirSync(bgDir, { recursive: true });
 
 // Serve uploaded files
 app.use('/uploads', express.static(uploadDir));
@@ -50,6 +52,7 @@ app.use('/api/roll', require('./routes/roll'));
 app.use('/api/table', require('./routes/table'));
 app.use('/api/session', require('./routes/session'));
 app.use('/api/user', require('./routes/user'));
+app.use('/api/appearance', require('./routes/appearance'));
 
 app.use('/api/ai', require('./routes/ai'));
 // Simple ping route used to wake the server

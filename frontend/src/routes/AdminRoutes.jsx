@@ -8,6 +8,7 @@ const AdminCharacteristicsPage = React.lazy(() => import('../pages/admin/AdminCh
 const AdminMapsPage = React.lazy(() => import('../pages/admin/AdminMapsPage'));
 const AdminMusicPage = React.lazy(() => import('../pages/admin/AdminMusicPage'));
 const AdminInventoryPage = React.lazy(() => import('../pages/admin/AdminInventoryPage'));
+const AdminAppearancePage = React.lazy(() => import('../pages/admin/AdminAppearancePage'));
 
 export default function AdminRoutes() {
   return (
@@ -19,6 +20,7 @@ export default function AdminRoutes() {
         <Route path="maps" element={<AdminMapsPage />} />
         <Route path="music" element={<AdminMusicPage />} />
         <Route path="inventory/:characterId" element={<AdminInventoryPage />} />
+        <Route path="appearance" element={<AdminAppearancePage />} />
       </Routes>
     </React.Suspense>
   );

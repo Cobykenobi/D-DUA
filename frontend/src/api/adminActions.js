@@ -20,3 +20,7 @@ export const uploadMap = (data) => api.post("/map", data);
 export const getUsers = () => api.get('/admin/users');
 export const updateUserRole = (id, role) =>
   api.put(`/admin/users/${id}/role`, { role });
+
+// Appearance
+export const getAppearance = () => api.get('/appearance');
+export const updateAppearance = (data) => api.put('/appearance', data);

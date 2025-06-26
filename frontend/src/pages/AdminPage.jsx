@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AdminCard from "../components/AdminCard";
 import { useNavigate } from "react-router-dom";
+import { useAppearance } from '../context/AppearanceContext';
 import {
   setMusic,
   createRace,
@@ -81,10 +82,11 @@ export default function AdminPage() {
     alert("Сесію завершено");
   };
 
+  const { background } = useAppearance();
   return (
     <div
       className="min-h-screen bg-cover bg-center p-8 font-dnd text-white"
-      style={{ backgroundImage: "url('/map-bg.jpg')" }}
+      style={{ backgroundImage: `url('${background}')` }}
     >
       <h1 className="text-3xl text-dndgold mb-6">Панель Адміністратора</h1>
 
@@ -93,6 +95,7 @@ export default function AdminPage() {
         <AdminCard title="Створити нову расу" onClick={handleCreateRace} />
         <AdminCard title="Завантажити карту" onClick={handleUploadMap} />
         <AdminCard title="Користувачі" onClick={() => navigate('/admin/users')} />
+        <AdminCard title="Оформлення" onClick={() => navigate('/admin/appearance')} />
         <AdminCard title="Запустити сесію" onClick={handleStartSession} />
         <AdminCard title="Завершити сесію" onClick={handleEndSession} />
       </div>
