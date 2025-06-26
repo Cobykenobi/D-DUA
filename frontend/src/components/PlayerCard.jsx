@@ -58,14 +58,14 @@ export default function PlayerCard({ character, onSelect }) {
           onClick={() => setOpen(true)}
           className="mt-2 bg-dndgold text-dndred font-dnd rounded-2xl px-3 py-1"
         >
-          Детальніше
+          {t('details')}
         </button>
         {onSelect && (
           <button
             onClick={() => onSelect(character)}
             className="mt-2 bg-red-800 px-3 py-1 text-sm rounded text-white hover:bg-red-700"
           >
-            Грати
+            {t('play')}
           </button>
         )}
       </motion.div>

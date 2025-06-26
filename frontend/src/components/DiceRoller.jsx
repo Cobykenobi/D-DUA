@@ -1,11 +1,13 @@
 import api from "../api/axios";
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const diceTypes = ["d20", "d12", "d10", "d8", "d6", "d4"];
 
 export default function DiceRoller({ sessionId, isGM }) {
   const [rolling, setRolling] = useState(false);
   const [lastRoll, setLastRoll] = useState(null);
+  const { t } = useTranslation();
 
   const rollDice = async (diceType, isPrivate = false) => {
     setRolling(true);
@@ -40,11 +42,11 @@ export default function DiceRoller({ sessionId, isGM }) {
       </div>
       {lastRoll !== null && (
         <div className="text-dndgold text-lg font-dnd mt-1">
-          Результат: <b>{lastRoll}</b>
+          {t('result')}: <b>{lastRoll}</b>
         </div>
       )}
       <div className="text-xs text-dndgold/60 mt-2">
-        {isGM ? "Ваш кидок бачить лише майстер" : "Кидок бачать усі гравці"}
+        {isGM ? t('roll_info_gm') : t('roll_info_all')}
       </div>
     </div>
   );
