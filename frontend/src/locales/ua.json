@@ -93,6 +93,7 @@
   "table": "Стіл",
   "game_field": "Поле гри",
   "gm_panel": "Панель ГМа",
+  "gm_tools": "Інструменти Майстра",
   "map": "Мапа",
   "map_link": "Посилання на мапу",
   "map_url": "URL мапи",
@@ -132,14 +133,14 @@
     "empty": "Порожньо"
   },
   "random": "Випадково",
-  "all": "Усі",
-  "roll_d20": "Кинути D20",
-  "roll_d6": "Кинути D6",
-  "result": "Результат",
-  "more_details": "Детальніше",
-  "play_character": "Грати",
-  "map_not_selected": "Карта не вибрана",
-  "gm_roll_private": "Кидок бачить лише майстер",
-  "roll_visible_all": "Кидок бачать усі гравці"
+
+  "roll_dice": "Кидок кубика",
+  "roll_dice_d20": "Кинути D20",
+  "roll_dice_d6": "Кинути D6",
+  "roll_result": "Результат",
+  "roll_visibility_gm": "Кидок бачить лише майстер",
+  "roll_visibility_all": "Кидок бачать усі гравці",
+  "all": "Усі"
+
 
 }

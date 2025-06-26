@@ -93,6 +93,7 @@
   "table": "Table",
   "game_field": "Game Field",
   "gm_panel": "GM Panel",
+  "gm_tools": "GM Tools",
   "map": "Map",
   "map_link": "Map Link",
   "map_url": "Map URL",
@@ -133,13 +134,13 @@
   },
   "random": "Random",
   "all": "All",
-  "roll_d20": "Roll D20",
-  "roll_d6": "Roll D6",
-  "result": "Result",
-  "more_details": "Details",
-  "play_character": "Play",
-  "map_not_selected": "Map not selected",
-  "gm_roll_private": "Only the Game Master can see your roll",
-  "roll_visible_all": "All players can see the roll"
+
+  "roll_dice": "Roll Dice",
+  "roll_dice_d20": "Roll D20",
+  "roll_dice_d6": "Roll D6",
+  "roll_result": "Result",
+  "roll_visibility_gm": "Only GM sees the roll",
+  "roll_visibility_all": "All players see the roll"
+
 
 }
