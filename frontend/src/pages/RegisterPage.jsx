@@ -46,12 +46,12 @@ function RegisterPage() {
       style={{ backgroundImage: `url('${background}')` }}
     >
       <div className="bg-[#2d1d14]/90 p-8 rounded-lg shadow-lg w-full max-w-md text-center text-white">
-        <h2 className="text-3xl font-dnd mb-4">Реєстрація</h2>
+        <h2 className="text-3xl font-dnd mb-4">{t('register')}</h2>
         <form onSubmit={handleRegister} className="flex flex-col gap-4">
           {error && <p className="text-red-400">{error}</p>}
           <input
             type="text"
-            placeholder="Логін"
+            placeholder={t('login')}
             value={login}
             onChange={(e) => setLogin(e.target.value)}
             className="p-2 rounded bg-[#3c2a20] text-white placeholder:text-gray-300"
@@ -59,7 +59,7 @@ function RegisterPage() {
           />
           <input
             type="password"
-            placeholder="Пароль"
+            placeholder={t('password')}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             className="p-2 rounded bg-[#3c2a20] text-white placeholder:text-gray-300"
@@ -69,7 +69,14 @@ function RegisterPage() {
             type="submit"
             className="bg-red-700 hover:bg-red-800 rounded py-2 text-white font-bold"
           >
-            Зареєструватися
+            {t('register_submit')}
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate('/login')}
+            className="bg-gray-600 hover:bg-gray-700 rounded py-2 text-white font-bold"
+          >
+            {t('back')}
           </button>
         </form>
       </div>

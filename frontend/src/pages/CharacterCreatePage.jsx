@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { createCharacter } from '../utils/api';
 
 import { useAppearance } from '../context/AppearanceContext';
+import { getStoredUserRole } from '../utils/auth';
 
 
 const CharacterCreatePage = () => {

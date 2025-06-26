@@ -45,10 +45,10 @@
 
   "admin": "Адмін",
   "register": "Реєстрація",
+  "register_submit": "Зареєструватися",
   "fields_required": "Всі поля обов'язкові",
   "back": "Назад",
   "your_characters": "Ваші персонажі",
-  "create_new": "Створити",
   "create_table": "Створити стіл",
   "empty_profile": "Немає персонажів.",
   "enter": "Увійти",
@@ -83,7 +83,6 @@
   "send": "Надіслати",
   "actions": "Дії",
   "player": "Гравець",
-  "name": "Ім'я",
   "race": "Раса",
   "class": "Клас",
   "stats_label": "Статистика",
@@ -91,7 +90,6 @@
   "kick": "Вигнати",
   "delete": "Видалити",
   "details": "Деталі",
-  "save": "Зберегти",
   "add_monster": "Додати монстра",
   "monster_name": "Ім'я монстра",
   "generate_initiative": "Згенерувати ініціативу",
@@ -111,7 +109,6 @@
     "empty": "Порожньо"
   },
   "random": "Випадково",
-  "all": "Усі",
-  "unknown": "Невідомо"
+  "all": "Усі"
 
 }
