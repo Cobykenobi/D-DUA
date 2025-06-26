@@ -28,7 +28,7 @@ describe('seed script', () => {
     const races = [
       'human','forest_elf','dark_elf','gnome','dwarf','orc'
     ];
-    const classes = ['warrior','mage','assassin','paladin','bard'];
+    const classes = ['warrior','mage','assassin','paladin','bard','archer','healer'];
     for (const r of races) {
       for (const c of classes) {
         const count = await StartingSet.countDocuments({ raceCode: r, classCode: c });

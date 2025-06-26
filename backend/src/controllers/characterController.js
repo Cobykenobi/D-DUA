@@ -22,7 +22,9 @@ const allowedClassCodes = new Set([
   'wizard',
   'assassin',
   'paladin',
-  'bard'
+  'bard',
+  'archer',
+  'healer'
 ]);
 const professionAliases = { mage: 'wizard' };
 
