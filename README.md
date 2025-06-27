@@ -42,17 +42,18 @@ version before continuing.
 
 3. **Seed starter data** (optional)
 
-   After updating your `.env` file, populate the database with approximately
-   ten races and six professions along with six core attributes:
+   After creating `backend/.env`, populate the database with starter races,
+   professions and core attributes:
 
    ```bash
-   cd backend
-   node scripts/seed.js
+   node backend/scripts/seed.js
    ```
 
-   This script also creates an admin account with login **root** and password
-
-   **kolokol911**. You must sign in with this account to access `/admin`.
+   Verify that the `races` and `professions` collections contain codes defined
+   in `allowedRaceCodes` and `allowedClassCodes` inside
+   `backend/src/controllers/characterController.js`. This script also creates an
+   admin account with login **root** and password **kolokol911**. You must sign
+   in with this account to access `/admin`.
 
 ## Running the app
 
