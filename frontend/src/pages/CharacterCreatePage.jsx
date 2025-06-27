@@ -41,7 +41,11 @@ const CharacterCreatePage = () => {
       }
     } catch (err) {
       console.error('Character creation failed', err);
-      const msg = t('error_create_character');
+      console.error(err.response?.data);
+      let msg = t('error_create_character');
+      if (err.response?.data?.error) {
+        msg += `: ${err.response.data.error}`;
+      }
       if (showToast) showToast(msg, 'error');
       else alert(msg);
     }
