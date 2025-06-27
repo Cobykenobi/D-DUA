@@ -40,7 +40,9 @@ exports.getAllByUser = async (req, res) => {
 // Створити персонажа
 exports.create = async (req, res) => {
   try {
-    console.log('create payload:', req.body);
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('create payload:', req.body);
+    }
 
 
     let { name, description, image, gender, raceId, professionId, race: raceCode, profession: professionCode, class: classCode } = req.body;
