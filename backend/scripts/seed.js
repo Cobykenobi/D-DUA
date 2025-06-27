@@ -140,33 +140,51 @@ async function seed() {
   };
 
   if (await StartingSet.countDocuments() === 0) {
-    const inventorySets = {};
+    const sets = [];
+    const skipped = [];
+
     for (const race of races) {
-      inventorySets[race.code] = {};
-      for (const [cls, groups] of Object.entries(classInventory)) {
+      for (const profession of professions) {
+        const groups = classInventory[profession.code];
+        if (!groups) {
+          skipped.push(`${race.code}/${profession.code}`);
+          continue;
+        }
+
         const arrays = Object.values(groups)
           .filter(a => a.length)
           .map(a => a.map(d => d.item));
-        const combos = combine(arrays).slice(0, 3);
-        inventorySets[race.code][cls] = combos;
-      }
-    }
 
-    const sets = [];
-    for (const [raceCode, classes] of Object.entries(inventorySets)) {
-      for (const [cls, combos] of Object.entries(classes)) {
+        if (!arrays.length) {
+          skipped.push(`${race.code}/${profession.code}`);
+          continue;
+        }
+
+        const combos = combine(arrays).slice(0, 3);
+        if (combos.length === 0) {
+          skipped.push(`${race.code}/${profession.code}`);
+          continue;
+        }
+
         for (const combo of combos) {
           sets.push({
-            raceCode,
-            classCode: cls.toLowerCase(),
+            raceCode: race.code,
+            classCode: profession.code,
             items: combo.map(name => itemsByName[name])
           });
         }
       }
     }
+
     if (sets.length) {
       await StartingSet.insertMany(sets);
       console.log('Starting sets seeded');
+    }
+
+    if (skipped.length) {
+      for (const combo of skipped) {
+        console.warn(`Skipped starting set for ${combo}`);
+      }
     }
   }
 

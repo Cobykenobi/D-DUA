@@ -358,7 +358,12 @@ describe('Character Controller - create', () => {
     await characterController.create(req, res);
 
     expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({ error: 'Missing starting items' });
+    expect(res.json).toHaveBeenCalledWith({
+      error: "Missing starting items for race 'orc' and class 'warrior'"
+    });
+    expect(console.warn).toHaveBeenCalledWith(
+      "Empty inventory for race 'orc' and class 'warrior'"
+    );
   });
 
 });

@@ -40,7 +40,9 @@ exports.getAllByUser = async (req, res) => {
 // Створити персонажа
 exports.create = async (req, res) => {
   try {
-    console.log('create payload:', req.body);
+    if (process.env.NODE_ENV !== 'production') {
+      console.log('create payload:', req.body);
+    }
 
 
     let { name, description, image, gender, raceId, professionId, race: raceCode, profession: professionCode, class: classCode } = req.body;
@@ -129,8 +131,12 @@ exports.create = async (req, res) => {
 
     const inventory = await generateInventory(raceCodeRaw, classCodeLower);
     if (!inventory.length) {
-      console.warn(`Empty inventory for race ${raceCodeRaw} class ${classCodeLower}`);
-      return res.status(400).json({ error: 'Missing starting items' });
+      console.warn(
+        `Empty inventory for race '${raceCodeRaw}' and class '${classCodeLower}'`
+      );
+      return res.status(400).json({
+        error: `Missing starting items for race '${raceCodeRaw}' and class '${classCodeLower}'`
+      });
     }
 
     const avatarUrl = await generateCharacterImage(

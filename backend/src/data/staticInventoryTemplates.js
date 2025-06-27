@@ -48,7 +48,9 @@ const classInventory = {
       { item: 'Короткий лук', bonus: { agility: 1 } },
       { item: 'Пісенник' }
     ],
+
     misc: []
+
   },
   paladin: {
     weapon: [
@@ -91,6 +93,7 @@ const classInventory = {
   }
 };
 
+
 const raceInventory = {
   human: [{ item: 'Монета удачі', bonus: { charisma: 1 } }],
   forest_elf: [{ item: 'Ельфійські стріли', bonus: { agility: 1 } }],
@@ -101,3 +104,4 @@ const raceInventory = {
 };
 
 module.exports = { classInventory, raceInventory };
+
