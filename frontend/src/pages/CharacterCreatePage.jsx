@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { createCharacter } from '../utils/api';
+import { useToast } from '../context/ToastContext';
 
 
 import { useAppearance } from '../context/AppearanceContext';
@@ -25,15 +26,24 @@ const CharacterCreatePage = () => {
 
 
 
+  const { showToast } = useToast();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const newChar = await createCharacter({
-      name,
-      gender,
-    });
-    if (newChar && newChar._id) {
-      navigate('/characters');
+    try {
+      const newChar = await createCharacter({ name, gender });
+      if (newChar && newChar._id) {
+        navigate('/characters');
+      } else {
+        const msg = t('error_create_character');
+        if (showToast) showToast(msg, 'error');
+        else alert(msg);
+      }
+    } catch (err) {
+      console.error('Character creation failed', err);
+      const msg = t('error_create_character');
+      if (showToast) showToast(msg, 'error');
+      else alert(msg);
     }
   };
 
