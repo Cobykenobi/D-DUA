@@ -57,6 +57,7 @@ exports.getAllByUser = async (req, res) => {
 // Створити персонажа
 exports.create = async (req, res) => {
   try {
+    console.log('create payload:', req.body);
 
 
     let { name, description, image, gender, raceId, professionId, race: raceCode, profession: professionCode, class: classCode } = req.body;
@@ -70,15 +71,15 @@ exports.create = async (req, res) => {
 
 
     if (!name || typeof name !== 'string' || !name.trim() || name.trim().length > 50) {
-      return res.status(400).json({ message: 'Invalid name' });
+      return res.status(400).json({ error: 'Invalid name' });
     }
 
     if (description && (typeof description !== 'string' || description.length > 500)) {
-      return res.status(400).json({ message: 'Invalid description' });
+      return res.status(400).json({ error: 'Invalid description' });
     }
 
     if (image && (typeof image !== 'string' || image.length > 500)) {
-      return res.status(400).json({ message: 'Invalid image' });
+      return res.status(400).json({ error: 'Invalid image' });
     }
 
     name = name.trim();
@@ -121,17 +122,17 @@ exports.create = async (req, res) => {
 
   if (!race.length || !profession.length) {
     return res.status(400).json({
-      message: 'Missing races or professions to create character'
+      error: 'Missing races or professions to create character'
     });
   }
 
   const raceCodeValue = (race[0].code || '').toLowerCase();
   const profCodeValue = (profession[0].code || '').toLowerCase();
   if (!allowedRaceCodes.has(raceCodeValue)) {
-    return res.status(400).json({ message: 'Invalid race' });
+    return res.status(400).json({ error: 'Invalid race' });
   }
   if (!allowedClassCodes.has(profCodeValue)) {
-    return res.status(400).json({ message: 'Invalid class' });
+    return res.status(400).json({ error: 'Invalid class' });
   }
 
 
