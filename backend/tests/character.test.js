@@ -181,7 +181,7 @@ describe('Character Controller - create', () => {
 
     expect(res.status).toHaveBeenCalledWith(400);
     expect(res.json).toHaveBeenCalledWith({
-      message: 'Missing races or professions to create character'
+      error: 'Missing races or professions to create character'
     });
   });
 
@@ -244,7 +244,7 @@ describe('Character Controller - create', () => {
     await characterController.create(req, res);
 
     expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({ message: 'Invalid name' });
+    expect(res.json).toHaveBeenCalledWith({ error: 'Invalid name' });
     expect(Race.aggregate).not.toHaveBeenCalled();
   });
 
@@ -256,7 +256,7 @@ describe('Character Controller - create', () => {
     await characterController.create(req, res);
 
     expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({ message: 'Invalid description' });
+    expect(res.json).toHaveBeenCalledWith({ error: 'Invalid description' });
   });
 
   it('returns 400 when image is invalid', async () => {
@@ -266,7 +266,7 @@ describe('Character Controller - create', () => {
     await characterController.create(req, res);
 
     expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({ message: 'Invalid image' });
+    expect(res.json).toHaveBeenCalledWith({ error: 'Invalid image' });
   });
 
   it('uses provided raceId and professionId', async () => {
@@ -358,7 +358,7 @@ describe('Character Controller - create', () => {
     await characterController.create(req, res);
 
     expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({ message: 'Invalid race' });
+    expect(res.json).toHaveBeenCalledWith({ error: 'Invalid race' });
   });
 
   it('returns 400 for invalid class code', async () => {
@@ -372,6 +372,6 @@ describe('Character Controller - create', () => {
     await characterController.create(req, res);
 
     expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({ message: 'Invalid class' });
+    expect(res.json).toHaveBeenCalledWith({ error: 'Invalid class' });
   });
 });
