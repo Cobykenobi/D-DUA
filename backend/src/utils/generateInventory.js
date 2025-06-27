@@ -161,7 +161,9 @@ function generateInventory(raceCode, classCode) {
   }
 
   if (!result.length) {
-    console.warn(`No inventory generated for race ${raceCode} and class ${classCode}`);
+    console.warn(
+      `generateInventory() returned empty array for race '${raceCode}' and class '${classCode}'`
+    );
   }
 
   return result;
