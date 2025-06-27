@@ -5,10 +5,12 @@ import { useTranslation } from 'react-i18next';
 export default function AdminProfessionsPage() {
   const [professions, setProfessions] = useState([]);
   const [name, setName] = useState('');
+  const [code, setCode] = useState('');
   const [description, setDescription] = useState('');
   const [loading, setLoading] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editName, setEditName] = useState('');
+  const [editCode, setEditCode] = useState('');
   const [editDescription, setEditDescription] = useState('');
   const { t } = useTranslation();
 
@@ -22,8 +24,8 @@ export default function AdminProfessionsPage() {
 
   const addProfession = async (e) => {
     e.preventDefault();
-    await api.post('/profession', { name, description });
-    setName(''); setDescription(''); fetchProfessions();
+    await api.post('/profession', { name, code, description });
+    setName(''); setCode(''); setDescription(''); fetchProfessions();
   };
 
   const removeProfession = async (id) => {
@@ -39,17 +41,19 @@ export default function AdminProfessionsPage() {
   const startEdit = (prof) => {
     setEditingId(prof._id);
     setEditName(prof.name);
+    setEditCode(prof.code);
     setEditDescription(prof.description || '');
   };
 
   const cancelEdit = () => {
     setEditingId(null);
     setEditName('');
+    setEditCode('');
     setEditDescription('');
   };
 
   const saveEdit = async (id) => {
-    await saveProfession(id, { name: editName, description: editDescription });
+    await saveProfession(id, { name: editName, code: editCode, description: editDescription });
     cancelEdit();
   };
 
@@ -63,6 +67,13 @@ export default function AdminProfessionsPage() {
             placeholder="Назва професії"
             value={name}
             onChange={e => setName(e.target.value)}
+            required
+          />
+          <input
+            className="rounded-2xl px-3 py-2 bg-[#2c1a12] border border-dndgold text-dndgold flex-1"
+            placeholder="Код"
+            value={code}
+            onChange={e => setCode(e.target.value)}
             required
           />
           <input
@@ -81,6 +92,7 @@ export default function AdminProfessionsPage() {
               <thead>
                 <tr className="text-left">
                   <th className="py-2">Назва</th>
+                  <th className="py-2">Код</th>
                   <th className="py-2">Опис</th>
                   <th className="py-2 w-24">Дії</th>
                 </tr>
@@ -97,6 +109,17 @@ export default function AdminProfessionsPage() {
                         />
                       ) : (
                         <span>{p.name}</span>
+                      )}
+                    </td>
+                    <td className="py-1 pr-2">
+                      {editingId === p._id ? (
+                        <input
+                          className="w-full rounded-lg px-2 py-1 bg-[#2c1a12] border border-dndgold text-dndgold"
+                          value={editCode}
+                          onChange={e => setEditCode(e.target.value)}
+                        />
+                      ) : (
+                        <span>{p.code}</span>
                       )}
                     </td>
                     <td className="py-1 pr-2">
