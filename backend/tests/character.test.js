@@ -19,7 +19,7 @@ jest.mock('../src/utils/ai');
 
 beforeEach(() => {
   jest.clearAllMocks();
-  generateInventory.mockResolvedValue([]);
+  generateInventory.mockResolvedValue([{ item: 'Test', amount: 1, bonus: {} }]);
   generateAvatar.mockResolvedValue('/avatars/test.png');
   generateCharacterImage.mockResolvedValue('/images/generated.png');
   jest.spyOn(console, 'warn').mockImplementation(() => {});
@@ -347,24 +347,10 @@ describe('Character Controller - create', () => {
     expect(res.status).toHaveBeenCalledWith(201);
   });
 
-  it('returns 400 for invalid race code', async () => {
-    Race.aggregate.mockResolvedValue([{ _id: 'r99', name: 'Alien', code: 'alien' }]);
-    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Wizard', code: 'wizard' }]);
-    StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
-
-    const req = { user: { id: 'u1' }, body: { name: 'Hero' } };
-    const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
-
-    await characterController.create(req, res);
-
-    expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({ error: 'Invalid race' });
-  });
-
-  it('returns 400 for invalid class code', async () => {
+  it('returns 400 when starting items are missing', async () => {
     Race.aggregate.mockResolvedValue([{ _id: 'r1', name: 'Orc', code: 'orc' }]);
-    Profession.aggregate.mockResolvedValue([{ _id: 'p99', name: 'Pirate', code: 'pirate' }]);
-    StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([{ items: [] }]) });
+    Profession.aggregate.mockResolvedValue([{ _id: 'p1', name: 'Warrior', code: 'warrior' }]);
+    generateInventory.mockResolvedValue([]);
 
     const req = { user: { id: 'u1' }, body: { name: 'Hero' } };
     const res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
@@ -372,6 +358,7 @@ describe('Character Controller - create', () => {
     await characterController.create(req, res);
 
     expect(res.status).toHaveBeenCalledWith(400);
-    expect(res.json).toHaveBeenCalledWith({ error: 'Invalid class' });
+    expect(res.json).toHaveBeenCalledWith({ error: 'Missing starting items' });
   });
+
 });

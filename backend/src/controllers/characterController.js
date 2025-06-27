@@ -9,23 +9,6 @@ const generateAvatar = require('../utils/generateAvatar');
 const { generateCharacterImage } = require('../utils/ai');
 const slug = require('../utils/slugify');
 
-const allowedRaceCodes = new Set([
-  'human',
-  'forest_elf',
-  'dark_elf',
-  'gnome',
-  'dwarf',
-  'orc'
-]);
-const allowedClassCodes = new Set([
-  'warrior',
-  'wizard',
-  'assassin',
-  'paladin',
-  'bard',
-  'archer',
-  'healer'
-]);
 const professionAliases = {};
 
 function mapInventory(inv) {
@@ -126,14 +109,7 @@ exports.create = async (req, res) => {
     });
   }
 
-  const raceCodeValue = (race[0].code || '').toLowerCase();
-  const profCodeValue = (profession[0].code || '').toLowerCase();
-  if (!allowedRaceCodes.has(raceCodeValue)) {
-    return res.status(400).json({ error: 'Invalid race' });
-  }
-  if (!allowedClassCodes.has(profCodeValue)) {
-    return res.status(400).json({ error: 'Invalid class' });
-  }
+
 
 
 
@@ -154,6 +130,7 @@ exports.create = async (req, res) => {
     const inventory = await generateInventory(raceCodeRaw, classCodeLower);
     if (!inventory.length) {
       console.warn(`Empty inventory for race ${raceCodeRaw} class ${classCodeLower}`);
+      return res.status(400).json({ error: 'Missing starting items' });
     }
 
     const avatarUrl = await generateCharacterImage(
