@@ -41,6 +41,7 @@
   "loading": "Завантаження...",
   "error_load_character": "Не вдалося завантажити персонажа",
   "error_save_changes": "Не вдалося зберегти зміни",
+  "error_create_character": "Не вдалося створити персонажа",
   "edit_inventory": "Редагування інвентарю",
   "admin_music": "Адмін: Музика",
   "track_name": "Назва треку",
