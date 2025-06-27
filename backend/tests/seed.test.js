@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { MongoMemoryServer } = require('mongodb-memory-server');
 const StartingSet = require('../src/models/StartingSet');
+const { classInventory, raceInventory } = require('../src/data/staticInventoryTemplates');
 
 jest.setTimeout(30000);
 
@@ -25,10 +26,8 @@ describe('seed script', () => {
 
 
   it('creates three sets for each race and class combination', async () => {
-    const races = [
-      'human','forest_elf','dark_elf','gnome','dwarf','orc'
-    ];
-    const classes = ['warrior','wizard','assassin','paladin','bard','archer','healer'];
+    const races = Object.keys(raceInventory);
+    const classes = Object.keys(classInventory);
     for (const r of races) {
       for (const c of classes) {
         const count = await StartingSet.countDocuments({ raceCode: r, classCode: c });
