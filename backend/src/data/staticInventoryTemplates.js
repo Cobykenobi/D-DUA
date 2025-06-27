@@ -48,9 +48,9 @@ const classInventory = {
       { item: 'Короткий лук', bonus: { agility: 1 } },
       { item: 'Пісенник' }
     ],
-    misc: [
-      { item: 'Флейта', bonus: { charisma: 1 } }
-    ]
+
+    misc: []
+
   },
   paladin: {
     weapon: [
@@ -93,40 +93,15 @@ const classInventory = {
   }
 };
 
-function combine(arrays) {
-  if (!arrays.length) return [[]];
-  const [first, ...rest] = arrays;
-  const combos = combine(rest);
-  const result = [];
-  for (const item of first) {
-    for (const c of combos) {
-      result.push([item, ...c]);
-    }
-  }
-  return result;
-}
-
-const races = ['human', 'forest_elf', 'dark_elf', 'gnome', 'dwarf', 'orc'];
-
-const startingSets = {};
-for (const race of races) {
-  startingSets[race] = {};
-}
-for (const [cls, groups] of Object.entries(classInventory)) {
-  const arrays = Object.values(groups).filter(a => a.length);
-  const combos = combine(arrays).slice(0, 3);
-  for (const race of races) {
-    startingSets[race][cls] = combos;
-  }
-}
 
 const raceInventory = {
-  human: [{ item: 'Монета удачі', amount: 1, bonus: { charisma: 1 } }],
-  forest_elf: [{ item: 'Ельфійські стріли', amount: 1, bonus: { agility: 1 } }],
-  dark_elf: [{ item: 'Ельфійські стріли', amount: 1, bonus: { agility: 1 } }],
-  dwarf: [{ item: 'Похідна кружка', amount: 1, bonus: { health: 1 } }],
-  gnome: [{ item: 'Гвинтовий ключ', amount: 1 }],
-  orc: [{ item: 'Кістяний талісман', amount: 1, bonus: { strength: 1 } }]
+  human: [{ item: 'Монета удачі', bonus: { charisma: 1 } }],
+  forest_elf: [{ item: 'Ельфійські стріли', bonus: { agility: 1 } }],
+  dark_elf: [{ item: 'Ельфійські стріли', bonus: { agility: 1 } }],
+  orc: [{ item: 'Кістяний талісман', bonus: { strength: 1 } }],
+  gnome: [{ item: 'Гвинтовий ключ' }],
+  dwarf: [{ item: 'Похідна кружка', bonus: { health: 1 } }]
 };
 
-module.exports = { classInventory, raceInventory, startingSets };
+module.exports = { classInventory, raceInventory };
+
