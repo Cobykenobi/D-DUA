@@ -1,4 +1,5 @@
 const Profession = require('../models/Profession');
+const slug = require('../utils/slugify');
 
 exports.getAll = async (req, res) => {
   try {
@@ -11,7 +12,16 @@ exports.getAll = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    const { name, code, description, modifiers } = req.body;
+    let { name, code, description, modifiers } = req.body;
+    code = code || slug(name);
+
+    const existing = await Profession.findOne({
+      $or: [{ name }, { code }]
+    });
+    if (existing) {
+      return res.status(400).json({ message: 'Profession already exists' });
+    }
+
     const profession = new Profession({ name, code, description, modifiers });
     await profession.save();
     res.status(201).json(profession);
@@ -22,7 +32,17 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const { name, code, description, modifiers } = req.body;
+    let { name, code, description, modifiers } = req.body;
+    code = code || slug(name);
+
+    const duplicate = await Profession.findOne({
+      $or: [{ name }, { code }],
+      _id: { $ne: req.params.id }
+    });
+    if (duplicate) {
+      return res.status(400).json({ message: 'Profession already exists' });
+    }
+
     const profession = await Profession.findByIdAndUpdate(
       req.params.id,
       { $set: { name, code, description, modifiers } },
