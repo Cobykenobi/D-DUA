@@ -134,7 +134,9 @@
       "weapon": "Weapon",
       "armor": "Armor",
       "potion": "Potion",
-      "misc": "Misc"
+      "misc": "Misc",
+      "accessory": "Accessory",
+      "special": "Special"
     },
     "empty": "No items"
   },
