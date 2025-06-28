@@ -4,14 +4,6 @@ const generateInventory = require('../src/utils/generateInventory');
 jest.mock('../src/models/StartingSet');
 
 
-beforeAll(() => {
-  global.StartingSet = StartingSet;
-});
-
-afterAll(() => {
-  delete global.StartingSet;
-});
-
 describe('generateInventory', () => {
   afterEach(() => {
     jest.restoreAllMocks();
@@ -36,7 +28,8 @@ describe('generateInventory', () => {
     expect(items).toEqual([
       { item: 'DB Sword', code: 'db_sword', amount: 1, bonus: { strength: 1 } },
       { item: 'DB Shield', code: 'db_shield', amount: 1, bonus: {} },
-      { item: 'Кістяний талісман', code: 'кістяний_талісман', amount: 1, bonus: { strength: 1 } }
+      { item: raceInventory.orc[0].item, code: 'кістяний_талісман', amount: 1, bonus: raceInventory.orc[0].bonus }
+
     ]);
 
   });
@@ -53,7 +46,9 @@ describe('generateInventory', () => {
       { item: 'Меч', code: 'меч', amount: 1, bonus: { strength: 2 } },
       { item: 'Щит', code: 'щит', amount: 1, bonus: { defense: 1 } },
       { item: 'Зілля здоров’я', code: 'зілля_здоров’я', amount: 1, bonus: {} },
-      { item: 'Кістяний талісман', code: 'кістяний_талісман', amount: 1, bonus: { strength: 1 } }
+
+      { item: raceInventory.orc[0].item, code: 'кістяний_талісман', amount: 1, bonus: raceInventory.orc[0].bonus }
+
     ]);
 
   });
