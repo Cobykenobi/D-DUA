@@ -1,7 +1,6 @@
 
 const StartingSet = require('../models/StartingSet');
 const slug = require('./slugify');
-const StartingSet = require('../models/StartingSet');
 const { classInventory, raceInventory } = require('../data/staticInventoryTemplates');
 
 
