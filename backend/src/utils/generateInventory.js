@@ -17,7 +17,7 @@ function combine(arrays) {
   return result;
 }
 
-const races = ['human', 'forest_elf', 'dark_elf', 'gnome', 'dwarf', 'orc'];
+const races = ['human', 'forest_elf', 'dark_elf', 'gnome', 'dwarf', 'orc', 'halfling', 'dragonborn', 'tiefling'];
 const startingSets = {};
 for (const race of races) {
   startingSets[race] = {};
