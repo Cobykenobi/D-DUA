@@ -116,10 +116,11 @@ async function seed() {
   }
 
   const addItem = (map, def, type) => {
-    if (!map.has(def.item)) {
-      map.set(def.item, {
+    const key = slug(def.item);
+    if (!map.has(key)) {
+      map.set(key, {
         name: def.item,
-        code: slug(def.item),
+        code: key,
         type,
         bonuses: def.bonus || {}
       });
