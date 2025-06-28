@@ -1,4 +1,5 @@
 
+const StartingSet = require('../models/StartingSet');
 const slug = require('./slugify');
 const { classInventory, raceInventory } = require('../data/staticInventoryTemplates');
 
@@ -56,7 +57,7 @@ async function generateInventory(raceCode, classCode) {
         }
       }
     }
-  } catch (err) {
+  } catch {
     // ignore db errors, fallback to static sets
   }
 
