@@ -58,6 +58,16 @@ async function seed() {
     { code: 'dwarf', name: 'Дварф', modifiers: { health: 1, defense: 1, strength: 0, intellect: 0, agility: 0, charisma: 0, mp: 0 } },
     { code: 'orc', name: 'Орк', modifiers: { health: 1, defense: 0, strength: 2, intellect: 0, agility: 0, charisma: 0, mp: 0 } },
   ];
+
+  for (const code of Object.keys(raceInventory)) {
+    if (!races.some(r => r.code === code)) {
+      races.push({
+        code,
+        name: code,
+        modifiers: { health: 0, defense: 0, strength: 0, intellect: 0, agility: 0, charisma: 0, mp: 0 }
+      });
+    }
+  }
   const professions = [
 
     { code: 'warrior', name: 'Воїн', modifiers: { health: 0, defense: 1, strength: 2, intellect: 0, agility: 0, charisma: 0, mp: 0 } },
@@ -69,6 +79,16 @@ async function seed() {
     { code: 'healer', name: 'Цілитель', modifiers: { health: 0, defense: 0, strength: 0, intellect: 1, agility: 0, charisma: 1, mp: 1 } }
 
   ];
+
+  for (const code of Object.keys(classInventory)) {
+    if (!professions.some(p => p.code === code)) {
+      professions.push({
+        code,
+        name: code,
+        modifiers: { health: 0, defense: 0, strength: 0, intellect: 0, agility: 0, charisma: 0, mp: 0 }
+      });
+    }
+  }
   const characteristics = [
     'health',
     'defense',

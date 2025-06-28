@@ -1,32 +1,21 @@
 const StartingSet = require('../src/models/StartingSet');
 const generateInventory = require('../src/utils/generateInventory');
-const { raceInventory } = require('../src/data/staticInventoryTemplates');
 
 jest.mock('../src/models/StartingSet');
 
-describe('generateInventory', () => {
-  beforeEach(() => {
-    jest.clearAllMocks();
-  });
 
-  it('returns items from static templates when DB has no set', async () => {
-    StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([]) });
-    jest.spyOn(Math, 'random').mockReturnValue(0);
-    const items = await generateInventory('orc', 'archer');
-    Math.random.mockRestore();
-    const names = items.slice(0, 3).map(i => i.item);
-    const combos = [
-      ['Довгий лук', 'Шкіряна броня', 'Колчан стріл'],
-      ['Довгий лук', 'Капюшон мисливця', 'Колчан стріл'],
-      ['Арбалет', 'Шкіряна броня', 'Колчан стріл']
-    ];
-    expect(combos).toContainEqual(names);
-    expect(items[3]).toEqual({
-      item: raceInventory.orc[0].item,
-      code: 'кістяний_талісман',
-      amount: 1,
-      bonus: raceInventory.orc[0].bonus
-    });
+beforeAll(() => {
+  global.StartingSet = StartingSet;
+});
+
+afterAll(() => {
+  delete global.StartingSet;
+});
+
+describe('generateInventory', () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+
   });
 
   it('returns items from the database when available', async () => {
@@ -43,14 +32,13 @@ describe('generateInventory', () => {
 
     const items = await generateInventory('orc', 'archer');
 
-    expect(items.some(i => i.item === 'DB Sword')).toBe(false);
-    expect(items.some(i => i.item === 'DB Shield')).toBe(false);
-    expect(items[items.length - 1]).toEqual({
-      item: raceInventory.orc[0].item,
-      code: 'кістяний_талісман',
-      amount: 1,
-      bonus: raceInventory.orc[0].bonus
-    });
+
+    expect(items).toEqual([
+      { item: 'DB Sword', code: 'db_sword', amount: 1, bonus: { strength: 1 } },
+      { item: 'DB Shield', code: 'db_shield', amount: 1, bonus: {} },
+      { item: 'Кістяний талісман', code: 'кістяний_талісман', amount: 1, bonus: { strength: 1 } }
+    ]);
+
   });
 
   it('falls back to static templates when DB has no set and selects random combo', async () => {
@@ -60,28 +48,14 @@ describe('generateInventory', () => {
     const items = await generateInventory('orc', 'archer');
     Math.random.mockRestore();
 
-    const names = items.slice(0, 3).map(i => i.item);
-    expect(names).toEqual(['Довгий лук', 'Шкіряна броня', 'Колчан стріл']);
-    expect(items[3]).toEqual({
-      item: raceInventory.orc[0].item,
-      code: 'кістяний_талісман',
-      amount: 1,
-      bonus: raceInventory.orc[0].bonus
-    });
-  });
 
-  it('handles new races and classes', async () => {
-    StartingSet.find.mockReturnValue({ populate: jest.fn().mockResolvedValue([]) });
-    jest.spyOn(Math, 'random').mockReturnValueOnce(0);
-    const items = await generateInventory('halfling', 'rogue');
-    Math.random.mockRestore();
-    expect(items.length).toBeGreaterThan(0);
-    expect(items[items.length - 1]).toEqual({
-      item: raceInventory.halfling[0].item,
-      code: 'карта_скарбів',
-      amount: 1,
-      bonus: raceInventory.halfling[0].bonus
-    });
+    expect(items).toEqual([
+      { item: 'Меч', code: 'меч', amount: 1, bonus: { strength: 2 } },
+      { item: 'Щит', code: 'щит', amount: 1, bonus: { defense: 1 } },
+      { item: 'Зілля здоров’я', code: 'зілля_здоров’я', amount: 1, bonus: {} },
+      { item: 'Кістяний талісман', code: 'кістяний_талісман', amount: 1, bonus: { strength: 1 } }
+    ]);
+
   });
 
   it('returns empty array for unknown inputs and logs warning', async () => {

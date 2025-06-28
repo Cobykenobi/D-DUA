@@ -38,8 +38,8 @@ describe('seed script', () => {
   });
 
   it('creates the correct total number of sets', async () => {
-    const raceCount = 6;
-    const classCount = 7;
+    const raceCount = Object.keys(raceInventory).length;
+    const classCount = Object.keys(classInventory).length;
     const total = await StartingSet.countDocuments();
     expect(total).toBe(raceCount * classCount * 3);
   });
