@@ -9,7 +9,8 @@
     "dark_elf": "Dark Elf",
     "gnome": "Gnome",
     "dwarf": "Dwarf",
-    "orc": "Orc"
+    "orc": "Orc",
+    "dragonborn": "Dragonborn"
   },
   "classes": {
     "warrior": "Warrior",
@@ -115,7 +116,6 @@
   "kick": "Kick",
   "delete": "Delete",
   "details": "Details",
-  "roll_dice": "Roll dice",
   "result": "Result",
   "roll_info_gm": "Only the GM sees your roll",
   "roll_info_all": "All players see your roll",

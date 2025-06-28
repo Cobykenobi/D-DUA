@@ -1,4 +1,5 @@
 
+const StartingSet = require('../models/StartingSet');
 const slug = require('./slugify');
 const StartingSet = require('../models/StartingSet');
 const { classInventory, raceInventory } = require('../data/staticInventoryTemplates');
@@ -18,7 +19,7 @@ function combine(arrays) {
   return result;
 }
 
-const races = ['human', 'forest_elf', 'dark_elf', 'gnome', 'dwarf', 'orc'];
+const races = ['human', 'forest_elf', 'dark_elf', 'gnome', 'dwarf', 'orc', 'halfling', 'dragonborn', 'tiefling'];
 const startingSets = {};
 for (const race of races) {
   startingSets[race] = {};
@@ -57,7 +58,7 @@ async function generateInventory(raceCode, classCode) {
         }
       }
     }
-  } catch (err) {
+  } catch {
     // ignore db errors, fallback to static sets
   }
 

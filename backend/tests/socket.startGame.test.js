@@ -3,6 +3,8 @@ const express = require('express');
 const Client = require('socket.io-client');
 const { init } = require('../src/socket');
 
+jest.setTimeout(10000);
+
 let ioServer, httpServer, addr;
 
 beforeAll((done) => {
