@@ -9,7 +9,8 @@
     "dark_elf": "Темний ельф",
     "gnome": "Гном",
     "dwarf": "Дварф",
-    "orc": "Орк"
+    "orc": "Орк",
+    "dragonborn": "Драконороджений"
   },
   "classes": {
     "warrior": "Воїн",
