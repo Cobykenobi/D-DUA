@@ -287,17 +287,290 @@ const classInventory = {
     ]
   },
   wizard: {
-    weapon: [
-      { item: 'Магічний посох', bonus: { intellect: 2 } },
-      { item: 'Чарівна паличка', bonus: { intellect: 1 } }
+    staff: [
+      {
+        item: 'Посох Вогню',
+        name: { uk: 'Посох Вогню', en: 'Staff of Fire' },
+        type: 'weapon',
+        bonus: {},
+        effect: 'Кастує "вогняну кулю" (10 урону)',
+        description: {
+          uk: 'Вивергає полум’я при активації.',
+          en: 'Erupts in flames when activated.'
+        }
+      },
+      {
+        item: 'Посох Льоду',
+        name: { uk: 'Посох Льоду', en: 'Staff of Frost' },
+        type: 'weapon',
+        bonus: {},
+        effect: 'Кастує "льодовий шип" (8 урону, уповільнює)',
+        description: {
+          uk: 'Заморожує ворогів.',
+          en: 'Freezes enemies in place.'
+        }
+      },
+      {
+        item: 'Посох Блискавки',
+        name: { uk: 'Посох Блискавки', en: 'Staff of Lightning' },
+        type: 'weapon',
+        bonus: {},
+        effect: 'Кастує "електроудар" (12 урону)',
+        description: {
+          uk: 'Б’є блискавкою одну ціль.',
+          en: 'Strikes a single target with lightning.'
+        }
+      },
+      {
+        item: 'Посох Мани',
+        name: { uk: 'Посох Мани', en: 'Staff of Mana' },
+        type: 'weapon',
+        bonus: { mp: 1 },
+        effect: '+1 до кількості заклять за гру',
+        description: {
+          uk: 'Фокусує чарівну силу.',
+          en: 'Focuses arcane power.'
+        }
+      },
+      {
+        item: 'Посох Ілюзії',
+        name: { uk: 'Посох Ілюзії', en: 'Staff of Illusion' },
+        type: 'weapon',
+        bonus: {},
+        effect: 'Один раз створює копію мага',
+        description: {
+          uk: 'Збиває ворогів з пантелику.',
+          en: 'Confuses foes with a duplicate.'
+        }
+      }
     ],
-    armor: [
-      { item: 'Обруч мудрості', bonus: { intellect: 1 } },
-      { item: 'Тканинна мантія', bonus: { health: 1 } }
+    accessory: [
+      {
+        item: 'Амулет Мудрості',
+        name: { uk: 'Амулет Мудрості', en: 'Amulet of Wisdom' },
+        type: 'accessory',
+        bonus: { intellect: 1 },
+        effect: '+1 до точності заклять',
+        description: {
+          uk: 'Давній символ ерудиції.',
+          en: 'An ancient symbol of erudition.'
+        }
+      },
+      {
+        item: 'Перстень Захисту',
+        name: { uk: 'Перстень Захисту', en: 'Ring of Defense' },
+        type: 'accessory',
+        bonus: { defense: 2 },
+        effect: '+2 AC',
+        description: {
+          uk: 'Магічна броня навколо тіла.',
+          en: 'A protective magical barrier.'
+        }
+      },
+      {
+        item: 'Кулон Мовчання',
+        name: { uk: 'Кулон Мовчання', en: 'Pendant of Silence' },
+        type: 'accessory',
+        bonus: {},
+        effect: 'Відміняє 1 вороже закляття',
+        description: {
+          uk: 'Захист від ворожої магії.',
+          en: 'Cancels one enemy spell.'
+        }
+      },
+      {
+        item: 'Очі Знання',
+        name: { uk: 'Очі Знання', en: 'Eyes of Knowledge' },
+        type: 'accessory',
+        bonus: {},
+        effect: 'Показують здоров’я ворога',
+        description: {
+          uk: 'Відкривають істину.',
+          en: 'Reveal the enemy’s health.'
+        }
+      },
+      {
+        item: 'Талісман Каналізації',
+        name: { uk: 'Талісман Каналізації', en: 'Channeling Talisman' },
+        type: 'accessory',
+        bonus: {},
+        effect: '-1 до часу читання закляття',
+        description: {
+          uk: 'Фокусує заклинання швидше.',
+          en: 'Helps channel spells faster.'
+        }
+      }
     ],
-    misc: [
-      { item: 'Мана-зілля' },
-      { item: 'Книга заклять' }
+    scroll: [
+      {
+        item: 'Свиток Вибуху',
+        name: { uk: 'Свиток Вибуху', en: 'Scroll of Blast' },
+        type: 'scroll',
+        bonus: {},
+        effect: 'Викликає вибух у зоні (AoE, 8 урону)',
+        description: {
+          uk: 'Одноразове використання.',
+          en: 'Single-use area explosion.'
+        }
+      },
+      {
+        item: 'Свиток Щита',
+        name: { uk: 'Свиток Щита', en: 'Scroll of Shield' },
+        type: 'scroll',
+        bonus: {},
+        effect: '+5 AC на 1 хід',
+        description: {
+          uk: 'Захист з енергії.',
+          en: 'Creates a shield of energy.'
+        }
+      },
+      {
+        item: 'Свиток Освітлення',
+        name: { uk: 'Свиток Освітлення', en: 'Scroll of Light' },
+        type: 'scroll',
+        bonus: {},
+        effect: 'Освітлює зону',
+        description: {
+          uk: 'Проганяє темряву.',
+          en: 'Dispels darkness in the area.'
+        }
+      },
+      {
+        item: 'Свиток Знищення',
+        name: { uk: 'Свиток Знищення', en: 'Scroll of Destruction' },
+        type: 'scroll',
+        bonus: {},
+        effect: 'Знищує 1 слабкий об\'єкт',
+        description: {
+          uk: 'Розкладає на молекули.',
+          en: 'Disintegrates a weak object.'
+        }
+      },
+      {
+        item: 'Свиток Туману',
+        name: { uk: 'Свиток Туману', en: 'Scroll of Mist' },
+        type: 'scroll',
+        bonus: {},
+        effect: 'Створює хмару для втечі',
+        description: {
+          uk: 'Ідеальний для відступу.',
+          en: 'Creates cover for retreat.'
+        }
+      }
+    ],
+    clothing: [
+      {
+        item: 'Мантія Магістра',
+        name: { uk: 'Мантія Магістра', en: 'Robe of the Magister' },
+        type: 'clothing',
+        bonus: { defense: 1, charisma: 1 },
+        effect: '+1 AC, +1 до харизми',
+        description: {
+          uk: 'Показує статус.',
+          en: 'Signifies high status.'
+        }
+      },
+      {
+        item: 'Каптур Аркани',
+        name: { uk: 'Каптур Аркани', en: 'Arcane Hood' },
+        type: 'clothing',
+        bonus: { agility: 1 },
+        effect: 'Маскує мага (+1 stealth)',
+        description: {
+          uk: 'Зменшує помітність.',
+          en: 'Conceals the mage.'
+        }
+      },
+      {
+        item: 'Чоботи Левітації',
+        name: { uk: 'Чоботи Левітації', en: 'Boots of Levitation' },
+        type: 'clothing',
+        bonus: {},
+        effect: 'Дозволяють літати 2 раунди',
+        description: {
+          uk: 'Парить над полем бою.',
+          en: 'Allows flight for two rounds.'
+        }
+      },
+      {
+        item: 'Пояс Фокусування',
+        name: { uk: 'Пояс Фокусування', en: 'Focus Belt' },
+        type: 'clothing',
+        bonus: { intellect: 1 },
+        effect: '+1 до сили заклять',
+        description: {
+          uk: 'Збирає енергію в центрі тіла.',
+          en: 'Concentrates energy at the core.'
+        }
+      },
+      {
+        item: 'Плащ Тіней',
+        name: { uk: 'Плащ Тіней', en: 'Cloak of Shadows' },
+        type: 'clothing',
+        bonus: {},
+        effect: 'Дає невидимість на 1 хід',
+        description: {
+          uk: 'Зливається з темрявою.',
+          en: 'Blends into the darkness.'
+        }
+      }
+    ],
+    special: [
+      {
+        item: 'Орб Прозріння',
+        name: { uk: 'Орб Прозріння', en: 'Orb of Foresight' },
+        type: 'special',
+        bonus: {},
+        effect: 'Побачити дії ворога наступним ходом',
+        description: {
+          uk: 'Передбачає хід ворога.',
+          en: "Reveals the enemy's next turn."
+        }
+      },
+      {
+        item: 'Сфера Забуття',
+        name: { uk: 'Сфера Забуття', en: 'Sphere of Forgetting' },
+        type: 'special',
+        bonus: {},
+        effect: 'Стирає памʼять ворога (втрачає одну дію)',
+        description: {
+          uk: 'Таємне знання.',
+          en: 'Erases one enemy action.'
+        }
+      },
+      {
+        item: 'Дзеркало Клонів',
+        name: { uk: 'Дзеркало Клонів', en: 'Mirror of Clones' },
+        type: 'special',
+        bonus: {},
+        effect: 'Створює ілюзію копії на 1 хід',
+        description: {
+          uk: 'Заплутує противника.',
+          en: 'Creates a temporary clone.'
+        }
+      },
+      {
+        item: 'Зірка Часу',
+        name: { uk: 'Зірка Часу', en: 'Star of Time' },
+        type: 'special',
+        bonus: {},
+        effect: 'Відновлює 1 використаний предмет',
+        description: {
+          uk: 'Маніпуляція з часом.',
+          en: 'Restores one used item.'
+        }
+      },
+      {
+        item: 'Книга Катастроф',
+        name: { uk: 'Книга Катастроф', en: 'Book of Catastrophe' },
+        type: 'special',
+        bonus: {},
+        effect: 'Разова атака на 20 шкоди',
+        description: {
+          uk: 'Темне знання в обкладинці.',
+          en: 'Unleashes a devastating strike.'
+        }
+      }
     ]
   },
   assassin: {
