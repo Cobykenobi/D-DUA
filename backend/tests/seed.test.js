@@ -26,8 +26,8 @@ describe('seed script', () => {
 
 
   it('creates three sets for each race and class combination', async () => {
-    const races = Object.keys(raceInventory);
-    const classes = Object.keys(classInventory);
+    const races = ['human', 'forest_elf', 'dark_elf', 'gnome', 'dwarf', 'orc'];
+    const classes = ['warrior', 'wizard', 'assassin', 'paladin', 'bard', 'archer', 'healer'];
     for (const r of races) {
       for (const c of classes) {
         const count = await StartingSet.countDocuments({ raceCode: r, classCode: c });
