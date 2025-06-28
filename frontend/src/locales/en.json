@@ -9,7 +9,8 @@
     "dark_elf": "Dark Elf",
     "gnome": "Gnome",
     "dwarf": "Dwarf",
-    "orc": "Orc"
+    "orc": "Orc",
+    "dragonborn": "Dragonborn"
   },
   "classes": {
     "warrior": "Warrior",
