@@ -70,6 +70,8 @@ export default function InventoryEditor({ inventory, onChange }) {
           <option value="armor">{t('inventory_ui.types.armor')}</option>
           <option value="potion">{t('inventory_ui.types.potion')}</option>
           <option value="misc">{t('inventory_ui.types.misc')}</option>
+          <option value="accessory">{t('inventory_ui.types.accessory')}</option>
+          <option value="special">{t('inventory_ui.types.special')}</option>
         </select>
         <button
           type="button"
@@ -91,6 +93,8 @@ export default function InventoryEditor({ inventory, onChange }) {
           <option value="armor">{t('inventory_ui.types.armor')}</option>
           <option value="potion">{t('inventory_ui.types.potion')}</option>
           <option value="misc">{t('inventory_ui.types.misc')}</option>
+          <option value="accessory">{t('inventory_ui.types.accessory')}</option>
+          <option value="special">{t('inventory_ui.types.special')}</option>
         </select>
       </div>
 
