@@ -637,45 +637,6 @@ const classInventory = {
     misc: [
       { item: 'Зілля лікування' }
     ]
-  },
-  rogue: {
-    weapon: [
-      { item: 'Кинджал', bonus: { agility: 1 } },
-      { item: 'Легкий лук', bonus: { agility: 1 } }
-    ],
-    armor: [
-      { item: 'Шкіряна броня', bonus: { agility: 1 } },
-      { item: 'Плащ тіней', bonus: { agility: 1 } }
-    ],
-    misc: [
-      { item: 'Набір відмичок' }
-    ]
-  },
-  druid: {
-    weapon: [
-      { item: 'Дубовий посох', bonus: { intellect: 1 } },
-      { item: 'Серп', bonus: { strength: 1 } }
-    ],
-    armor: [
-      { item: 'Плетена броня', bonus: { defense: 1 } },
-      { item: 'Талісман природи', bonus: { mp: 1 } }
-    ],
-    misc: [
-      { item: 'Лікувальне зілля' }
-    ]
-  },
-  necromancer: {
-    weapon: [
-      { item: 'Темний жезл', bonus: { intellect: 2 } },
-      { item: 'Коса', bonus: { strength: 1 } }
-    ],
-    armor: [
-      { item: 'Роба некроманта', bonus: { mp: 1 } },
-      { item: 'Черепний амулет', bonus: { intellect: 1 } }
-    ],
-    misc: [
-      { item: 'Мана-зілля' }
-    ]
   }
 };
 
@@ -686,10 +647,7 @@ const raceInventory = {
   dark_elf: [{ item: 'Ельфійські стріли', bonus: { agility: 1 } }],
   orc: [{ item: 'Кістяний талісман', bonus: { strength: 1 } }],
   gnome: [{ item: 'Гвинтовий ключ' }],
-  dwarf: [{ item: 'Похідна кружка', bonus: { health: 1 } }],
-  halfling: [{ item: 'Карта скарбів', bonus: { agility: 1 } }],
-  dragonborn: [{ item: 'Драконячий амулет', bonus: { strength: 1 } }],
-  tiefling: [{ item: 'Кишенькове дзеркальце', bonus: { charisma: 1 } }]
+  dwarf: [{ item: 'Похідна кружка', bonus: { health: 1 } }]
 };
 
 module.exports = { classInventory, raceInventory };
